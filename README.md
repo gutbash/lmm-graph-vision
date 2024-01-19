@@ -2,7 +2,7 @@
 
 How well does **GPT-4V** perform **Visual Question Answering (VQA)** on **Data Structures**?
 
-There is no dataset for **VQA** on graph and tree data structures in previous work, so we must create one. We create a standard, repeatable process for selecting and obtaining VQA GT tasks that must fall under a certain criteria.
+There is no dataset for **VQA** on graph and tree data structures in previous work, so we must create one. We create a standard, repeatable process for selecting and obtaining **VQA** tasks that must fall under a certain criteria.
 
 ### Model
 We elect **GPT-4V** as the primary model to observe for this evaluation.
