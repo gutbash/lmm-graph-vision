@@ -1,4 +1,4 @@
-# llm-graph-tree-vqa
+# lmm-graph-tree-vqa
 
 How well does **GPT-4V** perform **Visual Question Answering (VQA)** on **Data Structures**?
 
