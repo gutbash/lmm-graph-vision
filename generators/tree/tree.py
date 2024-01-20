@@ -55,5 +55,5 @@ tree_to_graph(T, root, pos)
 
 # Draw nodes and edges
 nx.draw(T, pos, with_labels=True, font_weight='bold', connectionstyle='arc3,rad=0', node_size=800, node_color='skyblue')
-plt.savefig("BinaryTree.png", format= "png")
+#plt.savefig("BinaryTree.png", format= "png")
 plt.show()
