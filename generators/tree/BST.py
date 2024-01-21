@@ -61,7 +61,7 @@ num_nodes = random.randint(10, 20)
 root = generate_binary_search_tree(num_nodes)
 
 # Create a directed graph
-T = nx.DiGraph()
+T = nx.Graph()
 
 pos = {}
 # Draw the tree
@@ -69,5 +69,5 @@ tree_to_graph(T, root, pos)
 
 # Draw nodes and edges
 nx.draw(T, pos, with_labels=True, font_weight='bold', connectionstyle='arc3,rad=0', node_size=800, node_color='skyblue')
-plt.savefig("BST.png", format= "png")
+#plt.savefig("BST.png", format= "png")
 plt.show()
