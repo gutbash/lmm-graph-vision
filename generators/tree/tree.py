@@ -38,24 +38,24 @@ class BinaryTree:
 
         return root
 
-    def tree_to_graph(self, T, node, pos, x=0, y=0, layer_height=None):
+    def graphize(self, T, node, pos, x=0, y=0, layer_height=None):
         if node:
             if layer_height is None:
                 layer_height = random.randint(3, 6)  # Random height for each layer
             pos[node.value] = (x, y)
             if node.left:
                 T.add_edge(node.value, node.left.value)
-                self.tree_to_graph(T, node.left, pos, x - layer_height, y - 1, layer_height / 2)
+                self.graphize(T, node.left, pos, x - layer_height, y - 1, layer_height / 2)
             if node.right:
                 T.add_edge(node.value, node.right.value)
-                self.tree_to_graph(T, node.right, pos, x + layer_height, y - 1, layer_height / 2)
+                self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2)
                 
     def draw(self, root):
         # Create a directed graph
         T = nx.DiGraph()
         pos = {}
         # Draw the tree
-        self.tree_to_graph(T, root, pos)
+        self.graphize(T, root, pos)
 
         # Draw nodes and edges
         nx.draw(T, pos, with_labels=True, font_weight='bold', connectionstyle='arc3,rad=0', node_size=800, node_color='skyblue')
@@ -101,7 +101,7 @@ class BinarySearchTree:
 
         return root
 
-    def tree_to_graph(self, T, node, pos, x=0, y=0, layer_height=None,layer_width=None):
+    def graphize(self, T, node, pos, x=0, y=0, layer_height=None,layer_width=None):
         if node:
             if layer_height is None:
                 layer_height = random.randint(20, 30)  # Random height for each layer (increased for a deeper tree)
@@ -111,10 +111,10 @@ class BinarySearchTree:
             pos[node.value] = (x, y)
             if node.left:
                 T.add_edge(node.value, node.left.value)
-                self.tree_to_graph(T, node.left, pos, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
+                self.graphize(T, node.left, pos, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
             if node.right:
                 T.add_edge(node.value, node.right.value)
-                self.tree_to_graph(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+                self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
 
     def draw(self, root):
         # Create a directed graph
@@ -122,7 +122,7 @@ class BinarySearchTree:
 
         pos = {}
         # Draw the tree
-        self.tree_to_graph(T, root, pos)
+        self.graphize(T, root, pos)
 
         # Draw nodes and edges
         nx.draw(T, pos, with_labels=True, font_weight='bold', connectionstyle='arc3,rad=0', node_size=800, node_color='skyblue')
