@@ -1,16 +1,25 @@
-from generators.tree import BinaryTree, BinarySearchTree
-from generators.graph import UndirectedGraph, DirectedGraph
+from generators.tree import BinaryTree, BinarySearchTree, generate_binary_tree, generate_binary_search_tree
+from generators.graph import UndirectedGraph, DirectedGraph, generate_undirected_graph, generate_directed_graph
 
-# Instantiate a binary tree
-binary_tree = BinaryTree(large=True)
-# Generate a binary tree 
-binary_tree_root = binary_tree.generate()
-# Draw the binary tree
-#binary_tree.draw(root=binary_tree_root, save=True, path='output.png', show=False)
+binary_tree_path = 'images/binary_tree/test.png'
+binary_search_tree_path = 'images/binary_search_tree/'
+undirected_graph_path = 'images/undirected_graph/'
+directed_graph_path = 'images/directed_graph/'
 
-# Instantiate a binary search tree
-binary_search_tree = BinarySearchTree(large=True)
-# Generate a binary search tree
-binary_search_tree_root = binary_search_tree.generate()
-# Draw the binary search tree
-binary_search_tree.draw(root=binary_search_tree_root, save=True, path='output.png', show=False)
+generation_number = 1
+variation_number = 1
+format_number = 1
+
+generate_binary_tree(
+    large=False,
+    save=True,
+    path=binary_tree_path + f'bit_{generation_number}_{variation_number}_{format_number}.png', 
+    show=False
+)
+
+generate_binary_search_tree(
+    large=False,
+    save=True,
+    path=binary_search_tree_path + f'bst_{generation_number}_{variation_number}_{format_number}.png', 
+    show=False
+)
