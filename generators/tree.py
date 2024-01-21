@@ -38,7 +38,7 @@ class BinaryTree:
         return root
 
 
-    def graphize(self, T, node, pos, x=0, y=0, layer_height=None,layer_width=None):
+    def graphize(self, T, node, pos, x=0, y=0, layer_height=None, layer_width=None):
         if node:
             if layer_height is None:
                 layer_height = random.randint(3, 6)  # Random height for each layer
@@ -52,16 +52,34 @@ class BinaryTree:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
                 
-    def draw(self, root: Node):
+    def draw(self, root: Node, save: bool = False, path: str = None, show: bool = True):
+        
+        # DPI for the output
+        dpi = 100
+        
+        # Calculate the figure size in inches for a 512x512 pixel image
+        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        
         # Create a directed graph
         T = nx.Graph()
         pos = {}
+        
         # Draw the tree
         self.graphize(T, root, pos)
+        
+        # Create a figure with the calculated size
+        plt.figure(figsize=(figure_size, figure_size))
 
         # Draw nodes and edges
         nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
-        plt.show()
+
+        if save:
+            if path is None:
+                path = "output.png"  # Default file name
+            plt.savefig(fname=path, format='png', dpi=dpi)
+            
+        if show:
+            plt.show()
         
 class BinarySearchTree:
     def __init__(self, large: bool = False):
@@ -103,7 +121,7 @@ class BinarySearchTree:
 
         return root
 
-    def graphize(self, T, node, pos, x=0, y=0, layer_height=None,layer_width=None):
+    def graphize(self, T, node, pos, x=0, y=0, layer_height=None, layer_width=None):
         if node:
             if layer_height is None:
                 layer_height = random.randint(20, 30)  # Random height for each layer (increased for a deeper tree)
@@ -118,14 +136,31 @@ class BinarySearchTree:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
 
-    def draw(self, root: Node):
+    def draw(self, root: Node, save: bool = False, path: str = None, show: bool = True):
+        
+        # DPI for the output
+        dpi = 100
+        
+        # Calculate the figure size in inches for a 512x512 pixel image
+        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        
         # Create a directed graph
         T = nx.Graph()
-
         pos = {}
+        
         # Draw the tree
         self.graphize(T, root, pos)
+        
+        # Create a figure with the calculated size
+        plt.figure(figsize=(figure_size, figure_size))
 
         # Draw nodes and edges
         nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
-        plt.show()
+        
+        if save:
+            if path is None:
+                path = "output.png"  # Default file name
+            plt.savefig(fname=path, format='png', dpi=dpi)
+            
+        if show:
+            plt.show()
