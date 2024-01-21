@@ -13,4 +13,4 @@ binary_search_tree = BinarySearchTree()
 # Generate a binary search tree
 binary_search_tree_root = binary_search_tree.generate()
 # Draw the binary search tree
-#binary_search_tree.draw(root=binary_search_tree_root, save=True, path='output.png', show=False, dpi=300)
+#binary_search_tree.draw(root=binary_search_tree_root, save=True, path='output.png', show=False)
