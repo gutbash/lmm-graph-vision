@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 
-class Node:
+class TreeNode:
     def __init__(self, value: int):
         self.value = value
         self.left = None
@@ -21,19 +21,35 @@ class BinaryTree:
         if num_nodes <= 0:
             return None
 
-        root = Node(1)  # The initial node is consistently designated as 1.
+        root_value = random.randint(1, 100) # Prick random root
+        root = TreeNode(root_value)
+        values_set = {root_value}
         nodes = [root]
+        queue = [root]
 
-        for i in range(2, num_nodes + 1):
-            parent = random.choice(nodes)
-            new_node = Node(i)
+        while len(nodes) < num_nodes:
+            current = queue.pop(0)
 
-            if not parent.left:
-                parent.left = new_node
-            elif not parent.right:
-                parent.right = new_node
+            left_child_value = random.randint(1, 100)
+            while left_child_value in values_set:
+                left_child_value = random.randint(1, 100)
 
-            nodes.append(new_node)
+            left_child = TreeNode(left_child_value)
+            current.left = left_child
+            values_set.add(left_child_value)
+            nodes.append(left_child)
+            queue.append(left_child)
+
+            if len(nodes) < num_nodes:
+                right_child_value = random.randint(1, 100)
+                while right_child_value in values_set:
+                    right_child_value = random.randint(1, 100)
+
+                right_child = TreeNode(right_child_value)
+                current.right = right_child
+                values_set.add(right_child_value)
+                nodes.append(right_child)
+                queue.append(right_child)
 
         return root
 
@@ -52,7 +68,7 @@ class BinaryTree:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
                 
-    def draw(self, root: Node, save: bool = False, path: str = None, show: bool = True):
+    def draw(self, root: TreeNode, save: bool = False, path: str = None, show: bool = True):
         
         # DPI for the output
         dpi = 100
@@ -95,12 +111,12 @@ class BinarySearchTree:
             return None
 
         root_value = random.randint(1, 100)  # Select the root randomly
-        root = Node(root_value)
+        root = TreeNode(root_value)
         nodes = [root]
 
         for i in range(2, num_nodes + 1):
             node_value = random.randint(1, 100)
-            new_node = Node(node_value)
+            new_node = TreeNode(node_value)
 
             current = root
             while True:
@@ -136,7 +152,7 @@ class BinarySearchTree:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
 
-    def draw(self, root: Node, save: bool = False, path: str = None, show: bool = True):
+    def draw(self, root: TreeNode, save: bool = False, path: str = None, show: bool = True):
         
         # DPI for the output
         dpi = 100

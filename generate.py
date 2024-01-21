@@ -1,4 +1,5 @@
 from generators.tree import BinaryTree, BinarySearchTree
+from generators.graph import UndirectedGraph, DirectedGraph
 
 # Instantiate a binary tree
 binary_tree = BinaryTree(large=True)
