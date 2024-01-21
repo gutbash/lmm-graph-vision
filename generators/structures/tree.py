@@ -2,7 +2,6 @@
 The tree module contains classes and methods for generating random binary trees and binary search trees.
 """
 
-import base64
 import networkx as nx
 import matplotlib.pyplot as plt
 import random

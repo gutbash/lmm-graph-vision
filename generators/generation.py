@@ -1,9 +1,11 @@
 from generators.structures.tree import BinaryTree, BinarySearchTree
 from generators.structures.graph import UndirectedGraph, DirectedGraph
+from images.encoding import encode_image
+from data.operations import add_object
 
 # TODO: Encode images as base64 strings and add them to the YAML file
 
-def generate_binary_tree(large: bool = False, save: bool = False, path: str = '', filename: str = 'bt_test.png', show: bool = False):
+def generate_binary_tree(large: bool = False, yaml: bool = False, save: bool = False, path: str = '', filename: str = 'bt_test.png', show: bool = False, generation: int = 1, variation: int = 1, format: int = 1):
     """
     Generate a binary tree.
     """
@@ -14,6 +16,20 @@ def generate_binary_tree(large: bool = False, save: bool = False, path: str = ''
     binary_tree_root = binary_tree.generate()
     binary_tree.draw(root=binary_tree_root, save=save, path=filepath, show=show)
     
+    if yaml:
+        encoded_image = encode_image(image_path=filepath)
+        
+        add_object(
+            file_path='data/tree/binary_tree.yaml',
+            text=None,
+            image_data=encoded_image,
+            image_path=filepath,
+            expected=None,
+            structure='binary_tree',
+            generation=generation,
+            variation=variation,
+            format=format
+        )
     
 
 def generate_binary_search_tree(large: bool = False, save: bool = False, path: str = '', filename: str = 'bst_test.png', show: bool = False):
