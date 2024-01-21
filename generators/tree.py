@@ -14,7 +14,7 @@ class BinaryTree:
 
     def generate(self):
         if self.large:
-            num_nodes = random.randint(10, 20)
+            num_nodes = random.randint(11, 20)
         else:
             num_nodes = random.randint(1, 10)
 
@@ -52,7 +52,7 @@ class BinaryTree:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
                 
-    def draw(self, root):
+    def draw(self, root: Node):
         # Create a directed graph
         T = nx.Graph()
         pos = {}
@@ -69,7 +69,7 @@ class BinarySearchTree:
 
     def generate(self):
         if self.large:
-            num_nodes = random.randint(10, 20)
+            num_nodes = random.randint(11, 20)
         else:
             num_nodes = random.randint(1, 10)
 
@@ -118,7 +118,7 @@ class BinarySearchTree:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
 
-    def draw(self, root):
+    def draw(self, root: Node):
         # Create a directed graph
         T = nx.Graph()
 
@@ -129,17 +129,3 @@ class BinarySearchTree:
         # Draw nodes and edges
         nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
         plt.show()
-
-# Instantiate a binary tree
-binary_tree = BinaryTree()
-# Generate a binary tree 
-binary_tree_root = binary_tree.generate()
-# Draw the binary tree
-#binary_tree.draw(binary_tree_root)
-
-# Instantiate a binary search tree
-binary_search_tree = BinarySearchTree()
-# Generate a binary search tree
-binary_search_tree_root = binary_search_tree.generate()
-# Draw the binary search tree
-#binary_search_tree.draw(binary_search_tree_root)
