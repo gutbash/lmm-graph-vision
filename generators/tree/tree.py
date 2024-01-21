@@ -47,7 +47,7 @@ num_nodes = random.randint(1,10)
 root = generate_binary_tree(num_nodes)
 
 # Create a directed graph
-T = nx.DiGraph()
+T = nx.Graph()
 
 pos = {}
 # Draw the tree
