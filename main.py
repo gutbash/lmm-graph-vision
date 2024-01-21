@@ -1,5 +1,4 @@
-from generators.tree import BinaryTree, BinarySearchTree, generate_binary_tree, generate_binary_search_tree
-from generators.graph import UndirectedGraph, DirectedGraph, generate_undirected_graph, generate_directed_graph
+from generators.generate import generate_binary_tree, generate_binary_search_tree, generate_undirected_graph, generate_directed_graph
 
 binary_tree_path = 'images/binary_tree/test.png'
 binary_search_tree_path = 'images/binary_search_tree/'

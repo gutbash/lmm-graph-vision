@@ -18,9 +18,3 @@ class UndirectedGraph:
 class DirectedGraph:
     def __init__(self, large: bool = False):
         self.large = large
-        
-def generate_undirected_graph(large: bool = False, save: bool = False, path: str = 'ug_test.png', show: bool = False):
-    pass
-
-def generate_directed_graph(large: bool = False, save: bool = False, path: str = 'dg_test.png', show: bool = False):
-    pass
