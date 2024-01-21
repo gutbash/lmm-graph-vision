@@ -1,5 +1,5 @@
 """
-The tree module contains classes for generating random binary trees and binary search trees.
+The tree module contains classes and methods for generating random binary trees and binary search trees.
 """
 
 import networkx as nx
@@ -396,7 +396,9 @@ class BinarySearchTree:
             
         if show:
             plt.show()
-            
+
+# TODO: Encode images as base64 strings and add them to the YAML file
+
 def generate_binary_tree(large: bool = False, save: bool = False, path: str = 'bt_test.png', show: bool = False):
     """
     Generate a binary tree.
