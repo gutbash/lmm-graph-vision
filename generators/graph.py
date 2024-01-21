@@ -1,3 +1,7 @@
+"""
+The graph module contains the classes for generating directed and undirected graphs.
+"""
+
 import networkx as nx
 import matplotlib.pyplot as plt
 import random

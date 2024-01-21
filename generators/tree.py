@@ -1,18 +1,81 @@
+"""
+The tree module contains classes for generating random binary trees and binary search trees.
+"""
+
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
 
 class TreeNode:
-    def __init__(self, value: int):
-        self.value = value
-        self.left = None
-        self.right = None
+    """
+    A class used to represent a tree node
 
+    Attributes
+    ----------
+    value : int
+        the value of the node
+    left : TreeNode
+        the left child of the node
+    right : TreeNode
+        the right child of the node
+    """
+    def __init__(self, value: int = None):
+        """
+        Parameters
+        ----------
+        value : int
+            the value of the node (default is None)
+        """
+        self.value = value # Node value
+        self.left = None # Left child
+        self.right = None # Right child
+
+# Generate a random binary tree
 class BinaryTree:
+    """
+    A class used to represent a binary tree
+
+    Attributes
+    ----------
+    large : bool
+        whether to generate a large tree or not
+
+    Methods
+    -------
+    generate()
+        Generates a random binary tree
+    graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
+        Graphizes the binary tree
+    draw(root: TreeNode, save: bool = False, path: str = None, show: bool = True)
+        Draws the binary tree
+    """
+    
     def __init__(self, large: bool = False):
+        """
+        Parameters
+        ----------
+        large : bool
+            whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
+        """
         self.large = large
 
     def generate(self):
+        """
+        Generates a random binary tree
+        
+        Paramters
+        ---------
+        None
+        
+        Returns
+        -------
+        TreeNode
+            the root of the binary tree
+        
+        Raises
+        ------
+        None
+        """
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
@@ -53,8 +116,36 @@ class BinaryTree:
 
         return root
 
+    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None):
+        """
+        Graphizes the binary tree
 
-    def graphize(self, T, node, pos, x=0, y=0, layer_height=None, layer_width=None):
+        Parameters
+        ----------
+        T : nx.Graph
+            the graph to be drawn
+        node : TreeNode
+            the current node
+        pos : dict
+            a dictionary of positions of nodes
+        x : int
+            the x coordinate of the current node (default is 0)
+        y : int
+            the y coordinate of the current node (default is 0)
+        layer_height : int
+            the height of the current layer (default is None)
+        layer_width : int
+            the width of the current layer (default is None)
+
+        Returns
+        -------
+        None
+        
+        Raises
+        ------
+        ValueError
+            if the node is None
+        """
         if node:
             if layer_height is None:
                 layer_height = random.randint(3, 6)  # Random height for each layer
@@ -67,8 +158,36 @@ class BinaryTree:
             if node.right:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+        else:
+            raise ValueError("The node is None")
                 
     def draw(self, root: TreeNode, save: bool = False, path: str = None, show: bool = True):
+        """
+        Draws the binary tree using matplotlib and networkx
+
+        Parameters
+        ----------
+        root : TreeNode
+            the root of the binary tree
+        save : bool
+            whether to save the image or not (default is False)
+        path : str
+            the path to save the image (default is None)
+        show : bool
+            whether to show the image or not (default is True)
+            
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        ValueError
+            if the root is None
+        """
+        
+        if root is None:
+            raise ValueError("The root is None")
         
         # DPI for the output
         dpi = 100
@@ -98,10 +217,50 @@ class BinaryTree:
             plt.show()
         
 class BinarySearchTree:
+    """
+    A class used to represent a binary search tree
+
+    Attributes
+    ----------
+    large : bool
+        whether to generate a large tree or not
+
+    Methods
+    -------
+    generate()
+        Generates a random binary search tree
+    graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
+        Graphizes the binary search tree
+    draw(root: TreeNode, save: bool = False, path: str = None, show: bool = True)
+        Draws the binary search tree
+    """    
+
     def __init__(self, large: bool = False):
+        """
+        Parameters
+        ----------
+        large : bool
+            whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
+        """
         self.large = large
 
     def generate(self):
+        """
+        Generates a random binary search tree
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        TreeNode
+            the root of the binary search tree
+            
+        Raises
+        ------
+        None
+        """
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
@@ -137,12 +296,41 @@ class BinarySearchTree:
 
         return root
 
-    def graphize(self, T, node, pos, x=0, y=0, layer_height=None, layer_width=None):
+    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None):
+        """
+        Graphizes the binary search tree
+
+        Parameters
+        ----------
+        T : nx.Graph
+            the graph to be drawn
+        node : TreeNode
+            the current node
+        pos : dict
+            a dictionary of positions of nodes
+        x : int
+            the x coordinate of the current node (default is 0)
+        y : int
+            the y coordinate of the current node (default is 0)
+        layer_height : int
+            the height of the current layer (default is None)
+        layer_width : int
+            the width of the current layer (default is None)
+
+        Returns
+        -------
+        None
+        
+        Raises
+        ------
+        ValueError
+            if the node is None
+        """
         if node:
             if layer_height is None:
-                layer_height = random.randint(20, 30)  # Random height for each layer (increased for a deeper tree)
+                layer_height = random.uniform(0.5, 1.5)  # Random height for each layer (increased for a deeper tree)
             if layer_width is None:
-                layer_width = 2
+                layer_width = 1.0
                 
             pos[node.value] = (x, y)
             if node.left:
@@ -151,8 +339,36 @@ class BinarySearchTree:
             if node.right:
                 T.add_edge(node.value, node.right.value)
                 self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+        else:
+            raise ValueError("The node is None")
 
     def draw(self, root: TreeNode, save: bool = False, path: str = None, show: bool = True):
+        """
+        Draws the binary search tree using matplotlib and networkx
+
+        Parameters
+        ----------
+        root : TreeNode
+            the root of the binary search tree
+        save : bool
+            whether to save the image or not (default is False)
+        path : str
+            the path to save the image (default is None)
+        show : bool
+            whether to show the image or not (default is True)
+            
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        ValueError
+            if the root is None
+        """
+        
+        if root is None:
+            raise ValueError("The root is None")
         
         # DPI for the output
         dpi = 100
@@ -162,7 +378,7 @@ class BinarySearchTree:
         
         # Create a directed graph
         T = nx.Graph()
-        pos = {}
+        pos = nx.spring_layout(T)
         
         # Draw the tree
         self.graphize(T, root, pos)
