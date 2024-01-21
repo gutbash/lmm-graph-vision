@@ -13,13 +13,15 @@ format_number = 1
 generate_binary_tree(
     large=False,
     save=True,
-    path=binary_tree_path + f'bit_{generation_number}_{variation_number}_{format_number}.png', 
+    path=binary_tree_path,
+    filename=f'bit_{generation_number}_{variation_number}_{format_number}.png',
     show=False
 )
 
 generate_binary_search_tree(
     large=False,
     save=True,
-    path=binary_search_tree_path + f'bst_{generation_number}_{variation_number}_{format_number}.png', 
+    path=binary_search_tree_path,
+    filename=f'bst_{generation_number}_{variation_number}_{format_number}.png', 
     show=False
 )
