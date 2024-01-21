@@ -20,3 +20,15 @@ generate_binary_tree(
     variation=variation_number,
     format=format_number
 )
+
+generate_binary_search_tree(
+    large=False,
+    yaml=True,
+    save=True,
+    show=False,
+    path=binary_search_tree_path,
+    filename=f'bst_{generation_number}_{variation_number}_{format_number}.png',
+    generation=generation_number,
+    variation=variation_number,
+    format=format_number
+)

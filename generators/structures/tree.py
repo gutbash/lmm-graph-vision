@@ -1,5 +1,5 @@
 """
-The tree module contains classes and methods for generating random binary trees and binary search trees.
+The tree module contains classes and methods for random binary trees and binary search trees.
 """
 
 import networkx as nx

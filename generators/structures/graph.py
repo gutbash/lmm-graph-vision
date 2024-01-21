@@ -1,5 +1,5 @@
 """
-The graph module contains the classes and methods for generating directed and undirected graphs.
+The graph module contains the classes and methods for random directed and undirected graphs.
 """
 
 import networkx as nx
