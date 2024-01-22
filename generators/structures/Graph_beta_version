@@ -1,0 +1,138 @@
+import random
+import networkx as nx
+import matplotlib.pyplot as plt
+
+class GraphNode:
+    def __init__(self, value: int):
+        self.value = value
+        self.neighbors = []
+
+class UndirectedGraph:
+    
+    def __init__(self, large: bool = False):
+        self.large = large
+        self.graph_nodes = []
+        
+    def generate(self):
+        """
+        Generates a random undirected graph
+
+        Returns
+        -------
+        list
+            the nodes of the undirected graph
+        """
+        if self.large:
+            num_nodes = random.randint(11, 20)
+        else:
+            num_nodes = random.randint(1, 10)
+
+        if num_nodes <= 0:
+            return None
+
+        node_values = [random.randrange(1, 100, 1) for i in range(num_nodes)]
+        nodes = [GraphNode(value) for value in node_values]
+
+        for i in range(num_nodes):
+            for j in range(i + 1, num_nodes):
+                if random.choice([True, False]):  # Randomly add an edge between nodes
+                    nodes[i].neighbors.append(nodes[j])
+                    nodes[j].neighbors.append(nodes[i])
+
+        self.graph_nodes = nodes
+        return nodes
+
+    def visualize_graph(self):
+        """
+        Visualizes the generated undirected graph
+
+        Returns
+        -------
+        None
+        """
+        G = nx.Graph()
+
+        for node in self.graph_nodes:
+            G.add_node(node.value)
+            for neighbor in node.neighbors:
+                G.add_edge(node.value, neighbor.value)
+
+        pos = nx.spring_layout(G)
+        nx.draw(G, pos, width = 1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
+        plt.show()
+
+class DirectedGraphNode:
+    def __init__(self, value: int):
+        self.value = value
+        self.out_neighbors = []
+        self.in_neighbors = []
+
+class DirectedGraph:
+    
+    def __init__(self, large: bool = False):
+        self.large = large
+        self.graph_nodes = []
+
+    def generate(self):
+        """
+        Generates a random directed graph
+
+        Returns
+        -------
+        list
+            the nodes of the directed graph
+        """
+        if self.large:
+            num_nodes = random.randint(11, 20)
+        else:
+            num_nodes = random.randint(1, 10)
+
+        if num_nodes <= 0:
+            return None
+
+        node_values = [random.randrange(1, 100, 1) for i in range(num_nodes)]
+        nodes = [DirectedGraphNode(value) for value in node_values]
+
+        for i in range(num_nodes):
+            for j in range(num_nodes):
+                if i != j and random.choice([True, False]):  # Avoid self-loops and add diverse edges
+                    nodes[i].out_neighbors.append(nodes[j])
+                    nodes[j].in_neighbors.append(nodes[i])
+
+        self.graph_nodes = nodes
+        return nodes
+
+    def visualize_graph(self):
+        """
+        Visualizes the generated directed graph
+
+        Returns
+        -------
+        None
+        """
+        G = nx.DiGraph()
+
+        for node in self.graph_nodes:
+            G.add_node(node.value)
+            for out_neighbor in node.out_neighbors:
+                G.add_edge(node.value, out_neighbor.value)
+
+        pos = nx.spring_layout(G)
+        nx.draw(G, pos, width = 1.57,with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
+        plt.show()
+        
+# Example usage
+undirected_graph = UndirectedGraph()
+nodes = undirected_graph.generate()
+print("Generated Nodes:", [node.value for node in nodes])
+
+# Visualize the graph
+undirected_graph.visualize_graph()
+
+# Example usage
+directed_graph = DirectedGraph()
+nodes = directed_graph.generate()
+print("Generated Nodes:", [node.value for node in nodes])
+
+# Visualize the graph
+directed_graph.visualize_graph()
