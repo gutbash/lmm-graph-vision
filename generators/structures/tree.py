@@ -18,6 +18,11 @@ class TreeNode:
         the left child of the node
     right : TreeNode
         the right child of the node
+        
+    Methods
+    -------
+    __init__(value: int)
+        Constructs all the necessary attributes for the TreeNode object
     """
     def __init__(self, value: int = None):
         """
@@ -42,6 +47,8 @@ class BinaryTree:
 
     Methods
     -------
+    __init__(large: bool = False)
+        Constructs all the necessary attributes for the BinaryTree object
     generate()
         Generates a random binary tree
     graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
@@ -52,6 +59,8 @@ class BinaryTree:
     
     def __init__(self, large: bool = False):
         """
+        Constructor for the BinaryTree class
+        
         Parameters
         ----------
         large : bool
@@ -75,6 +84,24 @@ class BinaryTree:
         Raises
         ------
         None
+        
+        Notes
+        -----
+        The number of nodes in the tree is randomly chosen between 1 and 10 for small trees and between 11 and 20 for large trees.
+        
+        The root is randomly chosen between 1 and 100.
+        
+        The value of each node is randomly chosen between 1 and 100.
+        
+        The left child of each node is randomly chosen between 1 and 100.
+        
+        The right child of each node is randomly chosen between 1 and 100.
+        
+        The tree is not necessarily balanced.
+        
+        The tree is not necessarily complete.
+        
+        The tree is not necessarily full.
         """
         if self.large:
             num_nodes = random.randint(11, 20)
@@ -184,6 +211,22 @@ class BinaryTree:
         ------
         ValueError
             if the root is None
+            
+        Notes
+        -----
+        The visualization is done using the networkx and matplotlib libraries.
+        
+        The nodes are labeled with their values.
+        
+        The graph is drawn using the spring layout.
+        
+        The image is not displayed if the show parameter is set to False.
+        
+        The image is not saved if the save parameter is set to False.
+        
+        The image is saved in the current directory if the path parameter is set to None.
+        
+        The image is saved with the default name if the path parameter is set to None.
         """
         
         if root is None:
@@ -227,6 +270,8 @@ class BinarySearchTree:
 
     Methods
     -------
+    __init__(large: bool = False)
+        Constructs all the necessary attributes for the BinarySearchTree object
     generate()
         Generates a random binary search tree
     graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
@@ -237,6 +282,8 @@ class BinarySearchTree:
 
     def __init__(self, large: bool = False):
         """
+        Constructor for the BinarySearchTree class
+        
         Parameters
         ----------
         large : bool
@@ -260,6 +307,24 @@ class BinarySearchTree:
         Raises
         ------
         None
+        
+        Notes
+        -----
+        The number of nodes in the tree is randomly chosen between 1 and 10 for small trees and between 11 and 20 for large trees.
+        
+        The root is randomly chosen between 1 and 100.
+        
+        The value of each node is randomly chosen between 1 and 100.
+        
+        The left child of each node is randomly chosen between 1 and 100.
+        
+        The right child of each node is randomly chosen between 1 and 100.
+        
+        The tree is not necessarily balanced.
+        
+        The tree is not necessarily complete.
+        
+        The tree is not necessarily full.
         """
         if self.large:
             num_nodes = random.randint(11, 20)
@@ -365,6 +430,22 @@ class BinarySearchTree:
         ------
         ValueError
             if the root is None
+            
+        Notes
+        -----
+        The visualization is done using the networkx and matplotlib libraries.
+        
+        The nodes are labeled with their values.
+        
+        The graph is drawn using the spring layout.
+        
+        The image is not displayed if the show parameter is set to False.
+        
+        The image is not saved if the save parameter is set to False.
+        
+        The image is saved in the current directory if the path parameter is set to None.
+        
+        The image is saved with the default name if the path parameter is set to None.
         """
         
         if root is None:
