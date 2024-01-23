@@ -5,8 +5,6 @@ from generators.structures.graph import UndirectedGraph, DirectedGraph
 from images.encoding import encode_image
 from data.operations import add_object
 
-# TODO: Encode images as base64 strings and add them to the YAML file
-
 def generate_binary_tree(large: bool = False, yaml: bool = False, save: bool = False, path: str = '', filename: str = 'bt_test.png', show: bool = False, generation: int = 0, variation: int = 0, format: int = 0):
     """
     Generate a binary tree.
@@ -118,8 +116,50 @@ def generate_binary_search_tree(large: bool = False, yaml: bool = False, save: b
             format=format
         )
     
-def generate_undirected_graph(large: bool = False, save: bool = False, path: str = '', filename: str = 'ug_test.png', show: bool = False):
-    pass
+def generate_undirected_graph(large: bool = False, yaml: bool = False, save: bool = False, path: str = '', filename: str = 'ug_test.png', show: bool = False, generation: int = 0, variation: int = 0, format: int = 0):
+    
+    filepath = path + filename
+    
+    undirected_graph = UndirectedGraph(large=large)
+    nodes = undirected_graph.generate()
+    print("Generated Nodes:", [node.value for node in nodes])
+    undirected_graph.draw(save=save, path=filepath, show=show)
+    
+    if yaml:
+        encoded_image = encode_image(image_path=filepath)
+        
+        add_object(
+            file_path='data/graph/undirected_graph.yaml',
+            text=None,
+            image_data=encoded_image,
+            image_path=filepath,
+            expected=None,
+            structure='undirected_graph',
+            generation=generation,
+            variation=variation,
+            format=format
+        )
 
-def generate_directed_graph(large: bool = False, save: bool = False, path: str = '', filename: str = 'dg_test.png', show: bool = False):
-    pass
+def generate_directed_graph(large: bool = False, yaml: bool = False, save: bool = False, path: str = '', filename: str = 'dg_test.png', show: bool = False, generation: int = 0, variation: int = 0, format: int = 0):
+    
+    filepath = path + filename
+    
+    directed_graph = DirectedGraph(large=large)
+    nodes = directed_graph.generate()
+    print("Generated Nodes:", [node.value for node in nodes])
+    directed_graph.draw(save=save, path=filepath, show=show)
+    
+    if yaml:
+        encoded_image = encode_image(image_path=filepath)
+        
+        add_object(
+            file_path='data/graph/directed_graph.yaml',
+            text=None,
+            image_data=encoded_image,
+            image_path=filepath,
+            expected=None,
+            structure='directed_graph',
+            generation=generation,
+            variation=variation,
+            format=format
+        )

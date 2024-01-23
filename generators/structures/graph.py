@@ -53,7 +53,7 @@ class UndirectedGraph:
         Constructs all the necessary attributes for the UndirectedGraph object
     generate()
         Generates a random undirected graph
-    visualize_graph()
+    draw(save: bool = False, path: str = None, show: bool = True)
         Visualizes the generated undirected graph
     """
     
@@ -110,7 +110,7 @@ class UndirectedGraph:
         self.graph_nodes = nodes
         return nodes
 
-    def visualize_graph(self):
+    def draw(self, save: bool = False, path: str = None, show: bool = True):
         """
         Visualizes the generated undirected graph
 
@@ -129,6 +129,12 @@ class UndirectedGraph:
         The graph is displayed using matplotlib.
         """
         
+        # DPI for the output
+        dpi = 100
+        
+        # Calculate the figure size in inches for a 512x512 pixel image
+        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        
         G = nx.Graph()
 
         for node in self.graph_nodes:
@@ -137,8 +143,19 @@ class UndirectedGraph:
                 G.add_edge(node.value, neighbor.value)
 
         pos = nx.spring_layout(G)
+        
+        # Create a figure with the calculated size
+        plt.figure(figsize=(figure_size, figure_size))
+        
         nx.draw(G, pos, width = 1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
-        plt.show()
+
+        if save:
+            if path is None:
+                path = "output.png"  # Default file name
+            plt.savefig(fname=path, format='png', dpi=dpi)
+            
+        if show:
+            plt.show()
 
 class DirectedGraphNode:
     """
@@ -190,7 +207,7 @@ class DirectedGraph:
         Constructs all the necessary attributes for the DirectedGraph object
     generate()
         Generates a random directed graph
-    visualize_graph()
+    draw(save: bool = False, path: str = None, show: bool = True)
         Visualizes the generated directed graph
     """
     
@@ -247,7 +264,7 @@ class DirectedGraph:
         self.graph_nodes = nodes
         return nodes
 
-    def visualize_graph(self):
+    def draw(self, save: bool = False, path: str = None, show: bool = True):
         """
         Visualizes the generated directed graph
 
@@ -266,6 +283,12 @@ class DirectedGraph:
         The graph is displayed using matplotlib.
         """
         
+        # DPI for the output
+        dpi = 100
+        
+        # Calculate the figure size in inches for a 512x512 pixel image
+        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        
         G = nx.DiGraph()
 
         for node in self.graph_nodes:
@@ -274,21 +297,16 @@ class DirectedGraph:
                 G.add_edge(node.value, out_neighbor.value)
 
         pos = nx.spring_layout(G)
-        nx.draw(G, pos, width = 1.57,with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
-        plt.show()
         
-# Example usage
-undirected_graph = UndirectedGraph()
-nodes = undirected_graph.generate()
-print("Generated Nodes:", [node.value for node in nodes])
+        # Create a figure with the calculated size
+        plt.figure(figsize=(figure_size, figure_size))
+        
+        nx.draw(G, pos, width = 1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
 
-# Visualize the graph
-undirected_graph.visualize_graph()
-
-# Example usage
-directed_graph = DirectedGraph()
-nodes = directed_graph.generate()
-print("Generated Nodes:", [node.value for node in nodes])
-
-# Visualize the graph
-directed_graph.visualize_graph()
+        if save:
+            if path is None:
+                path = "output.png"  # Default file name
+            plt.savefig(fname=path, format='png', dpi=dpi)
+            
+        if show:
+            plt.show()
