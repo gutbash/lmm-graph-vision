@@ -71,45 +71,75 @@ class UndirectedGraph:
         self.large = large
         self.graph_nodes = []
         
-    def generate(self) -> None:
+    def generate(self):
         """
-        Generates a random undirected graph
+        Generates a random undirected graph with basic structure
 
         Returns
         -------
-        None
-            
-        Notes
-        -----
-        The number of nodes in the graph is randomly chosen between 1 and 10 for small graphs and between 11 and 20 for large graphs.
-        
-        The value of each node is randomly chosen between 1 and 100.
-        
-        Each node has a 50% chance of having an edge to another node.
-        
-        The graph is guaranteed to be connected.
+        nx.Graph
+            the basic structure of the undirected graph
         """
-        
+        G = nx.Graph()
+
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
             num_nodes = random.randint(1, 10)
 
         if num_nodes <= 0:
-            return
+            return G
 
-        node_values = [random.randrange(1, 100, 1) for i in range(num_nodes)]
-        nodes = [UndirectedGraphNode(value) for value in node_values]
+        max_connections = 4
+        connections_count = {node: 0 for node in range(num_nodes)}
 
         for i in range(num_nodes):
             for j in range(i + 1, num_nodes):
-                if random.choice([True, False]):  # Randomly add an edge between nodes
-                    nodes[i].neighbors.append(nodes[j])
-                    nodes[j].neighbors.append(nodes[i])
+                if random.choice([True, False]) and connections_count[i] < max_connections and connections_count[j] < max_connections:
+                    G.add_edge(i, j)
+                    connections_count[i] += 1
+                    connections_count[j] += 1
 
-        self.graph_nodes = nodes
+        return G
 
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+    def fill_graph(self, graph):
+        """
+        Fills the graph nodes with the given values
+
+        Parameters
+        ----------
+        graph : nx.Graph
+            the graph to be filled
+
+        Returns
+        -------
+        nx.Graph
+            the filled graph
+        """
+        values = [random.randrange(1, 100, 1) for _ in range(len(graph))]
+
+        for i, node in enumerate(graph.nodes):
+            graph.nodes[node]['value'] = values[i]
+
+        return graph
+
+    def visualize_graph(self, graph, with_labels=True):
+        """
+        Visualizes the undirected graph
+
+        Parameters
+        ----------
+        graph : nx.Graph
+            the graph to be visualized
+        with_labels : bool, optional
+            whether to display node labels, by default True
+
+        Returns
+        -------
+        None
+        """
+        
+    def draw(self, graph, save: bool = False, path: Path = None, show: bool = True, with_labels: bool = False) -> None:
         """
         Visualizes the generated undirected graph
 
@@ -134,19 +164,12 @@ class UndirectedGraph:
         # Calculate the figure size in inches for a 512x512 pixel image
         figure_size = 512 / dpi  # 5.12 when dpi is 100
         
-        G = nx.Graph()
-
-        for node in self.graph_nodes:
-            G.add_node(node.value)
-            for neighbor in node.neighbors:
-                G.add_edge(node.value, neighbor.value)
-
-        pos = nx.spring_layout(G)
-        
+        pos = nx.spring_layout(graph, seed=42)  # Set seed for reproducibility
+    
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(G, pos, width = 1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
+        nx.draw(graph, pos, width=1.57, with_labels= with_labels, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(graph, 'value'))
 
         if save:
             if path is None:
@@ -223,45 +246,61 @@ class DirectedGraph:
         self.large = large
         self.graph_nodes = []
 
-    def generate(self) -> None:
+    def generate(self):
         """
-        Generates a random directed graph
+        Generates a random directed graph with basic structure
 
         Returns
         -------
-        None
-            
-        Notes
-        -----
-        The number of nodes in the graph is randomly chosen between 1 and 10 for small graphs and between 11 and 20 for large graphs.
-        
-        The value of each node is randomly chosen between 1 and 100.
-        
-        Each node has a 50% chance of having an edge to another node.
-        
-        The graph is guaranteed to be connected.
+        nx.DiGraph
+            the basic structure of the directed graph
         """
-        
+        G = nx.DiGraph()
+
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
             num_nodes = random.randint(1, 10)
 
         if num_nodes <= 0:
-            return None
+            return G
 
-        node_values = [random.randrange(1, 100, 1) for i in range(num_nodes)]
-        nodes = [DirectedGraphNode(value) for value in node_values]
+        max_connections = 4
+        out_connections_count = {node: 0 for node in range(num_nodes)}
+        in_connections_count = {node: 0 for node in range(num_nodes)}
 
         for i in range(num_nodes):
             for j in range(num_nodes):
-                if i != j and random.choice([True, False]):  # Avoid self-loops and add diverse edges
-                    nodes[i].out_neighbors.append(nodes[j])
-                    nodes[j].in_neighbors.append(nodes[i])
+                if i != j and random.choice([True, False]):
+                    if out_connections_count[i] < max_connections and in_connections_count[j] < max_connections:
+                        G.add_edge(i, j)
+                        out_connections_count[i] += 1
+                        in_connections_count[j] += 1
 
-        self.graph_nodes = nodes
+        return G
+        
+    def fill_graph(self, graph):
+        """
+        Fills the graph nodes with the given values
 
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+        Parameters
+        ----------
+        graph : nx.DiGraph
+            the graph to be filled
+
+        Returns
+        -------
+        nx.DiGraph
+            the filled graph
+        """
+        values = [random.randrange(1, 100, 1) for _ in range(len(graph))]
+
+        for i, node in enumerate(graph.nodes):
+            graph.nodes[node]['value'] = values[i]
+
+        return graph
+
+    def draw(self, graph, save: bool = False, path: Path = None, show: bool = True, with_labels: bool = False) -> None:
         """
         Visualizes the generated directed graph
 
@@ -286,19 +325,12 @@ class DirectedGraph:
         # Calculate the figure size in inches for a 512x512 pixel image
         figure_size = 512 / dpi  # 5.12 when dpi is 100
         
-        G = nx.DiGraph()
-
-        for node in self.graph_nodes:
-            G.add_node(node.value)
-            for out_neighbor in node.out_neighbors:
-                G.add_edge(node.value, out_neighbor.value)
-
-        pos = nx.spring_layout(G)
+        pos = nx.spring_layout(graph, seed=42)  # Set seed for reproducibility
         
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(G, pos, width = 1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
+        nx.draw(graph, pos, width=1.57, with_labels=with_labels, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(graph, 'value'))
 
         if save:
             if path is None:
