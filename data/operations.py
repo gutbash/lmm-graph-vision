@@ -2,20 +2,21 @@
 
 import yaml
 import uuid
+from pathlib import Path
 
-def add_object(file_path: str = None, text: str = None, image_data: str = None, image_path: str = None, expected: str = None, structure: str = None, generation: int = None, variation: int = None, format: int = None):
+def add_object(file_path: Path = None, text: str = None, image_data: str = None, image_path: Path = None, expected: str = None, structure: str = None, generation: int = None, variation: int = None, format: int = None) -> None:
     """
     Add an object to a YAML file.
         
     Paramters
     ---------
-    file_path : str (default: None)
+    file_path : Path (default: None)
         the path to the YAML file
     text : str (default: None)
         the text prompt for the model
     image_data : str (default: None)
         the base64-encoded image data
-    image_path : str (default: None)
+    image_path : Path (default: None)
         the path to the image
     expected : str (default: None)
         the expected output of the model
@@ -36,16 +37,26 @@ def add_object(file_path: str = None, text: str = None, image_data: str = None, 
     ------
     Exception
         if no file path is provided
+        if the file path does not exist
+        if no image path is provided
+        if the image path does not exist
     """
     
     if file_path is None:
         raise Exception('No file path provided.')
+    elif not file_path.exists():
+        raise Exception('The file path does not exist.')
+    
+    if image_path is None:
+        raise Exception('No image path provided.')
+    elif not image_path.exists():
+        raise Exception('The image path does not exist.')
     
     new_object = {
         'id': str(uuid.uuid4()),
         'text': text,
         'image_data': image_data,
-        'image_path': image_path,
+        'image_path': str(image_path),
         'expected': expected,
         'structure': structure,
         'generation': generation,
@@ -65,6 +76,5 @@ def add_object(file_path: str = None, text: str = None, image_data: str = None, 
         with open(file_path, 'w') as file:
             yaml.safe_dump(data, file)
 
-        print("Object added successfully to the YAML file.")
     except Exception as e:
         print(f"An error occurred: {e}")

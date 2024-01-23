@@ -5,6 +5,7 @@ The tree module contains classes and methods for random binary trees and binary 
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
+from pathlib import Path
 
 class TreeNode:
     """
@@ -24,6 +25,7 @@ class TreeNode:
     __init__(value: int)
         Constructs all the necessary attributes for the TreeNode object
     """
+    
     def __init__(self, value: int = None):
         """
         Parameters
@@ -44,6 +46,8 @@ class BinaryTree:
     ----------
     large : bool
         whether to generate a large tree or not
+    root : TreeNode
+        the root of the binary tree
 
     Methods
     -------
@@ -53,11 +57,11 @@ class BinaryTree:
         Generates a random binary tree
     graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
         Graphizes the binary tree
-    draw(root: TreeNode, save: bool = False, path: str = None, show: bool = True)
+    draw(root: TreeNode, save: bool = False, path: Path = None, show: bool = True)
         Draws the binary tree
     """
     
-    def __init__(self, large: bool = False):
+    def __init__(self, large: bool = False) -> None:
         """
         Constructor for the BinaryTree class
         
@@ -66,9 +70,11 @@ class BinaryTree:
         large : bool
             whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
         """
+        
         self.large = large
+        self.root = None
 
-    def generate(self):
+    def generate(self) -> None:
         """
         Generates a random binary tree
         
@@ -78,8 +84,7 @@ class BinaryTree:
         
         Returns
         -------
-        TreeNode
-            the root of the binary tree
+        None
         
         Raises
         ------
@@ -103,6 +108,7 @@ class BinaryTree:
         
         The tree is not necessarily full.
         """
+        
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
@@ -141,9 +147,9 @@ class BinaryTree:
                 nodes.append(right_child)
                 queue.append(right_child)
 
-        return root
+        self.root = root
 
-    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None):
+    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
         """
         Graphizes the binary tree
 
@@ -173,6 +179,7 @@ class BinaryTree:
         ValueError
             if the node is None
         """
+        
         if node:
             if layer_height is None:
                 layer_height = random.randint(3, 6)  # Random height for each layer
@@ -188,17 +195,15 @@ class BinaryTree:
         else:
             raise ValueError("The node is None")
                 
-    def draw(self, root: TreeNode, save: bool = False, path: str = None, show: bool = True):
+    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
         """
         Draws the binary tree using matplotlib and networkx
 
         Parameters
         ----------
-        root : TreeNode
-            the root of the binary tree
         save : bool
             whether to save the image or not (default is False)
-        path : str
+        path : Path
             the path to save the image (default is None)
         show : bool
             whether to show the image or not (default is True)
@@ -229,7 +234,7 @@ class BinaryTree:
         The image is saved with the default name if the path parameter is set to None.
         """
         
-        if root is None:
+        if self.root is None:
             raise ValueError("The root is None")
         
         # DPI for the output
@@ -243,7 +248,7 @@ class BinaryTree:
         pos = {}
         
         # Draw the tree
-        self.graphize(T, root, pos)
+        self.graphize(T, self.root, pos)
         
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
@@ -267,6 +272,8 @@ class BinarySearchTree:
     ----------
     large : bool
         whether to generate a large tree or not
+    root : TreeNode
+        the root of the binary search tree
 
     Methods
     -------
@@ -276,11 +283,11 @@ class BinarySearchTree:
         Generates a random binary search tree
     graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
         Graphizes the binary search tree
-    draw(root: TreeNode, save: bool = False, path: str = None, show: bool = True)
+    draw(root: TreeNode, save: bool = False, path: Path = None, show: bool = True)
         Draws the binary search tree
     """    
 
-    def __init__(self, large: bool = False):
+    def __init__(self, large: bool = False) -> None:
         """
         Constructor for the BinarySearchTree class
         
@@ -289,9 +296,11 @@ class BinarySearchTree:
         large : bool
             whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
         """
+        
         self.large = large
+        self.root = None
 
-    def generate(self):
+    def generate(self) -> None:
         """
         Generates a random binary search tree
         
@@ -301,8 +310,7 @@ class BinarySearchTree:
         
         Returns
         -------
-        TreeNode
-            the root of the binary search tree
+        None
             
         Raises
         ------
@@ -326,6 +334,7 @@ class BinarySearchTree:
         
         The tree is not necessarily full.
         """
+        
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
@@ -358,10 +367,10 @@ class BinarySearchTree:
                         current = current.right
 
             nodes.append(new_node)
+        
+        self.root = root
 
-        return root
-
-    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None):
+    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
         """
         Graphizes the binary search tree
 
@@ -391,6 +400,7 @@ class BinarySearchTree:
         ValueError
             if the node is None
         """
+        
         if node:
             if layer_height is None:
                 layer_height = random.uniform(0.5, 1.5)  # Random height for each layer (increased for a deeper tree)
@@ -407,17 +417,15 @@ class BinarySearchTree:
         else:
             raise ValueError("The node is None")
 
-    def draw(self, root: TreeNode, save: bool = False, path: str = None, show: bool = True):
+    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
         """
         Draws the binary search tree using matplotlib and networkx
 
         Parameters
         ----------
-        root : TreeNode
-            the root of the binary search tree
         save : bool
             whether to save the image or not (default is False)
-        path : str
+        path : Path
             the path to save the image (default is None)
         show : bool
             whether to show the image or not (default is True)
@@ -448,7 +456,7 @@ class BinarySearchTree:
         The image is saved with the default name if the path parameter is set to None.
         """
         
-        if root is None:
+        if self.root is None:
             raise ValueError("The root is None")
         
         # DPI for the output
@@ -462,7 +470,7 @@ class BinarySearchTree:
         pos = nx.spring_layout(T)
         
         # Draw the tree
-        self.graphize(T, root, pos)
+        self.graphize(T, self.root, pos)
         
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))

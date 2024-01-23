@@ -5,6 +5,7 @@ The graph module contains the classes and methods for random directed and undire
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
+from pathlib import Path
 
 class UndirectedGraphNode:
     """
@@ -23,7 +24,7 @@ class UndirectedGraphNode:
         Constructs all the necessary attributes for the UndirectedGraphNode object
     """
     
-    def __init__(self, value: int):
+    def __init__(self, value: int) -> None:
         """
         Constructs all the necessary attributes for an UndirectedGraphNode object
         
@@ -53,11 +54,11 @@ class UndirectedGraph:
         Constructs all the necessary attributes for the UndirectedGraph object
     generate()
         Generates a random undirected graph
-    draw(save: bool = False, path: str = None, show: bool = True)
+    draw(save: bool = False, path: Path = None, show: bool = True)
         Visualizes the generated undirected graph
     """
     
-    def __init__(self, large: bool = False):
+    def __init__(self, large: bool = False) -> None:
         """
         Constructs all the necessary attributes for an UndirectedGraph object
         
@@ -70,14 +71,13 @@ class UndirectedGraph:
         self.large = large
         self.graph_nodes = []
         
-    def generate(self):
+    def generate(self) -> None:
         """
         Generates a random undirected graph
 
         Returns
         -------
-        list
-            the nodes of the undirected graph
+        None
             
         Notes
         -----
@@ -96,7 +96,7 @@ class UndirectedGraph:
             num_nodes = random.randint(1, 10)
 
         if num_nodes <= 0:
-            return None
+            return
 
         node_values = [random.randrange(1, 100, 1) for i in range(num_nodes)]
         nodes = [UndirectedGraphNode(value) for value in node_values]
@@ -108,9 +108,8 @@ class UndirectedGraph:
                     nodes[j].neighbors.append(nodes[i])
 
         self.graph_nodes = nodes
-        return nodes
 
-    def draw(self, save: bool = False, path: str = None, show: bool = True):
+    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
         """
         Visualizes the generated undirected graph
 
@@ -176,7 +175,7 @@ class DirectedGraphNode:
         Constructs all the necessary attributes for the DirectedGraphNode object
     """
     
-    def __init__(self, value: int):
+    def __init__(self, value: int) -> None:
         """
         Constructs all the necessary attributes for a DirectedGraphNode object
         
@@ -207,11 +206,11 @@ class DirectedGraph:
         Constructs all the necessary attributes for the DirectedGraph object
     generate()
         Generates a random directed graph
-    draw(save: bool = False, path: str = None, show: bool = True)
+    draw(save: bool = False, path: Path = None, show: bool = True)
         Visualizes the generated directed graph
     """
     
-    def __init__(self, large: bool = False):
+    def __init__(self, large: bool = False) -> None:
         """
         Constructs all the necessary attributes for a DirectedGraph object
         
@@ -224,14 +223,13 @@ class DirectedGraph:
         self.large = large
         self.graph_nodes = []
 
-    def generate(self):
+    def generate(self) -> None:
         """
         Generates a random directed graph
 
         Returns
         -------
-        list
-            the nodes of the directed graph
+        None
             
         Notes
         -----
@@ -262,9 +260,8 @@ class DirectedGraph:
                     nodes[j].in_neighbors.append(nodes[i])
 
         self.graph_nodes = nodes
-        return nodes
 
-    def draw(self, save: bool = False, path: str = None, show: bool = True):
+    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
         """
         Visualizes the generated directed graph
 
