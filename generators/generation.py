@@ -142,6 +142,9 @@ def generate_structure(structure: Type[Any], large: bool = False, yaml: bool = F
     
     instantiated_structure = structure(large=large)
     instantiated_structure.generate()
+    # TEMPORARY CHECK FOR GRAPHS WHILE TREE.FILL NOT YET IMPLEMENTED
+    if structure_name == 'UndirectedGraph' or structure_name == 'DirectedGraph':
+        instantiated_structure.fill()
     instantiated_structure.draw(save=save, path=filepath, show=show)
     
     end = time.time()
