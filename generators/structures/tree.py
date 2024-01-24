@@ -25,7 +25,6 @@ class TreeNode:
     __init__(value: int)
         Constructs all the necessary attributes for the TreeNode object
     """
-    
     def __init__(self, value: int = None):
         """
         Parameters
@@ -33,9 +32,9 @@ class TreeNode:
         value : int
             the value of the node (default is None)
         """
-        self.value = value # Node value
-        self.left = None # Left child
-        self.right = None # Right child
+        self.value = value  # Node value
+        self.left = None  # Left child
+        self.right = None  # Right child
 
 # Generate a random binary tree
 class BinaryTree:
@@ -55,12 +54,11 @@ class BinaryTree:
         Constructs all the necessary attributes for the BinaryTree object
     generate()
         Generates a random binary tree
-    graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
+    graphize(T, node, x=0, y=0, layer_height=None, layer_width=None)
         Graphizes the binary tree
     draw(root: TreeNode, save: bool = False, path: Path = None, show: bool = True)
         Draws the binary tree
     """
-    
     def __init__(self, large: bool = False) -> None:
         """
         Constructor for the BinaryTree class
@@ -70,9 +68,11 @@ class BinaryTree:
         large : bool
             whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
         """
-        
         self.large = large
         self.root = None
+        self.pos = {}
+        self.tree_skeleton = None
+        self.tree_filled = None
 
     def generate(self) -> None:
         """
@@ -108,7 +108,8 @@ class BinaryTree:
         
         The tree is not necessarily full.
         """
-        
+        T = nx.Graph()
+
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
@@ -117,7 +118,7 @@ class BinaryTree:
         if num_nodes <= 0:
             return None
 
-        root_value = random.randint(1, 100) # Prick random root
+        root_value = random.randint(1, 100)
         root = TreeNode(root_value)
         values_set = {root_value}
         nodes = [root]
@@ -148,8 +149,9 @@ class BinaryTree:
                 queue.append(right_child)
 
         self.root = root
+        self.graphize(T, self.root)
 
-    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
+    def graphize(self, T: nx.Graph, node: TreeNode, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
         """
         Graphizes the binary tree
 
@@ -159,8 +161,6 @@ class BinaryTree:
             the graph to be drawn
         node : TreeNode
             the current node
-        pos : dict
-            a dictionary of positions of nodes
         x : int
             the x coordinate of the current node (default is 0)
         y : int
@@ -185,17 +185,43 @@ class BinaryTree:
                 layer_height = random.randint(3, 6)  # Random height for each layer
             if layer_width is None:
                 layer_width = 2
-            pos[node.value] = (x, y)
+
+            current_pos = (x, y)
+            self.pos[node.value] = current_pos
+
             if node.left:
                 T.add_edge(node.value, node.left.value)
-                self.graphize(T, node.left, pos, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
+                self.graphize(T, node.left, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
             if node.right:
                 T.add_edge(node.value, node.right.value)
-                self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+                self.graphize(T, node.right, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+            else:
+                T.add_node(node.value)
         else:
             raise ValueError("The node is None")
-                
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+        self.tree_skeleton = T
+
+    def fill(self) -> None:
+        """
+        Fills the graph nodes with the given values
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        """
+        
+        self.tree_filled = self.tree_skeleton.copy()
+
+        values = [random.randrange(1, 100, 1) for _ in range(len(self.tree_filled))]
+        print("These are new node values:",values)
+        for i, node in enumerate(self.tree_filled.nodes):
+            self.tree_filled.nodes[node]['value'] = values[i]
+
+    def draw(self, with_labels: bool = False, save: bool = False, path: Path = None, show: bool = True) -> None:
         """
         Draws the binary tree using matplotlib and networkx
 
@@ -236,34 +262,29 @@ class BinaryTree:
         
         if self.root is None:
             raise ValueError("The root is None")
-        
+
         # DPI for the output
         dpi = 100
-        
+
         # Calculate the figure size in inches for a 512x512 pixel image
         figure_size = 512 / dpi  # 5.12 when dpi is 100
-        
-        # Create a directed graph
-        T = nx.Graph()
-        pos = {}
-        
-        # Draw the tree
-        self.graphize(T, self.root, pos)
-        
+
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
+        print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
+        nx.draw(self.tree_filled, self.pos, with_labels=with_labels, font_weight='bold', node_size=800,
+                node_color='skyblue', labels=nx.get_node_attributes(self.tree_filled, 'value'))
 
         if save:
             if path is None:
                 path = "output.png"  # Default file name
             plt.savefig(fname=path, format='png', dpi=dpi)
-            
+
         if show:
-            plt.show()
-        
+            plt.show()   
+            
 class BinarySearchTree:
     """
     A class used to represent a binary search tree
