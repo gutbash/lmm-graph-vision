@@ -4,21 +4,37 @@ from generators.structures.graph import UndirectedGraph, DirectedGraph
 
 from pathlib import Path
 
-image_path_binary_tree = Path('images/binary_tree/')
-image_path_binary_search_tree = Path('images/binary_search_tree/')
-image_path_undirected_graph = Path('images/undirected_graph/')
-image_path_directed_graph = Path('images/directed_graph/')
+### DEVELOPMENT PATHS ###
 
-yaml_path_binary_tree = Path('data/binary_tree/')
-yaml_path_binary_search_tree = Path('data/binary_search_tree/')
-yaml_path_undirected_graph = Path('data/undirected_graph/')
-yaml_path_directed_graph = Path('data/directed_graph/')
+image_path_binary_tree = Path('images/develop/binary_tree/')
+image_path_binary_search_tree = Path('images/develop/binary_search_tree/')
+image_path_undirected_graph = Path('images/develop/undirected_graph/')
+image_path_directed_graph = Path('images/develop/directed_graph/')
+
+yaml_path_binary_tree = Path('data/develop/binary_tree/')
+yaml_path_binary_search_tree = Path('data/develop/binary_search_tree/')
+yaml_path_undirected_graph = Path('data/develop/undirected_graph/')
+yaml_path_directed_graph = Path('data/develop/directed_graph/')
+
+### DEPLOY PATHS ###
+
+"""
+image_path_binary_tree = Path('images/deploy/binary_tree/')
+image_path_binary_search_tree = Path('images/deploy/binary_search_tree/')
+image_path_undirected_graph = Path('images/deploy/undirected_graph/')
+image_path_directed_graph = Path('images/deploy/directed_graph/')
+
+yaml_path_binary_tree = Path('data/deploy/binary_tree/')
+yaml_path_binary_search_tree = Path('data/deploy/binary_search_tree/')
+yaml_path_undirected_graph = Path('data/deploy/undirected_graph/')
+yaml_path_directed_graph = Path('data/deploy/directed_graph/')
+"""
 
 generation_number = 0
 variation_number = 0
 format_number = 0
 
-### BEGIN TESTING AREA ###
+### TEST STRUCTURE GENERATION ###
 
 generate_structure(
     structure=BinaryTree,
@@ -79,5 +95,3 @@ generate_structure(
     variation=variation_number,
     format=format_number
 )
-
-### END TESTING AREA ###

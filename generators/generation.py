@@ -137,25 +137,28 @@ def generate_structure(structure: Type[Any], large: bool = False, yaml: bool = F
         logger.warning("Neither save nor show is True, so the image will not be generated.")
         return
     
-    logger.info(f"Generating {formal_name}...")
+    if not save_path.exists():
+        logger.error(f"Failed to save {formal_name} image because {save_path} does not exist.")
+        return
+    
+    logger.info(f"Creating {formal_name}...")
     start = time.time()
     
     instantiated_structure = structure(large=large)
     instantiated_structure.generate()
+    logger.info(f"\tGenerated {formal_name}")
     # TEMPORARY CHECK FOR GRAPHS WHILE TREE.FILL NOT YET IMPLEMENTED
-    if structure_name == 'UndirectedGraph' or structure_name == 'DirectedGraph':
+    if structure_name == 'UndirectedGraph' or structure_name == 'DirectedGraph' or structure_name == 'BinaryTree':
         instantiated_structure.fill()
+        logger.info(f"\tFilled {formal_name}")
     instantiated_structure.draw(save=save, path=filepath, show=show)
+    logger.info(f"\tDrew {formal_name}")
     
     end = time.time()
     logger.info(f"{formal_name} generated in {round(end - start, 2)} seconds.")
     
     if save:
-        if not save_path.exists():
-            logger.error(f"Failed to save {formal_name} image because {save_path} does not exist.")
-            return
-        else:
-            logger.info(f"{formal_name} image saved to {filepath}.")
+        logger.info(f"{formal_name} image saved to {filepath}.")
         if yaml:
             
             if not yaml_path.exists():
