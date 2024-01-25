@@ -169,7 +169,7 @@ class UndirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=False, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(self.graph_filled, 'value'))
+        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(self.graph_filled, 'value'))
 
         if save:
             if path is None:
@@ -340,7 +340,7 @@ class DirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=False, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(self.graph_filled, 'value'))
+        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(self.graph_filled, 'value'))
 
         if save:
             if path is None:

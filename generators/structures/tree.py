@@ -221,7 +221,7 @@ class BinaryTree:
         for i, node in enumerate(self.tree_filled.nodes):
             self.tree_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, with_labels: bool = False, save: bool = False, path: Path = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
         """
         Draws the binary tree using matplotlib and networkx
 
@@ -274,7 +274,7 @@ class BinaryTree:
         print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.tree_filled, self.pos, with_labels=with_labels, font_weight='bold', node_size=800,
+        nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=800,
                 node_color='skyblue', labels=nx.get_node_attributes(self.tree_filled, 'value'))
 
         if save:
