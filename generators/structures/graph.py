@@ -227,6 +227,8 @@ class DirectedGraph:
         Constructs all the necessary attributes for the DirectedGraph object
     generate()
         Generates a random directed graph
+    fill()
+        Fills the graph nodes with the given values
     draw(save: bool = False, path: Path = None, show: bool = True)
         Visualizes the generated directed graph
     """

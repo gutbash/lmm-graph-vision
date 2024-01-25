@@ -1,4 +1,4 @@
-from generators.generation import generate_structure
+from generators.generation import generate_structure, fill_structure
 from generators.structures.tree import BinaryTree, BinarySearchTree
 from generators.structures.graph import UndirectedGraph, DirectedGraph
 
@@ -36,21 +36,70 @@ format_number = 0
 
 ### TEST STRUCTURE GENERATION ###
 
-generate_structure(
+binary_tree_structure = generate_structure(
     structure=BinaryTree,
     large=False,
-    yaml=False,
-    yaml_path=yaml_path_binary_tree,
-    yaml_name='binary_tree.yaml',
-    save=True,
-    save_path=image_path_binary_tree,
-    file_name='binary_tree.png',
-    show=False,
-    generation=generation_number,
-    variation=variation_number,
-    format=format_number
 )
 
+for variation in range(1, 4):
+    
+    fill_structure(
+        structure_instance=binary_tree_structure,
+        yaml=False,
+        yaml_path=yaml_path_binary_tree,
+        yaml_name='binary_tree.yaml',
+        save=True,
+        save_path=image_path_binary_tree,
+        file_name=f'binary_tree_test_{variation}.png',
+        show=False,
+        generation=generation_number,
+        variation=variation_number,
+        format=format_number
+    )
+    
+undirected_graph_structure = generate_structure(
+    structure=UndirectedGraph,
+    large=False,
+)
+
+for variation in range(1, 4):
+    
+    fill_structure(
+        structure_instance=undirected_graph_structure,
+        yaml=False,
+        yaml_path=yaml_path_undirected_graph,
+        yaml_name='undirected_graph.yaml',
+        save=True,
+        save_path=image_path_undirected_graph,
+        file_name=f'undirected_graph_test_{variation}.png',
+        show=False,
+        generation=generation_number,
+        variation=variation_number,
+        format=format_number
+    )
+
+directed_graph_structure = generate_structure(
+    structure=DirectedGraph,
+    large=False,
+)
+
+for variation in range(1, 4):
+        
+    fill_structure(
+        structure_instance=directed_graph_structure,
+        yaml=False,
+        yaml_path=yaml_path_directed_graph,
+        yaml_name='directed_graph.yaml',
+        save=True,
+        save_path=image_path_directed_graph,
+        file_name=f'directed_graph_test_{variation}.png',
+        show=False,
+        generation=generation_number,
+        variation=variation_number,
+        format=format_number
+    )
+
+'''
 generate_structure(
     structure=BinarySearchTree,
     large=False,
@@ -65,33 +114,4 @@ generate_structure(
     variation=variation_number,
     format=format_number
 )
-
-generate_structure(
-    structure=UndirectedGraph,
-    large=False,
-    yaml=False,
-    yaml_path=yaml_path_undirected_graph,
-    yaml_name='undirected_graph.yaml',
-    save=True,
-    save_path=image_path_undirected_graph,
-    file_name='undirected_graph.png',
-    show=False,
-    generation=generation_number,
-    variation=variation_number,
-    format=format_number
-)
-
-generate_structure(
-    structure=DirectedGraph,
-    large=False,
-    yaml=False,
-    yaml_path=yaml_path_directed_graph,
-    yaml_name='directed_graph.yaml',
-    save=True,
-    save_path=image_path_directed_graph,
-    file_name='directed_graph.png',
-    show=False,
-    generation=generation_number,
-    variation=variation_number,
-    format=format_number
-)
+'''

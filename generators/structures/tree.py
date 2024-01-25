@@ -54,9 +54,9 @@ class BinaryTree:
         Constructs all the necessary attributes for the BinaryTree object
     generate()
         Generates a random binary tree
-    graphize(T, node, x=0, y=0, layer_height=None, layer_width=None)
-        Graphizes the binary tree
-    draw(root: TreeNode, save: bool = False, path: Path = None, show: bool = True)
+    fill()
+        Fills the graph nodes with the given values
+    draw(save: bool = False, path: Path = None, show: bool = True)
         Draws the binary tree
     """
     def __init__(self, large: bool = False) -> None:
@@ -93,14 +93,6 @@ class BinaryTree:
         Notes
         -----
         The number of nodes in the tree is randomly chosen between 1 and 10 for small trees and between 11 and 20 for large trees.
-        
-        The root is randomly chosen between 1 and 100.
-        
-        The value of each node is randomly chosen between 1 and 100.
-        
-        The left child of each node is randomly chosen between 1 and 100.
-        
-        The right child of each node is randomly chosen between 1 and 100.
         
         The tree is not necessarily balanced.
         
@@ -149,57 +141,58 @@ class BinaryTree:
                 queue.append(right_child)
 
         self.root = root
-        self.graphize(T, self.root)
 
-    def graphize(self, T: nx.Graph, node: TreeNode, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
-        """
-        Graphizes the binary tree
+        def graphize(T: nx.Graph, node: TreeNode, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
+            """
+            Graphizes the binary tree
 
-        Parameters
-        ----------
-        T : nx.Graph
-            the graph to be drawn
-        node : TreeNode
-            the current node
-        x : int
-            the x coordinate of the current node (default is 0)
-        y : int
-            the y coordinate of the current node (default is 0)
-        layer_height : int
-            the height of the current layer (default is None)
-        layer_width : int
-            the width of the current layer (default is None)
+            Parameters
+            ----------
+            T : nx.Graph
+                the graph to be drawn
+            node : TreeNode
+                the current node
+            x : int
+                the x coordinate of the current node (default is 0)
+            y : int
+                the y coordinate of the current node (default is 0)
+            layer_height : int
+                the height of the current layer (default is None)
+            layer_width : int
+                the width of the current layer (default is None)
 
-        Returns
-        -------
-        None
-        
-        Raises
-        ------
-        ValueError
-            if the node is None
-        """
-        
-        if node:
-            if layer_height is None:
-                layer_height = random.randint(3, 6)  # Random height for each layer
-            if layer_width is None:
-                layer_width = 2
+            Returns
+            -------
+            None
+            
+            Raises
+            ------
+            ValueError
+                if the node is None
+            """
+            
+            if node:
+                if layer_height is None:
+                    layer_height = random.randint(3, 6)  # Random height for each layer
+                if layer_width is None:
+                    layer_width = 2
 
-            current_pos = (x, y)
-            self.pos[node.value] = current_pos
+                current_pos = (x, y)
+                self.pos[node.value] = current_pos
 
-            if node.left:
-                T.add_edge(node.value, node.left.value)
-                self.graphize(T, node.left, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
-            if node.right:
-                T.add_edge(node.value, node.right.value)
-                self.graphize(T, node.right, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+                if node.left:
+                    T.add_edge(node.value, node.left.value)
+                    graphize(T, node.left, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
+                if node.right:
+                    T.add_edge(node.value, node.right.value)
+                    graphize(T, node.right, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+                else:
+                    T.add_node(node.value)
             else:
-                T.add_node(node.value)
-        else:
-            raise ValueError("The node is None")
-        self.tree_skeleton = T
+                raise ValueError("The node is None")
+            self.tree_skeleton = T
+            
+        graphize(T, self.root)
 
     def fill(self) -> None:
         """
@@ -212,12 +205,24 @@ class BinaryTree:
         Returns
         -------
         None
+        
+        Raises
+        ------
+        None
+        
+        Notes
+        -----
+        The value of each node is randomly chosen between 1 and 100.
+        
+        The left child of each node is randomly chosen between 1 and 100.
+        
+        The right child of each node is randomly chosen between 1 and 100.
         """
         
         self.tree_filled = self.tree_skeleton.copy()
 
         values = [random.randrange(1, 100, 1) for _ in range(len(self.tree_filled))]
-        print("These are new node values:",values)
+        #print("These are new node values:",values)
         for i, node in enumerate(self.tree_filled.nodes):
             self.tree_filled.nodes[node]['value'] = values[i]
 
@@ -271,7 +276,7 @@ class BinaryTree:
 
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
-        print(self.pos)
+        #print(self.pos)
 
         # Draw nodes and edges
         nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=800,

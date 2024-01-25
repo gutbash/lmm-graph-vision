@@ -38,16 +38,70 @@ ch.setFormatter(formatter)
 # Add console handler to logger
 logger.addHandler(ch)
 
-def generate_structure(structure: Type[Any], large: bool = False, yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: str = None, save: bool = False, save_path: Path = Path('.'), file_name: str = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0) -> None:
+def generate_structure(structure: Type[Any], large: bool = False) -> Type[Any]:
     """
-    Generate a binary tree.
+    Generates an empty structure instance and returns it
     
     Parameters
     ----------
     structure : Type[Any]
-        the structure to generate (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
+        the structure to generate
     large : bool (default: False)
-        whether or not the binary tree is large
+        whether or not the structure should be large
+        
+    Returns
+    -------
+    Type[Any]
+        the generated structure instance
+        
+    Raises
+    ------
+    ValueError
+        if structure is not a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
+    """
+    
+    structure_name = structure.__name__
+
+    match structure_name:
+        case 'BinaryTree':
+            default_file_name = 'bt_test.png'
+            yaml_structure_type = 'binary_tree'
+            formal_name = 'Binary Tree'
+        case 'BinarySearchTree':
+            default_file_name = 'bst_test.png'
+            yaml_structure_type = 'binary_search_tree'
+            formal_name = 'Binary Search Tree'
+        case 'UndirectedGraph':
+            default_file_name = 'ug_test.png'
+            yaml_structure_type = 'undirected_graph'
+            formal_name = 'Undirected Graph'
+        case 'DirectedGraph':
+            default_file_name = 'dg_test.png'
+            yaml_structure_type = 'directed_graph'
+            formal_name = 'Directed Graph'
+        case _:
+            raise ValueError("Structure must be a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph).")
+
+    logger.info(f"Generating {formal_name}...")
+    start = time.time()
+    
+    structure_instance = structure(large=large)
+    structure_instance.generate()
+    logger.info(f"╰── Generated {formal_name}")
+    
+    end = time.time()
+    logger.info(f"{formal_name} generated in {round(end - start, 2)} seconds.")
+    
+    return structure_instance
+
+def fill_structure(structure_instance: Type[Any], yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: str = None, save: bool = False, save_path: Path = Path('.'), file_name: str = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0) -> None:
+    """
+    Fills a structure instance and saves the image to a file and/or adds the object to a YAML file
+    
+    Parameters
+    ----------
+    structure_instance : Type[Any]
+        the structure instance to fill
     yaml : bool (default: False)
         whether or not to add the object to a YAML file
     yaml_path : Path (default: Path('.'))
@@ -82,27 +136,8 @@ def generate_structure(structure: Type[Any], large: bool = False, yaml: bool = F
     
     print()
     
-    # Path handling
-    save_path = Path(save_path)
-    if not file_name.endswith('.png'):
-        logger.warn("The file_name parameter does not end with '.png', so it will be added.")
-        file_name += '.png'
-    if not yaml_name.endswith('.yaml'):
-        logger.warn("The yaml_name parameter does not end with '.yaml', so it will be added.")
-        yaml_name += '.yaml'
-    # Check for save flag
-    if not save:
-        if save_path != Path('.') or file_name != None:
-            logger.warning("The save_path and file_name parameters are ignored since save is False.")
-        if yaml:
-            logger.warning("The yaml parameter is ignored since save is False.")
-    # Check for yaml flag
-    if not yaml:
-        if yaml_path != Path('.') or yaml_name != None:
-            logger.warning("The yaml_path and yaml_name parameters are ignored since yaml is False.")
+    structure_name = type(structure_instance).__name__
     
-    structure_name = structure.__name__
-
     match structure_name:
         case 'BinaryTree':
             default_file_name = 'bt_test.png'
@@ -122,6 +157,25 @@ def generate_structure(structure: Type[Any], large: bool = False, yaml: bool = F
             formal_name = 'Directed Graph'
         case _:
             raise ValueError("Structure must be a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph).")
+    
+    # Path handling
+    save_path = Path(save_path)
+    if not file_name.endswith('.png'):
+        logger.warn("The file_name parameter does not end with '.png', so it will be added.")
+        file_name += '.png'
+    if not yaml_name.endswith('.yaml'):
+        logger.warn("The yaml_name parameter does not end with '.yaml', so it will be added.")
+        yaml_name += '.yaml'
+    # Check for save flag
+    if not save:
+        if save_path != Path('.') or file_name != None:
+            logger.warning("The save_path and file_name parameters are ignored since save is False.")
+        if yaml:
+            logger.warning("The yaml parameter is ignored since save is False.")
+    # Check for yaml flag
+    if not yaml:
+        if yaml_path != Path('.') or yaml_name != None:
+            logger.warning("The yaml_path and yaml_name parameters are ignored since yaml is False.")
         
     if file_name is None:
         file_name = default_file_name
@@ -141,21 +195,16 @@ def generate_structure(structure: Type[Any], large: bool = False, yaml: bool = F
         logger.error(f"Failed to save {formal_name} image because {save_path} does not exist.")
         return
     
-    logger.info(f"Creating {formal_name}...")
+    logger.info(f"Filling {formal_name}...")
     start = time.time()
-    
-    instantiated_structure = structure(large=large)
-    instantiated_structure.generate()
-    logger.info(f"\tGenerated {formal_name}")
-    # TEMPORARY CHECK FOR GRAPHS WHILE TREE.FILL NOT YET IMPLEMENTED
-    if structure_name == 'UndirectedGraph' or structure_name == 'DirectedGraph' or structure_name == 'BinaryTree':
-        instantiated_structure.fill()
-        logger.info(f"\tFilled {formal_name}")
-    instantiated_structure.draw(save=save, path=filepath, show=show)
-    logger.info(f"\tDrew {formal_name}")
+
+    structure_instance.fill()
+    logger.info(f"╰── Filled {formal_name}")
+    structure_instance.draw(save=save, path=filepath, show=show)
+    logger.info(f"    Drew {formal_name}")
     
     end = time.time()
-    logger.info(f"{formal_name} generated in {round(end - start, 2)} seconds.")
+    logger.info(f"{formal_name} filled in {round(end - start, 2)} seconds.")
     
     if save:
         logger.info(f"{formal_name} image saved to {filepath}.")
