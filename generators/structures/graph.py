@@ -6,6 +6,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 from pathlib import Path
+from typing import Optional
 
 class UndirectedGraphNode:
     """
@@ -23,6 +24,9 @@ class UndirectedGraphNode:
     __init__(value: int)
         Constructs all the necessary attributes for the UndirectedGraphNode object
     """
+    
+    value: int
+    neighbors: list
     
     def __init__(self, value: int) -> None:
         """
@@ -58,9 +62,13 @@ class UndirectedGraph:
         Generates a random undirected graph
     fill()
         Fills the graph nodes with the given values
-    draw(save: bool = False, path: Path = None, show: bool = True)
+    draw(save: bool = False, path: Optional[Path] = None, show: bool = True)
         Visualizes the generated undirected graph
     """
+    
+    large: bool
+    graph_skeleton: nx.Graph
+    graph_filled: nx.Graph
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -130,7 +138,7 @@ class UndirectedGraph:
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
         
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
         """
         Visualizes the generated undirected graph
         
@@ -138,7 +146,7 @@ class UndirectedGraph:
         ----------
         save : bool
             whether or not to save the image
-        path : Path
+        path : Optional[Path]
             the path to the image
         show : bool
             whether or not to show the image
@@ -198,6 +206,10 @@ class DirectedGraphNode:
         Constructs all the necessary attributes for the DirectedGraphNode object
     """
     
+    value: int
+    out_neighbors: list
+    in_neighbors: list
+    
     def __init__(self, value: int) -> None:
         """
         Constructs all the necessary attributes for a DirectedGraphNode object
@@ -229,9 +241,13 @@ class DirectedGraph:
         Generates a random directed graph
     fill()
         Fills the graph nodes with the given values
-    draw(save: bool = False, path: Path = None, show: bool = True)
+    draw(save: bool = False, path: Optional[Path] = None, show: bool = True)
         Visualizes the generated directed graph
     """
+    
+    large: bool
+    graph_skeleton: nx.DiGraph
+    graph_filled: nx.DiGraph
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -303,7 +319,7 @@ class DirectedGraph:
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
         """
         Visualizes the generated directed graph
         
@@ -311,7 +327,7 @@ class DirectedGraph:
         ----------
         save : bool
             whether or not to save the image
-        path : Path
+        path : Optional[Path]
             the path to the image
         show : bool
             whether or not to show the image

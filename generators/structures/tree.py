@@ -6,6 +6,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 from pathlib import Path
+from typing import Optional
 
 class TreeNode:
     """
@@ -25,7 +26,12 @@ class TreeNode:
     __init__(value: int)
         Constructs all the necessary attributes for the TreeNode object
     """
-    def __init__(self, value: int = None):
+    
+    value: Optional[int]
+    left: Optional['TreeNode']
+    right: Optional['TreeNode']
+    
+    def __init__(self, value: Optional[int] = None):
         """
         Parameters
         ----------
@@ -59,6 +65,13 @@ class BinaryTree:
     draw(save: bool = False, path: Path = None, show: bool = True)
         Draws the binary tree
     """
+    
+    large: bool
+    root: Optional[TreeNode]
+    pos: dict
+    tree_skeleton: Optional[nx.Graph]
+    tree_filled: Optional[nx.Graph]
+    
     def __init__(self, large: bool = False) -> None:
         """
         Constructor for the BinaryTree class
@@ -142,7 +155,7 @@ class BinaryTree:
 
         self.root = root
 
-        def graphize(T: nx.Graph, node: TreeNode, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
+        def graphize(T: nx.Graph, node: TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
             """
             Graphizes the binary tree
 
@@ -156,9 +169,9 @@ class BinaryTree:
                 the x coordinate of the current node (default is 0)
             y : int
                 the y coordinate of the current node (default is 0)
-            layer_height : int
+            layer_height : Optional[int]
                 the height of the current layer (default is None)
-            layer_width : int
+            layer_width : Optional[int]
                 the width of the current layer (default is None)
 
             Returns
@@ -226,7 +239,7 @@ class BinaryTree:
         for i, node in enumerate(self.tree_filled.nodes):
             self.tree_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
         """
         Draws the binary tree using matplotlib and networkx
 
@@ -234,7 +247,7 @@ class BinaryTree:
         ----------
         save : bool
             whether to save the image or not (default is False)
-        path : Path
+        path : Optional[Path]
             the path to save the image (default is None)
         show : bool
             whether to show the image or not (default is True)
@@ -298,7 +311,7 @@ class BinarySearchTree:
     ----------
     large : bool
         whether to generate a large tree or not
-    root : TreeNode
+    root : Optional[TreeNode]
         the root of the binary search tree
 
     Methods
@@ -311,7 +324,10 @@ class BinarySearchTree:
         Graphizes the binary search tree
     draw(root: TreeNode, save: bool = False, path: Path = None, show: bool = True)
         Draws the binary search tree
-    """    
+    """
+    
+    large: bool
+    root: Optional[TreeNode]
 
     def __init__(self, large: bool = False) -> None:
         """
@@ -396,7 +412,7 @@ class BinarySearchTree:
         
         self.root = root
 
-    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: int = None, layer_width: int = None) -> None:
+    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
         """
         Graphizes the binary search tree
 
@@ -412,9 +428,9 @@ class BinarySearchTree:
             the x coordinate of the current node (default is 0)
         y : int
             the y coordinate of the current node (default is 0)
-        layer_height : int
+        layer_height : Optional[int]
             the height of the current layer (default is None)
-        layer_width : int
+        layer_width : Optional[int]
             the width of the current layer (default is None)
 
         Returns
@@ -443,7 +459,7 @@ class BinarySearchTree:
         else:
             raise ValueError("The node is None")
 
-    def draw(self, save: bool = False, path: Path = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
         """
         Draws the binary search tree using matplotlib and networkx
 
@@ -451,7 +467,7 @@ class BinarySearchTree:
         ----------
         save : bool
             whether to save the image or not (default is False)
-        path : Path
+        path : Optional[Path]
             the path to save the image (default is None)
         show : bool
             whether to show the image or not (default is True)

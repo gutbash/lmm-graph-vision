@@ -1,11 +1,13 @@
 """ This module contains functions for generating data structures. """
 
+from generators.structures.tree import BinaryTree, BinarySearchTree
+from generators.structures.graph import UndirectedGraph, DirectedGraph
 from images.encoding import encode_image
 from data.operations import add_object
 
 from pathlib import Path
 import time
-from typing import Type, Any
+from typing import Type, Optional, TypeVar
 from colorlog import ColoredFormatter
 import logging
 
@@ -38,20 +40,22 @@ ch.setFormatter(formatter)
 # Add console handler to logger
 logger.addHandler(ch)
 
-def generate_structure(structure: Type[Any], large: bool = False) -> Type[Any]:
+Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
+
+def generate_structure(structure: Type[Structure], large: bool = False) -> Type[Structure]:
     """
     Generates an empty structure instance and returns it
     
     Parameters
     ----------
-    structure : Type[Any]
+    structure : Type[Structure]
         the structure to generate
     large : bool (default: False)
         whether or not the structure should be large
         
     Returns
     -------
-    Type[Any]
+    Type[Structure]
         the generated structure instance
         
     Raises
@@ -64,23 +68,17 @@ def generate_structure(structure: Type[Any], large: bool = False) -> Type[Any]:
 
     match structure_name:
         case 'BinaryTree':
-            default_file_name = 'bt_test.png'
-            yaml_structure_type = 'binary_tree'
             formal_name = 'Binary Tree'
         case 'BinarySearchTree':
-            default_file_name = 'bst_test.png'
-            yaml_structure_type = 'binary_search_tree'
             formal_name = 'Binary Search Tree'
         case 'UndirectedGraph':
-            default_file_name = 'ug_test.png'
-            yaml_structure_type = 'undirected_graph'
             formal_name = 'Undirected Graph'
         case 'DirectedGraph':
-            default_file_name = 'dg_test.png'
-            yaml_structure_type = 'directed_graph'
             formal_name = 'Directed Graph'
         case _:
             raise ValueError("Structure must be a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph).")
+        
+    print()
 
     logger.info(f"Generating {formal_name}...")
     start = time.time()
@@ -94,25 +92,25 @@ def generate_structure(structure: Type[Any], large: bool = False) -> Type[Any]:
     
     return structure_instance
 
-def fill_structure(structure_instance: Type[Any], yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: str = None, save: bool = False, save_path: Path = Path('.'), file_name: str = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0) -> None:
+def fill_structure(structure_instance: Type[Structure], yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), file_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0) -> None:
     """
     Fills a structure instance and saves the image to a file and/or adds the object to a YAML file
     
     Parameters
     ----------
-    structure_instance : Type[Any]
+    structure_instance : Type[Structure]
         the structure instance to fill
     yaml : bool (default: False)
         whether or not to add the object to a YAML file
     yaml_path : Path (default: Path('.'))
         the path to the YAML file
-    yaml_name : str (default: None)
+    yaml_name : Optional[str] (default: None)
         the name of the YAML file
     save : bool (default: False)
         whether or not to save the image
     save_path : Path (default: Path('.'))
         the path to the image
-    file_name : str (default: None)
+    file_name : Optional[str] (default: None)
         the name of the image file
     show : bool (default: True)
         whether or not to show the image
