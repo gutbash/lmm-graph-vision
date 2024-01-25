@@ -40,6 +40,17 @@ ch.setFormatter(formatter)
 # Add console handler to logger
 logger.addHandler(ch)
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
 
 def generate_structure(structure: Type[Structure], large: bool = False) -> Type[Structure]:
@@ -60,35 +71,21 @@ def generate_structure(structure: Type[Structure], large: bool = False) -> Type[
         
     Raises
     ------
-    ValueError
-        if structure is not a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
+    None
     """
-    
-    structure_name = structure.__name__
 
-    match structure_name:
-        case 'BinaryTree':
-            formal_name = 'Binary Tree'
-        case 'BinarySearchTree':
-            formal_name = 'Binary Search Tree'
-        case 'UndirectedGraph':
-            formal_name = 'Undirected Graph'
-        case 'DirectedGraph':
-            formal_name = 'Directed Graph'
-        case _:
-            raise ValueError("Structure must be a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph).")
-        
-    print()
+    print(bcolors.OKBLUE + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + bcolors.ENDC)
+    
+    formal_name = structure.formal_name
 
     logger.info(f"Generating {formal_name}...")
-    start = time.time()
+    start = time.perf_counter()
     
     structure_instance = structure(large=large)
     structure_instance.generate()
-    logger.info(f"╰── Generated {formal_name}")
     
-    end = time.time()
-    logger.info(f"{formal_name} generated in {round(end - start, 2)} seconds.")
+    end = time.perf_counter()
+    logger.info(f"╰── Generated {formal_name} in {round(end - start, 2)} seconds.")
     
     return structure_instance
 
@@ -128,33 +125,13 @@ def fill_structure(structure_instance: Type[Structure], yaml: bool = False, yaml
     Raises
     ------
     ValueError
-        if structure is not a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
         if generation, variation, or format is negative
     """
+    print(bcolors.OKBLUE + "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄" + bcolors.ENDC)
     
-    print()
-    
-    structure_name = type(structure_instance).__name__
-    
-    match structure_name:
-        case 'BinaryTree':
-            default_file_name = 'bt_test.png'
-            yaml_structure_type = 'binary_tree'
-            formal_name = 'Binary Tree'
-        case 'BinarySearchTree':
-            default_file_name = 'bst_test.png'
-            yaml_structure_type = 'binary_search_tree'
-            formal_name = 'Binary Search Tree'
-        case 'UndirectedGraph':
-            default_file_name = 'ug_test.png'
-            yaml_structure_type = 'undirected_graph'
-            formal_name = 'Undirected Graph'
-        case 'DirectedGraph':
-            default_file_name = 'dg_test.png'
-            yaml_structure_type = 'directed_graph'
-            formal_name = 'Directed Graph'
-        case _:
-            raise ValueError("Structure must be a valid structure (e.g. BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph).")
+    default_file_name = structure_instance.default_file_name
+    yaml_structure_type = structure_instance.yaml_structure_type
+    formal_name = structure_instance.formal_name
     
     # Path handling
     save_path = Path(save_path)
@@ -193,16 +170,16 @@ def fill_structure(structure_instance: Type[Structure], yaml: bool = False, yaml
         logger.error(f"Failed to save {formal_name} image because {save_path} does not exist.")
         return
     
-    logger.info(f"Filling {formal_name}...")
-    start = time.time()
-
+    logger.info(f"Filling and Drawing {formal_name}...")
+    start = time.perf_counter()
     structure_instance.fill()
-    logger.info(f"╰── Filled {formal_name}")
-    structure_instance.draw(save=save, path=filepath, show=show)
-    logger.info(f"    Drew {formal_name}")
+    end = time.perf_counter()
+    logger.info(f"╰── Filled {formal_name} in {round(end - start, 2)} seconds.")
     
-    end = time.time()
-    logger.info(f"{formal_name} filled in {round(end - start, 2)} seconds.")
+    start = time.perf_counter()
+    structure_instance.draw(save=save, path=filepath, show=show)
+    end = time.perf_counter()
+    logger.info(f"    Drew {formal_name} in {round(end - start, 2)} seconds.")
     
     if save:
         logger.info(f"{formal_name} image saved to {filepath}.")

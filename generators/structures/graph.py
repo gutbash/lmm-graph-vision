@@ -53,6 +53,12 @@ class UndirectedGraph:
         the basic structure of the undirected graph
     graph_filled : nx.Graph
         the filled undirected graph
+    default_file_name : str
+        the default file name for the image
+    yaml_structure_type : str
+        the YAML structure type
+    formal_name : str
+        the formal name of the structure
         
     Methods
     -------
@@ -69,6 +75,9 @@ class UndirectedGraph:
     large: bool
     graph_skeleton: nx.Graph
     graph_filled: nx.Graph
+    default_file_name: str = 'ug_test.png'
+    yaml_structure_type: str = 'undirected_graph'
+    formal_name: str = 'Undirected Graph'
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -83,6 +92,9 @@ class UndirectedGraph:
         self.large = large
         self.graph_skeleton = None
         self.graph_filled = None
+        self.default_file_name = 'ug_test.png'
+        self.yaml_structure_type = 'undirected_graph'
+        self.formal_name = 'Undirected Graph'
         
     def generate(self) -> None:
         """
@@ -232,6 +244,12 @@ class DirectedGraph:
     ----------
     large : bool
         whether the graph should be large or not
+    default_file_name : str
+        the default file name for the image
+    yaml_structure_type : str
+        the YAML structure type
+    formal_name : str
+        the formal name of the structure
         
     Methods
     -------
@@ -248,6 +266,9 @@ class DirectedGraph:
     large: bool
     graph_skeleton: nx.DiGraph
     graph_filled: nx.DiGraph
+    default_file_name: str = 'dg_test.png'
+    yaml_structure_type: str = 'directed_graph'
+    formal_name: str = 'Directed Graph'
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -262,6 +283,9 @@ class DirectedGraph:
         self.large = large
         self.graph_skeleton = None
         self.graph_filled = None
+        self.default_file_name = 'dg_test.png'
+        self.yaml_structure_type = 'directed_graph'
+        self.formal_name = 'Directed Graph'
 
     def generate(self) -> None:
         """

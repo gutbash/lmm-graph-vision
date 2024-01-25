@@ -53,6 +53,18 @@ class BinaryTree:
         whether to generate a large tree or not
     root : TreeNode
         the root of the binary tree
+    pos : dict
+        a dictionary of positions of nodes
+    tree_skeleton : nx.Graph
+        the skeleton of the tree
+    tree_filled : nx.Graph
+        the filled tree
+    default_file_name : str
+        the default file name for the image
+    yaml_structure_type : str
+        the structure type for the YAML file
+    formal_name : str
+        the formal name of the structure
 
     Methods
     -------
@@ -71,6 +83,9 @@ class BinaryTree:
     pos: dict
     tree_skeleton: Optional[nx.Graph]
     tree_filled: Optional[nx.Graph]
+    default_file_name: str = 'bt_test.png'
+    yaml_structure_type: str = 'binary_tree'
+    formal_name: str = 'Binary Tree'
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -86,6 +101,9 @@ class BinaryTree:
         self.pos = {}
         self.tree_skeleton = None
         self.tree_filled = None
+        self.default_file_name = 'bt_test.png'
+        self.yaml_structure_type = 'binary_tree'
+        self.formal_name = 'Binary Tree'
 
     def generate(self) -> None:
         """
@@ -313,6 +331,12 @@ class BinarySearchTree:
         whether to generate a large tree or not
     root : Optional[TreeNode]
         the root of the binary search tree
+    default_file_name : str
+        the default file name for the image
+    yaml_structure_type : str
+        the structure type for the YAML file
+    formal_name : str
+        the formal name of the structure
 
     Methods
     -------
@@ -328,6 +352,9 @@ class BinarySearchTree:
     
     large: bool
     root: Optional[TreeNode]
+    default_file_name: str = 'bst_test.png'
+    yaml_structure_type: str = 'binary_search_tree'
+    formal_name: str = 'Binary Search Tree'
 
     def __init__(self, large: bool = False) -> None:
         """
@@ -341,6 +368,9 @@ class BinarySearchTree:
         
         self.large = large
         self.root = None
+        self.default_file_name = 'bst_test.png'
+        self.yaml_structure_type = 'binary_search_tree'
+        self.formal_name = 'Binary Search Tree'
 
     def generate(self) -> None:
         """
