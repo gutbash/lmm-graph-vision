@@ -4,8 +4,7 @@ from generators.structures.graph import UndirectedGraph, DirectedGraph
 
 from pathlib import Path
 
-# TODO: Put stuff into utils folder
-# TODO: Create dataset generation methods for each structure
+# TODO: Create iterative dataset generation methods for each structure
 # TODO: Separate drawing and saving
 
 ### DEVELOPMENT PATHS ###

@@ -2,8 +2,8 @@
 
 from generators.structures.tree import BinaryTree, BinarySearchTree
 from generators.structures.graph import UndirectedGraph, DirectedGraph
-from images.encoding import encode_image
-from data.operations import add_object
+from utils.encoding import encode_image
+from utils.serialization import add_object
 
 from pathlib import Path
 import time
