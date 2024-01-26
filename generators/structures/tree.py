@@ -6,7 +6,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Literal
+
+Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
+Shape = Literal['o', 's', 'd']
+Font = Literal['sans-serif', 'serif', 'monospace']
 
 class TreeNode:
     """
@@ -257,7 +261,7 @@ class BinaryTree:
         for i, node in enumerate(self.tree_filled.nodes):
             self.tree_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
         """
         Draws the binary tree using matplotlib and networkx
 
@@ -269,6 +273,12 @@ class BinaryTree:
             the path to save the image (default is None)
         show : bool
             whether to show the image or not (default is True)
+        shape : Shape
+            the shape of the nodes (default is 'o')
+        color : Color
+            the color of the nodes (default is '#88d7fe' aka sky blue)
+        font : Font
+            the font of the labels (default is 'sans-serif')
             
         Returns
         -------
@@ -311,7 +321,7 @@ class BinaryTree:
 
         # Draw nodes and edges
         nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=800,
-                node_color='skyblue', labels=nx.get_node_attributes(self.tree_filled, 'value'))
+                node_color=color, node_shape=shape, font_family=font, labels=nx.get_node_attributes(self.tree_filled, 'value'))
 
         if save:
             if path is None:
@@ -489,7 +499,7 @@ class BinarySearchTree:
         else:
             raise ValueError("The node is None")
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
         """
         Draws the binary search tree using matplotlib and networkx
 
@@ -501,6 +511,12 @@ class BinarySearchTree:
             the path to save the image (default is None)
         show : bool
             whether to show the image or not (default is True)
+        shape : Shape
+            the shape of the nodes (default is 'o')
+        color : Color
+            the color of the nodes (default is '#88d7fe')
+        font : Font
+            the font of the labels (default is 'sans-serif')
             
         Returns
         -------
@@ -548,7 +564,7 @@ class BinarySearchTree:
         plt.figure(figsize=(figure_size, figure_size))
 
         # Draw nodes and edges
-        nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue')
+        nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color=color, node_shape=shape, font_family=font)
         
         if save:
             if path is None:

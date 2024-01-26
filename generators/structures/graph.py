@@ -6,7 +6,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Literal
+
+Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
+Shape = Literal['o', 's', 'd']
+Font = Literal['sans-serif', 'serif', 'monospace']
 
 class UndirectedGraphNode:
     """
@@ -150,7 +154,7 @@ class UndirectedGraph:
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
         
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
         """
         Visualizes the generated undirected graph
         
@@ -162,6 +166,12 @@ class UndirectedGraph:
             the path to the image
         show : bool
             whether or not to show the image
+        shape : Shape
+            the shape of the nodes (default is 'o')
+        color : Color
+            the color of the nodes (default is '#88d7fe' aka sky blue)
+        font : Font
+            the font of the node labels (default is 'sans-serif')
 
         Returns
         -------
@@ -189,7 +199,7 @@ class UndirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(self.graph_filled, 'value'))
+        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, labels=nx.get_node_attributes(self.graph_filled, 'value'), node_shape=shape, node_color=color, font_family=font)
 
         if save:
             if path is None:
@@ -343,7 +353,7 @@ class DirectedGraph:
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
         """
         Visualizes the generated directed graph
         
@@ -355,6 +365,12 @@ class DirectedGraph:
             the path to the image
         show : bool
             whether or not to show the image
+        shape : Shape
+            the shape of the nodes (default is 'o')
+        color : Color
+            the color of the nodes (default is '#88d7fe' aka sky blue)
+        font : Font
+            the font of the node labels (default is 'sans-serif')
 
         Returns
         -------
@@ -382,7 +398,7 @@ class DirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, node_color='skyblue', labels=nx.get_node_attributes(self.graph_filled, 'value'))
+        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, labels=nx.get_node_attributes(self.graph_filled, 'value'), node_shape=shape, node_color=color, font_family=font)
 
         if save:
             if path is None:

@@ -1,8 +1,12 @@
-from generators.generation import generate_structure, fill_structure
+from generators.structure import generate_structure, fill_structure, draw_structure
 from generators.structures.tree import BinaryTree, BinarySearchTree
 from generators.structures.graph import UndirectedGraph, DirectedGraph
 
 from pathlib import Path
+
+# TODO: Put stuff into utils folder
+# TODO: Create dataset generation methods for each structure
+# TODO: Separate drawing and saving
 
 ### DEVELOPMENT PATHS ###
 
@@ -36,82 +40,93 @@ format_number = 0
 
 ### TEST STRUCTURE GENERATION ###
 
-binary_tree_structure = generate_structure(
-    structure=BinaryTree,
+colors = ['#88d7fe', '#feaf88', '#eeeeee']
+shapes = ['o', 's', 'd']
+fonts = ['sans-serif', 'serif', 'monospace']
+
+undirected_graph_structure_generated = generate_structure(
+    structure_class=UndirectedGraph,
     large=False,
 )
 
+undirected_graph_structure_filled = None
+
 for variation in range(1, 4):
     
-    fill_structure(
-        structure_instance=binary_tree_structure,
-        yaml=False,
-        yaml_path=yaml_path_binary_tree,
-        yaml_name='binary_tree.yaml',
-        save=True,
-        save_path=image_path_binary_tree,
-        file_name=f'binary_tree_test_{variation}.png',
-        show=False,
-        generation=generation_number,
-        variation=variation_number,
-        format=format_number
+    undirected_graph_structure_filled = fill_structure(
+        structure_instance=undirected_graph_structure_generated,
     )
     
-undirected_graph_structure = generate_structure(
-    structure=UndirectedGraph,
-    large=False,
-)
-
-for variation in range(1, 4):
-    
-    fill_structure(
-        structure_instance=undirected_graph_structure,
+    draw_structure(
+        structure_instance=undirected_graph_structure_filled,
         yaml=False,
+        save=True,
         yaml_path=yaml_path_undirected_graph,
         yaml_name='undirected_graph.yaml',
-        save=True,
         save_path=image_path_undirected_graph,
-        file_name=f'undirected_graph_test_{variation}.png',
+        file_name=f'undirected_graph_structure_{variation}.png',
         show=False,
         generation=generation_number,
         variation=variation_number,
-        format=format_number
+        format=format_number,
+        shape='o',
+        color='#88d7fe',
+        font='sans-serif',
     )
 
-directed_graph_structure = generate_structure(
-    structure=DirectedGraph,
-    large=False,
-)
-
-for variation in range(1, 4):
-        
-    fill_structure(
-        structure_instance=directed_graph_structure,
+for color in colors:
+    
+    draw_structure(
+        structure_instance=undirected_graph_structure_filled,
         yaml=False,
-        yaml_path=yaml_path_directed_graph,
-        yaml_name='directed_graph.yaml',
         save=True,
-        save_path=image_path_directed_graph,
-        file_name=f'directed_graph_test_{variation}.png',
+        yaml_path=yaml_path_undirected_graph,
+        yaml_name='undirected_graph.yaml',
+        save_path=image_path_undirected_graph,
+        file_name=f'undirected_graph_structure_{color}.png',
         show=False,
         generation=generation_number,
         variation=variation_number,
-        format=format_number
+        format=format_number,
+        shape='o',
+        color=color,
+        font='sans-serif',
     )
-
-'''
-generate_structure(
-    structure=BinarySearchTree,
-    large=False,
-    yaml=False,
-    yaml_path=yaml_path_binary_search_tree,
-    yaml_name='binary_search_tree.yaml',
-    save=True,
-    save_path=image_path_binary_search_tree,
-    file_name='binary_search_tree.png',
-    show=False,
-    generation=generation_number,
-    variation=variation_number,
-    format=format_number
-)
-'''
+    
+for shape in shapes:
+    
+    draw_structure(
+        structure_instance=undirected_graph_structure_filled,
+        yaml=False,
+        save=True,
+        yaml_path=yaml_path_undirected_graph,
+        yaml_name='undirected_graph.yaml',
+        save_path=image_path_undirected_graph,
+        file_name=f'undirected_graph_structure_{shape}.png',
+        show=False,
+        generation=generation_number,
+        variation=variation_number,
+        format=format_number,
+        shape=shape,
+        color='#88d7fe',
+        font='sans-serif',
+    )
+    
+for font in fonts:
+    
+    draw_structure(
+        structure_instance=undirected_graph_structure_filled,
+        yaml=False,
+        save=True,
+        yaml_path=yaml_path_undirected_graph,
+        yaml_name='undirected_graph.yaml',
+        save_path=image_path_undirected_graph,
+        file_name=f'undirected_graph_structure_{font}.png',
+        show=False,
+        generation=generation_number,
+        variation=variation_number,
+        format=format_number,
+        shape='o',
+        color='#88d7fe',
+        font=font,
+    )
