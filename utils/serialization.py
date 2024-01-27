@@ -4,7 +4,7 @@ import yaml
 import uuid
 from pathlib import Path
 
-def add_object(file_path: Path = None, text: str = None, image_data: str = None, image_path: Path = None, expected: str = None, structure: str = None, generation: int = None, variation: int = None, format: int = None) -> None:
+def add_object(file_path: Path = None, text: str = None, image_data: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None) -> None:
     """
     Add an object to a YAML file.
         
@@ -22,6 +22,8 @@ def add_object(file_path: Path = None, text: str = None, image_data: str = None,
         the expected output of the model
     structure : str (default: None)
         the data structure
+    run : int (default: 0)
+        the run number
     generation : int (default: None)
         the generation number
     variation : int (default: None)
