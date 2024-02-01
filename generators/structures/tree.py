@@ -378,6 +378,7 @@ class BinarySearchTree:
         
         self.large = large
         self.root = None
+        self.pos = {}
         self.default_file_name = 'bst_test.png'
         self.yaml_structure_type = 'binary_search_tree'
         self.formal_name = 'Binary Search Tree'
@@ -489,7 +490,7 @@ class BinarySearchTree:
             if layer_width is None:
                 layer_width = 1.0
                 
-            pos[node.value] = (x, y)
+            self.pos[node.value] = (x, y)
             if node.left:
                 T.add_edge(node.value, node.left.value)
                 self.graphize(T, node.left, pos, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
