@@ -5,6 +5,9 @@ __pycache__/
 
 tempCodeRunnerFile.py
 
+# venv
+lmm-graph-tree-vqa/
+
 # C extensions
 *.so
 
