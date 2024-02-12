@@ -2,14 +2,16 @@
 
 from generators.structures.tree import BinaryTree, BinarySearchTree
 from generators.structures.graph import UndirectedGraph, DirectedGraph
-from utils.encoding import encode_image
 from utils.serialization import add_object
 
 from pathlib import Path
+import yaml
 import time
 from typing import Type, Optional, TypeVar, Literal
 from colorlog import ColoredFormatter
 import logging
+import itertools
+from uuid import uuid4, UUID
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -56,6 +58,7 @@ class Generator:
     Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
     Shape = Literal['o', 's', 'd']
     Font = Literal['sans-serif', 'serif', 'monospace']
+    Thickness = Literal['0.5', '1.0', '1.5']
     
     Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
 
@@ -127,7 +130,7 @@ class Generator:
         
         return structure_instance
 
-    def draw_structure(self, structure_instance: Type[Structure], yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
+    def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file
         
@@ -163,6 +166,8 @@ class Generator:
             the color of the nodes
         font : Font (default: 'sans-serif')
             the font of the text
+        thickness : Thickness (default: '1.0')
+            the thickness of the edges
         
         Returns
         -------
@@ -219,7 +224,7 @@ class Generator:
         logger.info(f"Drawing {formal_name}...")
         start = time.perf_counter()
         
-        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font)
+        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, thickness=thickness)
         
         end = time.perf_counter()
         logger.info(f"╰── Drew {formal_name} in {round(end - start, 2)} seconds.")
@@ -238,19 +243,21 @@ class Generator:
                 yaml_path = yaml_path / yaml_name
                 
                 try:
-                    encoded_image = encode_image(image_path=filepath)
                     
                     add_object(
+                        uuid=uuid,
                         file_path=yaml_path,
-                        text=None,
-                        image_data=encoded_image,
+                        text=text,
                         image_path=filepath,
-                        expected=None,
+                        expected=expected,
                         structure=yaml_structure_type,
                         run=run,
                         generation=generation,
                         variation=variation,
-                        format=format
+                        format=format,
+                        color=color,
+                        font=font,
+                        thickness=thickness,
                     )
                     
                     logger.info(f"{formal_name} added to YAML file at {yaml_path}.")
@@ -264,25 +271,29 @@ class BatchGenerator(Generator):
     colors = ['#88d7fe', '#feaf88', '#eeeeee']
     shapes = ['o', 's', 'd']
     fonts = ['sans-serif', 'serif', 'monospace']
+    thickness = ['0.5', '1.0', '1.5']
     
     Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
     
     StructureAbbreviation = Literal['bit', 'bst', 'udg', 'dig']
     YamlName = Literal['binary_tree.yaml', 'binary_search_tree.yaml', 'undirected_graph.yaml', 'directed_graph.yaml']
     
-    total_runs: int
     generator: Generator
     
     def __init__(self) -> None:
-        self.total_runs = 0
         self.generator = Generator()
 
-    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path) -> None:
+    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path) -> None:
         
         run = 1
         
+        text_path_joined = Path.joinpath(text_path, text_name)
+        
+        with open(text_path_joined, 'r') as file:
+            text_prompts = yaml.safe_load(file)
+        
         # loop to create 5 base structures
-        for generation in range(1, 6):
+        for generation in range(1, 2):
         
             structure_generated = self.generator.generate_structure(
                 structure_class=structure_class,
@@ -290,7 +301,7 @@ class BatchGenerator(Generator):
             )
             
             # loop to create 3 variations of each base structure
-            for variation in range(1, 4):
+            for variation in range(1, 2):
                 
                 structure_filled = self.generator.fill_structure(
                     structure_instance=structure_generated,
@@ -299,73 +310,45 @@ class BatchGenerator(Generator):
                 format = 1
                 
                 # loop to create 3 shape formats of each variation
-                for shape in self.shapes:
-                    
-                    self.generator.draw_structure(
-                        structure_instance=structure_filled,
-                        yaml=True,
-                        yaml_path=yaml_path,
-                        yaml_name=yaml_name,
-                        save=True,
-                        save_path=save_path,
-                        save_name=f'{type}_r{run}_g{generation}_v{variation}_f{format}s.png',
-                        show=False,
-                        run=run,
-                        generation=generation,
-                        variation=variation,
-                        format=format,
-                        shape=shape,
-                        color='#88d7fe',
-                        font='sans-serif',
-                    )
-                    
-                    format += 1
-                    self.total_runs += 1
                 
-                # loop to create 3 color formats of each variation
-                for color in self.colors:
+                format_combinations = list(itertools.product(self.thickness, self.colors, self.fonts))
+                
+                for text in text_prompts:
                     
-                    self.generator.draw_structure(
-                        structure_instance=structure_filled,
-                        yaml=True,
-                        yaml_path=yaml_path,
-                        yaml_name=yaml_name,
-                        save=True,
-                        save_path=save_path,
-                        save_name=f'{type}_r{run}_g{generation}_v{variation}_f{format}s.png',
-                        show=False,
-                        run=run,
-                        generation=generation,
-                        variation=variation,
-                        format=format,
-                        shape='o',
-                        color=color,
-                        font='sans-serif',
-                    )
+                    expected = None
                     
-                    format += 1
-                    self.total_runs += 1
-                    
-                # loop to create 3 font formats of each variation
-                for font in self.fonts:
-                    
-                    self.generator.draw_structure(
-                        structure_instance=structure_filled,
-                        yaml=True,
-                        yaml_path=yaml_path,
-                        yaml_name=yaml_name,
-                        save=True,
-                        save_path=save_path,
-                        save_name=f'{type}_r{run}_g{generation}_v{variation}_f{format}s.png',
-                        show=False,
-                        run=run,
-                        generation=generation,
-                        variation=variation,
-                        format=format,
-                        shape='o',
-                        color='#88d7fe',
-                        font=font,
-                    )
-                    
-                    format += 1
-                    self.total_runs += 1
+                    method_name = text['type']
+                    if hasattr(structure_filled, method_name):
+                        method_to_call = getattr(structure_filled, method_name)
+                        expected = method_to_call()
+                    else:
+                        # Handle the case where the method does not exist
+                        print(f"Method '{method_name}' not found in {structure_filled}.")
+                
+                    for thickness, color, font in format_combinations:
+                        
+                        uuid = uuid4()
+                        
+                        self.generator.draw_structure(
+                            uuid=uuid,
+                            structure_instance=structure_filled,
+                            text=text['text'],
+                            expected=str(expected),
+                            yaml=True,
+                            yaml_path=yaml_path,
+                            yaml_name=yaml_name,
+                            save=True,
+                            save_path=save_path,
+                            save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-{thickness.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_idn-{str(uuid)}.png",
+                            show=False,
+                            run=run,
+                            generation=generation,
+                            variation=variation,
+                            format=format,
+                            color=color,
+                            font=font,
+                            thickness=thickness,
+                        )
+                        
+                        format += 1
+                        run += 1

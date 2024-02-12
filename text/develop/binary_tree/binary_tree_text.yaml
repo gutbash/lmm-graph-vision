@@ -1,6 +1,6 @@
 - text: Provide a post order traversal of the binary tree provided.
-  tags: binary_tree, post_order_traversal
+  type: post_order
 - text: Provide a pre order traversal of the binary tree provided.
-  tags: binary_tree, pre_order_traversal
+  type: pre_order
 - text: Provide an in order traversal of the binary tree provided.
-  tags: binary_tree, in_order_traversal
+  type: in_order

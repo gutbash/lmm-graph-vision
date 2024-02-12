@@ -11,41 +11,80 @@ from typing import Optional, Literal
 Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
+Thickness = Literal['0.5', '1.0', '1.5']
 
-class UndirectedGraphNode:
-    """
-    A node in an undirected graph
+class Graph:
     
-    Attributes
-    ----------
-    value : int
-        the value of the node
-    neighbors : list
-        the neighbors of the node
-        
-    Methods
-    -------
-    __init__(value: int)
-        Constructs all the necessary attributes for the UndirectedGraphNode object
-    """
+    large: bool = False
+    graph_skeleton: nx.DiGraph = None
+    graph_filled: nx.DiGraph = None
     
-    value: int
-    neighbors: list
-    
-    def __init__(self, value: int) -> None:
+    def adjacency_list(self) -> dict:
         """
-        Constructs all the necessary attributes for an UndirectedGraphNode object
+        Returns the adjacency list of the graph with node values as keys
         
         Parameters
         ----------
-        value : int
-            the value of the node
+        None
+        
+        Returns
+        -------
+        dict
+            the adjacency list of the graph
         """
         
-        self.value = value
-        self.neighbors = []
+        adj_list = {}
+        for node in self.graph_filled.nodes:
+            # Get the value of the node
+            node_value = self.graph_filled.nodes[node]['value']
+            # Get the values of the neighbors
+            neighbor_values = [self.graph_filled.nodes[neighbor]['value'] for neighbor in self.graph_filled.neighbors(node)]
+            # Store in the dictionary
+            adj_list[node_value] = neighbor_values
 
-class UndirectedGraph:
+        return adj_list
+    
+    def breadth_first_search(self) -> list:
+        """
+        Returns the BFS traversal of the graph
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        list
+            the BFS traversal of the graph
+        """
+        if not self.graph_filled:
+            raise ValueError("The graph is empty.")
+        start_node = next(iter(self.graph_filled))
+        bfs_nodes = list(nx.bfs_tree(self.graph_filled, source=start_node).nodes)
+        bfs_values = [self.graph_filled.nodes[node]['value'] for node in bfs_nodes]
+        return bfs_values
+    
+    def depth_first_search(self) -> list:
+        """
+        Returns the DFS traversal of the graph
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        list
+            the DFS traversal of the graph
+        """
+        if not self.graph_filled:
+            raise ValueError("The graph is empty.")
+        start_node = next(iter(self.graph_filled))
+        dfs_nodes = list(nx.dfs_tree(self.graph_filled, source=start_node).nodes)
+        dfs_values = [self.graph_filled.nodes[node]['value'] for node in dfs_nodes]
+        return dfs_values
+
+class UndirectedGraph(Graph):
     """
     An undirected graph
     
@@ -76,9 +115,6 @@ class UndirectedGraph:
         Visualizes the generated undirected graph
     """
     
-    large: bool
-    graph_skeleton: nx.Graph
-    graph_filled: nx.Graph
     default_file_name: str = 'ug_test.png'
     yaml_structure_type: str = 'undirected_graph'
     formal_name: str = 'Undirected Graph'
@@ -92,13 +128,7 @@ class UndirectedGraph:
         large : bool
             whether the graph should be large or not
         """
-        
         self.large = large
-        self.graph_skeleton = None
-        self.graph_filled = None
-        self.default_file_name = 'ug_test.png'
-        self.yaml_structure_type = 'undirected_graph'
-        self.formal_name = 'Undirected Graph'
         
     def generate(self) -> None:
         """
@@ -117,7 +147,7 @@ class UndirectedGraph:
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
-            num_nodes = random.randint(1, 10)
+            num_nodes = random.randint(3, 10)
 
         if num_nodes <= 0:
             return
@@ -149,12 +179,12 @@ class UndirectedGraph:
         
         self.graph_filled = self.graph_skeleton.copy()
         
-        values = [random.randrange(1, 100, 1) for _ in range(len(self.graph_filled))]
+        values = [i for i in range(1, len(self.graph_filled)+1)]
 
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
         
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
         Visualizes the generated undirected graph
         
@@ -172,6 +202,8 @@ class UndirectedGraph:
             the color of the nodes (default is '#88d7fe' aka sky blue)
         font : Font
             the font of the node labels (default is 'sans-serif')
+        thickness : Thickness
+            the thickness of the edges (default is '1.0')
 
         Returns
         -------
@@ -199,7 +231,8 @@ class UndirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, labels=nx.get_node_attributes(self.graph_filled, 'value'), node_shape=shape, node_color=color, font_family=font)
+        labels = {node: self.graph_filled.nodes[node]['value'] for node in self.graph_filled.nodes}
+        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:
@@ -209,44 +242,7 @@ class UndirectedGraph:
         if show:
             plt.show()
 
-class DirectedGraphNode:
-    """
-    A node in a directed graph
-    
-    Attributes
-    ----------
-    value : int
-        the value of the node
-    out_neighbors : list
-        the out neighbors of the node
-    in_neighbors : list
-        the in neighbors of the node
-        
-    Methods
-    -------
-    __init__(value: int)
-        Constructs all the necessary attributes for the DirectedGraphNode object
-    """
-    
-    value: int
-    out_neighbors: list
-    in_neighbors: list
-    
-    def __init__(self, value: int) -> None:
-        """
-        Constructs all the necessary attributes for a DirectedGraphNode object
-        
-        Parameters
-        ----------
-        value : int
-            the value of the node
-        """
-        
-        self.value = value
-        self.out_neighbors = []
-        self.in_neighbors = []
-
-class DirectedGraph:
+class DirectedGraph(Graph):
     """
     A directed graph
     
@@ -273,9 +269,6 @@ class DirectedGraph:
         Visualizes the generated directed graph
     """
     
-    large: bool
-    graph_skeleton: nx.DiGraph
-    graph_filled: nx.DiGraph
     default_file_name: str = 'dg_test.png'
     yaml_structure_type: str = 'directed_graph'
     formal_name: str = 'Directed Graph'
@@ -289,13 +282,7 @@ class DirectedGraph:
         large : bool
             whether the graph should be large or not
         """
-        
         self.large = large
-        self.graph_skeleton = None
-        self.graph_filled = None
-        self.default_file_name = 'dg_test.png'
-        self.yaml_structure_type = 'directed_graph'
-        self.formal_name = 'Directed Graph'
 
     def generate(self) -> None:
         """
@@ -314,12 +301,12 @@ class DirectedGraph:
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
-            num_nodes = random.randint(1, 10)
+            num_nodes = random.randint(3, 10)
 
         if num_nodes <= 0:
             return
 
-        max_connections = 4
+        max_connections = 2
         out_connections_count = {node: 0 for node in range(num_nodes)}
         in_connections_count = {node: 0 for node in range(num_nodes)}
 
@@ -348,12 +335,12 @@ class DirectedGraph:
         
         self.graph_filled = self.graph_skeleton.copy()
         
-        values = [random.randrange(1, 100, 1) for _ in range(len(self.graph_filled))]
+        values = [i for i in range(1, len(self.graph_filled)+1)]
 
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
         Visualizes the generated directed graph
         
@@ -371,6 +358,8 @@ class DirectedGraph:
             the color of the nodes (default is '#88d7fe' aka sky blue)
         font : Font
             the font of the node labels (default is 'sans-serif')
+        thickness : Thickness
+            the thickness of the edges (default is '1.0')
 
         Returns
         -------
@@ -398,7 +387,8 @@ class DirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, labels=nx.get_node_attributes(self.graph_filled, 'value'), node_shape=shape, node_color=color, font_family=font)
+        labels = {node: self.graph_filled.nodes[node]['value'] for node in self.graph_filled.nodes}
+        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:
