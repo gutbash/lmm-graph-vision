@@ -11,6 +11,7 @@ from typing import Optional, Literal
 Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
+Thickness = Literal['0.5', '1.0', '1.5']
 
 class UndirectedGraphNode:
     """
@@ -154,7 +155,7 @@ class UndirectedGraph:
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
         
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
         Visualizes the generated undirected graph
         
@@ -172,6 +173,8 @@ class UndirectedGraph:
             the color of the nodes (default is '#88d7fe' aka sky blue)
         font : Font
             the font of the node labels (default is 'sans-serif')
+        thickness : Thickness
+            the thickness of the edges (default is '1.0')
 
         Returns
         -------
@@ -199,7 +202,7 @@ class UndirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=1.0, width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:
@@ -353,7 +356,7 @@ class DirectedGraph:
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
         Visualizes the generated directed graph
         
@@ -371,6 +374,8 @@ class DirectedGraph:
             the color of the nodes (default is '#88d7fe' aka sky blue)
         font : Font
             the font of the node labels (default is 'sans-serif')
+        thickness : Thickness
+            the thickness of the edges (default is '1.0')
 
         Returns
         -------
@@ -398,7 +403,7 @@ class DirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=1.0, width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:

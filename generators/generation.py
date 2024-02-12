@@ -57,6 +57,7 @@ class Generator:
     Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
     Shape = Literal['o', 's', 'd']
     Font = Literal['sans-serif', 'serif', 'monospace']
+    Thickness = Literal['0.5', '1.0', '1.5']
     
     Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
 
@@ -128,7 +129,7 @@ class Generator:
         
         return structure_instance
 
-    def draw_structure(self, structure_instance: Type[Structure], yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
+    def draw_structure(self, structure_instance: Type[Structure], yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file
         
@@ -164,6 +165,8 @@ class Generator:
             the color of the nodes
         font : Font (default: 'sans-serif')
             the font of the text
+        thickness : Thickness (default: '1.0')
+            the thickness of the edges
         
         Returns
         -------
@@ -220,7 +223,7 @@ class Generator:
         logger.info(f"Drawing {formal_name}...")
         start = time.perf_counter()
         
-        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font)
+        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, thickness=thickness)
         
         end = time.perf_counter()
         logger.info(f"╰── Drew {formal_name} in {round(end - start, 2)} seconds.")
@@ -265,6 +268,7 @@ class BatchGenerator(Generator):
     colors = ['#88d7fe', '#feaf88', '#eeeeee']
     shapes = ['o', 's', 'd']
     fonts = ['sans-serif', 'serif', 'monospace']
+    thickness = ['0.5', '1.0', '1.5']
     
     Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
     
@@ -301,9 +305,9 @@ class BatchGenerator(Generator):
                 
                 # loop to create 3 shape formats of each variation
                 
-                format_combinations = list(itertools.product(self.shapes, self.colors, self.fonts))
+                format_combinations = list(itertools.product(self.thickness, self.colors, self.fonts))
                 
-                for shape, color, font in format_combinations:
+                for thickness, color, font in format_combinations:
                     
                     self.generator.draw_structure(
                         structure_instance=structure_filled,
@@ -318,9 +322,9 @@ class BatchGenerator(Generator):
                         generation=generation,
                         variation=variation,
                         format=format,
-                        shape=shape,
                         color=color,
                         font=font,
+                        thickness=thickness,
                     )
                     
                     format += 1
