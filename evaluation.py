@@ -74,7 +74,7 @@ class Evaluator:
           print(resp)
           response = resp.get('choices')[0].get('message').get('content')
           
-          if prompt.get('expected') in response:
+          if prompt.get('expected').strip("][}{") in response:
             match = True
           else:
             match = False
