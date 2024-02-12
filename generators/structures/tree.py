@@ -135,39 +135,56 @@ class BinaryTree:
         
         The tree is not necessarily full.
         """
-        T = nx.Graph()
+        self.tree_skeleton = nx.Graph()
 
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
-            num_nodes = random.randint(1, 10)
+            num_nodes = random.randint(3, 10)
 
         if num_nodes <= 0:
             return None
 
-        root_value = random.randint(1, 100)
+        root_value = random.randint(1, 99)
         root = TreeNode(root_value)
         values_set = {root_value}
         nodes = [root]
         queue = [root]
 
+        # Ensure root has two children
+        for _ in range(2):
+            child_value = random.randint(1, 99)
+            while child_value in values_set:
+                child_value = random.randint(1, 99)
+
+            child_node = TreeNode(child_value)
+            if queue[0].left is None:
+                queue[0].left = child_node
+            else:
+                queue[0].right = child_node
+            values_set.add(child_value)
+            nodes.append(child_node)
+            queue.append(child_node)
+
+        # Continue with random tree generation
         while len(nodes) < num_nodes:
             current = queue.pop(0)
 
-            left_child_value = random.randint(1, 100)
-            while left_child_value in values_set:
-                left_child_value = random.randint(1, 100)
+            if len(nodes) < num_nodes and current.left is None:
+                left_child_value = random.randint(1, 99)
+                while left_child_value in values_set:
+                    left_child_value = random.randint(1, 99)
 
-            left_child = TreeNode(left_child_value)
-            current.left = left_child
-            values_set.add(left_child_value)
-            nodes.append(left_child)
-            queue.append(left_child)
+                left_child = TreeNode(left_child_value)
+                current.left = left_child
+                values_set.add(left_child_value)
+                nodes.append(left_child)
+                queue.append(left_child)
 
-            if len(nodes) < num_nodes:
-                right_child_value = random.randint(1, 100)
+            if len(nodes) < num_nodes and current.right is None:
+                right_child_value = random.randint(1, 99)
                 while right_child_value in values_set:
-                    right_child_value = random.randint(1, 100)
+                    right_child_value = random.randint(1, 99)
 
                 right_child = TreeNode(right_child_value)
                 current.right = right_child
@@ -227,7 +244,7 @@ class BinaryTree:
                 raise ValueError("The node is None")
             self.tree_skeleton = T
             
-        graphize(T, self.root)
+        graphize(self.tree_skeleton, self.root)
 
     def fill(self) -> None:
         """
@@ -247,16 +264,16 @@ class BinaryTree:
         
         Notes
         -----
-        The value of each node is randomly chosen between 1 and 100.
+        The value of each node is randomly chosen between 1 and 99.
         
-        The left child of each node is randomly chosen between 1 and 100.
+        The left child of each node is randomly chosen between 1 and 99.
         
-        The right child of each node is randomly chosen between 1 and 100.
+        The right child of each node is randomly chosen between 1 and 99.
         """
         
         self.tree_filled = self.tree_skeleton.copy()
 
-        values = [random.randrange(1, 100, 1) for _ in range(len(self.tree_filled))]
+        values = [random.randrange(1, 99, 1) for _ in range(len(self.tree_filled))]
         #print("These are new node values:",values)
         for i, node in enumerate(self.tree_filled.nodes):
             self.tree_filled.nodes[node]['value'] = values[i]
@@ -320,8 +337,7 @@ class BinaryTree:
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=800,
-                node_color=color, node_shape=shape, font_family=font, labels=nx.get_node_attributes(self.tree_filled, 'value'))
+        nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=1.0, width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:
@@ -362,6 +378,9 @@ class BinarySearchTree:
     
     large: bool
     root: Optional[TreeNode]
+    pos: dict
+    tree_skeleton: Optional[nx.Graph]
+    tree_filled: Optional[nx.Graph]
     default_file_name: str = 'bst_test.png'
     yaml_structure_type: str = 'binary_search_tree'
     formal_name: str = 'Binary Search Tree'
@@ -379,6 +398,8 @@ class BinarySearchTree:
         self.large = large
         self.root = None
         self.pos = {}
+        self.tree_skeleton = None
+        self.tree_filled = None
         self.default_file_name = 'bst_test.png'
         self.yaml_structure_type = 'binary_search_tree'
         self.formal_name = 'Binary Search Tree'
@@ -403,13 +424,13 @@ class BinarySearchTree:
         -----
         The number of nodes in the tree is randomly chosen between 1 and 10 for small trees and between 11 and 20 for large trees.
         
-        The root is randomly chosen between 1 and 100.
+        The root is randomly chosen between 1 and 99.
         
-        The value of each node is randomly chosen between 1 and 100.
+        The value of each node is randomly chosen between 1 and 99.
         
-        The left child of each node is randomly chosen between 1 and 100.
+        The left child of each node is randomly chosen between 1 and 99.
         
-        The right child of each node is randomly chosen between 1 and 100.
+        The right child of each node is randomly chosen between 1 and 99.
         
         The tree is not necessarily balanced.
         
@@ -417,24 +438,45 @@ class BinarySearchTree:
         
         The tree is not necessarily full.
         """
-        
-        if self.large:
-            num_nodes = random.randint(11, 20)
-        else:
-            num_nodes = random.randint(1, 10)
+        self.tree_skeleton = nx.Graph()
 
-        if num_nodes <= 0:
-            return None
+        # Set minimum number of nodes
+        num_nodes = random.randint(3, 10) if not self.large else random.randint(11, 20)
 
-        root_value = random.randint(1, 100)  # Select the root randomly
+        # Initialize root
+        root_value = random.randint(1, 99)
         root = TreeNode(root_value)
-        nodes = [root]
+        self.root = root
 
-        for i in range(2, num_nodes + 1):
-            node_value = random.randint(1, 100)
+        # Ensure root has two children, handling edge cases
+        if root_value == 1:
+            # No valid value for left child
+            left_child_value = None
+        else:
+            left_child_value = random.randint(1, root_value - 1)
+
+        if root_value == 99:
+            # No valid value for right child
+            right_child_value = None
+        else:
+            right_child_value = random.randint(root_value + 1, 99)
+
+        root.left = TreeNode(left_child_value) if left_child_value is not None else None
+        root.right = TreeNode(right_child_value) if right_child_value is not None else None
+
+        # Add root and its valid children to the list of nodes
+        nodes = [root]
+        if root.left is not None:
+            nodes.append(root.left)
+        if root.right is not None:
+            nodes.append(root.right)
+
+        # Continue with random tree generation for remaining nodes
+        for _ in range(len(nodes), num_nodes):
+            node_value = random.randint(1, 99)
             new_node = TreeNode(node_value)
 
-            current = root
+            current = self.root
             while True:
                 if new_node.value < current.value:
                     if current.left is None:
@@ -452,53 +494,83 @@ class BinarySearchTree:
             nodes.append(new_node)
         
         self.root = root
+        
+        def graphize(T: nx.Graph, node: TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
+            """
+            Graphizes the binary search tree
 
-    def graphize(self, T: nx.Graph, node: TreeNode, pos: dict, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
+            Parameters
+            ----------
+            T : nx.Graph
+                the graph to be drawn
+            node : TreeNode
+                the current node
+            x : int
+                the x coordinate of the current node (default is 0)
+            y : int
+                the y coordinate of the current node (default is 0)
+            layer_height : Optional[int]
+                the height of the current layer (default is None)
+            layer_width : Optional[int]
+                the width of the current layer (default is None)
+
+            Returns
+            -------
+            None
+            
+            Raises
+            ------
+            ValueError
+                if the node is None
+            """
+            
+            if node:
+                if layer_height is None:
+                    layer_height = random.uniform(0.5, 1.5)  # Random height for each layer (increased for a deeper tree)
+                if layer_width is None:
+                    layer_width = 1.0
+                    
+                self.pos[node.value] = (x, y)
+                if node.left:
+                    T.add_edge(node.value, node.left.value)
+                    graphize(T, node.left, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
+                if node.right:
+                    T.add_edge(node.value, node.right.value)
+                    graphize(T, node.right, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+            else:
+                raise ValueError("The node is None")
+            self.tree_skeleton = T
+            
+        graphize(self.tree_skeleton, self.root)
+        
+    def fill(self) -> None:
         """
-        Graphizes the binary search tree
+        Fills the graph nodes with BST-compliant values.
 
         Parameters
         ----------
-        T : nx.Graph
-            the graph to be drawn
-        node : TreeNode
-            the current node
-        pos : dict
-            a dictionary of positions of nodes
-        x : int
-            the x coordinate of the current node (default is 0)
-        y : int
-            the y coordinate of the current node (default is 0)
-        layer_height : Optional[int]
-            the height of the current layer (default is None)
-        layer_width : Optional[int]
-            the width of the current layer (default is None)
+        None
 
         Returns
         -------
         None
-        
+
         Raises
         ------
-        ValueError
-            if the node is None
+        None
         """
-        
-        if node:
-            if layer_height is None:
-                layer_height = random.uniform(0.5, 1.5)  # Random height for each layer (increased for a deeper tree)
-            if layer_width is None:
-                layer_width = 1.0
-                
-            self.pos[node.value] = (x, y)
-            if node.left:
-                T.add_edge(node.value, node.left.value)
-                self.graphize(T, node.left, pos, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
-            if node.right:
-                T.add_edge(node.value, node.right.value)
-                self.graphize(T, node.right, pos, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
-        else:
-            raise ValueError("The node is None")
+        if self.root is None:
+            return
+
+        def fill_node(node, min_val, max_val):
+            if not node or min_val > max_val:
+                return
+            node.value = random.randint(min_val, max_val)
+            fill_node(node.left, min_val, node.value - 1)
+            fill_node(node.right, node.value + 1, max_val)
+
+        self.tree_filled = self.tree_skeleton.copy()
+        fill_node(self.root, 1, 99)
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif') -> None:
         """
@@ -554,18 +626,11 @@ class BinarySearchTree:
         # Calculate the figure size in inches for a 512x512 pixel image
         figure_size = 512 / dpi  # 5.12 when dpi is 100
         
-        # Create a directed graph
-        T = nx.Graph()
-        pos = nx.spring_layout(T)
-        
-        # Draw the tree
-        self.graphize(T, self.root, pos)
-        
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
 
         # Draw nodes and edges
-        nx.draw(T, pos, with_labels=True, font_weight='bold', node_size=800, node_color=color, node_shape=shape, font_family=font)
+        nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=1.0, width=1.0, alpha=1.0, edgecolors='black')
         
         if save:
             if path is None:

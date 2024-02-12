@@ -10,6 +10,7 @@ import time
 from typing import Type, Optional, TypeVar, Literal
 from colorlog import ColoredFormatter
 import logging
+import itertools
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -282,7 +283,7 @@ class BatchGenerator(Generator):
         run = 1
         
         # loop to create 5 base structures
-        for generation in range(1, 6):
+        for generation in range(1, 2):
         
             structure_generated = self.generator.generate_structure(
                 structure_class=structure_class,
@@ -299,7 +300,10 @@ class BatchGenerator(Generator):
                 format = 1
                 
                 # loop to create 3 shape formats of each variation
-                for shape in self.shapes:
+                
+                format_combinations = list(itertools.product(self.shapes, self.colors, self.fonts))
+                
+                for shape, color, font in format_combinations:
                     
                     self.generator.draw_structure(
                         structure_instance=structure_filled,
@@ -308,62 +312,14 @@ class BatchGenerator(Generator):
                         yaml_name=yaml_name,
                         save=True,
                         save_path=save_path,
-                        save_name=f'{type}_r{run}_g{generation}_v{variation}_f{format}s.png',
+                        save_name=f"{type}_run{run}_gen{generation}_var{variation}_fmt{format}.png",
                         show=False,
                         run=run,
                         generation=generation,
                         variation=variation,
                         format=format,
                         shape=shape,
-                        color='#88d7fe',
-                        font='sans-serif',
-                    )
-                    
-                    format += 1
-                    self.total_runs += 1
-                
-                # loop to create 3 color formats of each variation
-                for color in self.colors:
-                    
-                    self.generator.draw_structure(
-                        structure_instance=structure_filled,
-                        yaml=True,
-                        yaml_path=yaml_path,
-                        yaml_name=yaml_name,
-                        save=True,
-                        save_path=save_path,
-                        save_name=f'{type}_r{run}_g{generation}_v{variation}_f{format}s.png',
-                        show=False,
-                        run=run,
-                        generation=generation,
-                        variation=variation,
-                        format=format,
-                        shape='o',
                         color=color,
-                        font='sans-serif',
-                    )
-                    
-                    format += 1
-                    self.total_runs += 1
-                    
-                # loop to create 3 font formats of each variation
-                for font in self.fonts:
-                    
-                    self.generator.draw_structure(
-                        structure_instance=structure_filled,
-                        yaml=True,
-                        yaml_path=yaml_path,
-                        yaml_name=yaml_name,
-                        save=True,
-                        save_path=save_path,
-                        save_name=f'{type}_r{run}_g{generation}_v{variation}_f{format}s.png',
-                        show=False,
-                        run=run,
-                        generation=generation,
-                        variation=variation,
-                        format=format,
-                        shape='o',
-                        color='#88d7fe',
                         font=font,
                     )
                     

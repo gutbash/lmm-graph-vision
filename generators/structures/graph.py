@@ -117,7 +117,7 @@ class UndirectedGraph:
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
-            num_nodes = random.randint(1, 10)
+            num_nodes = random.randint(3, 10)
 
         if num_nodes <= 0:
             return
@@ -149,7 +149,7 @@ class UndirectedGraph:
         
         self.graph_filled = self.graph_skeleton.copy()
         
-        values = [random.randrange(1, 100, 1) for _ in range(len(self.graph_filled))]
+        values = [random.randrange(1, 99, 1) for _ in range(len(self.graph_filled))]
 
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
@@ -199,7 +199,7 @@ class UndirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, labels=nx.get_node_attributes(self.graph_filled, 'value'), node_shape=shape, node_color=color, font_family=font)
+        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=1.0, width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:
@@ -314,7 +314,7 @@ class DirectedGraph:
         if self.large:
             num_nodes = random.randint(11, 20)
         else:
-            num_nodes = random.randint(1, 10)
+            num_nodes = random.randint(3, 10)
 
         if num_nodes <= 0:
             return
@@ -348,7 +348,7 @@ class DirectedGraph:
         
         self.graph_filled = self.graph_skeleton.copy()
         
-        values = [random.randrange(1, 100, 1) for _ in range(len(self.graph_filled))]
+        values = [random.randrange(1, 99, 1) for _ in range(len(self.graph_filled))]
 
         for i, node in enumerate(self.graph_filled.nodes):
             self.graph_filled.nodes[node]['value'] = values[i]
@@ -398,7 +398,7 @@ class DirectedGraph:
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph_filled, pos, width=1.57, with_labels=True, font_weight='bold', node_size=800, labels=nx.get_node_attributes(self.graph_filled, 'value'), node_shape=shape, node_color=color, font_family=font)
+        nx.draw(self.graph_filled, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=1.0, width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             if path is None:

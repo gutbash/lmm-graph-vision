@@ -39,6 +39,60 @@ yaml_path_directed_graph = Path('data/deploy/directed_graph/')
 generator = Generator()
 
 structure = generator.generate_structure(
+    structure_class=BinaryTree,
+    large=False,
+)
+
+filled = generator.fill_structure(
+    structure_instance=structure,
+)
+
+generator.draw_structure(
+    structure_instance=structure,
+    yaml=False,
+    yaml_path=yaml_path_binary_tree,
+    yaml_name='binary_tree.yaml',
+    save=True,
+    save_path=image_path_binary_tree,
+    save_name='binary_tree.png',
+    show=False,
+    run=0,
+    generation=0,
+    variation=0,
+    format=0,
+    shape='o',
+    color='#88d7fe',
+    font='sans-serif',
+)
+
+structure = generator.generate_structure(
+    structure_class=BinarySearchTree,
+    large=False,
+)
+
+filled = generator.fill_structure(
+    structure_instance=structure,
+)
+
+generator.draw_structure(
+    structure_instance=structure,
+    yaml=False,
+    yaml_path=yaml_path_binary_search_tree,
+    yaml_name='binary_search_tree.yaml',
+    save=True,
+    save_path=image_path_binary_search_tree,
+    save_name='binary_search_tree.png',
+    show=False,
+    run=0,
+    generation=0,
+    variation=0,
+    format=0,
+    shape='o',
+    color='#88d7fe',
+    font='sans-serif',
+)
+
+structure = generator.generate_structure(
     structure_class=UndirectedGraph,
     large=False,
 )
@@ -55,6 +109,33 @@ generator.draw_structure(
     save=True,
     save_path=image_path_undirected_graph,
     save_name='undirected_graph.png',
+    show=False,
+    run=0,
+    generation=0,
+    variation=0,
+    format=0,
+    shape='o',
+    color='#88d7fe',
+    font='sans-serif',
+)
+
+structure = generator.generate_structure(
+    structure_class=DirectedGraph,
+    large=False,
+)
+
+filled = generator.fill_structure(
+    structure_instance=structure,
+)
+
+generator.draw_structure(
+    structure_instance=structure,
+    yaml=False,
+    yaml_path=yaml_path_directed_graph,
+    yaml_name='directed_graph.yaml',
+    save=True,
+    save_path=image_path_directed_graph,
+    save_name='directed_graph.png',
     show=False,
     run=0,
     generation=0,
