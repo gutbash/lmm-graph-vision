@@ -1,90 +1,107 @@
-from openai import OpenAI
-import base64
 from pathlib import Path
-import os
 import pandas as pd
-import re
-import csv
-import json
 import requests
 import yaml
 
-api_key=os.environ.get('OPENAI_API_KEY')
+from utils.encoding import encode_image
 
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
+yaml_path_binary_tree = Path('data/develop/binary_tree/')
+yaml_path_binary_search_tree = Path('data/develop/binary_search_tree/')
+yaml_path_undirected_graph = Path('data/develop/undirected_graph/')
+yaml_path_directed_graph = Path('data/develop/directed_graph/')
 
-folder_path = Path('./images')
-file_list = [file.resolve() for file in folder_path.iterdir() if file.is_file()]
+class Evaluator:
+  
+  api_key: str
+  columns: list = ['generation', 'variation', 'format', 'structure', 'prompt', 'response', 'image_path', 'font', 'color', 'thickness', 'task_id', 'api_id', 'created']
+  limit: int
+  path: Path
+  filename: str
+  rows: list = []
+  dataframe: pd.DataFrame
+  
+  def __init__(self, limit: int, path: Path, filename: str, api_key: str) -> None:
+    self.api_key = api_key
+    self.limit = limit
+    self.path = path
+    self.filename = filename
+  
+  def evaluate(self) -> None:
+    
+    with open(Path.joinpath(self.path, self.filename), 'r') as file:
+      prompts = yaml.safe_load(file) or []
 
-print(len(file_list))
+    # Check if the file exists, if not, create a new one with headers
+    try:
+      self.dataframe = pd.read_csv('results/results.csv')
+    except (FileNotFoundError, pd.errors.EmptyDataError):
+      self.dataframe = pd.DataFrame(columns=self.columns)
+      self.dataframe.to_csv('results/results.csv', index=False)
 
-for i in file_list:
-  print(i)
-
-limit = 1
-
-columns = ['', 'id', 'created', 'model', 'content', 'file']
-
-# Check if the file exists, if not, create a new one with headers
-try:
-    df = pd.read_csv('./data.csv')
-except FileNotFoundError:
-    df = pd.DataFrame(columns=columns)
-    df.to_csv('./data.csv', index=False)
-
-for i, path in enumerate(file_list):
-    if i >= limit:
+    for i, prompt in enumerate(prompts):
+      if i >= self.limit:
         break
-    else:
+      else:
         try:
-            # Path to your image
-            image_path = path
+          # Path to your image
+          image_path = Path(prompt.get('image_path'))
 
-            # Getting the base64 string
-            base64_image = encode_image(image_path)
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer {api_key}"
-            }
+          # Getting the base64 string
+          image_data = encode_image(image_path)
+          headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+          }
 
-            payload = {
-                "model": "gpt-4-vision-preview",
-                "messages": [
+          payload = {
+            "model": "gpt-4-vision-preview",
+            "messages": [
+              {
+                "role": "user",
+                "content": [
                   {
-                    "role": "user",
-                    "content": [
-                      {
-                        "type": "text",
-                        "text": "You are a very experienced computer scientist who is an expert at answering question about graphs or trees. You share your reasoning process and you acknowledge when the problem can not be solved. In the provided diagram, identify the graph or tree and solve the problem that is described in box with the red text outline. Please explicitly say 'the answer is...' when providing the final answer. Be concise."
-                      },
-                      {
-                        "type": "image_url",
-                        "image_url": {
-                          "url": f"data:image/jpeg;base64,{base64_image}"
-                        }
-                      }
-                    ]
+                    "type": "text",
+                    "text": f"{prompt.get('text')}"
+                  },
+                  {
+                    "type": "image_url",
+                    "image_url": {
+                      "url": f"data:image/jpeg;base64,{image_data}"
+                    }
                   }
-                ],
-                "max_tokens": 300
-            }
+                ]
+              }
+            ],
+            "max_tokens": 300
+          }
 
-            # Send the request to the API
-            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-            resp = response.json()
-            print(resp)
-            content = resp.get('choices')[0].get('message').get('content')
+          # Send the request to the API
+          resp = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload).json()
+          print(resp)
+          response = resp.get('choices')[0].get('message').get('content').replace('\n', '\\n')
 
-            # Append new data to the DataFrame
-            new_row = pd.Series([i, resp.get('id'), resp.get('created'), resp.get('model'), content, path], index=columns)
-            df = df.append(new_row, ignore_index=True)
+          # Append new data to the DataFrame
+          new_row = pd.Series([
+            prompt.get('generation'),
+            prompt.get('variation'),
+            prompt.get('format'),
+            prompt.get('structure'),
+            str(prompt.get('text')),
+            response,
+            image_path,
+            prompt.get('font'),
+            prompt.get('color'),
+            prompt.get('thickness'),
+            prompt.get('id'),
+            resp.get('id'),
+            resp.get('created'),
+          ], index=self.columns)
+          self.rows.append(new_row)
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+          print(f"An error occurred: {e.with_traceback()}")
+    
+    self.dataframe = pd.concat([self.dataframe, pd.DataFrame(self.rows, columns=self.columns)], ignore_index=True)
 
-# Write the updated DataFrame back to the CSV file
-df.to_csv('./data.csv', index=False)
-
-df.content
+    # Write the updated DataFrame back to the CSV file
+    self.dataframe.to_csv('results/results.csv', index=False)

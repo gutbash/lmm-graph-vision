@@ -1,10 +1,10 @@
 """This module contains functions for performing operations on YAML files."""
 
 import yaml
-import uuid
+from uuid import UUID
 from pathlib import Path
 
-def add_object(file_path: Path = None, text: str = None, image_data: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None) -> None:
+def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None, color: str = None, font: str = None, thickness: str = None) -> None:
     """
     Add an object to a YAML file.
         
@@ -14,8 +14,6 @@ def add_object(file_path: Path = None, text: str = None, image_data: str = None,
         the path to the YAML file
     text : str (default: None)
         the text prompt for the model
-    image_data : str (default: None)
-        the base64-encoded image data
     image_path : Path (default: None)
         the path to the image
     expected : str (default: None)
@@ -55,15 +53,17 @@ def add_object(file_path: Path = None, text: str = None, image_data: str = None,
         raise Exception('The image path does not exist.')
     
     new_object = {
-        'id': str(uuid.uuid4()),
+        'id': str(uuid),
         'text': text,
-        'image_data': image_data,
         'image_path': str(image_path),
         'expected': expected,
         'structure': structure,
         'generation': generation,
         'variation': variation,
         'format': format,
+        'color': color,
+        'font': font,
+        'thickness': thickness,
     }
     
     try:
