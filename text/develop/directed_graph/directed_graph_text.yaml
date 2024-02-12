@@ -1,4 +1,6 @@
-- text: Perform a depth first search on the directed graph provided.
-  tags: directed_graph, depth_first_search
-- text: Perform a breadth first search on the directed graph provided.
-  tags: directed_graph, breadth_first_search
+- text: Perform a depth first search on the directed graph provided starting from the vertex with the smallest value.
+  type: depth_first_search
+- text: Perform a breadth first search on the directed graph provided starting from the vertex with the smallest value.
+  type: breadth_first_search
+- text: Provide the adjacency list representation of the directed graph provided.
+  type: adjacency_list

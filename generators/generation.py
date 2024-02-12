@@ -314,6 +314,16 @@ class BatchGenerator(Generator):
                 format_combinations = list(itertools.product(self.thickness, self.colors, self.fonts))
                 
                 for text in text_prompts:
+                    
+                    expected = None
+                    
+                    method_name = text['type']
+                    if hasattr(structure_filled, method_name):
+                        method_to_call = getattr(structure_filled, method_name)
+                        expected = method_to_call()
+                    else:
+                        # Handle the case where the method does not exist
+                        print(f"Method '{method_name}' not found in {structure_filled}.")
                 
                     for thickness, color, font in format_combinations:
                         
@@ -323,7 +333,7 @@ class BatchGenerator(Generator):
                             uuid=uuid,
                             structure_instance=structure_filled,
                             text=text['text'],
-                            expected=None,
+                            expected=str(expected),
                             yaml=True,
                             yaml_path=yaml_path,
                             yaml_name=yaml_name,

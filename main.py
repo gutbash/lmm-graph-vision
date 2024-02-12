@@ -56,6 +56,12 @@ filled = generator.fill_structure(
     structure_instance=structure,
 )
 
+inorder = filled.traversal('inorder')
+postorder = filled.traversal('postorder')
+preorder = filled.traversal('preorder')
+
+print(inorder, postorder, preorder)
+
 generator.draw_structure(
     structure_instance=structure,
     yaml=False,
@@ -155,10 +161,9 @@ generator.draw_structure(
     font='sans-serif',
 )
 '''
-
 ### TEST BATCH GENERATION ###
 
-'''
+
 batch_generator = BatchGenerator()
 
 batch_generator.generate_batch(
@@ -170,15 +175,64 @@ batch_generator.generate_batch(
     text_path=text_path_binary_tree,
     text_name='binary_tree_text.yaml',
 )
-'''
+
+batch_generator.generate_batch(
+    structure_class=BinarySearchTree,
+    type='bst',
+    yaml_name='binary_search_tree.yaml',
+    yaml_path=yaml_path_binary_search_tree,
+    save_path=image_path_binary_search_tree,
+    text_path=text_path_binary_search_tree,
+    text_name='binary_search_tree_text.yaml',
+)
+
+batch_generator.generate_batch(
+    structure_class=UndirectedGraph,
+    type='ug',
+    yaml_name='undirected_graph.yaml',
+    yaml_path=yaml_path_undirected_graph,
+    save_path=image_path_undirected_graph,
+    text_path=text_path_undirected_graph,
+    text_name='undirected_graph_text.yaml',
+)
+
+batch_generator.generate_batch(
+    structure_class=DirectedGraph,
+    type='dg',
+    yaml_name='directed_graph.yaml',
+    yaml_path=yaml_path_directed_graph,
+    save_path=image_path_directed_graph,
+    text_path=text_path_directed_graph,
+    text_name='directed_graph_text.yaml',
+)
 
 ### TEST EVALUATION ###
-
+'''
 evaluator = Evaluator(
-    limit=3,
-    path=yaml_path_binary_tree,
-    filename='binary_tree.yaml',
     api_key=api_key,
 )
 
-evaluator.evaluate()
+evaluator.evaluate(
+    limit=1,
+    path=yaml_path_binary_tree,
+    filename='binary_tree.yaml',
+)
+
+evaluator.evaluate(
+    limit=1,
+    path=yaml_path_binary_search_tree,
+    filename='binary_search_tree.yaml',
+)
+
+evaluator.evaluate(
+    limit=1,
+    path=yaml_path_undirected_graph,
+    filename='undirected_graph.yaml',
+)
+
+evaluator.evaluate(
+    limit=1,
+    path=yaml_path_directed_graph,
+    filename='directed_graph.yaml',
+)
+'''

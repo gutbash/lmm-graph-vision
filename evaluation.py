@@ -12,23 +12,17 @@ yaml_path_directed_graph = Path('data/develop/directed_graph/')
 
 class Evaluator:
   
-  api_key: str
-  columns: list = ['generation', 'variation', 'format', 'structure', 'prompt', 'response', 'image_path', 'font', 'color', 'thickness', 'task_id', 'api_id', 'created']
-  limit: int
-  path: Path
-  filename: str
+  api_key: str = None
+  columns: list = ['generation', 'variation', 'format', 'structure', 'prompt', 'response', 'expected', 'match', 'image_path', 'font', 'color', 'thickness', 'task_id', 'api_id', 'created']
   rows: list = []
-  dataframe: pd.DataFrame
+  dataframe: pd.DataFrame = None
   
-  def __init__(self, limit: int, path: Path, filename: str, api_key: str) -> None:
+  def __init__(self, api_key: str) -> None:
     self.api_key = api_key
-    self.limit = limit
-    self.path = path
-    self.filename = filename
   
-  def evaluate(self) -> None:
+  def evaluate(self, limit: int, path: Path, filename: str) -> None:
     
-    with open(Path.joinpath(self.path, self.filename), 'r') as file:
+    with open(Path.joinpath(path, filename), 'r') as file:
       prompts = yaml.safe_load(file) or []
 
     # Check if the file exists, if not, create a new one with headers
@@ -39,7 +33,7 @@ class Evaluator:
       self.dataframe.to_csv('results/results.csv', index=False)
 
     for i, prompt in enumerate(prompts):
-      if i >= self.limit:
+      if i >= limit:
         break
       else:
         try:
@@ -78,7 +72,12 @@ class Evaluator:
           # Send the request to the API
           resp = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload).json()
           print(resp)
-          response = resp.get('choices')[0].get('message').get('content').replace('\n', '\\n')
+          response = resp.get('choices')[0].get('message').get('content')
+          
+          if prompt.get('expected') in response:
+            match = True
+          else:
+            match = False
 
           # Append new data to the DataFrame
           new_row = pd.Series([
@@ -87,7 +86,9 @@ class Evaluator:
             prompt.get('format'),
             prompt.get('structure'),
             str(prompt.get('text')),
-            response,
+            response.replace('\n', '\\n'),
+            prompt.get('expected'),
+            match,
             image_path,
             prompt.get('font'),
             prompt.get('color'),
