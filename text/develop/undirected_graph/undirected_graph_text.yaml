@@ -1,6 +1,6 @@
-- text: Perform a depth first search on the undirected graph provided starting from the vertex with the smallest value.
-  type: depth_first_search
-- text: Perform a breadth first search on the undirected graph provided starting from the vertex with the smallest value.
-  type: breadth_first_search
-- text: Provide the adjacency list representation of the undirected graph provided.
+- text: Provide a dictionary representing the adjacency list of the undirected graph provided.
   type: adjacency_list
+- text: Provide a list representing the depth first search of the undirected graph provided starting from the vertex with the smallest value.
+  type: depth_first_search
+- text: Provide a list representing the breadth first search of the undirected graph provided starting from the vertex with the smallest value.
+  type: breadth_first_search

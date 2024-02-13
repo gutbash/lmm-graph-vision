@@ -1,8 +1,8 @@
 colorlog==6.8.2
 matplotlib==3.8.2
 networkx==3.2.1
-openai==0.28.0
 pandas==2.2.0
-PyYAML==6.0.1
+python-dotenv==1.0.1
 PyYAML==6.0.1
 Requests==2.31.0
+pipreqs

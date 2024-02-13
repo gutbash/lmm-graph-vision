@@ -163,7 +163,6 @@ generator.draw_structure(
 '''
 ### TEST BATCH GENERATION ###
 
-
 batch_generator = BatchGenerator()
 '''
 batch_generator.generate_batch(
@@ -218,4 +217,4 @@ evaluator = Evaluator(
 
 #evaluator.evaluate(limit=1, path=yaml_path_undirected_graph, filename='undirected_graph.yaml')
 
-evaluator.evaluate(limit=1, path=yaml_path_directed_graph, filename='directed_graph.yaml')
+evaluator.evaluate(limit=3, path=yaml_path_directed_graph, filename='directed_graph.yaml')
