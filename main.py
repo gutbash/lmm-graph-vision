@@ -2,7 +2,7 @@ from generators.generation import Generator, BatchGenerator
 from generators.structures.tree import BinaryTree, BinarySearchTree
 from generators.structures.graph import UndirectedGraph, DirectedGraph
 
-from evaluation import Evaluator
+from evaluators.evaluation import Evaluator
 
 import os
 from pathlib import Path
