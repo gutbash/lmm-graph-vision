@@ -22,6 +22,8 @@ class Evaluator:
   
   def evaluate(self, limit: int, path: Path, filename: str) -> None:
     
+    self.rows.clear()
+    
     with open(Path.joinpath(path, filename), 'r') as file:
       prompts = yaml.safe_load(file) or []
 
@@ -66,7 +68,7 @@ class Evaluator:
                 ]
               }
             ],
-            "max_tokens": 300
+            "max_tokens": 500
           }
 
           # Send the request to the API

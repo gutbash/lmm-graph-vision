@@ -56,12 +56,6 @@ filled = generator.fill_structure(
     structure_instance=structure,
 )
 
-inorder = filled.traversal('inorder')
-postorder = filled.traversal('postorder')
-preorder = filled.traversal('preorder')
-
-print(inorder, postorder, preorder)
-
 generator.draw_structure(
     structure_instance=structure,
     yaml=False,
@@ -211,10 +205,10 @@ evaluator = Evaluator(
     api_key=api_key,
 )
 
-#evaluator.evaluate(limit=1, path=yaml_path_binary_tree, filename='binary_tree.yaml')
+evaluator.evaluate(limit=1, path=yaml_path_binary_tree, filename='binary_tree.yaml')
 
-#evaluator.evaluate(limit=1, path=yaml_path_binary_search_tree, filename='binary_search_tree.yaml')
+evaluator.evaluate(limit=1, path=yaml_path_binary_search_tree, filename='binary_search_tree.yaml')
 
-#evaluator.evaluate(limit=1, path=yaml_path_undirected_graph, filename='undirected_graph.yaml')
+evaluator.evaluate(limit=1, path=yaml_path_undirected_graph, filename='undirected_graph.yaml')
 
-evaluator.evaluate(limit=3, path=yaml_path_directed_graph, filename='directed_graph.yaml')
+evaluator.evaluate(limit=1, path=yaml_path_directed_graph, filename='directed_graph.yaml')

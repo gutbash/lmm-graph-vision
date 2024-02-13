@@ -1,6 +1,6 @@
-- text: Provide a post order traversal of the binary tree provided.
+- text: Provide a list representing the post-order traversal of the binary tree.
   type: post_order
-- text: Provide a pre order traversal of the binary tree provided.
+- text: Provide a list representing the pre-order traversal of the binary tree.
   type: pre_order
-- text: Provide an in order traversal of the binary tree provided.
+- text: Provide a list representing the in-order traversal of the binary tree.
   type: in_order
