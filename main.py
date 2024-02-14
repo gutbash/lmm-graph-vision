@@ -1,8 +1,10 @@
-from generators.generation import Generator, BatchGenerator
-from generators.structures.tree import BinaryTree, BinarySearchTree
-from generators.structures.graph import UndirectedGraph, DirectedGraph
+from generation.generator import Generator, BatchGenerator
+from generation.structures.tree import BinaryTree, BinarySearchTree
+from generation.structures.graph import UndirectedGraph, DirectedGraph
 
-from evaluators.evaluation import Evaluator
+from evaluation.evaluator import Evaluator
+from evaluation.models.openai import OpenAI
+from evaluation.models.deepmind import DeepMind
 
 import os
 from pathlib import Path
@@ -10,7 +12,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key = os.environ.get('OPENAI_API_KEY')
+openai_api_key = os.environ.get('OPENAI_API_KEY')
+deepmind_api_key = os.environ.get('DEEPMIND_API_KEY')
 
 ### DEVELOP PATHS ###
 
@@ -201,14 +204,26 @@ batch_generator.generate_batch(
 '''
 ### TEST EVALUATION ###
 
-evaluator = Evaluator(
-    api_key=api_key,
+openai_csv = 'openai.csv'
+deepmind_csv = 'deepmind.csv'
+
+openai = OpenAI(
+    api_key=openai_api_key,
 )
 
-evaluator.evaluate(limit=1, path=yaml_path_binary_tree, filename='binary_tree.yaml')
+deepmind = DeepMind(
+    api_key=deepmind_api_key,
+)
 
-evaluator.evaluate(limit=1, path=yaml_path_binary_search_tree, filename='binary_search_tree.yaml')
+evaluator = Evaluator()
 
-evaluator.evaluate(limit=1, path=yaml_path_undirected_graph, filename='undirected_graph.yaml')
+model = openai
+csv_name = openai_csv
 
-evaluator.evaluate(limit=1, path=yaml_path_directed_graph, filename='directed_graph.yaml')
+evaluator.evaluate(model=model, limit=1, yaml_path=yaml_path_binary_tree, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+
+evaluator.evaluate(model=model, limit=1, yaml_path=yaml_path_binary_search_tree, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+
+#evaluator.evaluate(model=model, limit=1, yaml_path=yaml_path_undirected_graph, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
+
+#evaluator.evaluate(model=model, limit=1, yaml_path=yaml_path_directed_graph, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)

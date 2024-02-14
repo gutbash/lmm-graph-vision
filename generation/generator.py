@@ -1,57 +1,19 @@
 """ This module contains functions for generating data structures. """
 
-from generators.structures.tree import BinaryTree, BinarySearchTree
-from generators.structures.graph import UndirectedGraph, DirectedGraph
-from utils.serialization import add_object
+from generation.structures.tree import BinaryTree, BinarySearchTree
+from generation.structures.graph import UndirectedGraph, DirectedGraph
+from utils.serializer import add_object
+from utils.colors import Colors
+from utils.logger import Logger
 
 from pathlib import Path
 import yaml
-import time
+from time import perf_counter
 from typing import Type, Optional, TypeVar, Literal
-from colorlog import ColoredFormatter
-import logging
 import itertools
 from uuid import uuid4, UUID
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.propagate = False
-
-# Create a console handler
-ch = logging.StreamHandler()
-
-# Create a formatter with color
-formatter = ColoredFormatter(
-    "%(log_color)s%(levelname)-8s%(reset)s %(blue)s%(message)s",
-    datefmt=None,
-    reset=True,
-    log_colors={
-        'DEBUG':    'cyan',
-        'INFO':     'green',
-        'WARNING':  'yellow',
-        'ERROR':    'red',
-        'CRITICAL': 'red,bg_white',
-    },
-    secondary_log_colors={},
-    style='%'
-)
-
-# Add formatter to console handler
-ch.setFormatter(formatter)
-
-# Add console handler to logger
-logger.addHandler(ch)
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+logger = Logger(__name__)
 
 class Generator:
     
@@ -83,17 +45,17 @@ class Generator:
         None
         """
 
-        print(bcolors.OKBLUE + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + bcolors.ENDC)
+        print(Colors.OKBLUE + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + Colors.ENDC)
         
         formal_name = structure_class.formal_name
 
         logger.info(f"Generating {formal_name}...")
-        start = time.perf_counter()
+        start = perf_counter()
         
         structure_instance = structure_class(large=large)
         structure_instance.generate()
         
-        end = time.perf_counter()
+        end = perf_counter()
         logger.info(f"╰── Generated {formal_name} in {round(end - start, 2)} seconds.")
         
         return structure_instance
@@ -116,16 +78,16 @@ class Generator:
         ------
         None
         """
-        print(bcolors.OKBLUE + "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄" + bcolors.ENDC)
+        print(Colors.OKBLUE + "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄" + Colors.ENDC)
         
         formal_name = structure_instance.formal_name
         
         logger.info(f"Filling {formal_name}...")
-        start = time.perf_counter()
+        start = perf_counter()
         
         structure_instance.fill()
         
-        end = time.perf_counter()
+        end = perf_counter()
         logger.info(f"╰── Filled {formal_name} in {round(end - start, 2)} seconds.")
         
         return structure_instance
@@ -178,7 +140,7 @@ class Generator:
         ValueError
             if generation, variation, or format is negative
         """
-        print(bcolors.OKBLUE + "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄" + bcolors.ENDC)
+        print(Colors.OKBLUE + "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄" + Colors.ENDC)
         
         default_file_name = structure_instance.default_file_name
         yaml_structure_type = structure_instance.yaml_structure_type
@@ -222,11 +184,11 @@ class Generator:
             return
         
         logger.info(f"Drawing {formal_name}...")
-        start = time.perf_counter()
+        start = perf_counter()
         
         structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, thickness=thickness)
         
-        end = time.perf_counter()
+        end = perf_counter()
         logger.info(f"╰── Drew {formal_name} in {round(end - start, 2)} seconds.")
         
         if save:
