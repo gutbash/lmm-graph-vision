@@ -1,970 +1,943 @@
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 1
   generation: 1
-  id: a996066a-0029-467a-ba89-50c11cae296d
-  image_path: images\develop\undirected_graph\ug_run-1_gen-1_var-1_fmt-1_thk-05_clr-88d7fe_fnt-sansserif_idn-a996066a-0029-467a-ba89-50c11cae296d.png
+  id: b0cbe570-cf84-4c3b-993d-6330ddc2ebcd
+  image_path: images/develop/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-05_clr-88d7fe_fnt-sansserif_idn-b0cbe570-cf84-4c3b-993d-6330ddc2ebcd.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 2
   generation: 1
-  id: 1e3f3f85-9e93-4fbb-8326-29b9d05ee81e
-  image_path: images\develop\undirected_graph\ug_run-2_gen-1_var-1_fmt-2_thk-05_clr-88d7fe_fnt-serif_idn-1e3f3f85-9e93-4fbb-8326-29b9d05ee81e.png
+  id: 3cc8d428-6d3b-41ab-9804-76cc4a6179e4
+  image_path: images/develop/undirected_graph/ug_run-2_gen-1_var-1_fmt-2_thk-05_clr-88d7fe_fnt-serif_idn-3cc8d428-6d3b-41ab-9804-76cc4a6179e4.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 3
   generation: 1
-  id: 1dca87d3-8adb-4d1a-a5ba-d57894bed571
-  image_path: images\develop\undirected_graph\ug_run-3_gen-1_var-1_fmt-3_thk-05_clr-88d7fe_fnt-monospace_idn-1dca87d3-8adb-4d1a-a5ba-d57894bed571.png
+  id: 218609c9-e304-49a7-ad97-93ffe9ab24af
+  image_path: images/develop/undirected_graph/ug_run-3_gen-1_var-1_fmt-3_thk-05_clr-88d7fe_fnt-monospace_idn-218609c9-e304-49a7-ad97-93ffe9ab24af.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 4
   generation: 1
-  id: c995ec58-95c9-4320-ac75-ce106e816c00
-  image_path: images\develop\undirected_graph\ug_run-4_gen-1_var-1_fmt-4_thk-05_clr-feaf88_fnt-sansserif_idn-c995ec58-95c9-4320-ac75-ce106e816c00.png
+  id: 1a057794-f705-4b5b-987c-34489a513c03
+  image_path: images/develop/undirected_graph/ug_run-4_gen-1_var-1_fmt-4_thk-05_clr-feaf88_fnt-sansserif_idn-1a057794-f705-4b5b-987c-34489a513c03.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 5
   generation: 1
-  id: 87a370fb-a98c-4215-ac7b-73fbdd1a69f7
-  image_path: images\develop\undirected_graph\ug_run-5_gen-1_var-1_fmt-5_thk-05_clr-feaf88_fnt-serif_idn-87a370fb-a98c-4215-ac7b-73fbdd1a69f7.png
+  id: 2618d44b-2c72-495e-8020-742c77f68637
+  image_path: images/develop/undirected_graph/ug_run-5_gen-1_var-1_fmt-5_thk-05_clr-feaf88_fnt-serif_idn-2618d44b-2c72-495e-8020-742c77f68637.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 6
   generation: 1
-  id: 6493ef8f-8185-432f-925d-3054c24e61e5
-  image_path: images\develop\undirected_graph\ug_run-6_gen-1_var-1_fmt-6_thk-05_clr-feaf88_fnt-monospace_idn-6493ef8f-8185-432f-925d-3054c24e61e5.png
+  id: fefd1245-e269-4214-8b72-a73a72737a1a
+  image_path: images/develop/undirected_graph/ug_run-6_gen-1_var-1_fmt-6_thk-05_clr-feaf88_fnt-monospace_idn-fefd1245-e269-4214-8b72-a73a72737a1a.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 7
   generation: 1
-  id: a1f1cd8e-7d57-4833-857d-405cdb22ba63
-  image_path: images\develop\undirected_graph\ug_run-7_gen-1_var-1_fmt-7_thk-05_clr-eeeeee_fnt-sansserif_idn-a1f1cd8e-7d57-4833-857d-405cdb22ba63.png
+  id: 2682a218-8cce-429b-a247-cd1d150d1b0d
+  image_path: images/develop/undirected_graph/ug_run-7_gen-1_var-1_fmt-7_thk-05_clr-eeeeee_fnt-sansserif_idn-2682a218-8cce-429b-a247-cd1d150d1b0d.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 8
   generation: 1
-  id: f5463f93-c7cc-448c-a027-1dc777f78ead
-  image_path: images\develop\undirected_graph\ug_run-8_gen-1_var-1_fmt-8_thk-05_clr-eeeeee_fnt-serif_idn-f5463f93-c7cc-448c-a027-1dc777f78ead.png
+  id: 1ee8cba3-6a3f-4105-bda8-3a5e494983ef
+  image_path: images/develop/undirected_graph/ug_run-8_gen-1_var-1_fmt-8_thk-05_clr-eeeeee_fnt-serif_idn-1ee8cba3-6a3f-4105-bda8-3a5e494983ef.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 9
   generation: 1
-  id: 4ae0f1be-f8d0-4db6-b9ab-a7080fa65947
-  image_path: images\develop\undirected_graph\ug_run-9_gen-1_var-1_fmt-9_thk-05_clr-eeeeee_fnt-monospace_idn-4ae0f1be-f8d0-4db6-b9ab-a7080fa65947.png
+  id: 46446955-2968-4a65-af9f-46a5272eb3f6
+  image_path: images/develop/undirected_graph/ug_run-9_gen-1_var-1_fmt-9_thk-05_clr-eeeeee_fnt-monospace_idn-46446955-2968-4a65-af9f-46a5272eb3f6.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 10
   generation: 1
-  id: c775e8e6-bdc9-4829-b333-ec49abe195cf
-  image_path: images\develop\undirected_graph\ug_run-10_gen-1_var-1_fmt-10_thk-10_clr-88d7fe_fnt-sansserif_idn-c775e8e6-bdc9-4829-b333-ec49abe195cf.png
+  id: 3e61d76e-c0cd-4718-bbbf-7312593d1509
+  image_path: images/develop/undirected_graph/ug_run-10_gen-1_var-1_fmt-10_thk-10_clr-88d7fe_fnt-sansserif_idn-3e61d76e-c0cd-4718-bbbf-7312593d1509.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 11
   generation: 1
-  id: 2e4fa551-9fe0-4f12-b767-52a453ebab2e
-  image_path: images\develop\undirected_graph\ug_run-11_gen-1_var-1_fmt-11_thk-10_clr-88d7fe_fnt-serif_idn-2e4fa551-9fe0-4f12-b767-52a453ebab2e.png
+  id: 74f46490-f678-4778-a6df-f7057b058006
+  image_path: images/develop/undirected_graph/ug_run-11_gen-1_var-1_fmt-11_thk-10_clr-88d7fe_fnt-serif_idn-74f46490-f678-4778-a6df-f7057b058006.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 12
   generation: 1
-  id: 8d9224e5-cf5c-4f47-9eee-8db7e87bf70c
-  image_path: images\develop\undirected_graph\ug_run-12_gen-1_var-1_fmt-12_thk-10_clr-88d7fe_fnt-monospace_idn-8d9224e5-cf5c-4f47-9eee-8db7e87bf70c.png
+  id: 15c64d2f-ab7a-4dbf-a4a4-514d9f835176
+  image_path: images/develop/undirected_graph/ug_run-12_gen-1_var-1_fmt-12_thk-10_clr-88d7fe_fnt-monospace_idn-15c64d2f-ab7a-4dbf-a4a4-514d9f835176.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 13
   generation: 1
-  id: 2092031c-7ee2-4b59-a4db-4697df8c2fe5
-  image_path: images\develop\undirected_graph\ug_run-13_gen-1_var-1_fmt-13_thk-10_clr-feaf88_fnt-sansserif_idn-2092031c-7ee2-4b59-a4db-4697df8c2fe5.png
+  id: fcd2d91f-1095-4f59-b5ba-3f289d95a9bf
+  image_path: images/develop/undirected_graph/ug_run-13_gen-1_var-1_fmt-13_thk-10_clr-feaf88_fnt-sansserif_idn-fcd2d91f-1095-4f59-b5ba-3f289d95a9bf.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 14
   generation: 1
-  id: d0ef92cf-852d-436b-83de-c286529b71d1
-  image_path: images\develop\undirected_graph\ug_run-14_gen-1_var-1_fmt-14_thk-10_clr-feaf88_fnt-serif_idn-d0ef92cf-852d-436b-83de-c286529b71d1.png
+  id: 400a227a-14aa-499f-8e6c-ca3f31f3c296
+  image_path: images/develop/undirected_graph/ug_run-14_gen-1_var-1_fmt-14_thk-10_clr-feaf88_fnt-serif_idn-400a227a-14aa-499f-8e6c-ca3f31f3c296.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 15
   generation: 1
-  id: 0769b8e7-b19a-412c-bba2-d544b1d874fe
-  image_path: images\develop\undirected_graph\ug_run-15_gen-1_var-1_fmt-15_thk-10_clr-feaf88_fnt-monospace_idn-0769b8e7-b19a-412c-bba2-d544b1d874fe.png
+  id: af058a0b-0f79-4bd3-a7a3-bc87b17c4d53
+  image_path: images/develop/undirected_graph/ug_run-15_gen-1_var-1_fmt-15_thk-10_clr-feaf88_fnt-monospace_idn-af058a0b-0f79-4bd3-a7a3-bc87b17c4d53.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 16
   generation: 1
-  id: 2f61e220-c57d-499a-ba2c-687c47a16d55
-  image_path: images\develop\undirected_graph\ug_run-16_gen-1_var-1_fmt-16_thk-10_clr-eeeeee_fnt-sansserif_idn-2f61e220-c57d-499a-ba2c-687c47a16d55.png
+  id: 8beefd7a-5826-48b7-9dd2-8f1e1df503bd
+  image_path: images/develop/undirected_graph/ug_run-16_gen-1_var-1_fmt-16_thk-10_clr-eeeeee_fnt-sansserif_idn-8beefd7a-5826-48b7-9dd2-8f1e1df503bd.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 17
   generation: 1
-  id: dfe61211-bf6b-4fdb-8e99-62aadd27485d
-  image_path: images\develop\undirected_graph\ug_run-17_gen-1_var-1_fmt-17_thk-10_clr-eeeeee_fnt-serif_idn-dfe61211-bf6b-4fdb-8e99-62aadd27485d.png
+  id: ac86d093-33b5-4439-b64c-8666dc4bef74
+  image_path: images/develop/undirected_graph/ug_run-17_gen-1_var-1_fmt-17_thk-10_clr-eeeeee_fnt-serif_idn-ac86d093-33b5-4439-b64c-8666dc4bef74.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 18
   generation: 1
-  id: a69843b6-5e8f-42c7-a6b7-c7187cfb2ae4
-  image_path: images\develop\undirected_graph\ug_run-18_gen-1_var-1_fmt-18_thk-10_clr-eeeeee_fnt-monospace_idn-a69843b6-5e8f-42c7-a6b7-c7187cfb2ae4.png
+  id: 07b3bba0-9ed3-4ce6-a7b9-5531737b8cd5
+  image_path: images/develop/undirected_graph/ug_run-18_gen-1_var-1_fmt-18_thk-10_clr-eeeeee_fnt-monospace_idn-07b3bba0-9ed3-4ce6-a7b9-5531737b8cd5.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 19
   generation: 1
-  id: 4091a889-b890-4e6f-b7ef-3d8a9d0d20c1
-  image_path: images\develop\undirected_graph\ug_run-19_gen-1_var-1_fmt-19_thk-15_clr-88d7fe_fnt-sansserif_idn-4091a889-b890-4e6f-b7ef-3d8a9d0d20c1.png
+  id: fb344b20-e29f-4915-837f-1b6c63cbc793
+  image_path: images/develop/undirected_graph/ug_run-19_gen-1_var-1_fmt-19_thk-15_clr-88d7fe_fnt-sansserif_idn-fb344b20-e29f-4915-837f-1b6c63cbc793.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 20
   generation: 1
-  id: 7f8a7255-7b4f-4861-9826-f1b295712154
-  image_path: images\develop\undirected_graph\ug_run-20_gen-1_var-1_fmt-20_thk-15_clr-88d7fe_fnt-serif_idn-7f8a7255-7b4f-4861-9826-f1b295712154.png
+  id: 195361f8-9602-4e04-906c-41b692f76f92
+  image_path: images/develop/undirected_graph/ug_run-20_gen-1_var-1_fmt-20_thk-15_clr-88d7fe_fnt-serif_idn-195361f8-9602-4e04-906c-41b692f76f92.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 21
   generation: 1
-  id: fd667640-4382-419c-a088-63688b0feeec
-  image_path: images\develop\undirected_graph\ug_run-21_gen-1_var-1_fmt-21_thk-15_clr-88d7fe_fnt-monospace_idn-fd667640-4382-419c-a088-63688b0feeec.png
+  id: 9b3f99f5-c4bc-4200-a42f-ddc9376cfa8b
+  image_path: images/develop/undirected_graph/ug_run-21_gen-1_var-1_fmt-21_thk-15_clr-88d7fe_fnt-monospace_idn-9b3f99f5-c4bc-4200-a42f-ddc9376cfa8b.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 22
   generation: 1
-  id: 5d278e2b-f407-4415-9653-3dc080ff4214
-  image_path: images\develop\undirected_graph\ug_run-22_gen-1_var-1_fmt-22_thk-15_clr-feaf88_fnt-sansserif_idn-5d278e2b-f407-4415-9653-3dc080ff4214.png
+  id: 36aa72ab-a585-4aa5-becd-f8c09f0a04bd
+  image_path: images/develop/undirected_graph/ug_run-22_gen-1_var-1_fmt-22_thk-15_clr-feaf88_fnt-sansserif_idn-36aa72ab-a585-4aa5-becd-f8c09f0a04bd.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 23
   generation: 1
-  id: cf9a8c16-288d-429e-b137-a1891fdaa6a3
-  image_path: images\develop\undirected_graph\ug_run-23_gen-1_var-1_fmt-23_thk-15_clr-feaf88_fnt-serif_idn-cf9a8c16-288d-429e-b137-a1891fdaa6a3.png
+  id: 8e64a70e-1f7b-4e64-b742-4dd48837614b
+  image_path: images/develop/undirected_graph/ug_run-23_gen-1_var-1_fmt-23_thk-15_clr-feaf88_fnt-serif_idn-8e64a70e-1f7b-4e64-b742-4dd48837614b.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 24
   generation: 1
-  id: 061cd714-c345-48bf-92b1-f428bc1d190b
-  image_path: images\develop\undirected_graph\ug_run-24_gen-1_var-1_fmt-24_thk-15_clr-feaf88_fnt-monospace_idn-061cd714-c345-48bf-92b1-f428bc1d190b.png
+  id: 91df9969-27d8-4a8d-9658-b78191b1621f
+  image_path: images/develop/undirected_graph/ug_run-24_gen-1_var-1_fmt-24_thk-15_clr-feaf88_fnt-monospace_idn-91df9969-27d8-4a8d-9658-b78191b1621f.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: sans-serif
   format: 25
   generation: 1
-  id: 9b36d5f3-b2ca-4df4-bfe7-b131c4729413
-  image_path: images\develop\undirected_graph\ug_run-25_gen-1_var-1_fmt-25_thk-15_clr-eeeeee_fnt-sansserif_idn-9b36d5f3-b2ca-4df4-bfe7-b131c4729413.png
+  id: 39e073db-528b-439d-a65a-e813372eccb5
+  image_path: images/develop/undirected_graph/ug_run-25_gen-1_var-1_fmt-25_thk-15_clr-eeeeee_fnt-sansserif_idn-39e073db-528b-439d-a65a-e813372eccb5.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: serif
   format: 26
   generation: 1
-  id: 911fb3de-1700-4ab1-a4ac-5dec442ab69d
-  image_path: images\develop\undirected_graph\ug_run-26_gen-1_var-1_fmt-26_thk-15_clr-eeeeee_fnt-serif_idn-911fb3de-1700-4ab1-a4ac-5dec442ab69d.png
+  id: eab62528-85e6-407a-822c-dc2acffdfe16
+  image_path: images/develop/undirected_graph/ug_run-26_gen-1_var-1_fmt-26_thk-15_clr-eeeeee_fnt-serif_idn-eab62528-85e6-407a-822c-dc2acffdfe16.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '{1: [2, 3, 4, 5], 2: [1, 6, 4, 7], 3: [1, 6, 4, 7], 4: [1, 2, 3, 7],
-    5: [1, 6], 6: [2, 3, 5, 7], 7: [2, 3, 4, 6]}'
+  expected: '{1: [2], 2: [1, 4], 3: [4], 4: [2, 3, 5], 5: [4]}'
   font: monospace
   format: 27
   generation: 1
-  id: 05d123a0-b8c5-499a-abab-5aa0b2fec18c
-  image_path: images\develop\undirected_graph\ug_run-27_gen-1_var-1_fmt-27_thk-15_clr-eeeeee_fnt-monospace_idn-05d123a0-b8c5-499a-abab-5aa0b2fec18c.png
+  id: f08e247d-228e-44c7-8ecc-25142685521a
+  image_path: images/develop/undirected_graph/ug_run-27_gen-1_var-1_fmt-27_thk-15_clr-eeeeee_fnt-monospace_idn-f08e247d-228e-44c7-8ecc-25142685521a.png
   structure: undirected_graph
   text: Provide a dictionary representing the adjacency list of the undirected graph.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 28
   generation: 1
-  id: 991c7cfc-8920-43a6-9e79-d5c90a69c46a
-  image_path: images\develop\undirected_graph\ug_run-28_gen-1_var-1_fmt-28_thk-05_clr-88d7fe_fnt-sansserif_idn-991c7cfc-8920-43a6-9e79-d5c90a69c46a.png
+  id: d6e4939a-5e71-4fe7-a822-f818d4cc8be1
+  image_path: images/develop/undirected_graph/ug_run-28_gen-1_var-1_fmt-28_thk-05_clr-88d7fe_fnt-sansserif_idn-d6e4939a-5e71-4fe7-a822-f818d4cc8be1.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 29
   generation: 1
-  id: 4a38e917-e513-4e55-b0b1-944f13095720
-  image_path: images\develop\undirected_graph\ug_run-29_gen-1_var-1_fmt-29_thk-05_clr-88d7fe_fnt-serif_idn-4a38e917-e513-4e55-b0b1-944f13095720.png
+  id: d454626d-0692-4938-8145-1e3d9842d425
+  image_path: images/develop/undirected_graph/ug_run-29_gen-1_var-1_fmt-29_thk-05_clr-88d7fe_fnt-serif_idn-d454626d-0692-4938-8145-1e3d9842d425.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 30
   generation: 1
-  id: 8bededbb-184b-4f74-b6dd-ca1049dd2fc1
-  image_path: images\develop\undirected_graph\ug_run-30_gen-1_var-1_fmt-30_thk-05_clr-88d7fe_fnt-monospace_idn-8bededbb-184b-4f74-b6dd-ca1049dd2fc1.png
+  id: 19687a07-4fb0-4bd2-b017-c1cf981bfae0
+  image_path: images/develop/undirected_graph/ug_run-30_gen-1_var-1_fmt-30_thk-05_clr-88d7fe_fnt-monospace_idn-19687a07-4fb0-4bd2-b017-c1cf981bfae0.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 31
   generation: 1
-  id: d23ac00e-51d4-4072-be9a-a6644a1fb2fa
-  image_path: images\develop\undirected_graph\ug_run-31_gen-1_var-1_fmt-31_thk-05_clr-feaf88_fnt-sansserif_idn-d23ac00e-51d4-4072-be9a-a6644a1fb2fa.png
+  id: 8c49cc86-a456-49ba-ac98-2a0419104401
+  image_path: images/develop/undirected_graph/ug_run-31_gen-1_var-1_fmt-31_thk-05_clr-feaf88_fnt-sansserif_idn-8c49cc86-a456-49ba-ac98-2a0419104401.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 32
   generation: 1
-  id: 0d1fa474-106f-4865-b95a-4d95d984a1a9
-  image_path: images\develop\undirected_graph\ug_run-32_gen-1_var-1_fmt-32_thk-05_clr-feaf88_fnt-serif_idn-0d1fa474-106f-4865-b95a-4d95d984a1a9.png
+  id: ff22dc21-d5a0-4d3a-9006-f55bfe73b46d
+  image_path: images/develop/undirected_graph/ug_run-32_gen-1_var-1_fmt-32_thk-05_clr-feaf88_fnt-serif_idn-ff22dc21-d5a0-4d3a-9006-f55bfe73b46d.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 33
   generation: 1
-  id: 0e6ee95d-5c4c-4cd5-8243-73de88b35c00
-  image_path: images\develop\undirected_graph\ug_run-33_gen-1_var-1_fmt-33_thk-05_clr-feaf88_fnt-monospace_idn-0e6ee95d-5c4c-4cd5-8243-73de88b35c00.png
+  id: 5572cb7b-3ffb-42da-82ec-a32b1307667e
+  image_path: images/develop/undirected_graph/ug_run-33_gen-1_var-1_fmt-33_thk-05_clr-feaf88_fnt-monospace_idn-5572cb7b-3ffb-42da-82ec-a32b1307667e.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 34
   generation: 1
-  id: e70a01bd-3846-48a8-9aa0-d47b4f710ced
-  image_path: images\develop\undirected_graph\ug_run-34_gen-1_var-1_fmt-34_thk-05_clr-eeeeee_fnt-sansserif_idn-e70a01bd-3846-48a8-9aa0-d47b4f710ced.png
+  id: 9dc42a64-5646-4719-9359-6f511e14155d
+  image_path: images/develop/undirected_graph/ug_run-34_gen-1_var-1_fmt-34_thk-05_clr-eeeeee_fnt-sansserif_idn-9dc42a64-5646-4719-9359-6f511e14155d.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 35
   generation: 1
-  id: 7648c604-0a54-46b5-be52-41a7be22bd8b
-  image_path: images\develop\undirected_graph\ug_run-35_gen-1_var-1_fmt-35_thk-05_clr-eeeeee_fnt-serif_idn-7648c604-0a54-46b5-be52-41a7be22bd8b.png
+  id: ae8a1b48-4099-4a35-aae2-e306502de263
+  image_path: images/develop/undirected_graph/ug_run-35_gen-1_var-1_fmt-35_thk-05_clr-eeeeee_fnt-serif_idn-ae8a1b48-4099-4a35-aae2-e306502de263.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 36
   generation: 1
-  id: 8e839cca-b1ef-4cb3-be64-45f295f5f7b8
-  image_path: images\develop\undirected_graph\ug_run-36_gen-1_var-1_fmt-36_thk-05_clr-eeeeee_fnt-monospace_idn-8e839cca-b1ef-4cb3-be64-45f295f5f7b8.png
+  id: 468908bf-34b4-4dd8-ae9f-49b3357202d7
+  image_path: images/develop/undirected_graph/ug_run-36_gen-1_var-1_fmt-36_thk-05_clr-eeeeee_fnt-monospace_idn-468908bf-34b4-4dd8-ae9f-49b3357202d7.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 37
   generation: 1
-  id: 1dcce0dd-384b-4dfe-b9f0-17231c7c6d8d
-  image_path: images\develop\undirected_graph\ug_run-37_gen-1_var-1_fmt-37_thk-10_clr-88d7fe_fnt-sansserif_idn-1dcce0dd-384b-4dfe-b9f0-17231c7c6d8d.png
+  id: 6838cdd1-3298-4366-9ff9-3169147d08d5
+  image_path: images/develop/undirected_graph/ug_run-37_gen-1_var-1_fmt-37_thk-10_clr-88d7fe_fnt-sansserif_idn-6838cdd1-3298-4366-9ff9-3169147d08d5.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 38
   generation: 1
-  id: bcf2277d-42fe-4089-b2ac-b7c3f96370c8
-  image_path: images\develop\undirected_graph\ug_run-38_gen-1_var-1_fmt-38_thk-10_clr-88d7fe_fnt-serif_idn-bcf2277d-42fe-4089-b2ac-b7c3f96370c8.png
+  id: 2c297d39-c4e2-4c31-8ce9-50be9ad68e82
+  image_path: images/develop/undirected_graph/ug_run-38_gen-1_var-1_fmt-38_thk-10_clr-88d7fe_fnt-serif_idn-2c297d39-c4e2-4c31-8ce9-50be9ad68e82.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 39
   generation: 1
-  id: a21818d2-48a2-4897-acce-9c5ca67481ef
-  image_path: images\develop\undirected_graph\ug_run-39_gen-1_var-1_fmt-39_thk-10_clr-88d7fe_fnt-monospace_idn-a21818d2-48a2-4897-acce-9c5ca67481ef.png
+  id: 31de4b3f-89fe-4ad7-990b-405223755776
+  image_path: images/develop/undirected_graph/ug_run-39_gen-1_var-1_fmt-39_thk-10_clr-88d7fe_fnt-monospace_idn-31de4b3f-89fe-4ad7-990b-405223755776.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 40
   generation: 1
-  id: 11323342-8ac9-494b-aa0d-1b09814da256
-  image_path: images\develop\undirected_graph\ug_run-40_gen-1_var-1_fmt-40_thk-10_clr-feaf88_fnt-sansserif_idn-11323342-8ac9-494b-aa0d-1b09814da256.png
+  id: 26bb110d-4b01-48e9-a78f-f29bc2c106c7
+  image_path: images/develop/undirected_graph/ug_run-40_gen-1_var-1_fmt-40_thk-10_clr-feaf88_fnt-sansserif_idn-26bb110d-4b01-48e9-a78f-f29bc2c106c7.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 41
   generation: 1
-  id: f4b21db1-cee4-4248-a37a-9dd3c2f52c03
-  image_path: images\develop\undirected_graph\ug_run-41_gen-1_var-1_fmt-41_thk-10_clr-feaf88_fnt-serif_idn-f4b21db1-cee4-4248-a37a-9dd3c2f52c03.png
+  id: a6ae7cbc-4687-4fc8-94e7-0f2dd7bfb5da
+  image_path: images/develop/undirected_graph/ug_run-41_gen-1_var-1_fmt-41_thk-10_clr-feaf88_fnt-serif_idn-a6ae7cbc-4687-4fc8-94e7-0f2dd7bfb5da.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 42
   generation: 1
-  id: 1b86a370-2cb3-47e8-8a48-606d82e5b7e9
-  image_path: images\develop\undirected_graph\ug_run-42_gen-1_var-1_fmt-42_thk-10_clr-feaf88_fnt-monospace_idn-1b86a370-2cb3-47e8-8a48-606d82e5b7e9.png
+  id: 70861216-1b1b-450f-a345-8df0b502aa5f
+  image_path: images/develop/undirected_graph/ug_run-42_gen-1_var-1_fmt-42_thk-10_clr-feaf88_fnt-monospace_idn-70861216-1b1b-450f-a345-8df0b502aa5f.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 43
   generation: 1
-  id: 0b7a9659-4446-4889-bd79-4934e2319352
-  image_path: images\develop\undirected_graph\ug_run-43_gen-1_var-1_fmt-43_thk-10_clr-eeeeee_fnt-sansserif_idn-0b7a9659-4446-4889-bd79-4934e2319352.png
+  id: 17fd0620-f44e-4029-b544-a05d4f34d4c0
+  image_path: images/develop/undirected_graph/ug_run-43_gen-1_var-1_fmt-43_thk-10_clr-eeeeee_fnt-sansserif_idn-17fd0620-f44e-4029-b544-a05d4f34d4c0.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 44
   generation: 1
-  id: c8dfe5a5-8c90-485d-bd65-e50f5469d847
-  image_path: images\develop\undirected_graph\ug_run-44_gen-1_var-1_fmt-44_thk-10_clr-eeeeee_fnt-serif_idn-c8dfe5a5-8c90-485d-bd65-e50f5469d847.png
+  id: e96dd341-f2f7-4c4a-a4c3-81a6cac95535
+  image_path: images/develop/undirected_graph/ug_run-44_gen-1_var-1_fmt-44_thk-10_clr-eeeeee_fnt-serif_idn-e96dd341-f2f7-4c4a-a4c3-81a6cac95535.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 45
   generation: 1
-  id: 76d06437-1f87-49f3-830e-5efd35242109
-  image_path: images\develop\undirected_graph\ug_run-45_gen-1_var-1_fmt-45_thk-10_clr-eeeeee_fnt-monospace_idn-76d06437-1f87-49f3-830e-5efd35242109.png
+  id: 8bbe67c5-ca2a-4fbe-b5e5-a9fdc330468a
+  image_path: images/develop/undirected_graph/ug_run-45_gen-1_var-1_fmt-45_thk-10_clr-eeeeee_fnt-monospace_idn-8bbe67c5-ca2a-4fbe-b5e5-a9fdc330468a.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 46
   generation: 1
-  id: eda35413-7386-49c4-83af-bd4cd43ef194
-  image_path: images\develop\undirected_graph\ug_run-46_gen-1_var-1_fmt-46_thk-15_clr-88d7fe_fnt-sansserif_idn-eda35413-7386-49c4-83af-bd4cd43ef194.png
+  id: f88328a2-2c15-45d7-bb6c-e7d4af123d62
+  image_path: images/develop/undirected_graph/ug_run-46_gen-1_var-1_fmt-46_thk-15_clr-88d7fe_fnt-sansserif_idn-f88328a2-2c15-45d7-bb6c-e7d4af123d62.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 47
   generation: 1
-  id: d6a80d2c-2ee9-4425-b9f8-2f608f2fac12
-  image_path: images\develop\undirected_graph\ug_run-47_gen-1_var-1_fmt-47_thk-15_clr-88d7fe_fnt-serif_idn-d6a80d2c-2ee9-4425-b9f8-2f608f2fac12.png
+  id: 8c904538-689d-4ce0-bda4-2294793e0edf
+  image_path: images/develop/undirected_graph/ug_run-47_gen-1_var-1_fmt-47_thk-15_clr-88d7fe_fnt-serif_idn-8c904538-689d-4ce0-bda4-2294793e0edf.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 48
   generation: 1
-  id: 3d46105e-3306-462e-926a-3674e74fc2f4
-  image_path: images\develop\undirected_graph\ug_run-48_gen-1_var-1_fmt-48_thk-15_clr-88d7fe_fnt-monospace_idn-3d46105e-3306-462e-926a-3674e74fc2f4.png
+  id: 79c81df0-a0d1-41af-8463-17d979b35912
+  image_path: images/develop/undirected_graph/ug_run-48_gen-1_var-1_fmt-48_thk-15_clr-88d7fe_fnt-monospace_idn-79c81df0-a0d1-41af-8463-17d979b35912.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 49
   generation: 1
-  id: c163760f-c9ae-421f-b7e7-04f9eee14e4d
-  image_path: images\develop\undirected_graph\ug_run-49_gen-1_var-1_fmt-49_thk-15_clr-feaf88_fnt-sansserif_idn-c163760f-c9ae-421f-b7e7-04f9eee14e4d.png
+  id: e41bcd44-add6-44cc-b6e9-4be031bbf086
+  image_path: images/develop/undirected_graph/ug_run-49_gen-1_var-1_fmt-49_thk-15_clr-feaf88_fnt-sansserif_idn-e41bcd44-add6-44cc-b6e9-4be031bbf086.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 50
   generation: 1
-  id: faf34733-3bd3-4e22-932b-d79e07f300a3
-  image_path: images\develop\undirected_graph\ug_run-50_gen-1_var-1_fmt-50_thk-15_clr-feaf88_fnt-serif_idn-faf34733-3bd3-4e22-932b-d79e07f300a3.png
+  id: 1e1535ee-5c73-4842-9acb-0a433abfd91b
+  image_path: images/develop/undirected_graph/ug_run-50_gen-1_var-1_fmt-50_thk-15_clr-feaf88_fnt-serif_idn-1e1535ee-5c73-4842-9acb-0a433abfd91b.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 51
   generation: 1
-  id: 7c32ca97-0acb-4e15-bca9-20b68554fb1c
-  image_path: images\develop\undirected_graph\ug_run-51_gen-1_var-1_fmt-51_thk-15_clr-feaf88_fnt-monospace_idn-7c32ca97-0acb-4e15-bca9-20b68554fb1c.png
+  id: 91d42772-bc82-484c-b818-dd2aae4440b9
+  image_path: images/develop/undirected_graph/ug_run-51_gen-1_var-1_fmt-51_thk-15_clr-feaf88_fnt-monospace_idn-91d42772-bc82-484c-b818-dd2aae4440b9.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 52
   generation: 1
-  id: 3113b561-3963-481e-947e-d26744301018
-  image_path: images\develop\undirected_graph\ug_run-52_gen-1_var-1_fmt-52_thk-15_clr-eeeeee_fnt-sansserif_idn-3113b561-3963-481e-947e-d26744301018.png
+  id: 7a092656-7c5a-4399-be63-b6127abe916e
+  image_path: images/develop/undirected_graph/ug_run-52_gen-1_var-1_fmt-52_thk-15_clr-eeeeee_fnt-sansserif_idn-7a092656-7c5a-4399-be63-b6127abe916e.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 53
   generation: 1
-  id: 7a5078b7-e97e-410e-b9f2-ceaaa786d44e
-  image_path: images\develop\undirected_graph\ug_run-53_gen-1_var-1_fmt-53_thk-15_clr-eeeeee_fnt-serif_idn-7a5078b7-e97e-410e-b9f2-ceaaa786d44e.png
+  id: 0ad55169-63b2-47bc-a20d-7aee0d6eacef
+  image_path: images/develop/undirected_graph/ug_run-53_gen-1_var-1_fmt-53_thk-15_clr-eeeeee_fnt-serif_idn-0ad55169-63b2-47bc-a20d-7aee0d6eacef.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 6, 3, 4, 7, 5]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 54
   generation: 1
-  id: e3e46ab2-c362-45cf-88a8-146661233fc9
-  image_path: images\develop\undirected_graph\ug_run-54_gen-1_var-1_fmt-54_thk-15_clr-eeeeee_fnt-monospace_idn-e3e46ab2-c362-45cf-88a8-146661233fc9.png
+  id: 38229a85-996a-4443-bed7-fd343b0ff325
+  image_path: images/develop/undirected_graph/ug_run-54_gen-1_var-1_fmt-54_thk-15_clr-eeeeee_fnt-monospace_idn-38229a85-996a-4443-bed7-fd343b0ff325.png
   structure: undirected_graph
   text: Provide a list representing the depth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 55
   generation: 1
-  id: c052f246-3c15-4449-b52d-a3e99293316a
-  image_path: images\develop\undirected_graph\ug_run-55_gen-1_var-1_fmt-55_thk-05_clr-88d7fe_fnt-sansserif_idn-c052f246-3c15-4449-b52d-a3e99293316a.png
+  id: 7700e005-8dff-478d-984b-e99832114825
+  image_path: images/develop/undirected_graph/ug_run-55_gen-1_var-1_fmt-55_thk-05_clr-88d7fe_fnt-sansserif_idn-7700e005-8dff-478d-984b-e99832114825.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 56
   generation: 1
-  id: 7381fdda-5ed8-4d48-a8e3-c17e86c2cf8a
-  image_path: images\develop\undirected_graph\ug_run-56_gen-1_var-1_fmt-56_thk-05_clr-88d7fe_fnt-serif_idn-7381fdda-5ed8-4d48-a8e3-c17e86c2cf8a.png
+  id: ceaf56a6-19f1-4364-9809-dfece8541b19
+  image_path: images/develop/undirected_graph/ug_run-56_gen-1_var-1_fmt-56_thk-05_clr-88d7fe_fnt-serif_idn-ceaf56a6-19f1-4364-9809-dfece8541b19.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 57
   generation: 1
-  id: c60ceb2d-635e-4a7d-afd3-b5b4b7269799
-  image_path: images\develop\undirected_graph\ug_run-57_gen-1_var-1_fmt-57_thk-05_clr-88d7fe_fnt-monospace_idn-c60ceb2d-635e-4a7d-afd3-b5b4b7269799.png
+  id: 366cbe9b-1f61-43fc-81ea-63a0646ff404
+  image_path: images/develop/undirected_graph/ug_run-57_gen-1_var-1_fmt-57_thk-05_clr-88d7fe_fnt-monospace_idn-366cbe9b-1f61-43fc-81ea-63a0646ff404.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 58
   generation: 1
-  id: d702c640-7610-4a22-9a47-b81096fdd2a2
-  image_path: images\develop\undirected_graph\ug_run-58_gen-1_var-1_fmt-58_thk-05_clr-feaf88_fnt-sansserif_idn-d702c640-7610-4a22-9a47-b81096fdd2a2.png
+  id: 0982a7d3-2ab8-4691-ade1-bbf77114a965
+  image_path: images/develop/undirected_graph/ug_run-58_gen-1_var-1_fmt-58_thk-05_clr-feaf88_fnt-sansserif_idn-0982a7d3-2ab8-4691-ade1-bbf77114a965.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 59
   generation: 1
-  id: 79c2f7b1-1c39-4e5a-976b-f5c755e79669
-  image_path: images\develop\undirected_graph\ug_run-59_gen-1_var-1_fmt-59_thk-05_clr-feaf88_fnt-serif_idn-79c2f7b1-1c39-4e5a-976b-f5c755e79669.png
+  id: cfc982c7-0cd2-4cfd-8bfd-88d64e8e3f7e
+  image_path: images/develop/undirected_graph/ug_run-59_gen-1_var-1_fmt-59_thk-05_clr-feaf88_fnt-serif_idn-cfc982c7-0cd2-4cfd-8bfd-88d64e8e3f7e.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 60
   generation: 1
-  id: fb75b8ef-6af4-42ca-8d3c-898f4fa582fa
-  image_path: images\develop\undirected_graph\ug_run-60_gen-1_var-1_fmt-60_thk-05_clr-feaf88_fnt-monospace_idn-fb75b8ef-6af4-42ca-8d3c-898f4fa582fa.png
+  id: df421397-8063-4223-9c62-5c9722d3b1b3
+  image_path: images/develop/undirected_graph/ug_run-60_gen-1_var-1_fmt-60_thk-05_clr-feaf88_fnt-monospace_idn-df421397-8063-4223-9c62-5c9722d3b1b3.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 61
   generation: 1
-  id: c00349a3-00b4-4ec1-a36f-73dd58b8537a
-  image_path: images\develop\undirected_graph\ug_run-61_gen-1_var-1_fmt-61_thk-05_clr-eeeeee_fnt-sansserif_idn-c00349a3-00b4-4ec1-a36f-73dd58b8537a.png
+  id: 82335435-5739-450c-ac20-3eefd0a2dd0e
+  image_path: images/develop/undirected_graph/ug_run-61_gen-1_var-1_fmt-61_thk-05_clr-eeeeee_fnt-sansserif_idn-82335435-5739-450c-ac20-3eefd0a2dd0e.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 62
   generation: 1
-  id: ff50e95c-bbee-4494-a263-4da216209690
-  image_path: images\develop\undirected_graph\ug_run-62_gen-1_var-1_fmt-62_thk-05_clr-eeeeee_fnt-serif_idn-ff50e95c-bbee-4494-a263-4da216209690.png
+  id: 2fdb9ed4-9855-4cd5-a968-4bd636cbb4fb
+  image_path: images/develop/undirected_graph/ug_run-62_gen-1_var-1_fmt-62_thk-05_clr-eeeeee_fnt-serif_idn-2fdb9ed4-9855-4cd5-a968-4bd636cbb4fb.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 63
   generation: 1
-  id: aad9f01d-12ca-4557-8bff-9a43ddd12add
-  image_path: images\develop\undirected_graph\ug_run-63_gen-1_var-1_fmt-63_thk-05_clr-eeeeee_fnt-monospace_idn-aad9f01d-12ca-4557-8bff-9a43ddd12add.png
+  id: dedd0898-aafb-47e4-b470-1bbed8d29637
+  image_path: images/develop/undirected_graph/ug_run-63_gen-1_var-1_fmt-63_thk-05_clr-eeeeee_fnt-monospace_idn-dedd0898-aafb-47e4-b470-1bbed8d29637.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 64
   generation: 1
-  id: 09f22415-a968-44db-bb9e-a0875c911210
-  image_path: images\develop\undirected_graph\ug_run-64_gen-1_var-1_fmt-64_thk-10_clr-88d7fe_fnt-sansserif_idn-09f22415-a968-44db-bb9e-a0875c911210.png
+  id: 08562a1b-4c63-4ffc-864f-5006d5747385
+  image_path: images/develop/undirected_graph/ug_run-64_gen-1_var-1_fmt-64_thk-10_clr-88d7fe_fnt-sansserif_idn-08562a1b-4c63-4ffc-864f-5006d5747385.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 65
   generation: 1
-  id: 7e349268-f47a-47bd-9109-1b6bc5f43de2
-  image_path: images\develop\undirected_graph\ug_run-65_gen-1_var-1_fmt-65_thk-10_clr-88d7fe_fnt-serif_idn-7e349268-f47a-47bd-9109-1b6bc5f43de2.png
+  id: 469c7b4c-4e48-4d04-9226-02ff9178b38f
+  image_path: images/develop/undirected_graph/ug_run-65_gen-1_var-1_fmt-65_thk-10_clr-88d7fe_fnt-serif_idn-469c7b4c-4e48-4d04-9226-02ff9178b38f.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 66
   generation: 1
-  id: f76d4938-fbd8-491b-8be9-ea357929340c
-  image_path: images\develop\undirected_graph\ug_run-66_gen-1_var-1_fmt-66_thk-10_clr-88d7fe_fnt-monospace_idn-f76d4938-fbd8-491b-8be9-ea357929340c.png
+  id: 52a412b7-0afe-4ec4-88b9-26525f914d1c
+  image_path: images/develop/undirected_graph/ug_run-66_gen-1_var-1_fmt-66_thk-10_clr-88d7fe_fnt-monospace_idn-52a412b7-0afe-4ec4-88b9-26525f914d1c.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 67
   generation: 1
-  id: 3418f57d-b8fc-43d6-98cb-602f648f1f37
-  image_path: images\develop\undirected_graph\ug_run-67_gen-1_var-1_fmt-67_thk-10_clr-feaf88_fnt-sansserif_idn-3418f57d-b8fc-43d6-98cb-602f648f1f37.png
+  id: 6fc9dbda-cb5c-42e0-9c89-691ea05b1d5f
+  image_path: images/develop/undirected_graph/ug_run-67_gen-1_var-1_fmt-67_thk-10_clr-feaf88_fnt-sansserif_idn-6fc9dbda-cb5c-42e0-9c89-691ea05b1d5f.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 68
   generation: 1
-  id: 53c2d06f-47af-45d8-b7cb-b3864aade059
-  image_path: images\develop\undirected_graph\ug_run-68_gen-1_var-1_fmt-68_thk-10_clr-feaf88_fnt-serif_idn-53c2d06f-47af-45d8-b7cb-b3864aade059.png
+  id: 2deb5a24-6ff9-449a-a861-a63254a2f9c9
+  image_path: images/develop/undirected_graph/ug_run-68_gen-1_var-1_fmt-68_thk-10_clr-feaf88_fnt-serif_idn-2deb5a24-6ff9-449a-a861-a63254a2f9c9.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 69
   generation: 1
-  id: e6aef213-bd5b-4f7e-8fea-5a8194eec9f2
-  image_path: images\develop\undirected_graph\ug_run-69_gen-1_var-1_fmt-69_thk-10_clr-feaf88_fnt-monospace_idn-e6aef213-bd5b-4f7e-8fea-5a8194eec9f2.png
+  id: fb959d18-ef5d-4ff1-8ef8-1fb5f36699dc
+  image_path: images/develop/undirected_graph/ug_run-69_gen-1_var-1_fmt-69_thk-10_clr-feaf88_fnt-monospace_idn-fb959d18-ef5d-4ff1-8ef8-1fb5f36699dc.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 70
   generation: 1
-  id: f0875969-5856-4870-862f-61aed03a8234
-  image_path: images\develop\undirected_graph\ug_run-70_gen-1_var-1_fmt-70_thk-10_clr-eeeeee_fnt-sansserif_idn-f0875969-5856-4870-862f-61aed03a8234.png
+  id: a242d41b-d07b-4427-a706-82dd85de9ade
+  image_path: images/develop/undirected_graph/ug_run-70_gen-1_var-1_fmt-70_thk-10_clr-eeeeee_fnt-sansserif_idn-a242d41b-d07b-4427-a706-82dd85de9ade.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 71
   generation: 1
-  id: 5d6ea3ae-7864-4b08-b4c9-694148426265
-  image_path: images\develop\undirected_graph\ug_run-71_gen-1_var-1_fmt-71_thk-10_clr-eeeeee_fnt-serif_idn-5d6ea3ae-7864-4b08-b4c9-694148426265.png
+  id: 4ee44c1b-0841-432b-920c-b3c2fd4c4d2c
+  image_path: images/develop/undirected_graph/ug_run-71_gen-1_var-1_fmt-71_thk-10_clr-eeeeee_fnt-serif_idn-4ee44c1b-0841-432b-920c-b3c2fd4c4d2c.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 72
   generation: 1
-  id: 5a69a4bd-8a0b-4501-bb03-56b427364f8a
-  image_path: images\develop\undirected_graph\ug_run-72_gen-1_var-1_fmt-72_thk-10_clr-eeeeee_fnt-monospace_idn-5a69a4bd-8a0b-4501-bb03-56b427364f8a.png
+  id: c6af1765-6bd5-4b17-8c2f-565e2da33938
+  image_path: images/develop/undirected_graph/ug_run-72_gen-1_var-1_fmt-72_thk-10_clr-eeeeee_fnt-monospace_idn-c6af1765-6bd5-4b17-8c2f-565e2da33938.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 73
   generation: 1
-  id: 4902452f-763f-4e85-8d73-02e3ae7a9a96
-  image_path: images\develop\undirected_graph\ug_run-73_gen-1_var-1_fmt-73_thk-15_clr-88d7fe_fnt-sansserif_idn-4902452f-763f-4e85-8d73-02e3ae7a9a96.png
+  id: 83b71aa5-fe0e-4a62-ab9b-69a10e545aac
+  image_path: images/develop/undirected_graph/ug_run-73_gen-1_var-1_fmt-73_thk-15_clr-88d7fe_fnt-sansserif_idn-83b71aa5-fe0e-4a62-ab9b-69a10e545aac.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 74
   generation: 1
-  id: 379795c1-60c6-43cd-bfc5-5a68681ac37f
-  image_path: images\develop\undirected_graph\ug_run-74_gen-1_var-1_fmt-74_thk-15_clr-88d7fe_fnt-serif_idn-379795c1-60c6-43cd-bfc5-5a68681ac37f.png
+  id: 020f0748-b943-4fa6-8c62-73ffbe7bca55
+  image_path: images/develop/undirected_graph/ug_run-74_gen-1_var-1_fmt-74_thk-15_clr-88d7fe_fnt-serif_idn-020f0748-b943-4fa6-8c62-73ffbe7bca55.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 75
   generation: 1
-  id: e41c79c6-a0dc-4527-96e7-547c6ceae800
-  image_path: images\develop\undirected_graph\ug_run-75_gen-1_var-1_fmt-75_thk-15_clr-88d7fe_fnt-monospace_idn-e41c79c6-a0dc-4527-96e7-547c6ceae800.png
+  id: 5850ecb8-3762-49f8-a531-e8c730bf4434
+  image_path: images/develop/undirected_graph/ug_run-75_gen-1_var-1_fmt-75_thk-15_clr-88d7fe_fnt-monospace_idn-5850ecb8-3762-49f8-a531-e8c730bf4434.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 76
   generation: 1
-  id: 6e2f6088-13c2-4c4e-8c05-000a1b0d440b
-  image_path: images\develop\undirected_graph\ug_run-76_gen-1_var-1_fmt-76_thk-15_clr-feaf88_fnt-sansserif_idn-6e2f6088-13c2-4c4e-8c05-000a1b0d440b.png
+  id: 0a00cee9-f67e-4554-a4e0-5e76f8f9c4e7
+  image_path: images/develop/undirected_graph/ug_run-76_gen-1_var-1_fmt-76_thk-15_clr-feaf88_fnt-sansserif_idn-0a00cee9-f67e-4554-a4e0-5e76f8f9c4e7.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 77
   generation: 1
-  id: 32f4e8cf-eab1-4159-a7cf-6eade5b89ddf
-  image_path: images\develop\undirected_graph\ug_run-77_gen-1_var-1_fmt-77_thk-15_clr-feaf88_fnt-serif_idn-32f4e8cf-eab1-4159-a7cf-6eade5b89ddf.png
+  id: c0eb05b9-6c4c-4ccd-8a36-d1585a738d09
+  image_path: images/develop/undirected_graph/ug_run-77_gen-1_var-1_fmt-77_thk-15_clr-feaf88_fnt-serif_idn-c0eb05b9-6c4c-4ccd-8a36-d1585a738d09.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 78
   generation: 1
-  id: aefbb7f4-502c-41e5-9a2d-29db13404c27
-  image_path: images\develop\undirected_graph\ug_run-78_gen-1_var-1_fmt-78_thk-15_clr-feaf88_fnt-monospace_idn-aefbb7f4-502c-41e5-9a2d-29db13404c27.png
+  id: a6ee6dd9-76c1-48f2-9e04-f3bebe90dc23
+  image_path: images/develop/undirected_graph/ug_run-78_gen-1_var-1_fmt-78_thk-15_clr-feaf88_fnt-monospace_idn-a6ee6dd9-76c1-48f2-9e04-f3bebe90dc23.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: sans-serif
   format: 79
   generation: 1
-  id: 0ba8c7a2-e356-4575-bfc1-ca52eef5b891
-  image_path: images\develop\undirected_graph\ug_run-79_gen-1_var-1_fmt-79_thk-15_clr-eeeeee_fnt-sansserif_idn-0ba8c7a2-e356-4575-bfc1-ca52eef5b891.png
+  id: 22ddfa93-747f-46ef-8af4-5dffe542ac6e
+  image_path: images/develop/undirected_graph/ug_run-79_gen-1_var-1_fmt-79_thk-15_clr-eeeeee_fnt-sansserif_idn-22ddfa93-747f-46ef-8af4-5dffe542ac6e.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: serif
   format: 80
   generation: 1
-  id: 5678ca4f-5136-41b6-8c8f-20453eb42f48
-  image_path: images\develop\undirected_graph\ug_run-80_gen-1_var-1_fmt-80_thk-15_clr-eeeeee_fnt-serif_idn-5678ca4f-5136-41b6-8c8f-20453eb42f48.png
+  id: 884e3458-2411-48b8-8697-938b4cd157b2
+  image_path: images/develop/undirected_graph/ug_run-80_gen-1_var-1_fmt-80_thk-15_clr-eeeeee_fnt-serif_idn-884e3458-2411-48b8-8697-938b4cd157b2.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[1, 2, 3, 4, 5, 6, 7]'
+  expected: '[1, 2, 4, 3, 5]'
   font: monospace
   format: 81
   generation: 1
-  id: c49f73b4-fb3d-4865-bdfe-930d94c18894
-  image_path: images\develop\undirected_graph\ug_run-81_gen-1_var-1_fmt-81_thk-15_clr-eeeeee_fnt-monospace_idn-c49f73b4-fb3d-4865-bdfe-930d94c18894.png
+  id: 052ec7a6-8876-464f-b48a-a6d308fcd008
+  image_path: images/develop/undirected_graph/ug_run-81_gen-1_var-1_fmt-81_thk-15_clr-eeeeee_fnt-monospace_idn-052ec7a6-8876-464f-b48a-a6d308fcd008.png
   structure: undirected_graph
   text: Provide a list representing the breadth-first search of the undirected graph
     starting from the vertex with the smallest value.

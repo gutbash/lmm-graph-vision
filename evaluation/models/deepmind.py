@@ -1,10 +1,14 @@
 import google.generativeai as deepmind
-from pathlib import Path
-import PIL.Image as Image
 from utils.logger import Logger
 from time import perf_counter
+import traceback
+
+from evaluation.models.messages.message import BaseMessage, ImageMessage
+from typing import List, TypeVar
 
 logger = Logger(__name__)
+
+Messages = TypeVar("Messages", BaseMessage, ImageMessage)
 
 class DeepMind:
     
@@ -16,25 +20,26 @@ class DeepMind:
         self.api_key = api_key
         self.client = deepmind.GenerativeModel(self.model)
         
+        # FIXME: client not recognizing api_key
         deepmind.configure(api_key=api_key)
         
-    def run(self, text: str, image_path: Path) -> str:
-        
-        image = Image.open(image_path)
+    def run(self, messages: List[Messages]) -> str:
         
         try:
+            
+            messages = [message.to_message() for message in messages]
             
             logger.info(f"Running DeepMind Completion...")
             start = perf_counter()
             
-            completion = self.client.generate_content([text, image])
+            completion = self.client.generate_content(['hi'])
             
             end = perf_counter()
             
         except Exception as e:
-            logger.error(e)
-            return None
-        
+            tb = traceback.format_exc()
+            logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+            return
         
         content = completion.text
         

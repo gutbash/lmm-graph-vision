@@ -1,12 +1,15 @@
 import openai
 from time import perf_counter
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Literal, TypeVar
 
+from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, Roles
 from utils.logger import Logger
 from utils.encoder import encode_image
 
 logger = Logger(__name__)
+
+Messages = TypeVar("Messages", UserMessage, SystemMessage, AssistantMessage)
 
 class OpenAI:
     
@@ -40,21 +43,14 @@ class OpenAI:
         self.temperature = temperature
         self.top_p = top_p
         
-    def run(self, text: str, image_path: Path) -> str:
-        
-        messages = [
-            {
-                "role": "user",
-                "content": [
-                {"type": "text", "text": f"{text}"},
-                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{encode_image(image_path)}"}}
-                ]
-            }
-        ]
+    def run(self, messages: List[Messages]) -> str:
         
         try:
-                
+            
+            messages = [message.to_message() for message in messages]
+            
             logger.info(f"Running OpenAI Completion...")
+            logger.info(messages)
             start = perf_counter()
         
             completion = self.client.with_options(max_retries=5).chat.completions.create(
@@ -71,8 +67,8 @@ class OpenAI:
             end = perf_counter()
         
         except Exception as e:
-            logger.error(e)
-            return None
+            logger.error(f'{type(e).__name__} @ {__name__}: {e}')
+            return
         
         id = completion.id
         created = completion.created

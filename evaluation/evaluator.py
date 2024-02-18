@@ -1,28 +1,41 @@
 from pathlib import Path
 import pandas as pd
 import yaml
-from typing import TypeVar
+from typing import TypeVar, List
 from utils.logger import Logger
+
+from utils.encoder import encode_image
+from PIL import Image
 
 logger = Logger(__name__)
 
 from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
+from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
+
+Messages = TypeVar("Messages", UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage)
 
 yaml_path_binary_tree = Path('data/develop/binary_tree/')
 yaml_path_binary_search_tree = Path('data/develop/binary_search_tree/')
 yaml_path_undirected_graph = Path('data/develop/undirected_graph/')
 yaml_path_directed_graph = Path('data/develop/directed_graph/')
 
+Model = TypeVar('Model', OpenAI, DeepMind)
+
 class Evaluator:
 
   columns: list = ['generation', 'variation', 'format', 'structure', 'prompt', 'response', 'expected', 'match', 'image_path', 'font', 'color', 'thickness', 'task_id']
   rows: list = []
-  dataframe: pd.DataFrame = None
+  dataframe: pd.DataFrame = pd.DataFrame(columns=columns)
   
-  Model = TypeVar('Model', OpenAI, DeepMind)
+  model: Model
+  limit: int
+  yaml_path: Path
+  yaml_name: str
+  csv_path: Path
+  csv_name: str
   
-  def evaluate(self, model: Model, limit: int, yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str) -> None:
+  def evaluate(self, model: Model, messages: List[Messages], limit: int, yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str) -> None:
     
     self.rows.clear()
     
@@ -35,7 +48,6 @@ class Evaluator:
     try:
       self.dataframe = pd.read_csv(save_path)
     except (FileNotFoundError, pd.errors.EmptyDataError):
-      self.dataframe = pd.DataFrame(columns=self.columns)
       self.dataframe.to_csv(save_path, index=False)
 
     for i, prompt in enumerate(prompts):
@@ -44,9 +56,27 @@ class Evaluator:
       else:
         try:
           # Path to your image
+          
           image_path = Path(prompt.get('image_path'))
           
-          content = model.run(prompt.get('text'), image_path)
+          for message in messages:
+              if hasattr(message, 'image_urls') and message.image_urls:
+                  images = []
+                  for image in message.image_urls:
+                      if image == "{{image}}":
+                          image = image_path
+                      images.append(image)
+                  message.image_urls = images
+              elif hasattr(message, 'image') and message.image:
+                  if message.image == "{{image}}":
+                      message.image = Image.open(image_path)
+
+          for message in messages:
+            if hasattr(message, 'content') and message.content:
+              if "{{content}}" in message.content:
+                message.content = message.content.replace("{{content}}", prompt.get('text'))
+              
+          content = model.run(messages)
           
           if prompt.get('expected').strip("][}{") in content:
             match = True
