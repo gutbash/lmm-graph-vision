@@ -1,6 +1,6 @@
-- text: Provide a dictionary representing the adjacency list of the directed graph.
+- text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
   type: adjacency_list
-- text: Provide a list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
+- text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
   type: depth_first_search
-- text: Provide a list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
+- text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
   type: breadth_first_search

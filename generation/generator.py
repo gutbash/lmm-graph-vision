@@ -5,6 +5,7 @@ from generation.structures.graph import UndirectedGraph, DirectedGraph
 from utils.serializer import add_object
 from utils.colors import Colors
 from utils.logger import Logger
+import os
 
 from pathlib import Path
 import yaml
@@ -249,7 +250,15 @@ class BatchGenerator(Generator):
         
         run = 1
         
+        for file_path in save_path.iterdir():
+            if file_path.is_file() or file_path.is_symlink():
+                file_path.unlink()
+        
         text_path_joined = Path.joinpath(text_path, text_name)
+        yaml_path_joined = Path.joinpath(yaml_path, yaml_name)
+        
+        with open(yaml_path_joined, 'w') as file:
+            file.write('')
         
         with open(text_path_joined, 'r') as file:
             text_prompts = yaml.safe_load(file)

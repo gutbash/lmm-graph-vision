@@ -20,7 +20,6 @@ class DeepMind:
         self.api_key = api_key
         self.client = deepmind.GenerativeModel(self.model)
         
-        # FIXME: client not recognizing api_key
         deepmind.configure(api_key=api_key)
         
     def run(self, messages: List[Messages]) -> str:
@@ -30,9 +29,10 @@ class DeepMind:
             messages = [message.to_message() for message in messages]
             
             logger.info(f"Running DeepMind Completion...")
+            logger.info(messages)
             start = perf_counter()
             
-            completion = self.client.generate_content(['hi'])
+            completion = self.client.generate_content(contents=messages)
             
             end = perf_counter()
             

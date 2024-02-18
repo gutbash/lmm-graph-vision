@@ -1,6 +1,6 @@
-- text: Provide a list representing the post-order traversal of the binary search tree.
+- text: Provide a single-line python list representing the post-order traversal of the binary search tree.
   type: post_order
-- text: Provide a list representing the pre-order traversal of the binary search tree.
+- text: Provide a single-line python list representing the pre-order traversal of the binary search tree.
   type: pre_order
-- text: Provide an list representing the in-order traversal of the binary search tree.
+- text: Provide a single-line python list representing the in-order traversal of the binary search tree.
   type: in_order

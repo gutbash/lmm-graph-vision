@@ -237,7 +237,7 @@ model = deepmind
 csv_name = deepmind_csv
 messages = deepmind_messages
 
-evaluator.evaluate(model=model, messages=messages, limit=1, yaml_path=yaml_path_binary_tree, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
-evaluator.evaluate(model=model, messages=messages, limit=1, yaml_path=yaml_path_binary_search_tree, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
-evaluator.evaluate(model=model, messages=messages, limit=1, yaml_path=yaml_path_undirected_graph, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
-evaluator.evaluate(model=model, messages=messages, limit=1, yaml_path=yaml_path_directed_graph, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path_binary_tree, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+#evaluator.evaluate(model=model, messages=messages, limit=1, yaml_path=yaml_path_binary_search_tree, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path_undirected_graph, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
+#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path_directed_graph, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)

@@ -1,918 +1,972 @@
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 1
   generation: 1
-  id: 4c76653f-aa9f-4968-a94d-7f6d98904b90
-  image_path: images/develop/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-05_clr-88d7fe_fnt-sansserif_idn-4c76653f-aa9f-4968-a94d-7f6d98904b90.png
+  id: 61d6cca2-9f5d-4525-88f2-b6341b7744ce
+  image_path: images/develop/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-05_clr-88d7fe_fnt-sansserif_idn-61d6cca2-9f5d-4525-88f2-b6341b7744ce.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 2
   generation: 1
-  id: 80e1c1e4-7e94-40ea-8cbe-7f2a59db8518
-  image_path: images/develop/binary_search_tree/bst_run-2_gen-1_var-1_fmt-2_thk-05_clr-88d7fe_fnt-serif_idn-80e1c1e4-7e94-40ea-8cbe-7f2a59db8518.png
+  id: 63c186c9-cbf5-4b99-ba45-bbeabe992aa5
+  image_path: images/develop/binary_search_tree/bst_run-2_gen-1_var-1_fmt-2_thk-05_clr-88d7fe_fnt-serif_idn-63c186c9-cbf5-4b99-ba45-bbeabe992aa5.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 3
   generation: 1
-  id: aa5b0f04-a319-4a05-96d0-81a39097d89d
-  image_path: images/develop/binary_search_tree/bst_run-3_gen-1_var-1_fmt-3_thk-05_clr-88d7fe_fnt-monospace_idn-aa5b0f04-a319-4a05-96d0-81a39097d89d.png
+  id: b7cf5081-f4b4-458b-9177-2d158493da09
+  image_path: images/develop/binary_search_tree/bst_run-3_gen-1_var-1_fmt-3_thk-05_clr-88d7fe_fnt-monospace_idn-b7cf5081-f4b4-458b-9177-2d158493da09.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 4
   generation: 1
-  id: a4d9575d-cc3a-49f1-8165-7a2135d6ca22
-  image_path: images/develop/binary_search_tree/bst_run-4_gen-1_var-1_fmt-4_thk-05_clr-feaf88_fnt-sansserif_idn-a4d9575d-cc3a-49f1-8165-7a2135d6ca22.png
+  id: 73469654-4859-4e27-b911-d4856761f513
+  image_path: images/develop/binary_search_tree/bst_run-4_gen-1_var-1_fmt-4_thk-05_clr-feaf88_fnt-sansserif_idn-73469654-4859-4e27-b911-d4856761f513.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 5
   generation: 1
-  id: 3d8a649d-add8-4265-b62b-9dc1c9564555
-  image_path: images/develop/binary_search_tree/bst_run-5_gen-1_var-1_fmt-5_thk-05_clr-feaf88_fnt-serif_idn-3d8a649d-add8-4265-b62b-9dc1c9564555.png
+  id: d53fab68-d1f6-4723-8b7b-b63262af62dd
+  image_path: images/develop/binary_search_tree/bst_run-5_gen-1_var-1_fmt-5_thk-05_clr-feaf88_fnt-serif_idn-d53fab68-d1f6-4723-8b7b-b63262af62dd.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 6
   generation: 1
-  id: 0822168a-afa3-4481-b79e-ce8dca9770b0
-  image_path: images/develop/binary_search_tree/bst_run-6_gen-1_var-1_fmt-6_thk-05_clr-feaf88_fnt-monospace_idn-0822168a-afa3-4481-b79e-ce8dca9770b0.png
+  id: b72cfbc7-a0f0-44de-a5dc-00a02813e4eb
+  image_path: images/develop/binary_search_tree/bst_run-6_gen-1_var-1_fmt-6_thk-05_clr-feaf88_fnt-monospace_idn-b72cfbc7-a0f0-44de-a5dc-00a02813e4eb.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 7
   generation: 1
-  id: dd678b40-f503-406f-bc3e-1e5500ba4c74
-  image_path: images/develop/binary_search_tree/bst_run-7_gen-1_var-1_fmt-7_thk-05_clr-eeeeee_fnt-sansserif_idn-dd678b40-f503-406f-bc3e-1e5500ba4c74.png
+  id: 13fc73d5-0feb-46aa-84ff-15e8cd35ac82
+  image_path: images/develop/binary_search_tree/bst_run-7_gen-1_var-1_fmt-7_thk-05_clr-eeeeee_fnt-sansserif_idn-13fc73d5-0feb-46aa-84ff-15e8cd35ac82.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 8
   generation: 1
-  id: 172c8a24-c6fe-403b-a059-933b2126a21d
-  image_path: images/develop/binary_search_tree/bst_run-8_gen-1_var-1_fmt-8_thk-05_clr-eeeeee_fnt-serif_idn-172c8a24-c6fe-403b-a059-933b2126a21d.png
+  id: 5500d53b-45a5-45a1-bec3-c37d99bf5726
+  image_path: images/develop/binary_search_tree/bst_run-8_gen-1_var-1_fmt-8_thk-05_clr-eeeeee_fnt-serif_idn-5500d53b-45a5-45a1-bec3-c37d99bf5726.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 9
   generation: 1
-  id: a0e6bb06-ceba-4908-9492-c1f262ec284c
-  image_path: images/develop/binary_search_tree/bst_run-9_gen-1_var-1_fmt-9_thk-05_clr-eeeeee_fnt-monospace_idn-a0e6bb06-ceba-4908-9492-c1f262ec284c.png
+  id: 51f223bd-62ae-4737-b979-2523863ce089
+  image_path: images/develop/binary_search_tree/bst_run-9_gen-1_var-1_fmt-9_thk-05_clr-eeeeee_fnt-monospace_idn-51f223bd-62ae-4737-b979-2523863ce089.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 10
   generation: 1
-  id: dcfc521f-c437-466d-963f-010da0c31d63
-  image_path: images/develop/binary_search_tree/bst_run-10_gen-1_var-1_fmt-10_thk-10_clr-88d7fe_fnt-sansserif_idn-dcfc521f-c437-466d-963f-010da0c31d63.png
+  id: be48f8c0-6303-4857-89a8-836d0038adf6
+  image_path: images/develop/binary_search_tree/bst_run-10_gen-1_var-1_fmt-10_thk-10_clr-88d7fe_fnt-sansserif_idn-be48f8c0-6303-4857-89a8-836d0038adf6.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 11
   generation: 1
-  id: f07b3356-39c0-429c-94b8-eba4af467a95
-  image_path: images/develop/binary_search_tree/bst_run-11_gen-1_var-1_fmt-11_thk-10_clr-88d7fe_fnt-serif_idn-f07b3356-39c0-429c-94b8-eba4af467a95.png
+  id: 8d57c38c-049a-4ef5-8eef-24a012ade6a7
+  image_path: images/develop/binary_search_tree/bst_run-11_gen-1_var-1_fmt-11_thk-10_clr-88d7fe_fnt-serif_idn-8d57c38c-049a-4ef5-8eef-24a012ade6a7.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 12
   generation: 1
-  id: 2617bc7d-f0de-4906-8714-345a7c9e7b55
-  image_path: images/develop/binary_search_tree/bst_run-12_gen-1_var-1_fmt-12_thk-10_clr-88d7fe_fnt-monospace_idn-2617bc7d-f0de-4906-8714-345a7c9e7b55.png
+  id: e4e87ce0-4d0a-4329-9643-ea35f4c78b36
+  image_path: images/develop/binary_search_tree/bst_run-12_gen-1_var-1_fmt-12_thk-10_clr-88d7fe_fnt-monospace_idn-e4e87ce0-4d0a-4329-9643-ea35f4c78b36.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 13
   generation: 1
-  id: f72afaf8-2072-4359-9d60-8571efceb7c8
-  image_path: images/develop/binary_search_tree/bst_run-13_gen-1_var-1_fmt-13_thk-10_clr-feaf88_fnt-sansserif_idn-f72afaf8-2072-4359-9d60-8571efceb7c8.png
+  id: 9b6dcbf1-eb8c-4641-867b-50af719bb5ca
+  image_path: images/develop/binary_search_tree/bst_run-13_gen-1_var-1_fmt-13_thk-10_clr-feaf88_fnt-sansserif_idn-9b6dcbf1-eb8c-4641-867b-50af719bb5ca.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 14
   generation: 1
-  id: 9101a04a-dc37-469c-ac55-d9f1be801ae8
-  image_path: images/develop/binary_search_tree/bst_run-14_gen-1_var-1_fmt-14_thk-10_clr-feaf88_fnt-serif_idn-9101a04a-dc37-469c-ac55-d9f1be801ae8.png
+  id: f8721bc9-7b6d-4618-b950-1df484be765a
+  image_path: images/develop/binary_search_tree/bst_run-14_gen-1_var-1_fmt-14_thk-10_clr-feaf88_fnt-serif_idn-f8721bc9-7b6d-4618-b950-1df484be765a.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 15
   generation: 1
-  id: 525f4131-81a4-4a60-9f0d-b4d9cf720677
-  image_path: images/develop/binary_search_tree/bst_run-15_gen-1_var-1_fmt-15_thk-10_clr-feaf88_fnt-monospace_idn-525f4131-81a4-4a60-9f0d-b4d9cf720677.png
+  id: c289d3c9-8fa7-40d8-baab-3c2570f0971c
+  image_path: images/develop/binary_search_tree/bst_run-15_gen-1_var-1_fmt-15_thk-10_clr-feaf88_fnt-monospace_idn-c289d3c9-8fa7-40d8-baab-3c2570f0971c.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 16
   generation: 1
-  id: 4e1f801a-69e1-40b6-b829-ece3106858b6
-  image_path: images/develop/binary_search_tree/bst_run-16_gen-1_var-1_fmt-16_thk-10_clr-eeeeee_fnt-sansserif_idn-4e1f801a-69e1-40b6-b829-ece3106858b6.png
+  id: 68da641b-2016-4609-8dc1-5f3145b78192
+  image_path: images/develop/binary_search_tree/bst_run-16_gen-1_var-1_fmt-16_thk-10_clr-eeeeee_fnt-sansserif_idn-68da641b-2016-4609-8dc1-5f3145b78192.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 17
   generation: 1
-  id: 51403d6a-ccae-4c17-98f3-8cd575ac1957
-  image_path: images/develop/binary_search_tree/bst_run-17_gen-1_var-1_fmt-17_thk-10_clr-eeeeee_fnt-serif_idn-51403d6a-ccae-4c17-98f3-8cd575ac1957.png
+  id: 4e0cb4b5-e3cb-4d12-af62-37891b9931c0
+  image_path: images/develop/binary_search_tree/bst_run-17_gen-1_var-1_fmt-17_thk-10_clr-eeeeee_fnt-serif_idn-4e0cb4b5-e3cb-4d12-af62-37891b9931c0.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 18
   generation: 1
-  id: c4137728-5edb-4cb1-83a9-bab43661fd68
-  image_path: images/develop/binary_search_tree/bst_run-18_gen-1_var-1_fmt-18_thk-10_clr-eeeeee_fnt-monospace_idn-c4137728-5edb-4cb1-83a9-bab43661fd68.png
+  id: b208e34b-e3b0-4541-9702-eb2551b89c31
+  image_path: images/develop/binary_search_tree/bst_run-18_gen-1_var-1_fmt-18_thk-10_clr-eeeeee_fnt-monospace_idn-b208e34b-e3b0-4541-9702-eb2551b89c31.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 19
   generation: 1
-  id: a05d0ed6-2643-4aa2-8f2b-8bac1aaf52c0
-  image_path: images/develop/binary_search_tree/bst_run-19_gen-1_var-1_fmt-19_thk-15_clr-88d7fe_fnt-sansserif_idn-a05d0ed6-2643-4aa2-8f2b-8bac1aaf52c0.png
+  id: c93ba0f4-5ba0-406c-8f69-1409564b2090
+  image_path: images/develop/binary_search_tree/bst_run-19_gen-1_var-1_fmt-19_thk-15_clr-88d7fe_fnt-sansserif_idn-c93ba0f4-5ba0-406c-8f69-1409564b2090.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 20
   generation: 1
-  id: 37c629fa-3aed-4261-81a5-6a007d9f2c36
-  image_path: images/develop/binary_search_tree/bst_run-20_gen-1_var-1_fmt-20_thk-15_clr-88d7fe_fnt-serif_idn-37c629fa-3aed-4261-81a5-6a007d9f2c36.png
+  id: 2b9cb216-15fe-43c3-a626-3d2cd31d3e28
+  image_path: images/develop/binary_search_tree/bst_run-20_gen-1_var-1_fmt-20_thk-15_clr-88d7fe_fnt-serif_idn-2b9cb216-15fe-43c3-a626-3d2cd31d3e28.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 21
   generation: 1
-  id: 3c88b7ff-9973-4aa6-b680-80fea1d7d894
-  image_path: images/develop/binary_search_tree/bst_run-21_gen-1_var-1_fmt-21_thk-15_clr-88d7fe_fnt-monospace_idn-3c88b7ff-9973-4aa6-b680-80fea1d7d894.png
+  id: 191fd91e-3d1f-4e0f-a8cc-c4414e55e89d
+  image_path: images/develop/binary_search_tree/bst_run-21_gen-1_var-1_fmt-21_thk-15_clr-88d7fe_fnt-monospace_idn-191fd91e-3d1f-4e0f-a8cc-c4414e55e89d.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 22
   generation: 1
-  id: 139fff0c-11b0-45b6-8324-68fc42bea876
-  image_path: images/develop/binary_search_tree/bst_run-22_gen-1_var-1_fmt-22_thk-15_clr-feaf88_fnt-sansserif_idn-139fff0c-11b0-45b6-8324-68fc42bea876.png
+  id: d75994fc-17fe-4d81-ba3f-01c981bcf5a9
+  image_path: images/develop/binary_search_tree/bst_run-22_gen-1_var-1_fmt-22_thk-15_clr-feaf88_fnt-sansserif_idn-d75994fc-17fe-4d81-ba3f-01c981bcf5a9.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 23
   generation: 1
-  id: d7e50154-c1fe-4bf7-a5d4-5ff09b34c09f
-  image_path: images/develop/binary_search_tree/bst_run-23_gen-1_var-1_fmt-23_thk-15_clr-feaf88_fnt-serif_idn-d7e50154-c1fe-4bf7-a5d4-5ff09b34c09f.png
+  id: a941f5db-f216-4a7c-af52-ee4db192beb9
+  image_path: images/develop/binary_search_tree/bst_run-23_gen-1_var-1_fmt-23_thk-15_clr-feaf88_fnt-serif_idn-a941f5db-f216-4a7c-af52-ee4db192beb9.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 24
   generation: 1
-  id: b0d56954-3285-493c-854d-631d2608f8f8
-  image_path: images/develop/binary_search_tree/bst_run-24_gen-1_var-1_fmt-24_thk-15_clr-feaf88_fnt-monospace_idn-b0d56954-3285-493c-854d-631d2608f8f8.png
+  id: 2ab62ac8-900c-406c-ae29-04d422bf18d6
+  image_path: images/develop/binary_search_tree/bst_run-24_gen-1_var-1_fmt-24_thk-15_clr-feaf88_fnt-monospace_idn-2ab62ac8-900c-406c-ae29-04d422bf18d6.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: sans-serif
   format: 25
   generation: 1
-  id: 0277ec8c-8d32-4edb-bca9-d1221bb8aa0a
-  image_path: images/develop/binary_search_tree/bst_run-25_gen-1_var-1_fmt-25_thk-15_clr-eeeeee_fnt-sansserif_idn-0277ec8c-8d32-4edb-bca9-d1221bb8aa0a.png
+  id: 25ab3b0f-972a-499b-8130-d289bc32137b
+  image_path: images/develop/binary_search_tree/bst_run-25_gen-1_var-1_fmt-25_thk-15_clr-eeeeee_fnt-sansserif_idn-25ab3b0f-972a-499b-8130-d289bc32137b.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: serif
   format: 26
   generation: 1
-  id: e3dcc39e-96d6-415b-b0f7-2cec07d82499
-  image_path: images/develop/binary_search_tree/bst_run-26_gen-1_var-1_fmt-26_thk-15_clr-eeeeee_fnt-serif_idn-e3dcc39e-96d6-415b-b0f7-2cec07d82499.png
+  id: 3e0e6a79-c39d-43ee-8c42-601d1ea69420
+  image_path: images/develop/binary_search_tree/bst_run-26_gen-1_var-1_fmt-26_thk-15_clr-eeeeee_fnt-serif_idn-3e0e6a79-c39d-43ee-8c42-601d1ea69420.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[10, 8, 11]'
+  expected: '[9, 53, 52, 57, 35]'
   font: monospace
   format: 27
   generation: 1
-  id: ed6d0ec2-8202-4b66-a956-4d382dd76479
-  image_path: images/develop/binary_search_tree/bst_run-27_gen-1_var-1_fmt-27_thk-15_clr-eeeeee_fnt-monospace_idn-ed6d0ec2-8202-4b66-a956-4d382dd76479.png
+  id: 4cf0a9b8-71e8-4e88-b5f1-4875b20e22bd
+  image_path: images/develop/binary_search_tree/bst_run-27_gen-1_var-1_fmt-27_thk-15_clr-eeeeee_fnt-monospace_idn-4cf0a9b8-71e8-4e88-b5f1-4875b20e22bd.png
   structure: binary_search_tree
-  text: Provide a list representing the post-order traversal of the binary search
-    tree.
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 28
   generation: 1
-  id: 8b5360b2-8581-4274-be8d-807538b31cf4
-  image_path: images/develop/binary_search_tree/bst_run-28_gen-1_var-1_fmt-28_thk-05_clr-88d7fe_fnt-sansserif_idn-8b5360b2-8581-4274-be8d-807538b31cf4.png
+  id: 5394efd7-22e7-4042-9528-cd5e7609a778
+  image_path: images/develop/binary_search_tree/bst_run-28_gen-1_var-1_fmt-28_thk-05_clr-88d7fe_fnt-sansserif_idn-5394efd7-22e7-4042-9528-cd5e7609a778.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 29
   generation: 1
-  id: 5cff781e-cb60-4278-9c0f-f9fc11b0eaa1
-  image_path: images/develop/binary_search_tree/bst_run-29_gen-1_var-1_fmt-29_thk-05_clr-88d7fe_fnt-serif_idn-5cff781e-cb60-4278-9c0f-f9fc11b0eaa1.png
+  id: c203a462-1c68-454f-8194-82e8e4810ee5
+  image_path: images/develop/binary_search_tree/bst_run-29_gen-1_var-1_fmt-29_thk-05_clr-88d7fe_fnt-serif_idn-c203a462-1c68-454f-8194-82e8e4810ee5.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 30
   generation: 1
-  id: 9afa7d74-96c2-4451-97a5-581b3b3c6233
-  image_path: images/develop/binary_search_tree/bst_run-30_gen-1_var-1_fmt-30_thk-05_clr-88d7fe_fnt-monospace_idn-9afa7d74-96c2-4451-97a5-581b3b3c6233.png
+  id: fc38a2d8-37be-4df3-8bbe-de747cdd30ca
+  image_path: images/develop/binary_search_tree/bst_run-30_gen-1_var-1_fmt-30_thk-05_clr-88d7fe_fnt-monospace_idn-fc38a2d8-37be-4df3-8bbe-de747cdd30ca.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 31
   generation: 1
-  id: 48da5549-86a1-4bdb-910e-54b83caa187e
-  image_path: images/develop/binary_search_tree/bst_run-31_gen-1_var-1_fmt-31_thk-05_clr-feaf88_fnt-sansserif_idn-48da5549-86a1-4bdb-910e-54b83caa187e.png
+  id: d9f073d9-f1e4-450f-befc-dde498c7a037
+  image_path: images/develop/binary_search_tree/bst_run-31_gen-1_var-1_fmt-31_thk-05_clr-feaf88_fnt-sansserif_idn-d9f073d9-f1e4-450f-befc-dde498c7a037.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 32
   generation: 1
-  id: 89862ff6-34a9-466e-a98f-e65b0d4e3520
-  image_path: images/develop/binary_search_tree/bst_run-32_gen-1_var-1_fmt-32_thk-05_clr-feaf88_fnt-serif_idn-89862ff6-34a9-466e-a98f-e65b0d4e3520.png
+  id: 287ef260-98ca-4c14-a734-14adc21484a1
+  image_path: images/develop/binary_search_tree/bst_run-32_gen-1_var-1_fmt-32_thk-05_clr-feaf88_fnt-serif_idn-287ef260-98ca-4c14-a734-14adc21484a1.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 33
   generation: 1
-  id: d7df7e14-2ffa-4934-811e-cca6828b13d6
-  image_path: images/develop/binary_search_tree/bst_run-33_gen-1_var-1_fmt-33_thk-05_clr-feaf88_fnt-monospace_idn-d7df7e14-2ffa-4934-811e-cca6828b13d6.png
+  id: f3e5c76b-2fb9-413c-a63a-1e96add5c661
+  image_path: images/develop/binary_search_tree/bst_run-33_gen-1_var-1_fmt-33_thk-05_clr-feaf88_fnt-monospace_idn-f3e5c76b-2fb9-413c-a63a-1e96add5c661.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 34
   generation: 1
-  id: 13e61e7a-a983-4cc2-b9ed-b178fbacb446
-  image_path: images/develop/binary_search_tree/bst_run-34_gen-1_var-1_fmt-34_thk-05_clr-eeeeee_fnt-sansserif_idn-13e61e7a-a983-4cc2-b9ed-b178fbacb446.png
+  id: b939a9a9-dd61-4da0-8d82-8b6b9cacbc14
+  image_path: images/develop/binary_search_tree/bst_run-34_gen-1_var-1_fmt-34_thk-05_clr-eeeeee_fnt-sansserif_idn-b939a9a9-dd61-4da0-8d82-8b6b9cacbc14.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 35
   generation: 1
-  id: 5470cd59-1191-4865-80e9-800fb2f51d86
-  image_path: images/develop/binary_search_tree/bst_run-35_gen-1_var-1_fmt-35_thk-05_clr-eeeeee_fnt-serif_idn-5470cd59-1191-4865-80e9-800fb2f51d86.png
+  id: 502be8d2-16a3-4ba7-8e6e-66a39bb1e8a1
+  image_path: images/develop/binary_search_tree/bst_run-35_gen-1_var-1_fmt-35_thk-05_clr-eeeeee_fnt-serif_idn-502be8d2-16a3-4ba7-8e6e-66a39bb1e8a1.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 36
   generation: 1
-  id: 9d9c9cb7-c390-44a0-bf6a-05ea20a2890f
-  image_path: images/develop/binary_search_tree/bst_run-36_gen-1_var-1_fmt-36_thk-05_clr-eeeeee_fnt-monospace_idn-9d9c9cb7-c390-44a0-bf6a-05ea20a2890f.png
+  id: c9d9a57b-bf13-4757-af79-679192df32f4
+  image_path: images/develop/binary_search_tree/bst_run-36_gen-1_var-1_fmt-36_thk-05_clr-eeeeee_fnt-monospace_idn-c9d9a57b-bf13-4757-af79-679192df32f4.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 37
   generation: 1
-  id: bf3416ba-156c-4d9f-ab4f-5804ec704f57
-  image_path: images/develop/binary_search_tree/bst_run-37_gen-1_var-1_fmt-37_thk-10_clr-88d7fe_fnt-sansserif_idn-bf3416ba-156c-4d9f-ab4f-5804ec704f57.png
+  id: ca2343f6-a720-4397-aa1f-fc5e0054894b
+  image_path: images/develop/binary_search_tree/bst_run-37_gen-1_var-1_fmt-37_thk-10_clr-88d7fe_fnt-sansserif_idn-ca2343f6-a720-4397-aa1f-fc5e0054894b.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 38
   generation: 1
-  id: 4accbb3d-4e9b-4184-b879-3bbfa7be45f4
-  image_path: images/develop/binary_search_tree/bst_run-38_gen-1_var-1_fmt-38_thk-10_clr-88d7fe_fnt-serif_idn-4accbb3d-4e9b-4184-b879-3bbfa7be45f4.png
+  id: 1e90e279-593f-4fda-b6e1-e96966c4dd07
+  image_path: images/develop/binary_search_tree/bst_run-38_gen-1_var-1_fmt-38_thk-10_clr-88d7fe_fnt-serif_idn-1e90e279-593f-4fda-b6e1-e96966c4dd07.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 39
   generation: 1
-  id: 1f65bb8e-6852-41b0-9684-e456acca9c27
-  image_path: images/develop/binary_search_tree/bst_run-39_gen-1_var-1_fmt-39_thk-10_clr-88d7fe_fnt-monospace_idn-1f65bb8e-6852-41b0-9684-e456acca9c27.png
+  id: 1fff4afd-f46f-4cf6-8eb9-93bc917866db
+  image_path: images/develop/binary_search_tree/bst_run-39_gen-1_var-1_fmt-39_thk-10_clr-88d7fe_fnt-monospace_idn-1fff4afd-f46f-4cf6-8eb9-93bc917866db.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 40
   generation: 1
-  id: f0eeda8d-922b-4080-a82d-fc91b7a59a2e
-  image_path: images/develop/binary_search_tree/bst_run-40_gen-1_var-1_fmt-40_thk-10_clr-feaf88_fnt-sansserif_idn-f0eeda8d-922b-4080-a82d-fc91b7a59a2e.png
+  id: ba8d6268-bfdc-4fc0-a36f-83971ce81382
+  image_path: images/develop/binary_search_tree/bst_run-40_gen-1_var-1_fmt-40_thk-10_clr-feaf88_fnt-sansserif_idn-ba8d6268-bfdc-4fc0-a36f-83971ce81382.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 41
   generation: 1
-  id: f20df2a5-9b42-4c19-b789-5300c2a290d8
-  image_path: images/develop/binary_search_tree/bst_run-41_gen-1_var-1_fmt-41_thk-10_clr-feaf88_fnt-serif_idn-f20df2a5-9b42-4c19-b789-5300c2a290d8.png
+  id: 09a46ff6-af9e-464c-82fd-259a187983a9
+  image_path: images/develop/binary_search_tree/bst_run-41_gen-1_var-1_fmt-41_thk-10_clr-feaf88_fnt-serif_idn-09a46ff6-af9e-464c-82fd-259a187983a9.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 42
   generation: 1
-  id: 7c14c4fc-a6b2-433e-a015-34490079f156
-  image_path: images/develop/binary_search_tree/bst_run-42_gen-1_var-1_fmt-42_thk-10_clr-feaf88_fnt-monospace_idn-7c14c4fc-a6b2-433e-a015-34490079f156.png
+  id: cf8dd113-75b6-406b-85b5-1f25a19eba05
+  image_path: images/develop/binary_search_tree/bst_run-42_gen-1_var-1_fmt-42_thk-10_clr-feaf88_fnt-monospace_idn-cf8dd113-75b6-406b-85b5-1f25a19eba05.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 43
   generation: 1
-  id: cd94f972-06f2-489e-9508-e7172dd6fbef
-  image_path: images/develop/binary_search_tree/bst_run-43_gen-1_var-1_fmt-43_thk-10_clr-eeeeee_fnt-sansserif_idn-cd94f972-06f2-489e-9508-e7172dd6fbef.png
+  id: c152832c-a399-4518-b555-972daf8c0dff
+  image_path: images/develop/binary_search_tree/bst_run-43_gen-1_var-1_fmt-43_thk-10_clr-eeeeee_fnt-sansserif_idn-c152832c-a399-4518-b555-972daf8c0dff.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 44
   generation: 1
-  id: 8ad0f29d-4af0-482e-8725-718d95920e07
-  image_path: images/develop/binary_search_tree/bst_run-44_gen-1_var-1_fmt-44_thk-10_clr-eeeeee_fnt-serif_idn-8ad0f29d-4af0-482e-8725-718d95920e07.png
+  id: dac1a3d6-259a-4c36-b98a-324ff718e190
+  image_path: images/develop/binary_search_tree/bst_run-44_gen-1_var-1_fmt-44_thk-10_clr-eeeeee_fnt-serif_idn-dac1a3d6-259a-4c36-b98a-324ff718e190.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 45
   generation: 1
-  id: c497378d-0964-4dfe-beb2-6348030060a8
-  image_path: images/develop/binary_search_tree/bst_run-45_gen-1_var-1_fmt-45_thk-10_clr-eeeeee_fnt-monospace_idn-c497378d-0964-4dfe-beb2-6348030060a8.png
+  id: 9207a0e2-cace-433b-9040-1b4fa5ff99d2
+  image_path: images/develop/binary_search_tree/bst_run-45_gen-1_var-1_fmt-45_thk-10_clr-eeeeee_fnt-monospace_idn-9207a0e2-cace-433b-9040-1b4fa5ff99d2.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 46
   generation: 1
-  id: 705de9e0-c610-40f1-b5c2-65a73332ba93
-  image_path: images/develop/binary_search_tree/bst_run-46_gen-1_var-1_fmt-46_thk-15_clr-88d7fe_fnt-sansserif_idn-705de9e0-c610-40f1-b5c2-65a73332ba93.png
+  id: 230d9c56-74ee-4b4b-8a7e-3196c4c6a5c4
+  image_path: images/develop/binary_search_tree/bst_run-46_gen-1_var-1_fmt-46_thk-15_clr-88d7fe_fnt-sansserif_idn-230d9c56-74ee-4b4b-8a7e-3196c4c6a5c4.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 47
   generation: 1
-  id: b6b9eedb-3069-404c-a7a0-a8f830caf1fb
-  image_path: images/develop/binary_search_tree/bst_run-47_gen-1_var-1_fmt-47_thk-15_clr-88d7fe_fnt-serif_idn-b6b9eedb-3069-404c-a7a0-a8f830caf1fb.png
+  id: e9007c45-34e5-462c-9a06-a8c7f36edaec
+  image_path: images/develop/binary_search_tree/bst_run-47_gen-1_var-1_fmt-47_thk-15_clr-88d7fe_fnt-serif_idn-e9007c45-34e5-462c-9a06-a8c7f36edaec.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 48
   generation: 1
-  id: 199fc6d6-d48b-43a2-9e06-324867178b4e
-  image_path: images/develop/binary_search_tree/bst_run-48_gen-1_var-1_fmt-48_thk-15_clr-88d7fe_fnt-monospace_idn-199fc6d6-d48b-43a2-9e06-324867178b4e.png
+  id: f58aa4e8-9c55-4184-991c-fbfb7170e72b
+  image_path: images/develop/binary_search_tree/bst_run-48_gen-1_var-1_fmt-48_thk-15_clr-88d7fe_fnt-monospace_idn-f58aa4e8-9c55-4184-991c-fbfb7170e72b.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 49
   generation: 1
-  id: f2c30a4c-2635-4e99-8671-11b1a44e3ee7
-  image_path: images/develop/binary_search_tree/bst_run-49_gen-1_var-1_fmt-49_thk-15_clr-feaf88_fnt-sansserif_idn-f2c30a4c-2635-4e99-8671-11b1a44e3ee7.png
+  id: c601ae16-6d99-4e2b-b72b-6e95a7a9b211
+  image_path: images/develop/binary_search_tree/bst_run-49_gen-1_var-1_fmt-49_thk-15_clr-feaf88_fnt-sansserif_idn-c601ae16-6d99-4e2b-b72b-6e95a7a9b211.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 50
   generation: 1
-  id: 3106cedf-0d39-4284-b753-2362defa582e
-  image_path: images/develop/binary_search_tree/bst_run-50_gen-1_var-1_fmt-50_thk-15_clr-feaf88_fnt-serif_idn-3106cedf-0d39-4284-b753-2362defa582e.png
+  id: d386d529-bc1e-4ea5-845c-d6d1b09e4e0c
+  image_path: images/develop/binary_search_tree/bst_run-50_gen-1_var-1_fmt-50_thk-15_clr-feaf88_fnt-serif_idn-d386d529-bc1e-4ea5-845c-d6d1b09e4e0c.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 51
   generation: 1
-  id: bcb84048-e0a1-4480-98be-be314f6333ea
-  image_path: images/develop/binary_search_tree/bst_run-51_gen-1_var-1_fmt-51_thk-15_clr-feaf88_fnt-monospace_idn-bcb84048-e0a1-4480-98be-be314f6333ea.png
+  id: 1d8cede0-5041-4765-92ce-53d4b6cf6356
+  image_path: images/develop/binary_search_tree/bst_run-51_gen-1_var-1_fmt-51_thk-15_clr-feaf88_fnt-monospace_idn-1d8cede0-5041-4765-92ce-53d4b6cf6356.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: sans-serif
   format: 52
   generation: 1
-  id: c8165be9-6f23-4fd4-8561-be19f1f78d50
-  image_path: images/develop/binary_search_tree/bst_run-52_gen-1_var-1_fmt-52_thk-15_clr-eeeeee_fnt-sansserif_idn-c8165be9-6f23-4fd4-8561-be19f1f78d50.png
+  id: e24dfed1-5283-41d5-b07b-2ba88ad127df
+  image_path: images/develop/binary_search_tree/bst_run-52_gen-1_var-1_fmt-52_thk-15_clr-eeeeee_fnt-sansserif_idn-e24dfed1-5283-41d5-b07b-2ba88ad127df.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: serif
   format: 53
   generation: 1
-  id: 16c0f4b8-8ac0-4085-87f5-175435ebda77
-  image_path: images/develop/binary_search_tree/bst_run-53_gen-1_var-1_fmt-53_thk-15_clr-eeeeee_fnt-serif_idn-16c0f4b8-8ac0-4085-87f5-175435ebda77.png
+  id: ebd2da16-b41a-4ae5-8fdb-9f0c6eb447b1
+  image_path: images/develop/binary_search_tree/bst_run-53_gen-1_var-1_fmt-53_thk-15_clr-eeeeee_fnt-serif_idn-ebd2da16-b41a-4ae5-8fdb-9f0c6eb447b1.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[11, 8, 10]'
+  expected: '[35, 9, 57, 52, 53]'
   font: monospace
   format: 54
   generation: 1
-  id: 2745657c-4838-42b7-a22b-db45918322f9
-  image_path: images/develop/binary_search_tree/bst_run-54_gen-1_var-1_fmt-54_thk-15_clr-eeeeee_fnt-monospace_idn-2745657c-4838-42b7-a22b-db45918322f9.png
+  id: 85d72ab5-1c60-45bb-bcd7-6c5c3121570f
+  image_path: images/develop/binary_search_tree/bst_run-54_gen-1_var-1_fmt-54_thk-15_clr-eeeeee_fnt-monospace_idn-85d72ab5-1c60-45bb-bcd7-6c5c3121570f.png
   structure: binary_search_tree
-  text: Provide a list representing the pre-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 55
   generation: 1
-  id: 2921a3ca-23e2-458d-8995-7d471510f047
-  image_path: images/develop/binary_search_tree/bst_run-55_gen-1_var-1_fmt-55_thk-05_clr-88d7fe_fnt-sansserif_idn-2921a3ca-23e2-458d-8995-7d471510f047.png
+  id: 51380c0d-3475-4712-bf5d-3ab9a79417e9
+  image_path: images/develop/binary_search_tree/bst_run-55_gen-1_var-1_fmt-55_thk-05_clr-88d7fe_fnt-sansserif_idn-51380c0d-3475-4712-bf5d-3ab9a79417e9.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 56
   generation: 1
-  id: 83f66fd4-901f-4689-9698-eb8262555a97
-  image_path: images/develop/binary_search_tree/bst_run-56_gen-1_var-1_fmt-56_thk-05_clr-88d7fe_fnt-serif_idn-83f66fd4-901f-4689-9698-eb8262555a97.png
+  id: 925fad8c-fa80-448e-a3db-3f6edd29cf48
+  image_path: images/develop/binary_search_tree/bst_run-56_gen-1_var-1_fmt-56_thk-05_clr-88d7fe_fnt-serif_idn-925fad8c-fa80-448e-a3db-3f6edd29cf48.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 57
   generation: 1
-  id: b01ce23d-e4be-49b6-9216-a45f4ab64b21
-  image_path: images/develop/binary_search_tree/bst_run-57_gen-1_var-1_fmt-57_thk-05_clr-88d7fe_fnt-monospace_idn-b01ce23d-e4be-49b6-9216-a45f4ab64b21.png
+  id: 504edea6-92ec-4417-967f-f5926f3e016b
+  image_path: images/develop/binary_search_tree/bst_run-57_gen-1_var-1_fmt-57_thk-05_clr-88d7fe_fnt-monospace_idn-504edea6-92ec-4417-967f-f5926f3e016b.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 58
   generation: 1
-  id: 4f92bc70-14db-4d06-b5b6-3339ae8d2b90
-  image_path: images/develop/binary_search_tree/bst_run-58_gen-1_var-1_fmt-58_thk-05_clr-feaf88_fnt-sansserif_idn-4f92bc70-14db-4d06-b5b6-3339ae8d2b90.png
+  id: 1709c112-ef06-433f-b708-b72208f70de9
+  image_path: images/develop/binary_search_tree/bst_run-58_gen-1_var-1_fmt-58_thk-05_clr-feaf88_fnt-sansserif_idn-1709c112-ef06-433f-b708-b72208f70de9.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 59
   generation: 1
-  id: 0917e671-f545-4f70-91ce-6fba2b9e0686
-  image_path: images/develop/binary_search_tree/bst_run-59_gen-1_var-1_fmt-59_thk-05_clr-feaf88_fnt-serif_idn-0917e671-f545-4f70-91ce-6fba2b9e0686.png
+  id: 60779443-bf59-4692-8b11-cfb294fca8da
+  image_path: images/develop/binary_search_tree/bst_run-59_gen-1_var-1_fmt-59_thk-05_clr-feaf88_fnt-serif_idn-60779443-bf59-4692-8b11-cfb294fca8da.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 60
   generation: 1
-  id: 556aa7bc-a4fb-41ea-9df3-399c9efbdc0c
-  image_path: images/develop/binary_search_tree/bst_run-60_gen-1_var-1_fmt-60_thk-05_clr-feaf88_fnt-monospace_idn-556aa7bc-a4fb-41ea-9df3-399c9efbdc0c.png
+  id: c42df335-887a-4104-b464-668e558df627
+  image_path: images/develop/binary_search_tree/bst_run-60_gen-1_var-1_fmt-60_thk-05_clr-feaf88_fnt-monospace_idn-c42df335-887a-4104-b464-668e558df627.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 61
   generation: 1
-  id: ef8ade07-bb33-47f1-843d-05864589740e
-  image_path: images/develop/binary_search_tree/bst_run-61_gen-1_var-1_fmt-61_thk-05_clr-eeeeee_fnt-sansserif_idn-ef8ade07-bb33-47f1-843d-05864589740e.png
+  id: 1eb77a60-b839-4a05-92e5-6d11325c9b1f
+  image_path: images/develop/binary_search_tree/bst_run-61_gen-1_var-1_fmt-61_thk-05_clr-eeeeee_fnt-sansserif_idn-1eb77a60-b839-4a05-92e5-6d11325c9b1f.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 62
   generation: 1
-  id: 3a95639f-3650-44b6-af91-75b1068b9e23
-  image_path: images/develop/binary_search_tree/bst_run-62_gen-1_var-1_fmt-62_thk-05_clr-eeeeee_fnt-serif_idn-3a95639f-3650-44b6-af91-75b1068b9e23.png
+  id: d47b6ba6-c707-4414-a3a7-740ca741e3d3
+  image_path: images/develop/binary_search_tree/bst_run-62_gen-1_var-1_fmt-62_thk-05_clr-eeeeee_fnt-serif_idn-d47b6ba6-c707-4414-a3a7-740ca741e3d3.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 63
   generation: 1
-  id: 9b04bacc-6e9b-46e6-aaf4-4f2d3b840edb
-  image_path: images/develop/binary_search_tree/bst_run-63_gen-1_var-1_fmt-63_thk-05_clr-eeeeee_fnt-monospace_idn-9b04bacc-6e9b-46e6-aaf4-4f2d3b840edb.png
+  id: 973b0908-2cda-4cf4-8c1f-08d93d2d8eb6
+  image_path: images/develop/binary_search_tree/bst_run-63_gen-1_var-1_fmt-63_thk-05_clr-eeeeee_fnt-monospace_idn-973b0908-2cda-4cf4-8c1f-08d93d2d8eb6.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '0.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 64
   generation: 1
-  id: 5713ff57-656d-4ba0-9d2a-42c71821b227
-  image_path: images/develop/binary_search_tree/bst_run-64_gen-1_var-1_fmt-64_thk-10_clr-88d7fe_fnt-sansserif_idn-5713ff57-656d-4ba0-9d2a-42c71821b227.png
+  id: 703ef83b-5899-452c-8222-529223ea4abb
+  image_path: images/develop/binary_search_tree/bst_run-64_gen-1_var-1_fmt-64_thk-10_clr-88d7fe_fnt-sansserif_idn-703ef83b-5899-452c-8222-529223ea4abb.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 65
   generation: 1
-  id: 949c0f7f-7958-4267-a1c5-1bfa8ea7cdfa
-  image_path: images/develop/binary_search_tree/bst_run-65_gen-1_var-1_fmt-65_thk-10_clr-88d7fe_fnt-serif_idn-949c0f7f-7958-4267-a1c5-1bfa8ea7cdfa.png
+  id: b1a2dc14-622a-4d3c-a560-2343715432ad
+  image_path: images/develop/binary_search_tree/bst_run-65_gen-1_var-1_fmt-65_thk-10_clr-88d7fe_fnt-serif_idn-b1a2dc14-622a-4d3c-a560-2343715432ad.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 66
   generation: 1
-  id: f7279e5a-7caf-456c-9a4b-98af045e0b81
-  image_path: images/develop/binary_search_tree/bst_run-66_gen-1_var-1_fmt-66_thk-10_clr-88d7fe_fnt-monospace_idn-f7279e5a-7caf-456c-9a4b-98af045e0b81.png
+  id: 05692811-56e9-439c-822c-b4e3f2099fca
+  image_path: images/develop/binary_search_tree/bst_run-66_gen-1_var-1_fmt-66_thk-10_clr-88d7fe_fnt-monospace_idn-05692811-56e9-439c-822c-b4e3f2099fca.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 67
   generation: 1
-  id: 6f225ef9-691f-46f1-97d1-03a7ad56c66c
-  image_path: images/develop/binary_search_tree/bst_run-67_gen-1_var-1_fmt-67_thk-10_clr-feaf88_fnt-sansserif_idn-6f225ef9-691f-46f1-97d1-03a7ad56c66c.png
+  id: d426b667-688f-47c7-87fb-1d7e3f60fa7c
+  image_path: images/develop/binary_search_tree/bst_run-67_gen-1_var-1_fmt-67_thk-10_clr-feaf88_fnt-sansserif_idn-d426b667-688f-47c7-87fb-1d7e3f60fa7c.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 68
   generation: 1
-  id: d170c2ff-cb5f-400b-b8bb-a11599baeb8b
-  image_path: images/develop/binary_search_tree/bst_run-68_gen-1_var-1_fmt-68_thk-10_clr-feaf88_fnt-serif_idn-d170c2ff-cb5f-400b-b8bb-a11599baeb8b.png
+  id: bf399339-a527-4dcc-9e40-3134e8707557
+  image_path: images/develop/binary_search_tree/bst_run-68_gen-1_var-1_fmt-68_thk-10_clr-feaf88_fnt-serif_idn-bf399339-a527-4dcc-9e40-3134e8707557.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 69
   generation: 1
-  id: e0091254-ea54-43be-9319-6e388f21c3eb
-  image_path: images/develop/binary_search_tree/bst_run-69_gen-1_var-1_fmt-69_thk-10_clr-feaf88_fnt-monospace_idn-e0091254-ea54-43be-9319-6e388f21c3eb.png
+  id: 68bf54f5-aab4-4b0f-8364-f85a53eda3c3
+  image_path: images/develop/binary_search_tree/bst_run-69_gen-1_var-1_fmt-69_thk-10_clr-feaf88_fnt-monospace_idn-68bf54f5-aab4-4b0f-8364-f85a53eda3c3.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 70
   generation: 1
-  id: 1a09482a-db6d-4300-b580-d39f22d4652b
-  image_path: images/develop/binary_search_tree/bst_run-70_gen-1_var-1_fmt-70_thk-10_clr-eeeeee_fnt-sansserif_idn-1a09482a-db6d-4300-b580-d39f22d4652b.png
+  id: 415e777d-13f9-4970-99f6-336d3da4c304
+  image_path: images/develop/binary_search_tree/bst_run-70_gen-1_var-1_fmt-70_thk-10_clr-eeeeee_fnt-sansserif_idn-415e777d-13f9-4970-99f6-336d3da4c304.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 71
   generation: 1
-  id: 874d56ed-36b9-45d9-8308-5770355cefba
-  image_path: images/develop/binary_search_tree/bst_run-71_gen-1_var-1_fmt-71_thk-10_clr-eeeeee_fnt-serif_idn-874d56ed-36b9-45d9-8308-5770355cefba.png
+  id: 22e08a8f-7ed1-4525-8928-f6afaa16aa5f
+  image_path: images/develop/binary_search_tree/bst_run-71_gen-1_var-1_fmt-71_thk-10_clr-eeeeee_fnt-serif_idn-22e08a8f-7ed1-4525-8928-f6afaa16aa5f.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 72
   generation: 1
-  id: 7172f889-40e4-4d9e-bab4-c6c44e4d99d7
-  image_path: images/develop/binary_search_tree/bst_run-72_gen-1_var-1_fmt-72_thk-10_clr-eeeeee_fnt-monospace_idn-7172f889-40e4-4d9e-bab4-c6c44e4d99d7.png
+  id: c4bde334-c521-4660-9296-62012d99dddc
+  image_path: images/develop/binary_search_tree/bst_run-72_gen-1_var-1_fmt-72_thk-10_clr-eeeeee_fnt-monospace_idn-c4bde334-c521-4660-9296-62012d99dddc.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.0'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 73
   generation: 1
-  id: 358e2645-97af-415d-94e5-577d51328023
-  image_path: images/develop/binary_search_tree/bst_run-73_gen-1_var-1_fmt-73_thk-15_clr-88d7fe_fnt-sansserif_idn-358e2645-97af-415d-94e5-577d51328023.png
+  id: c889125f-115a-4718-bccb-71500598b4a5
+  image_path: images/develop/binary_search_tree/bst_run-73_gen-1_var-1_fmt-73_thk-15_clr-88d7fe_fnt-sansserif_idn-c889125f-115a-4718-bccb-71500598b4a5.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 74
   generation: 1
-  id: 72a1377d-8427-44c3-b68d-d2c6418aa915
-  image_path: images/develop/binary_search_tree/bst_run-74_gen-1_var-1_fmt-74_thk-15_clr-88d7fe_fnt-serif_idn-72a1377d-8427-44c3-b68d-d2c6418aa915.png
+  id: a2b8bb94-9043-46ee-8a68-9dc19b28d56f
+  image_path: images/develop/binary_search_tree/bst_run-74_gen-1_var-1_fmt-74_thk-15_clr-88d7fe_fnt-serif_idn-a2b8bb94-9043-46ee-8a68-9dc19b28d56f.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#88d7fe'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 75
   generation: 1
-  id: 0dc79d8a-6a2a-4cd8-85d5-6b28a88e9377
-  image_path: images/develop/binary_search_tree/bst_run-75_gen-1_var-1_fmt-75_thk-15_clr-88d7fe_fnt-monospace_idn-0dc79d8a-6a2a-4cd8-85d5-6b28a88e9377.png
+  id: 204c80d3-9b96-4372-9e0f-f1cf176a332f
+  image_path: images/develop/binary_search_tree/bst_run-75_gen-1_var-1_fmt-75_thk-15_clr-88d7fe_fnt-monospace_idn-204c80d3-9b96-4372-9e0f-f1cf176a332f.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 76
   generation: 1
-  id: 308e198b-2e84-4106-8407-2f27d9e96723
-  image_path: images/develop/binary_search_tree/bst_run-76_gen-1_var-1_fmt-76_thk-15_clr-feaf88_fnt-sansserif_idn-308e198b-2e84-4106-8407-2f27d9e96723.png
+  id: 79483fa5-d5e9-408f-b319-c48f822b6479
+  image_path: images/develop/binary_search_tree/bst_run-76_gen-1_var-1_fmt-76_thk-15_clr-feaf88_fnt-sansserif_idn-79483fa5-d5e9-408f-b319-c48f822b6479.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 77
   generation: 1
-  id: 32ba604f-4ea4-4415-9625-b285104c3159
-  image_path: images/develop/binary_search_tree/bst_run-77_gen-1_var-1_fmt-77_thk-15_clr-feaf88_fnt-serif_idn-32ba604f-4ea4-4415-9625-b285104c3159.png
+  id: 656d0fa0-fc5d-492d-b535-fa5d4acdef97
+  image_path: images/develop/binary_search_tree/bst_run-77_gen-1_var-1_fmt-77_thk-15_clr-feaf88_fnt-serif_idn-656d0fa0-fc5d-492d-b535-fa5d4acdef97.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#feaf88'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 78
   generation: 1
-  id: ef5f0481-e534-4683-88d7-1fffa3e4c183
-  image_path: images/develop/binary_search_tree/bst_run-78_gen-1_var-1_fmt-78_thk-15_clr-feaf88_fnt-monospace_idn-ef5f0481-e534-4683-88d7-1fffa3e4c183.png
+  id: d0718857-152b-4dbd-bf2c-a06553599fc0
+  image_path: images/develop/binary_search_tree/bst_run-78_gen-1_var-1_fmt-78_thk-15_clr-feaf88_fnt-monospace_idn-d0718857-152b-4dbd-bf2c-a06553599fc0.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: sans-serif
   format: 79
   generation: 1
-  id: e513ead7-e685-4a0b-96a8-ecc8a654006f
-  image_path: images/develop/binary_search_tree/bst_run-79_gen-1_var-1_fmt-79_thk-15_clr-eeeeee_fnt-sansserif_idn-e513ead7-e685-4a0b-96a8-ecc8a654006f.png
+  id: 2cb3332d-d2e0-4ca9-aed7-868bdb982167
+  image_path: images/develop/binary_search_tree/bst_run-79_gen-1_var-1_fmt-79_thk-15_clr-eeeeee_fnt-sansserif_idn-2cb3332d-d2e0-4ca9-aed7-868bdb982167.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: serif
   format: 80
   generation: 1
-  id: 20402374-3099-4e6f-bd81-b07f3e16779e
-  image_path: images/develop/binary_search_tree/bst_run-80_gen-1_var-1_fmt-80_thk-15_clr-eeeeee_fnt-serif_idn-20402374-3099-4e6f-bd81-b07f3e16779e.png
+  id: 3a9f2220-6cef-4f8c-863d-94120f8cf939
+  image_path: images/develop/binary_search_tree/bst_run-80_gen-1_var-1_fmt-80_thk-15_clr-eeeeee_fnt-serif_idn-3a9f2220-6cef-4f8c-863d-94120f8cf939.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
 - color: '#eeeeee'
-  expected: '[8, 10, 11]'
+  expected: '[9, 35, 52, 53, 57]'
   font: monospace
   format: 81
   generation: 1
-  id: 00b0a060-964f-4f37-8238-f9f9aa4c4586
-  image_path: images/develop/binary_search_tree/bst_run-81_gen-1_var-1_fmt-81_thk-15_clr-eeeeee_fnt-monospace_idn-00b0a060-964f-4f37-8238-f9f9aa4c4586.png
+  id: 30699fd1-7dd7-4e2d-8456-b513f279c137
+  image_path: images/develop/binary_search_tree/bst_run-81_gen-1_var-1_fmt-81_thk-15_clr-eeeeee_fnt-monospace_idn-30699fd1-7dd7-4e2d-8456-b513f279c137.png
   structure: binary_search_tree
-  text: Provide an list representing the in-order traversal of the binary search tree.
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary search tree.
   thickness: '1.5'
   variation: 1
