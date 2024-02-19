@@ -1,7 +1,0 @@
-- text: Find the minimum value in the given binary search tree.
-  tags: binary_search_tree, minimum_value
-- text: Find the maximum value in the given binary search tree.
-  tags: binary_search_tree, maximum_value
-- text: Insert the value 51 into the binary search tree to form a new binary search tree.
-  tags: binary_search_tree, insert
-- text: Delete the value 65 from the binary search tree to form a new binary search tree.

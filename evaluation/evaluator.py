@@ -16,11 +16,6 @@ from evaluation.models.messages.message import UserMessage, SystemMessage, Assis
 
 Messages = TypeVar("Messages", UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage)
 
-yaml_path_binary_tree = Path('data/develop/binary_tree/')
-yaml_path_binary_search_tree = Path('data/develop/binary_search_tree/')
-yaml_path_undirected_graph = Path('data/develop/undirected_graph/')
-yaml_path_directed_graph = Path('data/develop/directed_graph/')
-
 Model = TypeVar('Model', OpenAI, DeepMind)
 
 class Evaluator:
