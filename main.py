@@ -14,8 +14,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai_api_key = os.environ.get('OPENAI_API_KEY')
-deepmind_api_key = os.environ.get('DEEPMIND_API_KEY')
+openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
+deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
 
 ### DEVELOP PATHS ###
 

@@ -4,8 +4,6 @@ import yaml
 from typing import TypeVar, List
 from utils.logger import Logger
 import copy
-
-from utils.encoder import encode_image
 from PIL import Image
 
 logger = Logger(__name__)
