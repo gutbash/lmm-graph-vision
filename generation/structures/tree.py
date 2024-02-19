@@ -1,12 +1,11 @@
 """
 The tree module contains classes and methods for random binary trees and binary search trees.
 """
-
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
 from pathlib import Path
-from typing import Optional, Literal
+from typing import Optional, Literal, Any
 
 Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
 Shape = Literal['o', 's', 'd']
@@ -16,12 +15,6 @@ Thickness = Literal['0.5', '1.0', '1.5']
 Traversal = Literal['preorder', 'inorder', 'postorder']
 
 class Tree:
-    
-    large: bool = False
-    root: Optional['Tree.TreeNode'] = None
-    pos: dict = {}
-    tree_skeleton: Optional[nx.Graph] = nx.Graph()
-    tree_filled: Optional[nx.Graph] = None
         
     def pre_order(self) -> list:
         
@@ -97,9 +90,9 @@ class BinaryTree(Tree):
         the root of the binary tree
     pos : dict
         a dictionary of positions of nodes
-    tree_skeleton : nx.Graph
+    skeleton : nx.Graph
         the skeleton of the tree
-    tree_filled : nx.Graph
+    filled : nx.Graph
         the filled tree
     default_file_name : str
         the default file name for the image
@@ -119,6 +112,12 @@ class BinaryTree(Tree):
     draw(save: bool = False, path: Path = None, show: bool = True)
         Draws the binary tree
     """
+    large: bool = False
+    root: Optional['Tree.TreeNode'] = None
+    pos: dict = {}
+    skeleton: Optional[nx.Graph] = nx.Graph()
+    filled: Optional[nx.Graph] = nx.Graph()
+    
     default_file_name: str = 'bt_test.png'
     yaml_structure_type: str = 'binary_tree'
     formal_name: str = 'Binary Tree'
@@ -133,6 +132,10 @@ class BinaryTree(Tree):
             whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
         """
         self.large = large
+        self.root = None
+        self.pos = {}
+        self.skeleton = nx.Graph()
+        self.filled = nx.Graph()
 
     def generate(self) -> None:
         """
@@ -266,9 +269,9 @@ class BinaryTree(Tree):
                     T.add_node(node.value)
             else:
                 raise ValueError("The node is None")
-            self.tree_skeleton = T
+            self.skeleton = T
             
-        graphize(self.tree_skeleton, self.root)
+        graphize(self.skeleton, self.root)
 
     def fill(self) -> None:
         """
@@ -295,12 +298,12 @@ class BinaryTree(Tree):
         The right child of each node is randomly chosen between 1 and 99.
         """
         
-        self.tree_filled = self.tree_skeleton.copy()
+        self.filled = self.skeleton.copy()
 
-        values = [random.randrange(1, 99, 1) for _ in range(len(self.tree_filled))]
+        values = [random.randrange(1, 99, 1) for _ in range(len(self.filled))]
         #print("These are new node values:",values)
-        for i, node in enumerate(self.tree_filled.nodes):
-            self.tree_filled.nodes[node]['value'] = values[i]
+        for i, node in enumerate(self.filled.nodes):
+            self.filled.nodes[node]['value'] = values[i]
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
@@ -363,272 +366,97 @@ class BinaryTree(Tree):
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.filled, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
-            if path is None:
-                path = "output.png"  # Default file name
-            plt.savefig(fname=path, format='png', dpi=dpi)
-
+            plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
         if show:
             plt.show()   
-            
+        
+        plt.close()
+        
 class BinarySearchTree(Tree):
-    """
-    A class used to represent a binary search tree
-
-    Attributes
-    ----------
-    large : bool
-        whether to generate a large tree or not
-    root : Optional[Tree.TreeNode]
-        the root of the binary search tree
-    default_file_name : str
-        the default file name for the image
-    yaml_structure_type : str
-        the structure type for the YAML file
-    formal_name : str
-        the formal name of the structure
-
-    Methods
-    -------
-    __init__(large: bool = False)
-        Constructs all the necessary attributes for the BinarySearchTree object
-    generate()
-        Generates a random binary search tree
-    graphize(T, node, pos, x=0, y=0, layer_height=None, layer_width=None)
-        Graphizes the binary search tree
-    draw(root: Tree.TreeNode, save: bool = False, path: Path = None, show: bool = True)
-        Draws the binary search tree
-    """
+    
+    large: bool = False
+    root: Optional['Tree.TreeNode'] = None
+    pos: dict = {}
+    skeleton: Optional[nx.Graph] = nx.Graph()
+    filled: Optional[nx.Graph] = nx.Graph()
     
     default_file_name: str = 'bst_test.png'
     yaml_structure_type: str = 'binary_search_tree'
     formal_name: str = 'Binary Search Tree'
-
+    
     def __init__(self, large: bool = False) -> None:
-        """
-        Constructor for the BinarySearchTree class
-        
-        Parameters
-        ----------
-        large : bool
-            whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
-        """
         self.large = large
+        self.root = None
+        self.pos = {}
+        self.skeleton = nx.Graph()
+        self.filled = nx.Graph()
 
     def generate(self) -> None:
-        """
-        Generates a random binary search tree
-        
-        Parameters
-        ----------
-        None
-        
-        Returns
-        -------
-        None
-            
-        Raises
-        ------
-        None
-        
-        Notes
-        -----
-        The number of nodes in the tree is randomly chosen between 1 and 10 for small trees and between 11 and 20 for large trees.
-        
-        The root is randomly chosen between 1 and 99.
-        
-        The value of each node is randomly chosen between 1 and 99.
-        
-        The left child of each node is randomly chosen between 1 and 99.
-        
-        The right child of each node is randomly chosen between 1 and 99.
-        
-        The tree is not necessarily balanced.
-        
-        The tree is not necessarily complete.
-        
-        The tree is not necessarily full.
-        """
-        # Set to keep track of used values
         used_values = set()
 
-        # Randomly choose the number of nodes
         num_nodes = random.randint(3, 10) if not self.large else random.randint(11, 20)
+        self.root = self._insert_node(None, random.randint(1, 99), used_values)
 
-        # Initialize root with a unique value
-        root_value = random.randint(1, 99)
-        while root_value in used_values:
-            root_value = random.randint(1, 99)
-        used_values.add(root_value)
-
-        # Create root node
-        root = Tree.TreeNode(root_value)
-        self.root = root
-
-        def _insert_node(current, value):
-            """
-            Inserts a node into the binary search tree
-
-            Parameters
-            ----------
-            current : Tree.TreeNode
-                The current node in the tree
-            value : int
-                The value of the new node
-            """
-            if current is None:
-                return Tree.TreeNode(value)
-
-            if value < current.value:
-                if current.left is None:
-                    current.left = Tree.TreeNode(value)
-                else:
-                    _insert_node(current.left, value)
-            else:  # value > current.value
-                if current.right is None:
-                    current.right = Tree.TreeNode(value)
-                else:
-                    _insert_node(current.right, value)
-        
-        def _graphize(T: nx.Graph, node: Tree.TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
-            """
-            Graphizes the binary search tree
-
-            Parameters
-            ----------
-            T : nx.Graph
-                the graph to be drawn
-            node : Tree.TreeNode
-                the current node
-            x : int
-                the x coordinate of the current node (default is 0)
-            y : int
-                the y coordinate of the current node (default is 0)
-            layer_height : Optional[int]
-                the height of the current layer (default is None)
-            layer_width : Optional[int]
-                the width of the current layer (default is None)
-
-            Returns
-            -------
-            None
-            
-            Raises
-            ------
-            ValueError
-                if the node is None
-            """
-            
-            if node:
-                if layer_height is None:
-                    layer_height = random.uniform(0.5, 1.5)  # Random height for each layer (increased for a deeper tree)
-                if layer_width is None:
-                    layer_width = 1.0
-                    
-                self.pos[node.value] = (x, y)
-                if node.left:
-                    T.add_edge(node.value, node.left.value)
-                    _graphize(T, node.left, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
-                if node.right:
-                    T.add_edge(node.value, node.right.value)
-                    _graphize(T, node.right, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
-            else:
-                raise ValueError("The node is None")
-            self.tree_skeleton = T
-            
-        # Generate remaining nodes
         for _ in range(1, num_nodes):
-            node_value = random.randint(1, 99)
-            while node_value in used_values:
-                node_value = random.randint(1, 99)
-            used_values.add(node_value)
+            self._insert_node(self.root, random.randint(1, 99), used_values)
 
-            # Insert the node into the tree
-            _insert_node(self.root, node_value)
+        self._graphize(self.skeleton, self.root)
 
-        _graphize(self.tree_skeleton, self.root)
+    def _insert_node(self, current: Optional[Tree.TreeNode], value: int, used_values: set) -> Tree.TreeNode:
+        if value in used_values:
+            return current
+
+        if current is None:
+            used_values.add(value)
+            return Tree.TreeNode(value)
+
+        if value < current.value:
+            current.left = self._insert_node(current.left, value, used_values)
+        else:
+            current.right = self._insert_node(current.right, value, used_values)
         
+        return current
+
+    def _graphize(self, T: nx.Graph, node: Optional[Tree.TreeNode], x: int = 0, y: int = 0) -> None:
+        if node is None:
+            return
+
+        self.pos[node.value] = (x, y)
+        if node.left:
+            T.add_edge(node.value, node.left.value)
+            self._graphize(T, node.left, x - 1, y - 1)
+        if node.right:
+            T.add_edge(node.value, node.right.value)
+            self._graphize(T, node.right, x + 1, y - 1)
+
     def fill(self) -> None:
-        """
-        Fills the graph nodes with BST-compliant values.
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-
-        Raises
-        ------
-        None
-        """
         if self.root is None:
             return
 
-        def fill_node(node, min_val, max_val):
-            if not node or min_val > max_val:
-                return
-            node.value = random.randint(min_val, max_val)
-            fill_node(node.left, min_val, node.value - 1)
-            fill_node(node.right, node.value + 1, max_val)
+        used_values = set()
+        self._fill_node(self.root, 1, 99, used_values)
 
-        self.tree_filled = self.tree_skeleton.copy()
-        fill_node(self.root, 1, 99)
+    def _fill_node(self, node: Optional[Tree.TreeNode], min_val: int, max_val: int, used_values: set) -> None:
+        if node is None or min_val > max_val:
+            return
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
-        """
-        Draws the binary search tree using matplotlib and networkx
+        new_value = random.randint(min_val, max_val)
+        while new_value in used_values:
+            new_value = random.randint(min_val, max_val)
 
-        Parameters
-        ----------
-        save : bool
-            whether to save the image or not (default is False)
-        path : Optional[Path]
-            the path to save the image (default is None)
-        show : bool
-            whether to show the image or not (default is True)
-        shape : Shape
-            the shape of the nodes (default is 'o')
-        color : Color
-            the color of the nodes (default is '#88d7fe')
-        font : Font
-            the font of the labels (default is 'sans-serif')
-        thickness : Thickness
-            the thickness of the edges (default is '1.0')
-            
-        Returns
-        -------
-        None
+        node.value = new_value
+        used_values.add(new_value)
 
-        Raises
-        ------
-        ValueError
-            if the root is None
-            
-        Notes
-        -----
-        The visualization is done using the networkx and matplotlib libraries.
-        
-        The nodes are labeled with their values.
-        
-        The graph is drawn using the spring layout.
-        
-        The image is not displayed if the show parameter is set to False.
-        
-        The image is not saved if the save parameter is set to False.
-        
-        The image is saved in the current directory if the path parameter is set to None.
-        
-        The image is saved with the default name if the path parameter is set to None.
-        """
-        
+        self._fill_node(node.left, min_val, node.value - 1, used_values)
+        self._fill_node(node.right, node.value + 1, max_val, used_values)
+
+    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         if self.root is None:
             raise ValueError("The root is None")
-        
+
         # DPI for the output
         dpi = 100
         
@@ -637,14 +465,12 @@ class BinarySearchTree(Tree):
         
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
-
-        # Draw nodes and edges
-        nx.draw(self.tree_filled, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        
+        nx.draw(self.skeleton, self.pos, with_labels=True, node_size=400, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
         
         if save:
-            if path is None:
-                path = "output.png"  # Default file name
-            plt.savefig(fname=path, format='png', dpi=dpi)
-            
+            plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
         if show:
             plt.show()
+            
+        plt.close()

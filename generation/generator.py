@@ -149,10 +149,10 @@ class Generator:
         
         # Path handling
         save_path = Path(save_path)
-        if not save_name.endswith('.png'):
+        if save_name is not None and not save_name.endswith('.png'):
             logger.warn("The save_name parameter does not end with '.png', so it will be added.")
             save_name += '.png'
-        if not yaml_name.endswith('.yaml'):
+        if yaml_name is not None and not yaml_name.endswith('.yaml'):
             logger.warn("The yaml_name parameter does not end with '.yaml', so it will be added.")
             yaml_name += '.yaml'
         # Check for save flag
@@ -177,7 +177,7 @@ class Generator:
 
         # Warning Checks
         if not save and not show:
-            logger.warning("Neither save nor show is True, so the image will not be generated.")
+            logger.error("Neither save nor show is True, so the image will not be generated.")
             return
         
         if not save_path.exists():
@@ -265,11 +265,39 @@ class BatchGenerator(Generator):
         
         # loop to create 5 base structures
         for generation in range(1, 2):
-        
-            structure_generated = self.generator.generate_structure(
-                structure_class=structure_class,
-                large=False,
-            )
+            
+            approved = False
+            
+            structure_generated = None
+            
+            while not approved:
+                
+                test_path = Path('images/')
+                test_name = 'test.png'
+                
+                structure_generated = self.generator.generate_structure(
+                    structure_class=structure_class,
+                    large=False,
+                )
+                
+                structure_filled = self.generator.fill_structure(
+                    structure_instance=structure_generated,
+                )
+                
+                self.generator.draw_structure(
+                    structure_instance=structure_filled,
+                    yaml=False,
+                    save=True,
+                    save_path=test_path,
+                    save_name=test_name,
+                    show=False,
+                )
+                
+                logger.warning(f"Check {Path.joinpath(test_path, test_name)}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n")
+                input_approved = input(">>> ")
+                
+                if input_approved.lower() == 'y':
+                    approved = True
             
             # loop to create 3 variations of each base structure
             for variation in range(1, 2):
