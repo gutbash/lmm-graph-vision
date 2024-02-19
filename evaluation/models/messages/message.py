@@ -13,13 +13,13 @@ class UserMessage:
     
     role: Roles = "user"
     content: str = None
-    image_urls: List[Union[Path, str]] = None
+    images: List[Union[Path, str]] = None
     
-    def __init__(self, content: str = None, image_urls: List[Union[Path, str]] = None) -> None:
+    def __init__(self, content: str = None, images: List[Union[Path, str]] = None) -> None:
         self.content = content
-        self.image_urls = image_urls
+        self.images = images
         
-        for image in self.image_urls:
+        for image in self.images:
             if isinstance(image, str) and image != "{{image}}":
                 logger.error("Image must be be either a Path or a string with the placerholder '{{image}}'.")
         
@@ -27,8 +27,8 @@ class UserMessage:
         content_list = [{"type": "text", "text": f"{self.content}"}] if self.content else []
         images_list = [
             {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{encode_image(image_url)}"}}
-            for image_url in self.image_urls
-        ] if self.image_urls else []
+            for image_url in self.images
+        ] if self.images else []
 
         return {
             "role": "user",

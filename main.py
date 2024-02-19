@@ -74,7 +74,7 @@ batch_generator.generate_batch(
 ## OpenAI ##
 
 openai_messages = [
-    UserMessage(content="{{content}}", image_urls=["{{image}}"]),
+    UserMessage(content="{{content}}", images=["{{image}}"]),
 ]
 
 openai_csv = 'openai.csv'
@@ -104,7 +104,7 @@ model = deepmind
 csv_name = deepmind_csv
 messages = deepmind_messages
 
-#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
