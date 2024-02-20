@@ -39,7 +39,11 @@ The following instructions use a **bash** terminal and assume you have [Python](
 
 ## Quickstart
 
+<details closed>
+<summary>Structures</summary>
+
 ### Structures
+
 >At the core of the project are the data structures. These are the base structures that are used to generate images for the **VQA** tasks.
 
 There are four base classes: `BinaryTree`, `BinarySearchTree`, `DirectedGraph`, `UndirectedGraph`.
@@ -56,6 +60,10 @@ structure.generate()
 structure.fill()
 structure.draw(save=True, path='test.png')
 ```
+</details>
+
+<details closed>
+<summary>Generators</summary>
 
 ### Generators
 >Generate an individual image.
@@ -76,6 +84,10 @@ generated = generator.generate_structure(structure_class=BinaryTree)
 filled = generator.fill_structure(structure_instance=generated)
 generator.draw_structure(structure_instance=filled, save=True, save_path=save_path, save_name='test.png')
 ```
+</details>
+
+<details closed>
+<summary>Batch Generators</summary>
 
 ### Batch Generators
 >Generate a batch of images.
@@ -104,6 +116,10 @@ batch_generator.generate_batch(
     text_name='binary_tree_text.yaml',
 )
 ```
+</details>
+
+<details closed>
+<summary>Models</summary>
 
 ### Models
 
@@ -124,6 +140,10 @@ deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
 openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
 ```
+</details>
+
+<details closed>
+<summary>Messages</summary>
 
 ### Messages
 
@@ -157,8 +177,12 @@ deepmind_messages = [
     ImageMessage(image=image_path),
 ]
 ```
+</details>
 
-### Template Keys
+<details closed>
+<summary>Message Keys</summary>
+
+### Message Keys
 
 >Insert text/image prompts from the `yaml` data into messages.
 
@@ -167,7 +191,7 @@ Keys are replaced with the `yaml` data's text and image prompts during evaluatio
 1. `{{content}}` for the text prompt
 2. `{{image}}` for the image prompt
 
-The following example shows the same message lists as the previous examples using template keys:
+The following example shows the same message lists as the previous examples using message keys:
 
 ```python
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
@@ -181,6 +205,10 @@ deepmind_messages = [
     ImageMessage(image="{{image}}"),
 ]
 ```
+</details>
+
+<details closed>
+<summary>Evaluation</summary>
 
 ### Evaluation
 
@@ -211,3 +239,4 @@ evaluator.evaluate(
     csv_name='openai.csv'
 )
 ```
+</details>
