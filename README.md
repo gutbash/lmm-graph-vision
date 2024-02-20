@@ -152,7 +152,7 @@ from evaluation.models.messages.message import UserMessage, SystemMessage, Assis
 from pathlib import Path
 
 openai_messages = [
-    UserMessage(content="What is in this image?", images=[Path('test/test.png')]),
+    UserMessage(content="Answer this question: What is in this image?", images=[Path('test/test.png')]),
 ]
 ```
 
