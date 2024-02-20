@@ -2,7 +2,7 @@
 
 How well do the **GPT-4V** and **Gemini Pro Vision** models perform zero-shot **Visual Question Answering (VQA)** on **Data Structures**?
 
-There is no dataset for **VQA** on graph and tree data structures in previous work, so we must create one. We create a standard, repeatable process for selecting and obtaining **VQA** tasks that fall under a certain criteria.
+We create a standard, repeatable process for selecting and obtaining **VQA** tasks in accordance with the [Computer Science Curricula 2013: Curriculum Guidelines for Undergraduate Degree Programs in Computer Science](https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf) by The Joint Task Force on Computing Curricula Association for Computing Machinery (ACM) IEEE Computer Society.
 
 ## Setup
 
