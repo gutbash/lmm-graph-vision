@@ -4,6 +4,7 @@ import openai
 from time import perf_counter
 from pathlib import Path
 from typing import List, Dict, Literal, TypeVar
+import traceback
 
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, Roles
 from utils.logger import Logger
@@ -172,7 +173,8 @@ class OpenAI:
             end = perf_counter()
         
         except Exception as e:
-            logger.error(f'{type(e).__name__} @ {__name__}: {e}')
+            tb = traceback.format_exc()
+            logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
             return
         
         id = completion.id

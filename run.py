@@ -30,7 +30,7 @@ text_path = Path('text/')
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
-
+'''
 batch_generator.generate_batch(
     structure_class=BinaryTree,
     type='bit',
@@ -40,7 +40,7 @@ batch_generator.generate_batch(
     text_path=text_path,
     text_name='binary_tree_text.yaml',
 )
-'''
+
 batch_generator.generate_batch(
     structure_class=BinarySearchTree,
     type='bst',
@@ -71,40 +71,29 @@ batch_generator.generate_batch(
     text_name='directed_graph_text.yaml',
 )
 '''
-## OpenAI ##
+openai = OpenAI(api_key=openai_api_key)
+deepmind = DeepMind(api_key=deepmind_api_key)
 
 openai_messages = [
     UserMessage(content="{{content}}", images=["{{image}}"]),
 ]
-
-openai_csv = 'openai.csv'
-
-openai = OpenAI(
-    api_key=openai_api_key,
-)
-
-## DeepMind ##
 
 deepmind_messages = [
     BaseMessage(content="{{content}}"),
     ImageMessage(image="{{image}}"),
 ]
 
+openai_csv = 'openai_no_sys.csv'
 deepmind_csv = 'deepmind.csv'
 
-deepmind = DeepMind(
-    api_key=deepmind_api_key,
-)
-
 ### TEST EVALUATION ###
-
 evaluator = Evaluator()
 
-model = deepmind
-csv_name = deepmind_csv
-messages = deepmind_messages
+model = openai
+csv_name = openai_csv
+messages = openai_messages
 
-#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
-#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
-#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
-#evaluator.evaluate(model=model, messages=messages, limit=81, yaml_path=yaml_path, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)

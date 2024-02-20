@@ -108,7 +108,7 @@ class Evaluator:
               if hasattr(message, 'content'):
                 if "{{content}}" in message.content:
                   message.content = message.content.replace("{{content}}", prompt.get('text'))
-              if hasattr(message, 'image_urls'):
+              if hasattr(message, 'images'):
                   images = []
                   for image in message.image_urls:
                       if image == "{{image}}":
