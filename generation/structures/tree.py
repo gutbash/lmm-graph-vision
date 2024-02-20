@@ -1,6 +1,5 @@
-"""
-The tree module contains classes and methods for random binary trees and binary search trees.
-"""
+"""Contains classes for binary trees and binary search trees."""
+
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
@@ -15,9 +14,19 @@ Thickness = Literal['0.5', '1.0', '1.5']
 Traversal = Literal['preorder', 'inorder', 'postorder']
 
 class Tree:
+    """
+    A class used to represent a tree
+    """
         
     def pre_order(self) -> list:
+        """
+        Traverses the tree in pre-order
         
+        Returns
+        -------
+        list
+            the pre-order traversal of the tree
+        """
         def _pre_order(node: 'Tree.TreeNode') -> list:
             if node is None:
                 return []
@@ -26,7 +35,14 @@ class Tree:
         return _pre_order(self.root)
     
     def in_order(self) -> list:
+        """
+        Traverses the tree in in-order
         
+        Returns
+        -------
+        list
+            the in-order traversal of the tree
+        """
         def _in_order(node: 'Tree.TreeNode') -> list:
             if node is None:
                 return []
@@ -35,7 +51,14 @@ class Tree:
         return _in_order(self.root)
     
     def post_order(self) -> list:
+        """
+        Traverses the tree in post-order
         
+        Returns
+        -------
+        list
+            the post-order traversal of the tree
+        """
         def _post_order(node: 'Tree.TreeNode') -> list:
             if node is None:
                 return []
@@ -55,11 +78,6 @@ class Tree:
             the left child of the node
         right : Tree.TreeNode
             the right child of the node
-            
-        Methods
-        -------
-        __init__(value: int)
-            Constructs all the necessary attributes for the Tree.TreeNode object
         """
         
         value: Optional[int]
@@ -68,6 +86,8 @@ class Tree:
         
         def __init__(self, value: Optional[int] = None):
             """
+            Initializes the TreeNode object
+            
             Parameters
             ----------
             value : int
@@ -80,7 +100,7 @@ class Tree:
 # Generate a random binary tree
 class BinaryTree(Tree):
     """
-    A class used to represent a binary tree
+    Represents a binary tree
 
     Attributes
     ----------
@@ -100,17 +120,6 @@ class BinaryTree(Tree):
         the structure type for the YAML file
     formal_name : str
         the formal name of the structure
-
-    Methods
-    -------
-    __init__(large: bool = False)
-        Constructs all the necessary attributes for the BinaryTree object
-    generate()
-        Generates a random binary tree
-    fill()
-        Fills the graph nodes with the given values
-    draw(save: bool = False, path: Path = None, show: bool = True)
-        Draws the binary tree
     """
     large: bool = False
     root: Optional['Tree.TreeNode'] = None
@@ -124,7 +133,7 @@ class BinaryTree(Tree):
     
     def __init__(self, large: bool = False) -> None:
         """
-        Constructor for the BinaryTree class
+        Initializes the BinaryTree object
         
         Parameters
         ----------
@@ -140,28 +149,6 @@ class BinaryTree(Tree):
     def generate(self) -> None:
         """
         Generates a random binary tree
-        
-        Paramters
-        ---------
-        None
-        
-        Returns
-        -------
-        None
-        
-        Raises
-        ------
-        None
-        
-        Notes
-        -----
-        The number of nodes in the tree is randomly chosen between 1 and 10 for small trees and between 11 and 20 for large trees.
-        
-        The tree is not necessarily balanced.
-        
-        The tree is not necessarily complete.
-        
-        The tree is not necessarily full.
         """
 
         if self.large:
@@ -240,10 +227,6 @@ class BinaryTree(Tree):
             layer_width : Optional[int]
                 the width of the current layer (default is None)
 
-            Returns
-            -------
-            None
-            
             Raises
             ------
             ValueError
@@ -276,26 +259,6 @@ class BinaryTree(Tree):
     def fill(self) -> None:
         """
         Fills the graph nodes with the given values
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-        
-        Raises
-        ------
-        None
-        
-        Notes
-        -----
-        The value of each node is randomly chosen between 1 and 99.
-        
-        The left child of each node is randomly chosen between 1 and 99.
-        
-        The right child of each node is randomly chosen between 1 and 99.
         """
         
         self.filled = self.skeleton.copy()
@@ -307,7 +270,7 @@ class BinaryTree(Tree):
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
-        Draws the binary tree using matplotlib and networkx
+        Draw the binary tree
 
         Parameters
         ----------
@@ -325,10 +288,6 @@ class BinaryTree(Tree):
             the font of the labels (default is 'sans-serif')
         thickness : Thickness
             the thickness of the edges (default is '1.0')
-            
-        Returns
-        -------
-        None
 
         Raises
         ------
@@ -340,16 +299,6 @@ class BinaryTree(Tree):
         The visualization is done using the networkx and matplotlib libraries.
         
         The nodes are labeled with their values.
-        
-        The graph is drawn using the spring layout.
-        
-        The image is not displayed if the show parameter is set to False.
-        
-        The image is not saved if the save parameter is set to False.
-        
-        The image is saved in the current directory if the path parameter is set to None.
-        
-        The image is saved with the default name if the path parameter is set to None.
         """
         
         if self.root is None:
@@ -376,6 +325,28 @@ class BinaryTree(Tree):
         plt.close()
         
 class BinarySearchTree(Tree):
+    """
+    Represents a binary search tree
+    
+    Attributes
+    ----------
+    large : bool
+        whether to generate a large tree or not
+    root : TreeNode
+        the root of the binary search tree
+    pos : dict
+        a dictionary of positions of nodes
+    skeleton : nx.Graph
+        the skeleton of the tree
+    filled : nx.Graph
+        the filled tree
+    default_file_name : str
+        the default file name for the image
+    yaml_structure_type : str
+        the structure type for the YAML file
+    formal_name : str
+        the formal name of the structure
+    """
     
     large: bool = False
     root: Optional['Tree.TreeNode'] = None
@@ -388,6 +359,14 @@ class BinarySearchTree(Tree):
     formal_name: str = 'Binary Search Tree'
     
     def __init__(self, large: bool = False) -> None:
+        """
+        Initializes the BinarySearchTree object
+        
+        Parameters
+        ----------
+        large : bool
+            whether to generate a large tree with 11-20 nodes instead of 1-10 nodes or not (default is False)
+        """
         self.large = large
         self.root = None
         self.pos = {}
@@ -395,6 +374,9 @@ class BinarySearchTree(Tree):
         self.filled = nx.Graph()
 
     def generate(self) -> None:
+        """
+        Generates a random binary search tree
+        """
         used_values = set()
 
         num_nodes = random.randint(3, 10) if not self.large else random.randint(11, 20)
@@ -433,6 +415,9 @@ class BinarySearchTree(Tree):
             self._graphize(T, node.right, x + 1, y - 1)
 
     def fill(self) -> None:
+        """
+        Fills the graph nodes with the given values
+        """
         if self.root is None:
             return
 
@@ -454,6 +439,37 @@ class BinarySearchTree(Tree):
         self._fill_node(node.right, node.value + 1, max_val, used_values)
 
     def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
+        """
+        Draw the binary search tree
+        
+        Parameters
+        ----------
+        save : bool
+            whether to save the image or not (default is False)
+        path : Optional[Any]
+            the path to save the image (default is None)
+        show : bool
+            whether to show the image or not (default is True)
+        shape : Shape
+            the shape of the nodes (default is 'o')
+        color : Color
+            the color of the nodes (default is '#88d7fe' aka sky blue)
+        font : Font
+            the font of the labels (default is 'sans-serif')
+        thickness : Thickness
+            the thickness of the edges (default is '1.0')
+        
+        Raises
+        ------
+        ValueError
+            if the root is None
+            
+        Notes
+        -----
+        The visualization is done using the networkx and matplotlib libraries.
+        
+        The nodes are labeled with their values.
+        """
         if self.root is None:
             raise ValueError("The root is None")
 

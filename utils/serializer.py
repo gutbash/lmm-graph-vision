@@ -1,4 +1,4 @@
-"""This module contains functions for performing operations on YAML files."""
+"""Contains functions for performing operations on YAML files."""
 
 import yaml
 from uuid import UUID
@@ -10,6 +10,8 @@ def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, imag
         
     Paramters
     ---------
+    uuid : UUID (default: None)
+        the UUID of the object
     file_path : Path (default: None)
         the path to the YAML file
     text : str (default: None)
@@ -28,6 +30,12 @@ def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, imag
         the variation number
     format : int (default: None)
         the format number
+    color : str (default: None)
+        the color of the text
+    font : str (default: None)
+        the font of the text
+    thickness : str (default: None)
+        the thickness of the edges
     
     Returns
     -------

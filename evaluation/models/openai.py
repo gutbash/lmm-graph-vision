@@ -1,3 +1,5 @@
+"""Contains the OpenAI model class for running completions."""
+
 import openai
 from time import perf_counter
 from pathlib import Path
@@ -12,7 +14,47 @@ logger = Logger(__name__)
 Messages = TypeVar("Messages", UserMessage, SystemMessage, AssistantMessage)
 
 class OpenAI:
+    """
+    OpenAI model for running completions.
     
+    Attributes
+    ----------
+    client : openai.OpenAI
+        the OpenAI client
+    api_key : str
+        the API key for the OpenAI client
+    model : str
+        the model to use
+    frequency_penalty : float
+        the frequency penalty
+    presence_penalty : float
+        the presence penalty
+    logit_bias : Dict[str, int]
+        the logit bias values
+    logprobs : bool
+        whether to return the logprobs
+    top_logprobs : int
+        the number of top logprobs to return
+    max_tokens : int
+        the maximum number of tokens
+    n : int
+        the number of completions to generate
+    seed : int
+        the seed
+    stop : List[str]
+        the stop sequence
+    temperature : float
+        the temperature
+    top_p : float
+        the top p value
+        
+    Example
+    -------
+    ```python
+    from evaluation.models.openai import OpenAI
+    openai = OpenAI(api_key)
+    ```
+    """
     client: openai.OpenAI
     api_key: str
     model: str = "gpt-4-vision-preview"
@@ -29,6 +71,36 @@ class OpenAI:
     top_p: float = 1.0 # 0.0 to 1.0
     
     def __init__(self, api_key: str, frequency_penalty: float = 0.0, presence_penalty: float = 0.0, logit_bias: Dict[str, int] = None, logprobs: bool = False, top_logprobs: int = None, max_tokens: int = 500, n: int = None, seed: int = None, stop: List[str] = None, temperature: float = 1.0, top_p: float = 1.0) -> None:
+        """
+        Initialize the OpenAI model.
+        
+        Parameters
+        ----------
+        api_key : str
+            the API key for the OpenAI client
+        frequency_penalty : float
+            the frequency penalty
+        presence_penalty : float
+            the presence penalty
+        logit_bias : Dict[str, int]
+            the logit bias values
+        logprobs : bool
+            whether to return the logprobs
+        top_logprobs : int
+            the number of top logprobs to return
+        max_tokens : int
+            the maximum number of tokens
+        n : int
+            the number of completions to generate
+        seed : int
+            the seed
+        stop : List[str]
+            the stop sequence
+        temperature : float
+            the temperature
+        top_p : float
+            the top p value
+        """
         self.api_key = api_key
         self.client = openai.OpenAI(api_key=api_key)
         self.frequency_penalty = frequency_penalty
@@ -44,6 +116,39 @@ class OpenAI:
         self.top_p = top_p
         
     def run(self, messages: List[Messages]) -> str:
+        """
+        Run the OpenAI completion.
+        
+        Parameters
+        ----------
+        messages : List[Messages]
+            the messages to run the completion on
+            
+        Returns
+        -------
+        str
+            the completion
+            
+        Raises
+        ------
+        Exception
+            if the completion fails
+        
+        Example
+        -------
+        ```python
+        from evaluation.models.openai import OpenAI
+        from evaluation.models.messages.message import UserMessage, AssistantMessage
+        
+        openai = OpenAI(api_key)
+        messages = [
+            UserMessage("Hello, how are you?"),
+            AssistantMessage("I'm good, how are you?")
+        ]
+        
+        completion = openai.run(messages)
+        ```
+        """
         
         try:
             

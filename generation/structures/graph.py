@@ -1,6 +1,4 @@
-"""
-The graph module contains the classes and methods for random directed and undirected graphs.
-"""
+"""Contains classes for directed and undirected graphs."""
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -14,14 +12,13 @@ Font = Literal['sans-serif', 'serif', 'monospace']
 Thickness = Literal['0.5', '1.0', '1.5']
 
 class Graph:
+    """
+    A graph
+    """
     
     def adjacency_list(self) -> dict:
         """
-        Returns the adjacency list of the graph with node values as keys
-        
-        Parameters
-        ----------
-        None
+        Returns the adjacency list of the graph with node values as keys and lists of neighbor values as values.
         
         Returns
         -------
@@ -42,11 +39,7 @@ class Graph:
     
     def breadth_first_search(self) -> list:
         """
-        Returns the BFS traversal of the graph
-        
-        Parameters
-        ----------
-        None
+        Returns the BFS traversal of the graph as a list of values.
         
         Returns
         -------
@@ -62,11 +55,7 @@ class Graph:
     
     def depth_first_search(self) -> list:
         """
-        Returns the DFS traversal of the graph
-        
-        Parameters
-        ----------
-        None
+        Returns the DFS traversal of the graph as a list of values.
         
         Returns
         -------
@@ -98,17 +87,6 @@ class UndirectedGraph(Graph):
         the YAML structure type
     formal_name : str
         the formal name of the structure
-        
-    Methods
-    -------
-    __init__(large: bool = False)
-        Constructs all the necessary attributes for the UndirectedGraph object
-    generate()
-        Generates a random undirected graph
-    fill()
-        Fills the graph nodes with the given values
-    draw(save: bool = False, path: Optional[Path] = None, show: bool = True)
-        Visualizes the generated undirected graph
     """
     large: bool = False
     skeleton: nx.DiGraph = nx.DiGraph()
@@ -133,15 +111,7 @@ class UndirectedGraph(Graph):
         
     def generate(self) -> None:
         """
-        Generates a random undirected graph with basic structure
-        
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
+        Generates a random undirected graph with basic structure.
         """
         G = nx.Graph()
 
@@ -164,15 +134,7 @@ class UndirectedGraph(Graph):
 
     def fill(self) -> None:
         """
-        Fills the graph nodes with the given values
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
+        Fills the graph nodes with given values.
         """
         
         self.filled = self.skeleton.copy()
@@ -184,7 +146,7 @@ class UndirectedGraph(Graph):
         
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
-        Visualizes the generated undirected graph
+        Visualizes the generated undirected graph.
         
         Parameters
         ----------
@@ -202,18 +164,12 @@ class UndirectedGraph(Graph):
             the font of the node labels (default is 'sans-serif')
         thickness : Thickness
             the thickness of the edges (default is '1.0')
-
-        Returns
-        -------
-        None
         
         Notes
         -----
         The visualization is done using the networkx and matplotlib libraries.
         
         The nodes are labeled with their values.
-
-        The graph is drawn using the spring layout.
         
         The graph is displayed using matplotlib.
         """
@@ -247,23 +203,16 @@ class DirectedGraph(Graph):
     ----------
     large : bool
         whether the graph should be large or not
+    skeleton : nx.DiGraph
+        the basic structure of the directed graph
+    filled : nx.DiGraph
+        the filled directed graph
     default_file_name : str
         the default file name for the image
     yaml_structure_type : str
         the YAML structure type
     formal_name : str
         the formal name of the structure
-        
-    Methods
-    -------
-    __init__(large: bool = False)
-        Constructs all the necessary attributes for the DirectedGraph object
-    generate()
-        Generates a random directed graph
-    fill()
-        Fills the graph nodes with the given values
-    draw(save: bool = False, path: Optional[Path] = None, show: bool = True)
-        Visualizes the generated directed graph
     """
     large: bool = False
     skeleton: nx.DiGraph = nx.DiGraph()
@@ -288,15 +237,7 @@ class DirectedGraph(Graph):
 
     def generate(self) -> None:
         """
-        Generates a random directed graph with basic structure
-        
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
+        Generates a directed graph with basic structure.
         """
         G = nx.DiGraph()
 
@@ -321,15 +262,7 @@ class DirectedGraph(Graph):
         
     def fill(self) -> None:
         """
-        Fills the graph nodes with the given values
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
+        Fills the graph nodes with the given values.
         """
         
         self.filled = self.skeleton.copy()
@@ -359,18 +292,12 @@ class DirectedGraph(Graph):
             the font of the node labels (default is 'sans-serif')
         thickness : Thickness
             the thickness of the edges (default is '1.0')
-
-        Returns
-        -------
-        None
         
         Notes
         -----
         The visualization is done using the networkx and matplotlib libraries.
         
         The nodes are labeled with their values.
-        
-        The graph is drawn using the spring layout.
         
         The graph is displayed using matplotlib.
         """

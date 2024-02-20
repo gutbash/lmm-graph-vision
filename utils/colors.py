@@ -1,4 +1,18 @@
+"""Contains colors class for the terminal output."""
+
 class Colors:
+    """
+    Contains colors for the terminal output.
+    
+    Example
+    -------
+    ```python
+    from utils.colors import Colors
+    
+    print(f'{Colors.OKGREEN}This is a green message.{Colors.ENDC}')
+    ```
+    """
+    
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'

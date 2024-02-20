@@ -1,4 +1,4 @@
-""" This module contains functions for generating data structures. """
+"""Contains classes for generating data structures."""
 
 from generation.structures.tree import BinaryTree, BinarySearchTree
 from generation.structures.graph import UndirectedGraph, DirectedGraph
@@ -17,6 +17,16 @@ from uuid import uuid4, UUID
 logger = Logger(__name__)
 
 class Generator:
+    """
+    Generator class for generating data structures.
+
+    Example
+    -------
+    ```python
+    from generation.generator import Generator
+    generator = Generator()
+    ```
+    """
     
     Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
     Shape = Literal['o', 's', 'd']
@@ -27,23 +37,19 @@ class Generator:
 
     def generate_structure(self, structure_class: Type[Structure], large: bool = False) -> Type[Structure]:
         """
-        Generates an empty structure instance and returns it
+        Generates an empty structure instance and returns it.
         
         Parameters
         ----------
         structure_class : Type[Structure]
             the structure to generate
         large : bool (default: False)
-            whether or not the structure should be large
+            whether or not the structure should be large (11-20 nodes)
             
         Returns
         -------
         Type[Structure]
             the generated structure instance
-            
-        Raises
-        ------
-        None
         """
 
         print(Colors.OKBLUE + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + Colors.ENDC)
@@ -63,7 +69,7 @@ class Generator:
 
     def fill_structure(self, structure_instance: Type[Structure]) -> Type[Structure]:
         """
-        Fills the structure instance and returns it
+        Fills the structure instance and returns it.
         
         Parameters
         ----------
@@ -74,10 +80,6 @@ class Generator:
         -------
         Type[Structure]
             the filled structure instance
-            
-        Raises
-        ------
-        None
         """
         print(Colors.OKBLUE + "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄" + Colors.ENDC)
         
@@ -95,12 +97,18 @@ class Generator:
 
     def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
-        Draws the structure instance and saves the image to a file and/or adds the object to a YAML file
+        Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
         Parameters
         ----------
         structure_instance : Type[Structure]
             the structure instance to fill
+        uuid : UUID (default: None)
+            the UUID of the object
+        text : str (default: None)
+            the text to add to the YAML file
+        expected : str (default: None)
+            the expected output of the model
         yaml : bool (default: False)
             whether or not to add the object to a YAML file
         yaml_path : Path (default: Path('.'))
@@ -131,10 +139,6 @@ class Generator:
             the font of the text
         thickness : Thickness (default: '1.0')
             the thickness of the edges
-        
-        Returns
-        -------
-        None
         
         Raises
         ------
@@ -229,7 +233,16 @@ class Generator:
                     logger.error(f"Failed to add binary tree to YAML: {e}")
                     
 class BatchGenerator(Generator):
+    """
+    Generate data structures in batches.
     
+    Example
+    -------
+    ```python
+    from generation.generator import BatchGenerator
+    batch_generator = BatchGenerator()
+    ```
+    """
     # format attribute options
     colors = ['#88d7fe', '#feaf88', '#eeeeee']
     shapes = ['o', 's', 'd']
@@ -244,10 +257,66 @@ class BatchGenerator(Generator):
     generator: Generator
     
     def __init__(self) -> None:
+        """
+        Initializes the BatchGenerator class.
+        """
         self.generator = Generator()
 
     def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path) -> None:
+        """
+        Generates a batch of data structures.
         
+        Parameters
+        ----------
+        structure_class : Type[Structure]
+            the structure to generate
+        type : StructureAbbreviation
+            the abbreviation of the structure
+        yaml_name : YamlName
+            the name of the YAML file
+        yaml_path : Path
+            the path to the YAML file
+        save_path : Path
+            the path to save the images
+        text_path : Path
+            the path to the text file
+        text_name : Path
+            the name of the text file
+            
+        Example
+        -------
+        ```python
+        batch_generator = BatchGenerator()
+        batch_generator.generate_batch(
+            structure_class=BinaryTree,
+            type='bit',
+            yaml_name='binary_tree.yaml',
+            yaml_path=yaml_path,
+            save_path=image_path_binary_tree,
+            text_path=text_path,
+            text_name='binary_tree_text.yaml',
+        )
+        ```
+        
+        Notes
+        -----
+        The YAML file has a default format for evaluation. This format is generated by the `BatchGenerator` and is as follows:
+        
+        ```yaml
+        - color: '#88d7fe'
+          expected: '[30, 71, 56, 69, 42, 19, 25]'
+          font: serif
+          format: 2
+          generation: 1
+          id: eab69c75-2644-496b-806e-fb6daa36347a
+          image_path: images/binary_tree/bit_run-2_gen-1_var-1_fmt-2_thk-05_clr-88d7fe_fnt-serif_idn-eab69c75-2644-496b-806e-fb6daa36347a.png
+          structure: binary_tree
+          text: Provide a single-line python list representing the post-order traversal of
+            the binary tree.
+          thickness: '0.5'
+          variation: 1
+        ```
+        """
         run = 1
         
         for file_path in save_path.iterdir():

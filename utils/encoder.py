@@ -1,3 +1,5 @@
+"""Contains functions to encode an image to base64."""
+
 import base64
 from pathlib import Path
 
@@ -8,21 +10,31 @@ def encode_image(image_path: Path = None) -> str:
     
     Parameters
     ----------
-    image_path : Path (default: None)
-        the path to the image
+    image_path : Path
+        The path to the image file.
     
     Returns
     -------
     str
-        the encoded image
-    
+        The base64 encoded image.
+        
     Raises
     ------
     Exception
-        if no image path is provided
-        if the image path does not exist
-    """
+        If no image path is provided.
+        If the image path does not exist.
+        
+    Example
+    -------
     
+    ```python
+    from pathlib import Path
+    from utils.encoder import encode_image
+    
+    image_path = Path('path/to/image.jpg')
+    encoded_image = encode_image(image_path)
+    ```
+    """
     if image_path is None:
         raise Exception('No image path provided.')
     elif not image_path.exists():
