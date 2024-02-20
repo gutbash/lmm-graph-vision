@@ -126,6 +126,7 @@ The following example creates instances of both models:
 from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
@@ -210,6 +211,11 @@ from evaluation.evaluator import Evaluator
 from evaluation.models.openai import OpenAI
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
 
 openai = OpenAI(
     api_key=openai_api_key,
