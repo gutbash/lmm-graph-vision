@@ -7,6 +7,7 @@ from typing import TypeVar, List
 from utils.logger import Logger
 import copy
 from PIL import Image
+import traceback
 
 logger = Logger(__name__)
 
@@ -110,11 +111,11 @@ class Evaluator:
                   message.content = message.content.replace("{{content}}", prompt.get('text'))
               if hasattr(message, 'images'):
                   images = []
-                  for image in message.image_urls:
+                  for image in message.images:
                       if image == "{{image}}":
                           image = image_path
                       images.append(image)
-                  message.image_urls = images
+                  message.images = images
               elif hasattr(message, 'image'):
                   if message.image == "{{image}}":
                       message.image = Image.open(image_path)
@@ -147,4 +148,6 @@ class Evaluator:
           file_exists = True  # After the first write, header should not be written again.
 
         except Exception as e:
-          logger.error(f'{type(e).__name__} @ {__name__}: {e}')
+            tb = traceback.format_exc()
+            logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+            return
