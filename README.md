@@ -1,6 +1,6 @@
 # lmm-graph-tree-vqa
 
-How well do the **GPT-4V** and **Gemini Pro Vision** models perform **Visual Question Answering (VQA)** on **Data Structures**?
+How well do the **GPT-4V** and **Gemini Pro Vision** models perform zero-shot **Visual Question Answering (VQA)** on **Data Structures**?
 
 There is no dataset for **VQA** on graph and tree data structures in previous work, so we must create one. We create a standard, repeatable process for selecting and obtaining **VQA** tasks that fall under a certain criteria.
 
