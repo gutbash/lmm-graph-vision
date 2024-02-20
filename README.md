@@ -76,13 +76,11 @@ from generation.structures.tree import BinaryTree
 from generation.generator import Generator
 from pathlib import Path
 
-save_path = Path('test/')
-
 generator = Generator()
 
 generated = generator.generate_structure(structure_class=BinaryTree)
 filled = generator.fill_structure(structure_instance=generated)
-generator.draw_structure(structure_instance=filled, save=True, save_path=save_path, save_name='test.png')
+generator.draw_structure(structure_instance=filled, save=True, save_path=Path('test/'), save_name='test.png')
 ```
 </details>
 
@@ -100,19 +98,15 @@ from generation.structures.tree import BinaryTree
 from generation.generator import BatchGenerator
 from pathlib import Path
 
-image_path_binary_tree = Path('images/binary_tree/')
-yaml_path = Path('data/')
-text_path = Path('text/')
-
 batch_generator = BatchGenerator()
 
 batch_generator.generate_batch(
     structure_class=BinaryTree,
     type='bit',
     yaml_name='binary_tree.yaml',
-    yaml_path=yaml_path,
-    save_path=image_path_binary_tree,
-    text_path=text_path,
+    yaml_path=Path('data/'),
+    save_path=Path('images/binary_tree/'),
+    text_path=Path('text/'),
     text_name='binary_tree_text.yaml',
 )
 ```
@@ -156,10 +150,8 @@ The following example creates a typical prompt for **OpenAI**:
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage
 from pathlib import Path
 
-image_path = Path('test/test.png')
-
 openai_messages = [
-    UserMessage(content="What is in this image?", images=[image_path]),
+    UserMessage(content="What is in this image?", images=[Path('test/test.png')]),
 ]
 ```
 
@@ -170,11 +162,9 @@ The following example creates a typical prompt for **DeepMind**:
 from evaluation.models.messages.message import ImageMessage, BaseMessage
 from pathlib import Path
 
-image_path = Path('test/test.png')
-
 deepmind_messages = [
     BaseMessage(content="Answer this question: What is in this image?"),
-    ImageMessage(image=image_path),
+    ImageMessage(image=Path('test/test.png')),
 ]
 ```
 </details>
