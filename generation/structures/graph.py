@@ -179,7 +179,7 @@ class UndirectedGraph(Graph):
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -302,7 +302,7 @@ class DirectedGraph(Graph):
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

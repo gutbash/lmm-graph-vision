@@ -40,7 +40,7 @@ batch_generator.generate_batch(
     text_path=text_path,
     text_name='binary_tree_text.yaml',
 )
-
+'''
 batch_generator.generate_batch(
     structure_class=BinarySearchTree,
     type='bst',
@@ -70,12 +70,16 @@ batch_generator.generate_batch(
     text_path=text_path,
     text_name='directed_graph_text.yaml',
 )
-
+'''
 openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
 
-openai_messages = [
+openai_messages_id = [
     UserMessage(content="{{content}}", images=["{{image}}"]),
+]
+
+openai_messages = [
+    UserMessage(content="{{content}}.", images=["{{image}}"]),
 ]
 
 deepmind_messages = [
@@ -83,7 +87,7 @@ deepmind_messages = [
     ImageMessage(image="{{image}}"),
 ]
 
-openai_csv = 'openai_no_sys.csv'
+openai_csv = 'openai_structure_name.csv'
 deepmind_csv = 'deepmind.csv'
 
 ### TEST EVALUATION ###
@@ -93,7 +97,8 @@ model = openai
 csv_name = openai_csv
 messages = openai_messages
 
-#evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+evaluator.evaluate(model=model, messages=openai_messages_id, limit=3, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name="openai_structure_name.csv")
+evaluator.evaluate(model=model, messages=openai_messages, limit=3, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name="openai_no_structure_name.csv")
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
