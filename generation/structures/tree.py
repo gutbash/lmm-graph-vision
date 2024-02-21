@@ -110,10 +110,8 @@ class BinaryTree(Tree):
         the root of the binary tree
     pos : dict
         a dictionary of positions of nodes
-    skeleton : nx.Graph
-        the skeleton of the tree
-    filled : nx.Graph
-        the filled tree
+    graph : nx.Graph
+        the graph of the tree
     default_file_name : str
         the default file name for the image
     yaml_structure_type : str
@@ -124,8 +122,7 @@ class BinaryTree(Tree):
     large: bool = False
     root: Optional['Tree.TreeNode'] = None
     pos: dict = {}
-    skeleton: Optional[nx.Graph] = nx.Graph()
-    filled: Optional[nx.Graph] = nx.Graph()
+    graph: Optional[nx.Graph] = nx.Graph()
     
     default_file_name: str = 'bt_test.png'
     yaml_structure_type: str = 'binary_tree'
@@ -143,8 +140,7 @@ class BinaryTree(Tree):
         self.large = large
         self.root = None
         self.pos = {}
-        self.skeleton = nx.Graph()
-        self.filled = nx.Graph()
+        self.graph = nx.Graph()
 
     def generate(self) -> None:
         """
@@ -252,21 +248,19 @@ class BinaryTree(Tree):
                     T.add_node(node.value)
             else:
                 raise ValueError("The node is None")
-            self.skeleton = T
+            self.graph = T
             
-        graphize(self.skeleton, self.root)
+        graphize(self.graph, self.root)
 
     def fill(self) -> None:
         """
         Fills the graph nodes with the given values
         """
-        
-        self.filled = self.skeleton.copy()
 
-        values = [random.randrange(1, 99, 1) for _ in range(len(self.filled))]
+        values = [random.randrange(1, 99, 1) for _ in range(len(self.graph))]
         #print("These are new node values:",values)
-        for i, node in enumerate(self.filled.nodes):
-            self.filled.nodes[node]['value'] = values[i]
+        for i, node in enumerate(self.graph.nodes):
+            self.graph.nodes[node]['value'] = values[i]
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
@@ -315,7 +309,7 @@ class BinaryTree(Tree):
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.filled, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -336,10 +330,8 @@ class BinarySearchTree(Tree):
         the root of the binary search tree
     pos : dict
         a dictionary of positions of nodes
-    skeleton : nx.Graph
-        the skeleton of the tree
-    filled : nx.Graph
-        the filled tree
+    graph : nx.Graph
+        the graph of the tree
     default_file_name : str
         the default file name for the image
     yaml_structure_type : str
@@ -351,8 +343,7 @@ class BinarySearchTree(Tree):
     large: bool = False
     root: Optional['Tree.TreeNode'] = None
     pos: dict = {}
-    skeleton: Optional[nx.Graph] = nx.Graph()
-    filled: Optional[nx.Graph] = nx.Graph()
+    graph: Optional[nx.Graph] = nx.Graph()
     
     default_file_name: str = 'bst_test.png'
     yaml_structure_type: str = 'binary_search_tree'
@@ -370,8 +361,7 @@ class BinarySearchTree(Tree):
         self.large = large
         self.root = None
         self.pos = {}
-        self.skeleton = nx.Graph()
-        self.filled = nx.Graph()
+        self.graph = nx.Graph()
 
     def generate(self) -> None:
         """
@@ -385,7 +375,7 @@ class BinarySearchTree(Tree):
         for _ in range(1, num_nodes):
             self._insert_node(self.root, random.randint(1, 99), used_values)
 
-        self._graphize(self.skeleton, self.root)
+        self._graphize(self.graph, self.root)
 
     def _insert_node(self, current: Optional[Tree.TreeNode], value: int, used_values: set) -> Tree.TreeNode:
         if value in used_values:
@@ -482,7 +472,7 @@ class BinarySearchTree(Tree):
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.skeleton, self.pos, with_labels=True, node_size=400, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, self.pos, with_labels=True, node_size=400, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
         
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

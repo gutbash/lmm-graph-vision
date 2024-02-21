@@ -362,11 +362,13 @@ class BatchGenerator(Generator):
                     show=False,
                 )
                 
-                logger.warning(f"Check {Path.joinpath(test_path, test_name)}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n")
+                logger.warning(f"Check {Path.joinpath(test_path, test_name)}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n(X) Exit\n")
                 input_approved = input(">>> ")
                 
                 if input_approved.lower() == 'y':
                     approved = True
+                elif input_approved.lower() == 'x':
+                    return
             
             # loop to create 3 variations of each base structure
             for variation in range(1, 2):

@@ -27,11 +27,11 @@ class Graph:
         """
         
         adj_list = {}
-        for node in self.filled.nodes:
+        for node in self.graph.nodes:
             # Get the value of the node
-            node_value = self.filled.nodes[node]['value']
+            node_value = self.graph.nodes[node]['value']
             # Get the values of the neighbors
-            neighbor_values = [self.filled.nodes[neighbor]['value'] for neighbor in self.filled.neighbors(node)]
+            neighbor_values = [self.graph.nodes[neighbor]['value'] for neighbor in self.graph.neighbors(node)]
             # Store in the dictionary
             adj_list[node_value] = neighbor_values
 
@@ -46,11 +46,11 @@ class Graph:
         list
             the BFS traversal of the graph
         """
-        if not self.filled:
+        if not self.graph:
             raise ValueError("The graph is empty.")
-        start_node = next(iter(self.filled))
-        bfs_nodes = list(nx.bfs_tree(self.filled, source=start_node).nodes)
-        bfs_values = [self.filled.nodes[node]['value'] for node in bfs_nodes]
+        start_node = next(iter(self.graph))
+        bfs_nodes = list(nx.bfs_tree(self.graph, source=start_node).nodes)
+        bfs_values = [self.graph.nodes[node]['value'] for node in bfs_nodes]
         return bfs_values
     
     def depth_first_search(self) -> list:
@@ -62,11 +62,11 @@ class Graph:
         list
             the DFS traversal of the graph
         """
-        if not self.filled:
+        if not self.graph:
             raise ValueError("The graph is empty.")
-        start_node = next(iter(self.filled))
-        dfs_nodes = list(nx.dfs_tree(self.filled, source=start_node).nodes)
-        dfs_values = [self.filled.nodes[node]['value'] for node in dfs_nodes]
+        start_node = next(iter(self.graph))
+        dfs_nodes = list(nx.dfs_tree(self.graph, source=start_node).nodes)
+        dfs_values = [self.graph.nodes[node]['value'] for node in dfs_nodes]
         return dfs_values
 
 class UndirectedGraph(Graph):
@@ -77,10 +77,8 @@ class UndirectedGraph(Graph):
     ----------
     large : bool
         whether the graph should be large or not
-    skeleton : nx.Graph
+    graph : nx.Graph
         the basic structure of the undirected graph
-    filled : nx.Graph
-        the filled undirected graph
     default_file_name : str
         the default file name for the image
     yaml_structure_type : str
@@ -89,8 +87,7 @@ class UndirectedGraph(Graph):
         the formal name of the structure
     """
     large: bool = False
-    skeleton: nx.DiGraph = nx.DiGraph()
-    filled: nx.DiGraph = nx.DiGraph()
+    graph: nx.DiGraph = nx.DiGraph()
     
     default_file_name: str = 'ug_test.png'
     yaml_structure_type: str = 'undirected_graph'
@@ -106,8 +103,7 @@ class UndirectedGraph(Graph):
             whether the graph should be large or not
         """
         self.large = large
-        self.skeleton = nx.Graph()
-        self.filled = nx.Graph()
+        self.graph = nx.Graph()
         
     def generate(self) -> None:
         """
@@ -130,19 +126,16 @@ class UndirectedGraph(Graph):
                 G.add_edge(source, target)
                 additional_edges -= 1
 
-        self.skeleton = G
+        self.graph = G
 
     def fill(self) -> None:
         """
         Fills the graph nodes with given values.
         """
-        
-        self.filled = self.skeleton.copy()
-        
-        values = [i for i in range(1, len(self.filled)+1)]
+        values = [i for i in range(1, len(self.graph)+1)]
 
-        for i, node in enumerate(self.filled.nodes):
-            self.filled.nodes[node]['value'] = values[i]
+        for i, node in enumerate(self.graph.nodes):
+            self.graph.nodes[node]['value'] = values[i]
         
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
@@ -180,13 +173,13 @@ class UndirectedGraph(Graph):
         # Calculate the figure size in inches for a 512x512 pixel image
         figure_size = 512 / dpi  # 5.12 when dpi is 100
         
-        pos = nx.spring_layout(self.skeleton, seed=42)  # Set seed for reproducibility
+        pos = nx.spring_layout(self.graph, seed=42)  # Set seed for reproducibility
     
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        labels = {node: self.skeleton.nodes[node].get('value', node) for node in self.skeleton.nodes}
-        nx.draw(self.skeleton, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -203,10 +196,8 @@ class DirectedGraph(Graph):
     ----------
     large : bool
         whether the graph should be large or not
-    skeleton : nx.DiGraph
+    graph : nx.DiGraph
         the basic structure of the directed graph
-    filled : nx.DiGraph
-        the filled directed graph
     default_file_name : str
         the default file name for the image
     yaml_structure_type : str
@@ -215,8 +206,7 @@ class DirectedGraph(Graph):
         the formal name of the structure
     """
     large: bool = False
-    skeleton: nx.DiGraph = nx.DiGraph()
-    filled: nx.DiGraph = nx.DiGraph()
+    graph: nx.DiGraph = nx.DiGraph()
     
     default_file_name: str = 'dg_test.png'
     yaml_structure_type: str = 'directed_graph'
@@ -232,8 +222,7 @@ class DirectedGraph(Graph):
             whether the graph should be large or not
         """
         self.large = large
-        self.skeleton = nx.DiGraph()
-        self.filled = nx.DiGraph()
+        self.graph = nx.DiGraph()
 
     def generate(self) -> None:
         """
@@ -258,19 +247,16 @@ class DirectedGraph(Graph):
                 G.add_edge(source, target)
                 additional_edges -= 1
 
-        self.skeleton = G
+        self.graph = G
         
     def fill(self) -> None:
         """
         Fills the graph nodes with the given values.
         """
-        
-        self.filled = self.skeleton.copy()
-        
-        values = [i for i in range(1, len(self.filled)+1)]
+        values = [i for i in range(1, len(self.graph)+1)]
 
-        for i, node in enumerate(self.filled.nodes):
-            self.filled.nodes[node]['value'] = values[i]
+        for i, node in enumerate(self.graph.nodes):
+            self.graph.nodes[node]['value'] = values[i]
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
         """
@@ -301,10 +287,10 @@ class DirectedGraph(Graph):
         
         The graph is displayed using matplotlib.
         """
-        if self.skeleton is None or len(self.skeleton.nodes()) == 0:
+        if self.graph is None or len(self.graph.nodes()) == 0:
             raise ValueError("Graph is empty or not generated")
         
-        pos = nx.spring_layout(self.filled, seed=42)  # Set seed for reproducibility
+        pos = nx.spring_layout(self.graph, seed=42)  # Set seed for reproducibility
 
         # DPI for the output
         dpi = 100
@@ -315,8 +301,8 @@ class DirectedGraph(Graph):
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        labels = {node: self.skeleton.nodes[node].get('value', node) for node in self.skeleton.nodes}
-        nx.draw(self.skeleton, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
+        labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=10, linewidths=float(thickness), width=1.0, alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
