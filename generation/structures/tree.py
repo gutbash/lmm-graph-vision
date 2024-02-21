@@ -18,7 +18,7 @@ class Tree:
     A class used to represent a tree
     """
         
-    def pre_order(self) -> list:
+    def pre_order(self, structure_instance) -> list:
         """
         Traverses the tree in pre-order
         
@@ -32,9 +32,9 @@ class Tree:
                 return []
             return [node.value] + _pre_order(node.left) + _pre_order(node.right)
         
-        return _pre_order(self.root)
+        return _pre_order(structure_instance.root)
     
-    def in_order(self) -> list:
+    def in_order(self, structure_instance) -> list:
         """
         Traverses the tree in in-order
         
@@ -48,9 +48,9 @@ class Tree:
                 return []
             return _in_order(node.left) + [node.value] + _in_order(node.right)
         
-        return _in_order(self.root)
+        return _in_order(structure_instance.root)
     
-    def post_order(self) -> list:
+    def post_order(self, structure_instance) -> list:
         """
         Traverses the tree in post-order
         
@@ -64,7 +64,7 @@ class Tree:
                 return []
             return _post_order(node.left) + _post_order(node.right) + [node.value]
         
-        return _post_order(self.root)
+        return _post_order(structure_instance.root)
     
     class TreeNode:
         """

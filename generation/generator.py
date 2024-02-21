@@ -390,7 +390,7 @@ class BatchGenerator(Generator):
                     method_name = text['type']
                     if hasattr(structure_filled, method_name):
                         method_to_call = getattr(structure_filled, method_name)
-                        expected = method_to_call()
+                        expected = method_to_call(structure_filled)
                     else:
                         # Handle the case where the method does not exist
                         print(f"Method '{method_name}' not found in {structure_filled}.")

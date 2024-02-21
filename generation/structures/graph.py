@@ -16,7 +16,7 @@ class Graph:
     A graph
     """
     
-    def adjacency_list(self) -> dict:
+    def adjacency_list(self, structure_instance) -> dict:
         """
         Returns the adjacency list of the graph with node values as keys and lists of neighbor values as values.
         
@@ -27,17 +27,17 @@ class Graph:
         """
         
         adj_list = {}
-        for node in self.graph.nodes:
+        for node in structure_instance.graph.nodes:
             # Get the value of the node
-            node_value = self.graph.nodes[node]['value']
+            node_value = structure_instance.graph.nodes[node]['value']
             # Get the values of the neighbors
-            neighbor_values = [self.graph.nodes[neighbor]['value'] for neighbor in self.graph.neighbors(node)]
+            neighbor_values = [structure_instance.graph.nodes[neighbor]['value'] for neighbor in structure_instance.graph.neighbors(node)]
             # Store in the dictionary
             adj_list[node_value] = neighbor_values
 
         return adj_list
     
-    def breadth_first_search(self) -> list:
+    def breadth_first_search(self, structure_instance) -> list:
         """
         Returns the BFS traversal of the graph as a list of values.
         
@@ -46,14 +46,14 @@ class Graph:
         list
             the BFS traversal of the graph
         """
-        if not self.graph:
+        if not structure_instance.graph:
             raise ValueError("The graph is empty.")
-        start_node = next(iter(self.graph))
-        bfs_nodes = list(nx.bfs_tree(self.graph, source=start_node).nodes)
-        bfs_values = [self.graph.nodes[node]['value'] for node in bfs_nodes]
+        start_node = next(iter(structure_instance.graph))
+        bfs_nodes = list(nx.bfs_tree(structure_instance.graph, source=start_node).nodes)
+        bfs_values = [structure_instance.graph.nodes[node]['value'] for node in bfs_nodes]
         return bfs_values
     
-    def depth_first_search(self) -> list:
+    def depth_first_search(self, structure_instance) -> list:
         """
         Returns the DFS traversal of the graph as a list of values.
         
@@ -62,11 +62,11 @@ class Graph:
         list
             the DFS traversal of the graph
         """
-        if not self.graph:
+        if not structure_instance.graph:
             raise ValueError("The graph is empty.")
-        start_node = next(iter(self.graph))
-        dfs_nodes = list(nx.dfs_tree(self.graph, source=start_node).nodes)
-        dfs_values = [self.graph.nodes[node]['value'] for node in dfs_nodes]
+        start_node = next(iter(structure_instance.graph))
+        dfs_nodes = list(nx.dfs_tree(structure_instance.graph, source=start_node).nodes)
+        dfs_values = [structure_instance.graph.nodes[node]['value'] for node in dfs_nodes]
         return dfs_values
 
 class UndirectedGraph(Graph):
