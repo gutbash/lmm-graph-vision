@@ -30,7 +30,7 @@ text_path = Path('text/')
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
-'''
+
 batch_generator.generate_batch(
     structure_class=BinaryTree,
     type='bit',
@@ -39,8 +39,10 @@ batch_generator.generate_batch(
     save_path=image_path_binary_tree,
     text_path=text_path,
     text_name='binary_tree_text.yaml',
+    generations=3,
+    variations=3,
 )
-
+'''
 batch_generator.generate_batch(
     structure_class=BinarySearchTree,
     type='bst',
@@ -50,7 +52,7 @@ batch_generator.generate_batch(
     text_path=text_path,
     text_name='binary_search_tree_text.yaml',
 )
-
+'''
 batch_generator.generate_batch(
     structure_class=UndirectedGraph,
     type='ug',
@@ -59,6 +61,8 @@ batch_generator.generate_batch(
     save_path=image_path_undirected_graph,
     text_path=text_path,
     text_name='undirected_graph_text.yaml',
+    generations=3,
+    variations=3,
 )
 
 batch_generator.generate_batch(
@@ -69,8 +73,10 @@ batch_generator.generate_batch(
     save_path=image_path_directed_graph,
     text_path=text_path,
     text_name='directed_graph_text.yaml',
+    generations=3,
+    variations=3,
 )
-'''
+
 ### TEST EVALUATION ###
 
 openai = OpenAI(api_key=openai_api_key)
@@ -93,6 +99,11 @@ evaluator = Evaluator()
 model = deepmind
 csv_name = deepmind_csv
 messages = deepmind_messages
+
+#TODO: run eval on sys vs no sys
+#TODO: run eval on str name vs no str name
+#TODO: run eval on meta-inst vs no meta-inst
+#TODO: run eval on large vs small
 
 evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)

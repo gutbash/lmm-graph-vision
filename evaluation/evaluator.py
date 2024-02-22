@@ -30,7 +30,7 @@ class Evaluator:
   columns : list
       the columns for the DataFrame
   """
-  columns: list = ['generation', 'variation', 'format', 'structure', 'prompt', 'response', 'expected', 'match', 'image_path', 'font', 'color', 'thickness', 'task_id']
+  columns: list = ['n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'expected_response', 'match', 'node_font', 'node_color', 'edge_width', 'task_id']
   
   def evaluate(self, model: Model, messages: List[Messages], limit: int, yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str) -> None:
     """
@@ -119,7 +119,7 @@ class Evaluator:
               elif hasattr(message, 'image'):
                   if message.image == "{{image}}":
                       message.image = Image.open(image_path)
-
+                      
           content = model.run(message_list)
           
           if prompt.get('expected').strip("][}{") in content:
@@ -129,18 +129,19 @@ class Evaluator:
 
           # Append new data to the DataFrame
           new_row = {
-            'generation': prompt.get('generation'),
-            'variation': prompt.get('variation'),
-            'format': prompt.get('format'),
+            'n_generation': prompt.get('generation'),
+            'n_variation': prompt.get('variation'),
+            'n_format': prompt.get('format'),
             'structure': prompt.get('structure'),
-            'prompt': str(prompt.get('text')),
-            'response': content.replace('\n', '\\n'),
-            'expected': prompt.get('expected'),
+            'text_task': str(prompt.get('text')),
+            'text_prompt': str([message.content for message in message_list if type(message) == UserMessage]).strip("]["),
+            'image_prompt': image_path,
+            'model_response': content.replace('\n', '\\n'),
+            'expected_response': prompt.get('expected'),
             'match': match,
-            'image_path': image_path,
-            'font': prompt.get('font'),
-            'color': prompt.get('color'),
-            'thickness': prompt.get('thickness'),
+            'node_font': prompt.get('font'),
+            'node_color': prompt.get('color'),
+            'edge_width': prompt.get('thickness'),
             'task_id': prompt.get('id'),
           }
           
