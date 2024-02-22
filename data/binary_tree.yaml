@@ -1,0 +1,33 @@
+- color: '#88d7fe'
+  expected: '[3, 31, 42, 46, 62, 6, 57, 73, 7]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: f42e3213-a6b5-48ff-8909-f48c1aa7185d
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-88d7fe_fnt-sansserif_idn-f42e3213-a6b5-48ff-8909-f48c1aa7185d.png
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal
+  thickness: '1.0'
+  variation: 1
+- color: '#88d7fe'
+  expected: '[28, 81, 45, 87, 14, 78, 58, 88, 18]'
+  font: sans-serif
+  format: 2
+  generation: 1
+  id: ac91283c-287e-4eb3-9ace-aedf2d97bdf8
+  image_path: images/binary_tree/bit_run-2_gen-1_var-1_fmt-2_thk-10_clr-88d7fe_fnt-sansserif_idn-ac91283c-287e-4eb3-9ace-aedf2d97bdf8.png
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal
+  thickness: '1.0'
+  variation: 1
+- color: '#88d7fe'
+  expected: '[87, 45, 14, 81, 78, 28, 88, 58, 18]'
+  font: sans-serif
+  format: 3
+  generation: 1
+  id: 19d25e6c-eec6-49d7-8678-f7d98163247b
+  image_path: images/binary_tree/bit_run-3_gen-1_var-1_fmt-3_thk-10_clr-88d7fe_fnt-sansserif_idn-19d25e6c-eec6-49d7-8678-f7d98163247b.png
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal
+  thickness: '1.0'
+  variation: 1

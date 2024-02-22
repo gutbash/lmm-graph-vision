@@ -262,7 +262,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path) -> None:
+    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False) -> None:
         """
         Generates a batch of data structures.
         
@@ -333,7 +333,7 @@ class BatchGenerator(Generator):
             text_prompts = yaml.safe_load(file)
         
         # loop to create 5 base structures
-        for generation in range(1, 2):
+        for generation in range(1, generations + 1):
             
             approved = False
             
@@ -371,7 +371,7 @@ class BatchGenerator(Generator):
                     return
             
             # loop to create 3 variations of each base structure
-            for variation in range(1, 2):
+            for variation in range(1, variations + 1):
                 
                 structure_filled = self.generator.fill_structure(
                     structure_instance=structure_generated,
@@ -394,8 +394,38 @@ class BatchGenerator(Generator):
                     else:
                         # Handle the case where the method does not exist
                         print(f"Method '{method_name}' not found in {structure_filled}.")
+                        
+                    if visual_combinations:
                 
-                    for thickness, color, font in format_combinations:
+                        for thickness, color, font in format_combinations:
+                            
+                            uuid = uuid4()
+                            
+                            self.generator.draw_structure(
+                                uuid=uuid,
+                                structure_instance=structure_filled,
+                                text=text['text'],
+                                expected=str(expected),
+                                yaml=True,
+                                yaml_path=yaml_path,
+                                yaml_name=yaml_name,
+                                save=True,
+                                save_path=save_path,
+                                save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-{thickness.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_idn-{str(uuid)}.png",
+                                show=False,
+                                run=run,
+                                generation=generation,
+                                variation=variation,
+                                format=format,
+                                color=color,
+                                font=font,
+                                thickness=thickness,
+                            )
+                            
+                            format += 1
+                            run += 1
+                            
+                    else:
                         
                         uuid = uuid4()
                         
@@ -409,16 +439,12 @@ class BatchGenerator(Generator):
                             yaml_name=yaml_name,
                             save=True,
                             save_path=save_path,
-                            save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-{thickness.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_idn-{str(uuid)}.png",
+                            save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-10_clr-88d7fe_fnt-sansserif_idn-{str(uuid)}.png",
                             show=False,
                             run=run,
                             generation=generation,
                             variation=variation,
                             format=format,
-                            color=color,
-                            font=font,
-                            thickness=thickness,
                         )
                         
-                        format += 1
                         run += 1

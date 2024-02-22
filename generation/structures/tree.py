@@ -309,7 +309,7 @@ class BinaryTree(Tree):
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.graph, self.pos,labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
