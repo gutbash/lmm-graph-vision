@@ -49,7 +49,7 @@ class Tree:
             return _in_order(node.left) + [node.value] + _in_order(node.right)
         
         return _in_order(structure_instance.root)
-    
+        
     def post_order(self, structure_instance) -> list:
         """
         Traverses the tree in post-order
@@ -59,12 +59,12 @@ class Tree:
         list
             the post-order traversal of the tree
         """
-        def _post_order(node: 'Tree.TreeNode') -> list:
+        def _post_order(node: 'Tree.TreeNode', graph: nx.Graph) -> list:
             if node is None:
                 return []
-            return _post_order(node.left) + _post_order(node.right) + [node.value]
-        
-        return _post_order(structure_instance.root)
+            return _post_order(node.left, graph) + _post_order(node.right, graph) + [graph.nodes[node.value]['value']]
+
+        return _post_order(structure_instance.root, structure_instance.graph)
     
     class TreeNode:
         """
@@ -309,7 +309,7 @@ class BinaryTree(Tree):
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.graph, self.pos, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, self.pos,labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
