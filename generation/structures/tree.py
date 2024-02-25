@@ -241,10 +241,10 @@ class BinaryTree(Tree):
 
                 if node.left:
                     T.add_edge(node.value, node.left.value)
-                    graphize(T, node.left, x - layer_height, y - 1, layer_height / 2, layer_width / 2)
+                    graphize(T, node.left, x - layer_width, y - 1, layer_height / 2, layer_width / 2)
                 if node.right:
                     T.add_edge(node.value, node.right.value)
-                    graphize(T, node.right, x + layer_height, y - 1, layer_height / 2, layer_width / 2)
+                    graphize(T, node.right, x + layer_width, y - 1, layer_height / 2, layer_width / 2)
                 else:
                     T.add_node(node.value)
             else:
