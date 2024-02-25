@@ -4,7 +4,7 @@ import yaml
 from uuid import UUID
 from pathlib import Path
 
-def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None, color: str = None, font: str = None, thickness: str = None) -> None:
+def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None, color: str = None, font: str = None, width: str = None) -> None:
     """
     Add an object to a YAML file.
         
@@ -34,8 +34,8 @@ def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, imag
         the color of the text
     font : str (default: None)
         the font of the text
-    thickness : str (default: None)
-        the thickness of the edges
+    width : str (default: None)
+        the width of the edges
     
     Returns
     -------
@@ -71,7 +71,7 @@ def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, imag
         'format': format,
         'color': color,
         'font': font,
-        'thickness': thickness,
+        'width': width,
     }
     
     try:

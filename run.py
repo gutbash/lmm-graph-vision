@@ -30,6 +30,7 @@ text_path = Path('text/')
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
+multiplier = 1
 
 batch_generator.generate_batch(
     structure_class=BinaryTree,
@@ -39,10 +40,10 @@ batch_generator.generate_batch(
     save_path=image_path_binary_tree,
     text_path=text_path,
     text_name='binary_tree_text.yaml',
-    generations=3,
-    variations=3,
+    generations=multiplier,
+    variations=multiplier,
 )
-'''
+
 batch_generator.generate_batch(
     structure_class=BinarySearchTree,
     type='bst',
@@ -51,8 +52,10 @@ batch_generator.generate_batch(
     save_path=image_path_binary_search_tree,
     text_path=text_path,
     text_name='binary_search_tree_text.yaml',
+    generations=multiplier,
+    variations=multiplier,
 )
-'''
+
 batch_generator.generate_batch(
     structure_class=UndirectedGraph,
     type='ug',
@@ -61,8 +64,8 @@ batch_generator.generate_batch(
     save_path=image_path_undirected_graph,
     text_path=text_path,
     text_name='undirected_graph_text.yaml',
-    generations=3,
-    variations=3,
+    generations=multiplier,
+    variations=multiplier,
 )
 
 batch_generator.generate_batch(
@@ -73,8 +76,8 @@ batch_generator.generate_batch(
     save_path=image_path_directed_graph,
     text_path=text_path,
     text_name='directed_graph_text.yaml',
-    generations=3,
-    variations=3,
+    generations=multiplier,
+    variations=multiplier,
 )
 
 ### TEST EVALUATION ###
@@ -83,6 +86,11 @@ openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
 
 openai_messages = [
+    UserMessage(content="{{content}}", images=["{{image}}"]),
+]
+
+openai_sys_messages = [
+    SystemMessage(content="You are GPT-4V. A large multimodal model with vision capabilities trained by OpenAI."),
     UserMessage(content="{{content}}", images=["{{image}}"]),
 ]
 
@@ -96,7 +104,7 @@ deepmind_csv = 'deepmind.csv'
 
 evaluator = Evaluator()
 
-model = deepmind
+model = openai
 csv_name = deepmind_csv
 messages = deepmind_messages
 
@@ -105,7 +113,8 @@ messages = deepmind_messages
 #TODO: run eval on meta-inst vs no meta-inst
 #TODO: run eval on large vs small
 
-evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
+#evaluator.evaluate(model=model, messages=openai_messages, limit=None, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name="results_sys.csv")
+#evaluator.evaluate(model=model, messages=openai_sys_messages, limit=None, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name="results_no_sys.csv")
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
 #evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)

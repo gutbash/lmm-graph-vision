@@ -8,6 +8,7 @@ from utils.logger import Logger
 import copy
 from PIL import Image
 import traceback
+from utils.files import validate_path
 
 logger = Logger(__name__)
 
@@ -32,7 +33,7 @@ class Evaluator:
   """
   columns: list = ['n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'expected_response', 'match', 'node_font', 'node_color', 'edge_width', 'task_id']
   
-  def evaluate(self, model: Model, messages: List[Messages], limit: int, yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str) -> None:
+  def evaluate(self, model: Model, messages: List[Messages], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, limit: int = None) -> None:
     """
     Evaluates the model.
     
@@ -42,8 +43,8 @@ class Evaluator:
         the model to evaluate
     messages : List[Messages]
         the messages to evaluate
-    limit : int
-        the limit of prompts to evaluate
+    limit : int (optional = None)
+        the limit for the evaluation
     yaml_path : Path
         the path to the evaluation YAML file
     yaml_name : str
@@ -75,15 +76,15 @@ class Evaluator:
       structure: binary_tree
       text: Provide a single-line python list representing the post-order traversal of
         the binary tree.
-      thickness: '0.5'
+      width: '0.5'
       variation: 1
     ```
     """
     
-    save_path = Path.joinpath(csv_path, csv_name)
+    save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
     
-    with open(Path.joinpath(yaml_path, yaml_name), 'r') as file:
+    with open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
       prompts = yaml.safe_load(file) or []
 
     # Check if the file exists, if not, create a new one with headers
@@ -97,12 +98,10 @@ class Evaluator:
     for i, prompt in enumerate(prompts):
       message_list = copy.deepcopy(messages)
       
-      if i >= limit:
+      if limit is not None and i >= limit:
         break
       else:
         try:
-          # Path to your image
-          
           image_path = Path(prompt.get('image_path'))
           
           for message in message_list:
@@ -141,7 +140,7 @@ class Evaluator:
             'match': match,
             'node_font': prompt.get('font'),
             'node_color': prompt.get('color'),
-            'edge_width': prompt.get('thickness'),
+            'edge_width': prompt.get('width'),
             'task_id': prompt.get('id'),
           }
           

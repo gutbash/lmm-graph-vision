@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 import random
 from pathlib import Path
 from typing import Optional, Literal, Any
+from utils.colors import hex_to_rgb_float
 
-Color = Literal['#88d7fe', '#feaf88', '#eeeeee']
+Color = Literal['#abe0f9', '#fee4b3', '#eeeeee']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
-Thickness = Literal['0.5', '1.0', '1.5']
+Width = Literal['0.5', '1.0', '1.5']
 
 Traversal = Literal['preorder', 'inorder', 'postorder']
 
@@ -262,7 +263,7 @@ class BinaryTree(Tree):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0') -> None:
         """
         Draw the binary tree
 
@@ -277,11 +278,11 @@ class BinaryTree(Tree):
         shape : Shape
             the shape of the nodes (default is 'o')
         color : Color
-            the color of the nodes (default is '#88d7fe' aka sky blue)
+            the color of the nodes (default is '#abe0f9' aka sky blue)
         font : Font
             the font of the labels (default is 'sans-serif')
-        thickness : Thickness
-            the thickness of the edges (default is '1.0')
+        width : Width
+            the width of the edges (default is '1.0')
 
         Raises
         ------
@@ -309,7 +310,7 @@ class BinaryTree(Tree):
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=400, node_color=color, node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=800, node_color=color, node_shape=shape, font_family=font, font_size=12, linewidths=float(width), width=float(width), alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -428,7 +429,7 @@ class BinarySearchTree(Tree):
         self._fill_node(node.left, min_val, node.value - 1, used_values)
         self._fill_node(node.right, node.value + 1, max_val, used_values)
 
-    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#88d7fe', font: Font = 'sans-serif', thickness: Thickness = '1.0') -> None:
+    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0') -> None:
         """
         Draw the binary search tree
         
@@ -443,11 +444,11 @@ class BinarySearchTree(Tree):
         shape : Shape
             the shape of the nodes (default is 'o')
         color : Color
-            the color of the nodes (default is '#88d7fe' aka sky blue)
+            the color of the nodes (default is '#abe0f9' aka sky blue)
         font : Font
             the font of the labels (default is 'sans-serif')
-        thickness : Thickness
-            the thickness of the edges (default is '1.0')
+        width : Width
+            the width of the edges (default is '1.0')
         
         Raises
         ------
@@ -472,7 +473,7 @@ class BinarySearchTree(Tree):
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph, self.pos, with_labels=True, node_size=400, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=10, linewidths=float(thickness), width=float(thickness), alpha=1.0, edgecolors='black')
+        nx.draw(self.graph, self.pos, with_labels=True, node_size=800, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=12, linewidths=float(width), width=float(width), alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
         
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
