@@ -9,6 +9,10 @@ import copy
 from PIL import Image
 import traceback
 from utils.files import validate_path
+import re
+import aiofiles
+import csv
+import asyncio
 
 logger = Logger(__name__)
 
@@ -31,9 +35,9 @@ class Evaluator:
   columns : list
       the columns for the DataFrame
   """
-  columns: list = ['n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'expected_response', 'match', 'node_font', 'node_color', 'edge_width', 'task_id']
+  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
   
-  def evaluate(self, model: Model, messages: List[Messages], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, limit: int = None) -> None:
+  async def evaluate(self, model: Model, messages: List[Messages], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
     """
     Evaluates the model.
     
@@ -81,73 +85,111 @@ class Evaluator:
     ```
     """
     
+    RATE_LIMIT = 60
+    REQUEST_INTERVAL = 60
+    
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
     
-    with open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
-      prompts = yaml.safe_load(file) or []
+    async with aiofiles.open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
+      prompts = yaml.safe_load(await file.read()) or []
 
     # Check if the file exists, if not, create a new one with headers
-    try:
-      self.dataframe = pd.read_csv(save_path)
-    except (FileNotFoundError, pd.errors.EmptyDataError):
-      logger.info(f'Creating new CSV at {save_path}')
-      self.dataframe = pd.DataFrame(columns=self.columns)
-      self.dataframe.to_csv(save_path, index=False)
+    if not file_exists:
+        logger.info(f'Creating new CSV at {save_path}')
+        self.dataframe = pd.DataFrame(columns=self.columns)
+        async with aiofiles.open(save_path, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            await writer.writerow(self.columns)
+        
+    new_rows = []
+    
+    chunk_size = RATE_LIMIT // repeats
+    logger.info(f'Chunk size: {chunk_size}')
+    if chunk_size == 0:
+        chunk_size = 1
+    
+    prompt_chunks = [prompts[i:i + chunk_size] for i in range(0, len(prompts), chunk_size)]
+    
+    for chunk_index, chunk in enumerate(prompt_chunks):
+    
+      coroutines = []
 
-    for i, prompt in enumerate(prompts):
-      message_list = copy.deepcopy(messages)
-      
-      if limit is not None and i >= limit:
-        break
-      else:
-        try:
+      for i, prompt in enumerate(chunk):
+        for attempt in range(repeats):
+          message_list = copy.deepcopy(messages)
+
           image_path = Path(prompt.get('image_path'))
           
           for message in message_list:
-              if hasattr(message, 'content'):
-                if "{{content}}" in message.content:
-                  message.content = message.content.replace("{{content}}", prompt.get('text'))
-              if hasattr(message, 'images'):
-                  images = []
-                  for image in message.images:
-                      if image == "{{image}}":
-                          image = image_path
-                      images.append(image)
-                  message.images = images
-              elif hasattr(message, 'image'):
-                  if message.image == "{{image}}":
-                      message.image = Image.open(image_path)
-                      
-          content = model.run(message_list)
+            if hasattr(message, 'content'):
+              if "{{content}}" in message.content:
+                message.content = message.content.replace("{{content}}", prompt.get('text'))
+            if hasattr(message, 'images'):
+                images = []
+                for image in message.images:
+                    if image == "{{image}}":
+                        image = image_path
+                    images.append(image)
+                message.images = images
+            elif hasattr(message, 'image'):
+                if message.image == "{{image}}":
+                    message.image = image_path
+                        
+          coroutines.append((model.arun(message_list), prompt))
           
+      logger.info(f'Running {len(coroutines)} coroutines...')
+
+      try:
+        results = await asyncio.gather(*[coro for coro, _ in coroutines])
+      except Exception as e:
+          tb = traceback.format_exc()
+          logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+          return
+    
+      for result, prompt in zip(results, [prompt for _, prompt in coroutines]):
+          content = result
+              
           if prompt.get('expected').strip("][}{") in content:
             match = True
           else:
             match = False
+            
+          pattern = r'\{(.*?)\}|\[(.*?)\]'
+          matches = re.findall(pattern, content)
+          clean_matches = [match for group in matches for match in group if match]
 
           # Append new data to the DataFrame
           new_row = {
+            'run': prompt.get('run'),
             'n_generation': prompt.get('generation'),
             'n_variation': prompt.get('variation'),
             'n_format': prompt.get('format'),
             'structure': prompt.get('structure'),
             'text_task': str(prompt.get('text')),
-            'text_prompt': str([message.content for message in message_list if type(message) == UserMessage]).strip("]["),
+            'text_prompt': str([message.content for message in message_list if type(message) == UserMessage or type(message) == BaseMessage]).strip("]["),
             'image_prompt': image_path,
             'model_response': content.replace('\n', '\\n'),
+            'extracted_response': str(clean_matches).strip("]["),
             'expected_response': prompt.get('expected'),
             'match': match,
             'node_font': prompt.get('font'),
             'node_color': prompt.get('color'),
             'edge_width': prompt.get('width'),
             'task_id': prompt.get('id'),
+            'attempt': attempt + 1,
+            'num_nodes': prompt.get('num_nodes'),
+            'resolution': prompt.get('resolution'),
           }
           
-          pd.DataFrame([new_row]).to_csv(save_path, mode='a', header=not file_exists, index=False)
-          file_exists = True  # After the first write, header should not be written again.
-
-        except Exception as e:
-            tb = traceback.format_exc()
-            logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
-            return
+          new_rows.append(new_row)
+          
+      # Sleep after processing each chunk to respect the rate limit
+      #if chunk_index < len(prompt_chunks) - 1:  # Avoid sleeping after the last chunk
+      logger.info(f'Sleeping for {REQUEST_INTERVAL} seconds to respect rate limit...')
+      await asyncio.sleep(REQUEST_INTERVAL)
+      
+    async with aiofiles.open(save_path, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        for new_row in new_rows:
+            await writer.writerow([str(new_row[col]) for col in self.columns])

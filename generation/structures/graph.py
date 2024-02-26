@@ -106,13 +106,15 @@ class UndirectedGraph(Graph):
         self.large = large
         self.graph = nx.Graph()
         
-    def generate(self) -> None:
+    def generate(self, num_nodes: int = None) -> None:
         """
         Generates a random undirected graph with basic structure.
         """
         G = nx.Graph()
 
-        num_nodes = random.randint(11, 20) if self.large else random.randint(3, 10)
+        if not num_nodes:
+            num_nodes = random.randint(3, 18)
+            
         if num_nodes <= 0:
             return
 
@@ -138,7 +140,7 @@ class UndirectedGraph(Graph):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
         
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
         """
         Visualizes the generated undirected graph.
         
@@ -170,9 +172,15 @@ class UndirectedGraph(Graph):
         
         # DPI for the output
         dpi = 100
-        
+
         # Calculate the figure size in inches for a 512x512 pixel image
-        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        figure_size = resolution / dpi  # 5.12 when dpi is 100
+        scale_factor = figure_size / (512 / dpi)
+
+        # Adjusted sizes
+        node_size = 800 * (scale_factor ** 2)
+        font_size = 12 * scale_factor
+        edge_width = float(width) * scale_factor
         
         pos = nx.spring_layout(self.graph, seed=42)  # Set seed for reproducibility
     
@@ -180,7 +188,7 @@ class UndirectedGraph(Graph):
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=800, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=12, linewidths=float(width), width=float(width), edgecolors=hex_to_rgb_float(color, -50), alpha=1.0)
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, edgecolors=hex_to_rgb_float(color, -50), alpha=1.0)
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -225,14 +233,15 @@ class DirectedGraph(Graph):
         self.large = large
         self.graph = nx.DiGraph()
 
-    def generate(self) -> None:
+    def generate(self, num_nodes: int = None) -> None:
         """
         Generates a directed graph with basic structure.
         """
         G = nx.DiGraph()
 
-        # Determine the number of nodes
-        num_nodes = random.randint(11, 20) if self.large else random.randint(3, 10)
+        if not num_nodes:
+            num_nodes = random.randint(3, 18)
+            
         if num_nodes <= 0:
             return
 
@@ -259,7 +268,7 @@ class DirectedGraph(Graph):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
         """
         Visualizes the generated directed graph
         
@@ -295,15 +304,22 @@ class DirectedGraph(Graph):
 
         # DPI for the output
         dpi = 100
-        
+
         # Calculate the figure size in inches for a 512x512 pixel image
-        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        figure_size = resolution / dpi  # 5.12 when dpi is 100
+        scale_factor = figure_size / (512 / dpi)
+
+        # Adjusted sizes
+        arrow_size = 20 * scale_factor
+        node_size = 800 * (scale_factor ** 2)
+        font_size = 12 * scale_factor
+        edge_width = float(width) * scale_factor
         
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=800, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=12, linewidths=float(width), width=float(width), alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

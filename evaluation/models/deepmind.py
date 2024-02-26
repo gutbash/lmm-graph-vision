@@ -4,6 +4,9 @@ import google.generativeai as deepmind
 from utils.logger import Logger
 from time import perf_counter
 import traceback
+import httpx
+import json
+import asyncio
 
 from evaluation.models.messages.message import BaseMessage, ImageMessage
 from typing import List, TypeVar
@@ -92,7 +95,7 @@ class DeepMind:
             messages = [message.to_message() for message in messages]
             
             logger.info(f"Running DeepMind Completion...")
-            logger.info(messages)
+            logger.info(str(messages)[:200])
             start = perf_counter()
             
             completion = self.client.generate_content(contents=messages)
@@ -105,6 +108,44 @@ class DeepMind:
             return
         
         content = completion.text
+        
+        logger.info(f"│\n         │\n{content}\n         │")
+        logger.info(f"╰── Ran DeepMind Completion in {round(end - start, 2)} seconds.")
+        
+        return content
+    
+    async def arun(self, messages: List[Messages]) -> str:
+        
+        messages = [message.to_message() for message in messages]
+        
+        headers = {
+            'Content-Type': 'application/json',
+        }
+        
+        data = {"contents": [{"parts": messages}]}
+        
+        timeout = httpx.Timeout(60.0, connect=5.0)
+        
+        try:
+            
+            logger.info(f"Running DeepMind Completion...")
+            logger.info(str(messages)[:200])
+            start = perf_counter()
+            
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                response = await client.post(f'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key={self.api_key}', headers=headers, data=json.dumps(data))
+                completion = response.json()
+            
+            end = perf_counter()
+            
+        except Exception as e:
+            tb = traceback.format_exc()
+            logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+            return
+        
+        logger.info(f"│\n         │\n{completion}\n         │")
+        
+        content = completion['candidates'][0]['content']['parts'][0]['text']
         
         logger.info(f"│\n         │\n{content}\n         │")
         logger.info(f"╰── Ran DeepMind Completion in {round(end - start, 2)} seconds.")

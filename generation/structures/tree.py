@@ -31,7 +31,7 @@ class Tree:
         def _pre_order(node: 'Tree.TreeNode') -> list:
             if node is None:
                 return []
-            return [node.value] + _pre_order(node.left) + _pre_order(node.right)
+            return [structure_instance.graph.nodes[node.value]['value']] + _pre_order(node.left) + _pre_order(node.right)
         
         return _pre_order(structure_instance.root)
     
@@ -47,7 +47,7 @@ class Tree:
         def _in_order(node: 'Tree.TreeNode') -> list:
             if node is None:
                 return []
-            return _in_order(node.left) + [node.value] + _in_order(node.right)
+            return _in_order(node.left) + [structure_instance.graph.nodes[node.value]['value']] + _in_order(node.right)
         
         return _in_order(structure_instance.root)
         
@@ -143,18 +143,16 @@ class BinaryTree(Tree):
         self.pos = {}
         self.graph = nx.Graph()
 
-    def generate(self) -> None:
+    def generate(self, num_nodes: int = None) -> None:
         """
         Generates a random binary tree
         """
 
-        if self.large:
-            num_nodes = random.randint(11, 20)
-        else:
-            num_nodes = random.randint(3, 10)
+        if not num_nodes:
+            num_nodes = random.randint(3, 18)
 
         if num_nodes <= 0:
-            return None
+            return
 
         root_value = random.randint(1, 99)
         root = Tree.TreeNode(root_value)
@@ -263,7 +261,7 @@ class BinaryTree(Tree):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0') -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
         """
         Draw the binary tree
 
@@ -303,14 +301,20 @@ class BinaryTree(Tree):
         dpi = 100
 
         # Calculate the figure size in inches for a 512x512 pixel image
-        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        figure_size = resolution / dpi  # 5.12 when dpi is 100
+        scale_factor = figure_size / (512 / dpi)
+
+        # Adjusted sizes
+        node_size = 800 * (scale_factor ** 2)
+        font_size = 12 * scale_factor
+        edge_width = float(width) * scale_factor
 
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=800, node_color=color, node_shape=shape, font_family=font, font_size=12, linewidths=float(width), width=float(width), alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
+        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=node_size, node_color=color, node_shape=shape, font_family=font, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -364,13 +368,18 @@ class BinarySearchTree(Tree):
         self.pos = {}
         self.graph = nx.Graph()
 
-    def generate(self) -> None:
+    def generate(self, num_nodes: int = None) -> None:
         """
         Generates a random binary search tree
         """
         used_values = set()
 
-        num_nodes = random.randint(3, 10) if not self.large else random.randint(11, 20)
+        if not num_nodes:
+            num_nodes = random.randint(3, 18)
+            
+        if num_nodes <= 0:
+            return
+        
         self.root = self._insert_node(None, random.randint(1, 99), used_values)
 
         for _ in range(1, num_nodes):
@@ -429,7 +438,7 @@ class BinarySearchTree(Tree):
         self._fill_node(node.left, min_val, node.value - 1, used_values)
         self._fill_node(node.right, node.value + 1, max_val, used_values)
 
-    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0') -> None:
+    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
         """
         Draw the binary search tree
         
@@ -466,14 +475,20 @@ class BinarySearchTree(Tree):
 
         # DPI for the output
         dpi = 100
-        
+
         # Calculate the figure size in inches for a 512x512 pixel image
-        figure_size = 512 / dpi  # 5.12 when dpi is 100
+        figure_size = resolution / dpi  # 5.12 when dpi is 100
+        scale_factor = figure_size / (512 / dpi)
+
+        # Adjusted sizes
+        node_size = 800 * (scale_factor ** 2)
+        font_size = 12 * scale_factor
+        edge_width = float(width) * scale_factor
         
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph, self.pos, with_labels=True, node_size=800, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=12, linewidths=float(width), width=float(width), alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
+        nx.draw(self.graph, self.pos, with_labels=True, node_size=node_size, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
         
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

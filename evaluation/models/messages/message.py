@@ -58,7 +58,7 @@ class UserMessage:
         """
         content_list = [{"type": "text", "text": f"{self.content}"}] if self.content else []
         images_list = [
-            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{encode_image(image_url)}"}}
+            {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{encode_image(image_url)}"}}
             for image_url in self.images
         ] if self.images else []
 
@@ -169,7 +169,7 @@ class ImageMessage:
         if isinstance(image, str) and image != "{{image}}":
             logger.error("Image must be be either a Path or a string with the placerholder '{{image}}'.")
         
-        self.image = image if image == "{{image}}" else Image.open(image)
+        self.image = image
     
     def to_message(self) -> Union[str, Image.Image]:
         """
@@ -180,7 +180,7 @@ class ImageMessage:
         Union[str, Image.Image]
             the message in API format
         """
-        return self.image
+        return {"inline_data": {"mime_type":"image/png", "data": encode_image(self.image)}}
         
 class BaseMessage:
     """
@@ -213,4 +213,4 @@ class BaseMessage:
         str
             the message in API format
         """
-        return self.content
+        return {"text": self.content}

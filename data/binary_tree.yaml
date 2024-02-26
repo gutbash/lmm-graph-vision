@@ -1,34 +1,538 @@
 - color: '#fee4b3'
-  expected: '[18, 67, 50, 34, 93, 91, 38]'
+  expected: '[18, 86, 76]'
   font: sans-serif
   format: 1
   generation: 1
-  id: e5e74dac-3ea2-45ff-b610-129858db41d2
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-88d7fe_fnt-sansserif_idn-e5e74dac-3ea2-45ff-b610-129858db41d2.png
+  id: 4a41e3da-8997-4bdc-b972-e022ba78935a
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 256
+  run: 1
   structure: binary_tree
   text: Provide a single-line python list representing the post-order traversal of
     the binary tree.
   variation: 1
   width: '1.0'
 - color: '#fee4b3'
-  expected: '[32, 26, 88, 4, 64, 47, 69]'
+  expected: '[76, 18, 86]'
   font: sans-serif
   format: 1
   generation: 1
-  id: e5e74dac-3ea2-45ff-b610-129858db41d2
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-88d7fe_fnt-sansserif_idn-e5e74dac-3ea2-45ff-b610-129858db41d2.png
+  id: c6d24c35-ece7-4029-8afd-7660bd70db0f
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 256
+  run: 1
   structure: binary_tree
   text: Provide a single-line python list representing the pre-order traversal of
     the binary tree.
   variation: 1
   width: '1.0'
 - color: '#fee4b3'
-  expected: '[88, 26, 4, 32, 47, 64, 69]'
+  expected: '[18, 76, 86]'
   font: sans-serif
   format: 1
   generation: 1
-  id: e5e74dac-3ea2-45ff-b610-129858db41d2
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-88d7fe_fnt-sansserif_idn-e5e74dac-3ea2-45ff-b610-129858db41d2.png
+  id: 20c74ad9-caa8-4385-99f5-0c34335808c7
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 256
+  run: 1
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[18, 86, 76]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 94620232-1e8d-4ba7-bc2f-a48d118ebdb6
+  image_path: images/binary_tree/bit_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[76, 18, 86]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 69a74206-66b8-4444-9b6c-738b3cf814c1
+  image_path: images/binary_tree/bit_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[18, 76, 86]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 3569d4a3-3111-4108-8bb5-22b23813671e
+  image_path: images/binary_tree/bit_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[18, 86, 76]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: a5af6f29-1560-4114-9278-7d351ffddd2a
+  image_path: images/binary_tree/bit_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 1024
+  run: 3
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[76, 18, 86]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 41a55222-a181-4fb0-b953-022a1496aaaf
+  image_path: images/binary_tree/bit_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 1024
+  run: 3
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[18, 76, 86]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: cbcfb7f2-6231-4132-b754-3e052b3435d3
+  image_path: images/binary_tree/bit_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 1024
+  run: 3
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[18, 86, 76]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: e9309f7a-a00e-4333-b1fb-46b1bd6b17dc
+  image_path: images/binary_tree/bit_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 2048
+  run: 4
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[76, 18, 86]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 587eda2d-7010-45bc-b0ad-2616c2042715
+  image_path: images/binary_tree/bit_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 2048
+  run: 4
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[18, 76, 86]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 4e280dc7-c7b2-47dc-bc88-8a8284efd0a5
+  image_path: images/binary_tree/bit_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-d278104e-48ec-4f19-9615-5fd59e34effd.png
+  num_nodes: 3
+  resolution: 2048
+  run: 4
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 61, 17, 83, 92, 38]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: ad07bb08-8631-4ec2-a7da-c156a4b89af1
+  image_path: images/binary_tree/bit_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 256
+  run: 5
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[38, 17, 62, 61, 92, 83]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: cf496e3e-00cc-41cc-9ba4-65ec53acaba7
+  image_path: images/binary_tree/bit_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 256
+  run: 5
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 17, 61, 38, 83, 92]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 617cf625-5999-4684-a641-963103be59d6
+  image_path: images/binary_tree/bit_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 256
+  run: 5
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 61, 17, 83, 92, 38]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 82c1f6c2-8d1b-4b5a-8471-23d880388384
+  image_path: images/binary_tree/bit_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[38, 17, 62, 61, 92, 83]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 2c815a55-88fb-4971-8a2a-3cc0fa8b67d4
+  image_path: images/binary_tree/bit_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 17, 61, 38, 83, 92]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 4c50cb61-ac51-44fb-beef-6297abfe40d7
+  image_path: images/binary_tree/bit_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 61, 17, 83, 92, 38]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 2312bdc1-3755-4b97-a0c6-92d8ebea90ef
+  image_path: images/binary_tree/bit_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[38, 17, 62, 61, 92, 83]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: c38c0c02-ea8d-486c-a238-54fa18c4953a
+  image_path: images/binary_tree/bit_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 17, 61, 38, 83, 92]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 8896e8ed-da09-4367-a379-fdd322846434
+  image_path: images/binary_tree/bit_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 61, 17, 83, 92, 38]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 77940e97-b003-4902-8c22-d10cdb699229
+  image_path: images/binary_tree/bit_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[38, 17, 62, 61, 92, 83]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 0f8b8c8d-1646-41fb-864d-e2af9d1651b3
+  image_path: images/binary_tree/bit_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[62, 17, 61, 38, 83, 92]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: a64be1de-e649-4ca7-b30a-3fa3f8599df8
+  image_path: images/binary_tree/bit_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-1808c481-b7be-40e3-adb7-0e05aabc1402.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 10, 59, 31, 13, 97, 11, 28, 95]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: cd43f97a-64ea-405f-a747-c3c42e89c7b8
+  image_path: images/binary_tree/bit_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 256
+  run: 9
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[95, 13, 59, 59, 10, 31, 28, 97, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 40af6051-b2ee-4d66-87f7-23ca0faa5769
+  image_path: images/binary_tree/bit_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 256
+  run: 9
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 59, 10, 13, 31, 95, 97, 28, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 8c49d2df-f7e7-40f6-9874-391233a001b0
+  image_path: images/binary_tree/bit_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 256
+  run: 9
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 10, 59, 31, 13, 97, 11, 28, 95]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: f735a606-5299-4ee3-86eb-be39ee5d1ddc
+  image_path: images/binary_tree/bit_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 512
+  run: 10
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[95, 13, 59, 59, 10, 31, 28, 97, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: d4106fc2-84f4-4cf4-9ab5-880d47b4efd8
+  image_path: images/binary_tree/bit_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 512
+  run: 10
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 59, 10, 13, 31, 95, 97, 28, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 2f54ac95-9e86-44ce-b3ec-b14b9c540a83
+  image_path: images/binary_tree/bit_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 512
+  run: 10
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 10, 59, 31, 13, 97, 11, 28, 95]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: e44813d1-ef27-4a35-8a08-6327731f0d0c
+  image_path: images/binary_tree/bit_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 1024
+  run: 11
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[95, 13, 59, 59, 10, 31, 28, 97, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 6e72323f-43a9-4ad8-a5f3-19129c6711d8
+  image_path: images/binary_tree/bit_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 1024
+  run: 11
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 59, 10, 13, 31, 95, 97, 28, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 885b78a2-89da-4eb9-b5f8-6cb6ae1e4954
+  image_path: images/binary_tree/bit_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 1024
+  run: 11
+  structure: binary_tree
+  text: Provide a single-line python list representing the in-order traversal of the
+    binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 10, 59, 31, 13, 97, 11, 28, 95]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 1f591327-2969-41f6-b3bf-b4d4ebaf1db7
+  image_path: images/binary_tree/bit_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: binary_tree
+  text: Provide a single-line python list representing the post-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[95, 13, 59, 59, 10, 31, 28, 97, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 1fe4cdab-213e-4622-aedc-17e974a17891
+  image_path: images/binary_tree/bit_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: binary_tree
+  text: Provide a single-line python list representing the pre-order traversal of
+    the binary tree.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[59, 59, 10, 13, 31, 95, 97, 28, 11]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 4fe5bdde-11a9-4c9a-90c0-24b5015aa06e
+  image_path: images/binary_tree/bit_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-fbd1079d-1a2e-48f7-872f-2fd726489c44.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
   structure: binary_tree
   text: Provide a single-line python list representing the in-order traversal of the
     binary tree.

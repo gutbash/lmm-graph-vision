@@ -8,3 +8,4 @@ Requests==2.31.0
 pipreqs
 openai
 google-generativeai
+aiofiles

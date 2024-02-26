@@ -4,7 +4,7 @@ import yaml
 from uuid import UUID
 from pathlib import Path
 
-def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None, color: str = None, font: str = None, width: str = None) -> None:
+def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, image_path: Path = None, expected: str = None, structure: str = None, run: int = 0, generation: int = None, variation: int = None, format: int = None, color: str = None, font: str = None, width: str = None, num_nodes: int = None, resolution: int = None) -> None:
     """
     Add an object to a YAML file.
         
@@ -72,6 +72,9 @@ def add_object(uuid: UUID = None, file_path: Path = None, text: str = None, imag
         'color': color,
         'font': font,
         'width': width,
+        'num_nodes': num_nodes,
+        'resolution': resolution,
+        'run': run,
     }
     
     try:

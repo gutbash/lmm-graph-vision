@@ -8,6 +8,7 @@ from evaluation.models.deepmind import DeepMind
 
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
 
+import asyncio
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -30,8 +31,9 @@ text_path = Path('text/')
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
-multiplier = 1
-
+generation = 3
+variation = 1
+'''
 batch_generator.generate_batch(
     structure_class=BinaryTree,
     type='bit',
@@ -40,8 +42,10 @@ batch_generator.generate_batch(
     save_path=image_path_binary_tree,
     text_path=text_path,
     text_name='binary_tree_text.yaml',
-    generations=multiplier,
-    variations=multiplier,
+    generations=generation,
+    variations=variation,
+    random_num_nodes=False,
+    resolutions=[256, 512, 1024, 2048],
 )
 
 batch_generator.generate_batch(
@@ -52,8 +56,10 @@ batch_generator.generate_batch(
     save_path=image_path_binary_search_tree,
     text_path=text_path,
     text_name='binary_search_tree_text.yaml',
-    generations=multiplier,
-    variations=multiplier,
+    generations=generation,
+    variations=variation,
+    random_num_nodes=False,
+    resolutions=[256, 512, 1024, 2048],
 )
 
 batch_generator.generate_batch(
@@ -64,8 +70,10 @@ batch_generator.generate_batch(
     save_path=image_path_undirected_graph,
     text_path=text_path,
     text_name='undirected_graph_text.yaml',
-    generations=multiplier,
-    variations=multiplier,
+    generations=generation,
+    variations=variation,
+    random_num_nodes=False,
+    resolutions=[256, 512, 1024, 2048],
 )
 
 batch_generator.generate_batch(
@@ -76,21 +84,18 @@ batch_generator.generate_batch(
     save_path=image_path_directed_graph,
     text_path=text_path,
     text_name='directed_graph_text.yaml',
-    generations=multiplier,
-    variations=multiplier,
+    generations=generation,
+    variations=variation,
+    random_num_nodes=False,
+    resolutions=[256, 512, 1024, 2048],
 )
-
+'''
 ### TEST EVALUATION ###
 
 openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
 
 openai_messages = [
-    UserMessage(content="{{content}}", images=["{{image}}"]),
-]
-
-openai_sys_messages = [
-    SystemMessage(content="You are GPT-4V. A large multimodal model with vision capabilities trained by OpenAI."),
     UserMessage(content="{{content}}", images=["{{image}}"]),
 ]
 
@@ -104,17 +109,14 @@ deepmind_csv = 'deepmind.csv'
 
 evaluator = Evaluator()
 
-model = openai
+model = deepmind
 csv_name = deepmind_csv
 messages = deepmind_messages
 
-#TODO: run eval on sys vs no sys
-#TODO: run eval on str name vs no str name
-#TODO: run eval on meta-inst vs no meta-inst
-#TODO: run eval on large vs small
+async def run_eval():
 
-#evaluator.evaluate(model=model, messages=openai_messages, limit=None, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name="results_sys.csv")
-#evaluator.evaluate(model=model, messages=openai_sys_messages, limit=None, yaml_path=yaml_path, yaml_name='binary_tree.yaml', csv_path=Path('results/'), csv_name="results_no_sys.csv")
-#evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='binary_search_tree.yaml', csv_path=Path('results/'), csv_name=csv_name)
-#evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='undirected_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
-#evaluator.evaluate(model=model, messages=messages, limit=3, yaml_path=yaml_path, yaml_name='directed_graph.yaml', csv_path=Path('results/'), csv_name=csv_name)
+    for structure in ['binary_tree', 'undirected_graph', 'directed_graph']:
+
+        await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name='deepmind_resolution.csv', repeats=1)
+
+asyncio.run(run_eval())

@@ -44,7 +44,7 @@ class Generator:
     ```
     """
 
-    def generate_structure(self, structure_class: Type[Structure], large: bool = False) -> Type[Structure]:
+    def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None) -> Type[Structure]:
         """
         Generates an empty structure instance and returns it.
         
@@ -52,8 +52,6 @@ class Generator:
         ----------
         structure_class : Type[Structure]
             the structure to generate
-        large : bool (default: False)
-            whether or not the structure should be large (11-20 nodes)
             
         Returns
         -------
@@ -66,8 +64,8 @@ class Generator:
         logger.info(f"Generating {structure_class.formal_name}...")
         start = perf_counter()
         
-        structure_instance = structure_class(large=large)
-        structure_instance.generate()
+        structure_instance = structure_class()
+        structure_instance.generate(num_nodes=num_nodes)
         
         end = perf_counter()
         logger.info(f"╰── Generated {structure_class.formal_name} in {round(end - start, 2)} seconds.")
@@ -100,7 +98,7 @@ class Generator:
         
         return structure_instance
 
-    def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0') -> None:
+    def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512) -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -178,7 +176,7 @@ class Generator:
         logger.info(f"Drawing {structure_instance.formal_name}...")
         start = perf_counter()
         
-        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, width=width)
+        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, width=width, resolution=resolution)
         
         end = perf_counter()
         logger.info(f"╰── Drew {structure_instance.formal_name} in {round(end - start, 2)} seconds.")
@@ -201,6 +199,8 @@ class Generator:
                         color=color,
                         font=font,
                         width=width,
+                        num_nodes=num_nodes,
+                        resolution=resolution,
                     )
                     logger.info(f"{structure_instance.formal_name} added to YAML file at {datapath}.")
                 except Exception as e:
@@ -225,7 +225,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False) -> None:
+    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False, random_num_nodes: bool = True, resolutions: list = [512]) -> None:
         """
         Generates a batch of data structures.
         
@@ -300,13 +300,14 @@ class BatchGenerator(Generator):
             
             approved = False
             structure_generated = None
+            num_nodes = generation * 3 if not random_num_nodes else None
             
             while not approved:
                 
                 test_path = check_path_exists(Path('images/'))
                 test_name = 'test.png'
                 
-                structure_generated = self.generator.generate_structure(structure_class=structure_class, large=False)
+                structure_generated = self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes)
                 structure_filled = self.generator.fill_structure(structure_instance=structure_generated)
                 self.generator.draw_structure(
                     structure_instance=structure_filled,
@@ -338,7 +339,56 @@ class BatchGenerator(Generator):
                         
                         uuid = uuid4()
                         
+                        for res in resolutions:
+                        
+                            for text in text_prompts:
+
+                                task_id = uuid4()
+                                
+                                expected = None
+                                method_name = text['type']
+                                if hasattr(structure_filled, method_name):
+                                    method_to_call = getattr(structure_filled, method_name)
+                                    expected = method_to_call(structure_filled)
+                                else:
+                                    logger.error(f"Method '{method_name}' not found in {structure_filled}.")
+                                
+                                self.generator.draw_structure(
+                                    uuid=task_id,
+                                    structure_instance=structure_filled,
+                                    text=text['text'],
+                                    expected=str(expected),
+                                    yaml=True,
+                                    yaml_path=yaml_path,
+                                    yaml_name=yaml_name,
+                                    save=True,
+                                    save_path=save_path,
+                                    save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-{width.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_res-{str(res)}_idn-{str(uuid)}.png",
+                                    show=False,
+                                    run=run,
+                                    generation=generation,
+                                    variation=variation,
+                                    format=format,
+                                    color=color,
+                                    font=font,
+                                    width=width,
+                                    num_nodes=len(structure_filled.graph.nodes),
+                                    resolution=res,
+                                )
+                                
+                            run += 1
+                            
+                        format += 1
+                        
+                else:
+                    
+                    uuid = uuid4()
+                    
+                    for res in resolutions:
+                    
                         for text in text_prompts:
+                        
+                            task_id = uuid4()
                             
                             expected = None
                             method_name = text['type']
@@ -347,9 +397,9 @@ class BatchGenerator(Generator):
                                 expected = method_to_call(structure_filled)
                             else:
                                 logger.error(f"Method '{method_name}' not found in {structure_filled}.")
-                            
+                                
                             self.generator.draw_structure(
-                                uuid=uuid,
+                                uuid=task_id,
                                 structure_instance=structure_filled,
                                 text=text['text'],
                                 expected=str(expected),
@@ -358,50 +408,14 @@ class BatchGenerator(Generator):
                                 yaml_name=yaml_name,
                                 save=True,
                                 save_path=save_path,
-                                save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-{width.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_idn-{str(uuid)}.png",
+                                save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-10_clr-abe0f9_fnt-sansserif_res-{str(res)}_idn-{str(uuid)}.png",
                                 show=False,
                                 run=run,
                                 generation=generation,
                                 variation=variation,
                                 format=format,
-                                color=color,
-                                font=font,
-                                width=width,
+                                num_nodes=len(structure_filled.graph.nodes),
+                                resolution=res,
                             )
                             
-                        format += 1
                         run += 1
-                        
-                else:
-                    
-                    uuid = uuid4()
-                    
-                    for text in text_prompts:
-                        
-                        expected = None
-                        method_name = text['type']
-                        if hasattr(structure_filled, method_name):
-                            method_to_call = getattr(structure_filled, method_name)
-                            expected = method_to_call(structure_filled)
-                        else:
-                            logger.error(f"Method '{method_name}' not found in {structure_filled}.")
-                            
-                        self.generator.draw_structure(
-                            uuid=uuid,
-                            structure_instance=structure_filled,
-                            text=text['text'],
-                            expected=str(expected),
-                            yaml=True,
-                            yaml_path=yaml_path,
-                            yaml_name=yaml_name,
-                            save=True,
-                            save_path=save_path,
-                            save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-10_clr-88d7fe_fnt-sansserif_idn-{str(uuid)}.png",
-                            show=False,
-                            run=run,
-                            generation=generation,
-                            variation=variation,
-                            format=format,
-                        )
-                            
-                    run += 1
