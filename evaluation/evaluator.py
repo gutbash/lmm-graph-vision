@@ -186,7 +186,10 @@ class Evaluator:
           
       # Sleep after processing each chunk to respect the rate limit
       #if chunk_index < len(prompt_chunks) - 1:  # Avoid sleeping after the last chunk
+      logger.info(f'Completed {chunk_index + 1} of {len(prompt_chunks)} chunks')
+      logger.info(f'Elapsed time: {(chunk_index + 1) * REQUEST_INTERVAL} out of {len(prompt_chunks) * REQUEST_INTERVAL} seconds')
       logger.info(f'Sleeping for {REQUEST_INTERVAL} seconds to respect rate limit...')
+      
       await asyncio.sleep(REQUEST_INTERVAL)
       
     async with aiofiles.open(save_path, mode='a', newline='') as file:

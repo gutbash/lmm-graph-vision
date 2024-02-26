@@ -12,6 +12,7 @@ import asyncio
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from uuid import uuid4
 
 load_dotenv()
 
@@ -105,7 +106,7 @@ deepmind_messages = [
 ]
 
 openai_csv = 'openai.csv'
-deepmind_csv = 'deepmind.csv'
+deepmind_csv = f'deepmind-resolution-3_run-{uuid4()}.csv'
 
 evaluator = Evaluator()
 
@@ -117,6 +118,6 @@ async def run_eval():
 
     for structure in ['binary_tree', 'undirected_graph', 'directed_graph']:
 
-        await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name='deepmind_resolution.csv', repeats=1)
+        await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=csv_name, repeats=3)
 
 asyncio.run(run_eval())
