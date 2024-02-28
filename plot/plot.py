@@ -4,7 +4,6 @@ import pandas as pd
 from pathlib import Path
 from uuid import uuid4
 
-
 # Load the dataset
 file_path = Path('results/deepmind-resolution-3_run-dacf296a-a138-4c07-beaa-e1a0efbab19d.csv')
 
@@ -74,6 +73,8 @@ def match_rate_per_num_nodes_and_resolution(file_path: Path) -> None:
     #plt.show()
     plt.savefig(f'plot/probability_of_match_by_num_nodes_and_resolution-{uuid4()}.png')
     plt.close()
+
+
     
-match_rate_per_structure_grouped_by_resolution(file_path)
+#match_rate_per_structure_grouped_by_resolution(file_path)
 #match_rate_per_num_nodes_and_resolution(file_path)

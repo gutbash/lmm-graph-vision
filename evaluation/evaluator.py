@@ -13,6 +13,7 @@ import re
 import aiofiles
 import csv
 import asyncio
+from difflib import SequenceMatcher
 
 logger = Logger(__name__)
 
@@ -35,7 +36,7 @@ class Evaluator:
   columns : list
       the columns for the DataFrame
   """
-  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
+  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'similarity', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
   
   async def evaluate(self, model: Model, messages: List[Messages], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
     """
@@ -91,8 +92,13 @@ class Evaluator:
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
     
-    async with aiofiles.open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
-      prompts = yaml.safe_load(await file.read()) or []
+    try:
+      async with aiofiles.open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
+        prompts = yaml.safe_load(await file.read())
+    except Exception as e:
+      tb = traceback.format_exc()
+      logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+      raise FileNotFoundError(f'YAML file {yaml_name} not found.')
 
     # Check if the file exists, if not, create a new one with headers
     if not file_exists:
@@ -111,7 +117,10 @@ class Evaluator:
     
     prompt_chunks = [prompts[i:i + chunk_size] for i in range(0, len(prompts), chunk_size)]
     
+    total_chunks = len(prompt_chunks)
+    
     for chunk_index, chunk in enumerate(prompt_chunks):
+      chunk_num = chunk_index + 1
     
       coroutines = []
 
@@ -149,15 +158,22 @@ class Evaluator:
     
       for result, prompt in zip(results, [prompt for _, prompt in coroutines]):
           content = result
+          
+          pattern = r'(\{.*?\})|(\[.*?\])'
+          matches = re.findall(pattern, content)
+          logger.info(f'Matches: {matches}')
+          clean_matches = [match for group in matches for match in group if match]
+          if type(clean_matches[0]) is tuple:
+            clean_matches = [item for tup in matches for item in tup if item]
+          clean_match = str(clean_matches[0])
               
-          if prompt.get('expected').strip("][}{") in content:
+          if prompt.get('expected').strip("`][}{`") in content:
             match = True
           else:
             match = False
             
-          pattern = r'\{(.*?)\}|\[(.*?)\]'
-          matches = re.findall(pattern, content)
-          clean_matches = [match for group in matches for match in group if match]
+          matcher = SequenceMatcher(None, prompt.get('expected').strip("``"), clean_match)
+          similarity = matcher.ratio() * 100
 
           # Append new data to the DataFrame
           new_row = {
@@ -170,9 +186,10 @@ class Evaluator:
             'text_prompt': str([message.content for message in message_list if type(message) == UserMessage or type(message) == BaseMessage]).strip("]["),
             'image_prompt': image_path,
             'model_response': content.replace('\n', '\\n'),
-            'extracted_response': str(clean_matches).strip("]["),
+            'extracted_response': clean_match,
             'expected_response': prompt.get('expected'),
             'match': match,
+            'similarity': similarity,
             'node_font': prompt.get('font'),
             'node_color': prompt.get('color'),
             'edge_width': prompt.get('width'),
@@ -185,11 +202,12 @@ class Evaluator:
           new_rows.append(new_row)
           
       # Sleep after processing each chunk to respect the rate limit
-      #if chunk_index < len(prompt_chunks) - 1:  # Avoid sleeping after the last chunk
-      logger.info(f'Completed {chunk_index + 1} of {len(prompt_chunks)} chunks')
-      logger.info(f'Elapsed time: {(chunk_index + 1) * REQUEST_INTERVAL} out of {len(prompt_chunks) * REQUEST_INTERVAL} seconds')
+      logger.info(f'Completed {chunk_num} of {total_chunks} chunks')
+      #if chunk_num < total_chunks:  # Avoid sleeping after the last chunk
+        
+      logger.info(f'Elapsed time: {(chunk_num) * REQUEST_INTERVAL} out of {total_chunks * REQUEST_INTERVAL} seconds')
       logger.info(f'Sleeping for {REQUEST_INTERVAL} seconds to respect rate limit...')
-      
+    
       await asyncio.sleep(REQUEST_INTERVAL)
       
     async with aiofiles.open(save_path, mode='a', newline='') as file:

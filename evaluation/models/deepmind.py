@@ -126,8 +126,9 @@ class DeepMind:
         
         timeout = httpx.Timeout(9999.0, connect=60.0)
         
-        max_retries = 3
-        retry_delay = 60
+        max_retries = 5
+        retry_delay_yellow = 10
+        retry_delay_red = 60
         
         for attempt in range(max_retries):
             try:
@@ -143,11 +144,17 @@ class DeepMind:
                 end = perf_counter()
                     
                 if response.status_code == 500:
-                    logger.error("Internal Server Error: Retrying...")
-                    await asyncio.sleep(retry_delay)
+                    if attempt == max_retries - 1:
+                        logger.error(f"500 Internal Server Error: Retrying in {retry_delay_red} seconds...")
+                        await asyncio.sleep(retry_delay_red)
+                    else:
+                        logger.error(f"500 Internal Server Error: Retrying in {retry_delay_yellow} seconds...")
+                        await asyncio.sleep(retry_delay_yellow)
                     continue
-
-                logger.info(f"│\n         │\n{completion}\n         │")
+                if response.status_code == 429:
+                    logger.error(f"429 Resource Exhausted: Retrying in {retry_delay_red} seconds...")
+                    await asyncio.sleep(retry_delay_red)
+                    continue
                 
                 content = completion['candidates'][0]['content']['parts'][0]['text']
                 
@@ -161,9 +168,9 @@ class DeepMind:
                 logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
                 
                 if attempt < max_retries - 1:
-                    logger.error(f"Retrying in {retry_delay} seconds...")
-                    await asyncio.sleep(retry_delay)
+                    logger.error(f"Retrying in {retry_delay_red} seconds...")
+                    await asyncio.sleep(retry_delay_red)
                 else:
                     logger.error(f"Failed to run DeepMind Completion after {max_retries} attempts.")
-                    return
-        return "Error: Failed to run DeepMind Completion."
+                    return None
+        return None
