@@ -1,378 +1,544 @@
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [1]}'
+  expected: '{1: [2, 3], 2: [3], 3: []}'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-5141027e-5b9b-4985-b196-444bd4387d93.png
+  id: 306c216a-ad1a-4db0-be52-f18695b91f8f
+  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
-  resolution: 512
+  resolution: 256
   run: 1
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: c5029d8b-d3a7-4b79-8313-ab12fbcc5952
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-5141027e-5b9b-4985-b196-444bd4387d93.png
+  id: 97fee358-f489-4a59-8e5c-ac3538554d4d
+  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
-  resolution: 512
+  resolution: 256
   run: 1
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: d2a1da89-04e6-45b4-a9e3-238ee7e65a2b
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-5141027e-5b9b-4985-b196-444bd4387d93.png
+  id: 1a3f3fc3-894b-45b0-a607-ffcf61c21524
+  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
-  resolution: 512
+  resolution: 256
   run: 1
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 96afdb2b-86a6-47ab-a02f-befe82e90f0e
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [1]}'
+  expected: '{1: [2, 3], 2: [3], 3: []}'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-9463f58b-599b-43c1-98d5-59c21f69a332.png
+  id: fee4c99d-a7bd-4762-8a7f-6c69f5aaec61
+  image_path: images/directed_graph/dg_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
   resolution: 512
   run: 2
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: c29449c7-4aa7-4502-bbfa-c7a9fcbbd620
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-9463f58b-599b-43c1-98d5-59c21f69a332.png
+  id: 2f153123-ee5b-4f07-89d1-28382344c3a7
+  image_path: images/directed_graph/dg_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
   resolution: 512
   run: 2
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: a399a72d-4dd6-4569-8a44-6dcc9946ead9
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-9463f58b-599b-43c1-98d5-59c21f69a332.png
+  id: 847cd2e3-76a7-4fbc-8e8d-f5962e2b9751
+  image_path: images/directed_graph/dg_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
   resolution: 512
   run: 2
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 12678972-d66d-47af-84f7-d1784363df9c
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [1]}'
+  expected: '{1: [2, 3], 2: [3], 3: []}'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-c2e24579-c679-4dbb-904c-093328a552f3.png
+  id: 79af5b91-41d2-4a16-b1a9-e867651c4d94
+  image_path: images/directed_graph/dg_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
-  resolution: 512
+  resolution: 1024
   run: 3
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: 759a9994-3926-4c28-8650-0a2eb19a0c76
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-c2e24579-c679-4dbb-904c-093328a552f3.png
+  id: 5a7e8adb-6ecb-4c1e-a49b-3b531e0704eb
+  image_path: images/directed_graph/dg_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
-  resolution: 512
+  resolution: 1024
   run: 3
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 39876cc5-1a32-4bfd-9aaf-95868e1e801c
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-c2e24579-c679-4dbb-904c-093328a552f3.png
+  id: 6764bc8e-6b49-4136-9903-6010603aae6a
+  image_path: images/directed_graph/dg_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
   num_nodes: 3
-  resolution: 512
+  resolution: 1024
   run: 3
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 6c4e9404-9726-4d3e-b542-eb354af7a05f
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 3], 6: []}'
+  expected: '{1: [2, 3], 2: [3], 3: []}'
   font: sans-serif
   format: 1
-  generation: 2
-  image_path: images/directed_graph/dg_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fd96c232-f39b-4fc6-a452-870d4d6ff746.png
-  num_nodes: 6
-  resolution: 512
+  generation: 1
+  id: df8eeea1-19d7-4f03-a8f4-2198ee9a8db1
+  image_path: images/directed_graph/dg_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
+  num_nodes: 3
+  resolution: 2048
   run: 4
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: cd5cde8a-bb1e-4160-b736-2043a80390c5
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 3, 4, 5, 6]'
+  expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
-  generation: 2
-  image_path: images/directed_graph/dg_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fd96c232-f39b-4fc6-a452-870d4d6ff746.png
-  num_nodes: 6
-  resolution: 512
+  generation: 1
+  id: 1c3ca05f-a119-457d-8ecb-b29898edfd86
+  image_path: images/directed_graph/dg_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
+  num_nodes: 3
+  resolution: 2048
   run: 4
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: ea273c01-09b2-4d86-a9ad-d71564c387c6
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 3, 4, 5, 6]'
+  expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
-  generation: 2
-  image_path: images/directed_graph/dg_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fd96c232-f39b-4fc6-a452-870d4d6ff746.png
-  num_nodes: 6
-  resolution: 512
+  generation: 1
+  id: a6e00960-ed65-4002-b769-33cbebc558c1
+  image_path: images/directed_graph/dg_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-937e4ab6-2ed4-4343-8a0a-32fa671532e4.png
+  num_nodes: 3
+  resolution: 2048
   run: 4
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 7a232d6e-cc7f-44ef-9ea5-d2afa88efb4b
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 3], 6: []}'
+  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 2], 6: [5]}'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/directed_graph/dg_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-dca84dae-43a0-4c05-9f54-c199e10f6c9c.png
+  id: 1f8c27a6-4018-411f-b754-3b8f45560baf
+  image_path: images/directed_graph/dg_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
   num_nodes: 6
-  resolution: 512
+  resolution: 256
   run: 5
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: b8a97b99-0772-413c-96b0-03de43373df8
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/directed_graph/dg_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-dca84dae-43a0-4c05-9f54-c199e10f6c9c.png
+  id: 8b00829e-d4ca-4935-8176-587b27f5b314
+  image_path: images/directed_graph/dg_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
   num_nodes: 6
-  resolution: 512
+  resolution: 256
   run: 5
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 4bce210a-05b5-4c89-b201-b765f1649a57
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/directed_graph/dg_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-dca84dae-43a0-4c05-9f54-c199e10f6c9c.png
+  id: b884d715-d5b5-4707-a799-d7baa00ab7b6
+  image_path: images/directed_graph/dg_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
   num_nodes: 6
-  resolution: 512
+  resolution: 256
   run: 5
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: e155b219-9597-4964-b2ec-b23cc39196f9
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 3], 6: []}'
+  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 2], 6: [5]}'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/directed_graph/dg_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-845631ec-f400-4fb2-b0dc-2c825d132721.png
+  id: d4ab4f95-705e-406e-a5af-78fb468d3106
+  image_path: images/directed_graph/dg_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
   num_nodes: 6
   resolution: 512
   run: 6
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: 1a36c9dc-ed09-4bed-97f4-63965bd354e9
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/directed_graph/dg_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-845631ec-f400-4fb2-b0dc-2c825d132721.png
+  id: ad12ce2a-1f48-4013-bd50-5f7259cb1b3c
+  image_path: images/directed_graph/dg_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
   num_nodes: 6
   resolution: 512
   run: 6
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 53e45f4d-d2d0-49cb-aa6f-9516c9669a06
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/directed_graph/dg_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-845631ec-f400-4fb2-b0dc-2c825d132721.png
+  id: cb75e140-ac6a-4bc5-bec5-ae556ee29251
+  image_path: images/directed_graph/dg_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
   num_nodes: 6
   resolution: 512
   run: 6
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: aad81319-142a-4f63-8ca5-e74c478fc1e8
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3, 7, 8], 3: [4, 9, 6, 7], 4: [5, 3], 5: [6], 6: [7, 5, 1], 7: [8, 3], 8: [9], 9: [4]}'
+  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 2], 6: [5]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: f920473a-df5f-4d59-9850-974cf5008b38
+  image_path: images/directed_graph/dg_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: directed_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 44dea3f6-0a61-47b8-801e-df452d9c363a
+  image_path: images/directed_graph/dg_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: directed_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: f5dea701-7789-4a56-b00d-70fcb687d88a
+  image_path: images/directed_graph/dg_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: directed_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [3], 3: [4], 4: [5], 5: [6, 2], 6: [5]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 2ae7f259-87f6-4b73-8051-5e21dfadd06f
+  image_path: images/directed_graph/dg_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: directed_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 8876754e-b8e6-4003-8564-2f94d17f8ad1
+  image_path: images/directed_graph/dg_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: directed_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 5ca1ae62-005b-4c2c-bfd7-f18d0327f7d9
+  image_path: images/directed_graph/dg_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-7a5b4e84-d79e-4048-ab59-5eab9c469359.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: directed_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [3], 3: [4, 7, 6], 4: [5], 5: [6], 6: [7], 7: [8], 8: [9,
+    1], 9: []}'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-e4289da0-ad13-4cfd-b6e6-bbf297486514.png
+  id: fb930c6d-f7c9-49bc-a85b-38bf51615e07
+  image_path: images/directed_graph/dg_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
-  resolution: 512
-  run: 7
+  resolution: 256
+  run: 9
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: 0a74cd62-cb72-4b0e-b8e0-b8ccd4abb594
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-e4289da0-ad13-4cfd-b6e6-bbf297486514.png
+  id: 8140c5b6-07af-4fad-aedd-562ad859554a
+  image_path: images/directed_graph/dg_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
-  resolution: 512
-  run: 7
+  resolution: 256
+  run: 9
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 31d5152f-3770-4938-9223-d37b4110b0fe
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 3, 7, 8, 4, 9, 6, 5]'
+  expected: '[1, 2, 3, 4, 7, 6, 5, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-e4289da0-ad13-4cfd-b6e6-bbf297486514.png
+  id: 67d9df52-8ca2-4acc-8214-89e3baab5346
+  image_path: images/directed_graph/dg_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
-  resolution: 512
-  run: 7
+  resolution: 256
+  run: 9
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: c7856546-6b2c-416b-b164-5cac4b03e2cd
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3, 7, 8], 3: [4, 9, 6, 7], 4: [5, 3], 5: [6], 6: [7, 5, 1], 7: [8, 3], 8: [9], 9: [4]}'
+  expected: '{1: [2], 2: [3], 3: [4, 7, 6], 4: [5], 5: [6], 6: [7], 7: [8], 8: [9,
+    1], 9: []}'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-395d7843-2ef3-4189-8fe0-206a59bb1c45.png
+  id: 8a22b03f-0a5d-4671-833c-2a238edd8ab0
+  image_path: images/directed_graph/dg_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
   resolution: 512
-  run: 8
+  run: 10
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: f29a0f7b-52da-42f8-8c14-a6e5c5c50383
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-395d7843-2ef3-4189-8fe0-206a59bb1c45.png
+  id: d73cfcd2-35a7-405f-8ddf-432ad49e93ac
+  image_path: images/directed_graph/dg_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
   resolution: 512
-  run: 8
+  run: 10
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 7e85b274-c0b8-4181-a378-9637a166bec6
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 3, 7, 8, 4, 9, 6, 5]'
+  expected: '[1, 2, 3, 4, 7, 6, 5, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-395d7843-2ef3-4189-8fe0-206a59bb1c45.png
+  id: a33ef7a2-99de-446c-85c4-0ed3b00417b2
+  image_path: images/directed_graph/dg_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
   resolution: 512
-  run: 8
+  run: 10
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 2bb9c7b3-419b-40b0-ae64-c6c6e3814c87
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3, 7, 8], 3: [4, 9, 6, 7], 4: [5, 3], 5: [6], 6: [7, 5, 1], 7: [8, 3], 8: [9], 9: [4]}'
+  expected: '{1: [2], 2: [3], 3: [4, 7, 6], 4: [5], 5: [6], 6: [7], 7: [8], 8: [9,
+    1], 9: []}'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-8303db46-2dcd-4e1c-974d-6cb89d94d9ee.png
+  id: 356a8e66-1488-4a9b-9807-e651a13850be
+  image_path: images/directed_graph/dg_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
-  resolution: 512
-  run: 9
+  resolution: 1024
+  run: 11
   structure: directed_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the directed graph.
-  uuid: 4260dc44-df3d-41ea-b232-d57196a85440
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-8303db46-2dcd-4e1c-974d-6cb89d94d9ee.png
+  id: 1e324438-ef77-40b5-8983-1d599630f383
+  image_path: images/directed_graph/dg_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
-  resolution: 512
-  run: 9
+  resolution: 1024
+  run: 11
   structure: directed_graph
-  text: Provide a single-line python list representing the depth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: 4fbb5eb2-9069-4590-b590-1b4e7b0eb158
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 3, 7, 8, 4, 9, 6, 5]'
+  expected: '[1, 2, 3, 4, 7, 6, 5, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/directed_graph/dg_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-8303db46-2dcd-4e1c-974d-6cb89d94d9ee.png
+  id: ae6635bb-c359-4363-93b9-1b91e3702ad2
+  image_path: images/directed_graph/dg_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
   num_nodes: 9
-  resolution: 512
-  run: 9
+  resolution: 1024
+  run: 11
   structure: directed_graph
-  text: Provide a single-line python list representing the breadth-first search of the directed graph starting from the vertex with the smallest value.
-  uuid: d69f4100-a7c8-47e5-b5b3-63fe4331a371
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [3], 3: [4, 7, 6], 4: [5], 5: [6], 6: [7], 7: [8], 8: [9,
+    1], 9: []}'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 29974fe4-5193-4b7d-8922-02002826421f
+  image_path: images/directed_graph/dg_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: directed_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the directed graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: a9e4abaf-bb8d-403a-8111-1014dddc95b5
+  image_path: images/directed_graph/dg_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: directed_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 7, 6, 5, 8, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 67e64a41-af97-410d-a18a-fdb70d8295fd
+  image_path: images/directed_graph/dg_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-60c85bd6-cab7-475c-a1e4-1630b106fe86.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: directed_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the directed graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'

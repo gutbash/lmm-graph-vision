@@ -3,376 +3,542 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-7f31792b-a790-4674-adc5-7b25068df791.png
+  id: d1b98545-6ca9-481d-8870-0b92ec902b6f
+  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
-  resolution: 512
+  resolution: 256
   run: 1
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: 09a0069d-40a7-41a9-81c4-ce9372004573
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-7f31792b-a790-4674-adc5-7b25068df791.png
+  id: f62c6ca1-709a-48d6-8084-0a947188936d
+  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
-  resolution: 512
+  resolution: 256
   run: 1
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 42797151-7ad7-421c-8890-2621858b4ccf
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-7f31792b-a790-4674-adc5-7b25068df791.png
+  id: 7a8a5ed4-92af-4ca6-9f2d-9bc33070ed6b
+  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
-  resolution: 512
+  resolution: 256
   run: 1
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 7177839c-e1d2-42bb-94b8-57ae64ed2785
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '{1: [2, 3], 2: [1, 3], 3: [2, 1]}'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-19fd48e6-1ef8-4991-8835-907569c70c40.png
+  id: d808a564-4229-4bc6-a2ec-22dc60a0db57
+  image_path: images/undirected_graph/ug_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
   resolution: 512
   run: 2
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: 5907c5d4-b750-4e9e-a156-7b2f3535d9bb
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-19fd48e6-1ef8-4991-8835-907569c70c40.png
+  id: 0546d31e-43c3-4535-af5a-40a019159e87
+  image_path: images/undirected_graph/ug_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
   resolution: 512
   run: 2
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 6f976e78-cc29-48d8-9e42-bc9ad02b492c
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-19fd48e6-1ef8-4991-8835-907569c70c40.png
+  id: f96893c4-602a-46d4-84d1-6f1f545a85f0
+  image_path: images/undirected_graph/ug_run-2_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
   resolution: 512
   run: 2
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 71586887-3d40-4738-b58d-fc012d86f88b
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '{1: [2, 3], 2: [1, 3], 3: [2, 1]}'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-070ee17e-c10d-4d46-bbea-48ffcade2eb5.png
+  id: 66eab84b-a596-4754-864a-6b8286402b51
+  image_path: images/undirected_graph/ug_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
-  resolution: 512
+  resolution: 1024
   run: 3
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: 980686b4-3b0f-49bf-8be1-9e598cdc82cd
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-070ee17e-c10d-4d46-bbea-48ffcade2eb5.png
+  id: 6922f95d-7f3e-4589-a583-03041f2f19c7
+  image_path: images/undirected_graph/ug_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
-  resolution: 512
+  resolution: 1024
   run: 3
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 0d22ee58-c493-4850-90b1-c42c10eede45
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-070ee17e-c10d-4d46-bbea-48ffcade2eb5.png
+  id: a87eb29f-c8f8-4ffe-9b7b-38036772933d
+  image_path: images/undirected_graph/ug_run-3_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
   num_nodes: 3
-  resolution: 512
+  resolution: 1024
   run: 3
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: b0231892-fcdd-415e-8e95-6f937e6d7955
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2, 6], 2: [1, 3, 5], 3: [2, 4], 4: [3, 5], 5: [4, 6, 2], 6: [5, 1]}'
+  expected: '{1: [2, 3], 2: [1, 3], 3: [2, 1]}'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: 621ec7e4-e014-4960-bcfd-10cd7ae1ca6e
+  image_path: images/undirected_graph/ug_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
+  num_nodes: 3
+  resolution: 2048
+  run: 4
+  structure: undirected_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: c82f01ca-dbac-4bef-b261-d47481d8272e
+  image_path: images/undirected_graph/ug_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
+  num_nodes: 3
+  resolution: 2048
+  run: 4
+  structure: undirected_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  id: ec8e8ca3-5985-4b2f-82cf-a702ded45ef9
+  image_path: images/undirected_graph/ug_run-4_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-ffb1d235-b4f6-4da1-87b2-f42605eef1c7.png
+  num_nodes: 3
+  resolution: 2048
+  run: 4
+  structure: undirected_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [1, 3, 4], 3: [2, 4, 5], 4: [3, 5, 2], 5: [4, 6, 3], 6: [5]}'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/undirected_graph/ug_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-5cdccb92-4118-451d-b8cf-a13ac597e5df.png
+  id: 0f6d3484-a0e9-4a01-991a-f43bf5fee3e3
+  image_path: images/undirected_graph/ug_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
   num_nodes: 6
-  resolution: 512
-  run: 4
+  resolution: 256
+  run: 5
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: faf76857-42a9-47a2-b6c9-330dab667ea2
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/undirected_graph/ug_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-5cdccb92-4118-451d-b8cf-a13ac597e5df.png
+  id: 7e313912-8e60-4122-9833-7624776e5f62
+  image_path: images/undirected_graph/ug_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
   num_nodes: 6
-  resolution: 512
-  run: 4
-  structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 7fe89494-ec23-4428-a280-fd856f11d514
-  variation: 1
-  width: 1.0
-- color: '#fee4b3'
-  expected: '[1, 2, 6, 3, 5, 4]'
-  font: sans-serif
-  format: 1
-  generation: 2
-  image_path: images/undirected_graph/ug_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-5cdccb92-4118-451d-b8cf-a13ac597e5df.png
-  num_nodes: 6
-  resolution: 512
-  run: 4
-  structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 19a81f04-c4e8-4868-8074-5f62c980099b
-  variation: 1
-  width: 1.0
-- color: '#fee4b3'
-  expected: '{1: [2, 6], 2: [1, 3, 5], 3: [2, 4], 4: [3, 5], 5: [4, 6, 2], 6: [5, 1]}'
-  font: sans-serif
-  format: 1
-  generation: 2
-  image_path: images/undirected_graph/ug_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a740cf87-2fb5-43cf-915e-8aa7a83b8899.png
-  num_nodes: 6
-  resolution: 512
+  resolution: 256
   run: 5
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: fee86b46-e19a-4b50-986e-f30165ac73ca
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/undirected_graph/ug_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a740cf87-2fb5-43cf-915e-8aa7a83b8899.png
+  id: 949e1f8e-0761-4bee-875b-57752c57dcbf
+  image_path: images/undirected_graph/ug_run-5_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
   num_nodes: 6
-  resolution: 512
+  resolution: 256
   run: 5
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 110e692a-8e2d-4ad7-8fd3-f846a1b9d10e
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 6, 3, 5, 4]'
+  expected: '{1: [2], 2: [1, 3, 4], 3: [2, 4, 5], 4: [3, 5, 2], 5: [4, 6, 3], 6: [5]}'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/undirected_graph/ug_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a740cf87-2fb5-43cf-915e-8aa7a83b8899.png
-  num_nodes: 6
-  resolution: 512
-  run: 5
-  structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: e6613073-ebb1-4606-9de0-4a1c0b411c39
-  variation: 2
-  width: 1.0
-- color: '#fee4b3'
-  expected: '{1: [2, 6], 2: [1, 3, 5], 3: [2, 4], 4: [3, 5], 5: [4, 6, 2], 6: [5, 1]}'
-  font: sans-serif
-  format: 1
-  generation: 2
-  image_path: images/undirected_graph/ug_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-20e8a3f9-63ba-40bb-945f-8cd6864d8983.png
+  id: 4215eefc-1642-4df8-8e47-cb1c15781049
+  image_path: images/undirected_graph/ug_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
   num_nodes: 6
   resolution: 512
   run: 6
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: 9f9316a7-4da2-4871-a4f4-8dca4531da99
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/undirected_graph/ug_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-20e8a3f9-63ba-40bb-945f-8cd6864d8983.png
+  id: 34e88a7e-d070-4e93-b9cb-182ab39e71a9
+  image_path: images/undirected_graph/ug_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
   num_nodes: 6
   resolution: 512
   run: 6
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 445e422d-945a-49d2-a8cf-96cf1ac5a348
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 6, 3, 5, 4]'
+  expected: '[1, 2, 3, 4, 5, 6]'
   font: sans-serif
   format: 1
   generation: 2
-  image_path: images/undirected_graph/ug_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-20e8a3f9-63ba-40bb-945f-8cd6864d8983.png
+  id: 3ccccda4-2703-4e82-ab76-5cd126d607c7
+  image_path: images/undirected_graph/ug_run-6_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
   num_nodes: 6
   resolution: 512
   run: 6
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 96fbac96-ce31-4ff8-8f58-60fba3b8979a
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2, 4], 2: [1, 3, 4], 3: [2, 4], 4: [3, 5, 1, 2], 5: [4, 6, 8], 6: [5, 7], 7: [6, 8], 8: [7, 9, 5], 9: [8]}'
+  expected: '{1: [2], 2: [1, 3, 4], 3: [2, 4, 5], 4: [3, 5, 2], 5: [4, 6, 3], 6: [5]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 97033726-804d-441f-a4ff-5af1f969e1e7
+  image_path: images/undirected_graph/ug_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: undirected_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 813013d6-0e42-4fc5-95de-43471c1a6804
+  image_path: images/undirected_graph/ug_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: undirected_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 07cad5ad-dc46-4bb0-8e83-9cc5bddf8642
+  image_path: images/undirected_graph/ug_run-7_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
+  num_nodes: 6
+  resolution: 1024
+  run: 7
+  structure: undirected_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [1, 3, 4], 3: [2, 4, 5], 4: [3, 5, 2], 5: [4, 6, 3], 6: [5]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 242212b1-23aa-47dc-b8ca-70c69c25d6ae
+  image_path: images/undirected_graph/ug_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: undirected_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: e3bf3529-611e-4828-8d7e-28230cdbcba7
+  image_path: images/undirected_graph/ug_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: undirected_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  id: 819ba8b0-06d3-44b4-9063-ae425aec6a73
+  image_path: images/undirected_graph/ug_run-8_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-cf625faa-a289-41f6-acb7-e2730b8ca1f1.png
+  num_nodes: 6
+  resolution: 2048
+  run: 8
+  structure: undirected_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2, 5, 4], 2: [1, 3], 3: [2, 4], 4: [3, 5, 9, 7, 1], 5: [4, 6, 1],
+    6: [5, 7], 7: [6, 8, 4, 9], 8: [7, 9], 9: [8, 4, 7]}'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6a4f6150-138a-4bc9-9486-f9641c4ceced.png
+  id: 29d18d9e-12d7-4f28-ae62-dc1a54d00b8c
+  image_path: images/undirected_graph/ug_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
-  resolution: 512
-  run: 7
+  resolution: 256
+  run: 9
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: 529528e4-9620-4e15-8cc0-294bda2f14cd
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6a4f6150-138a-4bc9-9486-f9641c4ceced.png
+  id: 3bd8b7ea-385c-4eb6-bdbf-528d13aba01b
+  image_path: images/undirected_graph/ug_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
-  resolution: 512
-  run: 7
+  resolution: 256
+  run: 9
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: c50d2c18-8f6a-4732-b95a-a1b346c56cd0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 4, 3, 5, 6, 8, 7, 9]'
+  expected: '[1, 2, 5, 4, 3, 6, 9, 7, 8]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6a4f6150-138a-4bc9-9486-f9641c4ceced.png
+  id: 7fef7409-2cd5-4ac9-a748-fd9a868dae8c
+  image_path: images/undirected_graph/ug_run-9_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-256_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
-  resolution: 512
-  run: 7
+  resolution: 256
+  run: 9
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: d4c2dcea-7070-48da-bf98-79750af70930
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2, 4], 2: [1, 3, 4], 3: [2, 4], 4: [3, 5, 1, 2], 5: [4, 6, 8], 6: [5, 7], 7: [6, 8], 8: [7, 9, 5], 9: [8]}'
+  expected: '{1: [2, 5, 4], 2: [1, 3], 3: [2, 4], 4: [3, 5, 9, 7, 1], 5: [4, 6, 1],
+    6: [5, 7], 7: [6, 8, 4, 9], 8: [7, 9], 9: [8, 4, 7]}'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-96a5f647-39ce-4783-8a37-d9b4611b6d78.png
+  id: 54e056ba-112b-4dc4-8142-c0453886860f
+  image_path: images/undirected_graph/ug_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
   resolution: 512
-  run: 8
+  run: 10
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: f40d55b3-e0b4-499a-8182-fd9c3170d6b3
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-96a5f647-39ce-4783-8a37-d9b4611b6d78.png
+  id: 7286a0f6-11e0-4296-a26c-04f2acd05351
+  image_path: images/undirected_graph/ug_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
   resolution: 512
-  run: 8
+  run: 10
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: d0dc64fb-b9b2-41a3-af81-cd82909a8457
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 4, 3, 5, 6, 8, 7, 9]'
+  expected: '[1, 2, 5, 4, 3, 6, 9, 7, 8]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-96a5f647-39ce-4783-8a37-d9b4611b6d78.png
+  id: dc99906b-88b6-4963-a47c-2a6ef8027b79
+  image_path: images/undirected_graph/ug_run-10_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
   resolution: 512
-  run: 8
+  run: 10
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 1a8eec39-fd16-4f0f-a3c1-8638d14bd382
-  variation: 2
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '{1: [2, 4], 2: [1, 3, 4], 3: [2, 4], 4: [3, 5, 1, 2], 5: [4, 6, 8], 6: [5, 7], 7: [6, 8], 8: [7, 9, 5], 9: [8]}'
+  expected: '{1: [2, 5, 4], 2: [1, 3], 3: [2, 4], 4: [3, 5, 9, 7, 1], 5: [4, 6, 1],
+    6: [5, 7], 7: [6, 8, 4, 9], 8: [7, 9], 9: [8, 4, 7]}'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-097b2461-f029-4953-bc26-c11807915e59.png
+  id: ff52349c-9d4e-47ae-813f-5a6971fd47d0
+  image_path: images/undirected_graph/ug_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
-  resolution: 512
-  run: 9
+  resolution: 1024
+  run: 11
   structure: undirected_graph
-  text: Provide a single-line python dictionary representing the adjacency list of the undirected graph.
-  uuid: 197ef5c3-c55c-447d-8432-dba37ff60451
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-097b2461-f029-4953-bc26-c11807915e59.png
+  id: 2fe37eeb-72fb-4fc7-818a-120190d7cea3
+  image_path: images/undirected_graph/ug_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
-  resolution: 512
-  run: 9
+  resolution: 1024
+  run: 11
   structure: undirected_graph
-  text: Provide a single-line python list representing the depth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 7a6488e0-686e-4e90-a685-f3b6601dcfe0
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
 - color: '#fee4b3'
-  expected: '[1, 2, 4, 3, 5, 6, 8, 7, 9]'
+  expected: '[1, 2, 5, 4, 3, 6, 9, 7, 8]'
   font: sans-serif
   format: 1
   generation: 3
-  image_path: images/undirected_graph/ug_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-097b2461-f029-4953-bc26-c11807915e59.png
+  id: 3aa16823-94b6-4705-828d-2002c7a013ef
+  image_path: images/undirected_graph/ug_run-11_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-1024_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
   num_nodes: 9
-  resolution: 512
-  run: 9
+  resolution: 1024
+  run: 11
   structure: undirected_graph
-  text: Provide a single-line python list representing the breadth-first search of the undirected graph starting from the vertex with the smallest value.
-  uuid: 9f68ef4a-adc7-4083-baa9-a1b7b3f8ded3
-  variation: 3
-  width: 1.0
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '{1: [2, 5, 4], 2: [1, 3], 3: [2, 4], 4: [3, 5, 9, 7, 1], 5: [4, 6, 1],
+    6: [5, 7], 7: [6, 8, 4, 9], 8: [7, 9], 9: [8, 4, 7]}'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 4fef2e24-65ec-4edd-a411-249177f24383
+  image_path: images/undirected_graph/ug_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: undirected_graph
+  text: Provide a single-line python dictionary representing the adjacency list of
+    the undirected graph.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 3b63f97c-0b47-42c7-87fc-06fbe747b6dc
+  image_path: images/undirected_graph/ug_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: undirected_graph
+  text: Provide a single-line python list representing the depth-first search of the
+    undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'
+- color: '#fee4b3'
+  expected: '[1, 2, 5, 4, 3, 6, 9, 7, 8]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  id: 94d31153-3cf8-4f3b-9896-b9bddf4bc552
+  image_path: images/undirected_graph/ug_run-12_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-2048_idn-a4ef2f25-2c31-4ee8-a1c9-eba171f24278.png
+  num_nodes: 9
+  resolution: 2048
+  run: 12
+  structure: undirected_graph
+  text: Provide a single-line python list representing the breadth-first search of
+    the undirected graph starting from the vertex with the smallest value.
+  variation: 1
+  width: '1.0'

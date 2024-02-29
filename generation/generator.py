@@ -2,7 +2,7 @@
 
 from generation.structures.tree import BinaryTree, BinarySearchTree
 from generation.structures.graph import UndirectedGraph, DirectedGraph
-from utils.serializer import add_objects_async
+from utils.serializer import add_object
 from utils.colors import Colors
 from utils.logger import Logger
 from utils.files import validate_path, check_path_exists, has_negative_value
@@ -22,6 +22,11 @@ Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
 Width = Literal['0.5', '1.0', '1.5']
 
+colors = ['#abe0f9', '#fee4b3', '#eeeeee']
+shapes = ['o', 's', 'd']
+fonts = ['sans-serif', 'serif', 'monospace']
+widths = ['0.5', '1.0', '1.5']
+
 Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
 
 StructureAbbreviation = Literal['bit', 'bst', 'udg', 'dig']
@@ -39,7 +44,7 @@ class Generator:
     ```
     """
 
-    async def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None) -> Type[Structure]:
+    def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None) -> Type[Structure]:
         """
         Generates an empty structure instance and returns it.
         
@@ -67,7 +72,7 @@ class Generator:
         
         return structure_instance
 
-    async def fill_structure(self, structure_instance: Type[Structure]) -> Type[Structure]:
+    def fill_structure(self, structure_instance: Type[Structure]) -> Type[Structure]:
         """
         Fills the structure instance and returns it.
         
@@ -93,7 +98,7 @@ class Generator:
         
         return structure_instance
 
-    async def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512) -> None:
+    def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, yaml: bool = False, yaml_path: Path = Path('.'), yaml_name: Optional[str] = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512) -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -107,6 +112,12 @@ class Generator:
             the text to add to the YAML file
         expected : str (default: None)
             the expected output of the model
+        yaml : bool (default: False)
+            whether or not to add the object to a YAML file
+        yaml_path : Path (default: Path('.'))
+            the path to the YAML file
+        yaml_name : Optional[str] (default: None)
+            the name of the YAML file
         save : bool (default: False)
             whether or not to save the image
         save_path : Path (default: Path('.'))
@@ -145,11 +156,19 @@ class Generator:
                 return
             if save_path != Path('.') or save_name:
                 logger.warning("The save_path and save_name parameters are ignored since save is False.")
+            if yaml:
+                logger.warning("The yaml parameter is ignored since save is False.")
 
+        if not yaml:
+            if yaml_path != Path('.') or yaml_name:
+                logger.warning("The yaml_path and yaml_name parameters are ignored since yaml is False.")
+        if not yaml_name:
+            yaml_name = structure_instance.yaml_structure_type + '.yaml'
         if not save_name:
             save_name = structure_instance.default_file_name
             
         filepath = validate_path(save_path, save_name, '.png')
+        datapath = validate_path(yaml_path, yaml_name, '.yaml')
 
         if has_negative_value([run, generation, variation, format]):
             raise ValueError("Generation, variation, and format must be non-negative integers.")
@@ -164,22 +183,28 @@ class Generator:
         
         if save:
             logger.info(f"{structure_instance.formal_name} image saved to {filepath}.")
-        return {
-            'uuid': str(uuid),
-            'text': text.replace('\n', '') if text else None,
-            'expected': expected,
-            'structure': structure_instance.yaml_structure_type,
-            'run': run,
-            'generation': generation,
-            'variation': variation,
-            'format': format,
-            'image_path': str(filepath),
-            'color': color,
-            'font': font,
-            'width': float(width),
-            'num_nodes': num_nodes,
-            'resolution': resolution,
-        }
+            if yaml:
+                try:
+                    add_object(
+                        uuid=uuid,
+                        file_path=datapath,
+                        text=text,
+                        image_path=filepath,
+                        expected=expected,
+                        structure=structure_instance.yaml_structure_type,
+                        run=run,
+                        generation=generation,
+                        variation=variation,
+                        format=format,
+                        color=color,
+                        font=font,
+                        width=width,
+                        num_nodes=num_nodes,
+                        resolution=resolution,
+                    )
+                    logger.info(f"{structure_instance.formal_name} added to YAML file at {datapath}.")
+                except Exception as e:
+                    logger.error(f"Failed to add binary tree to YAML: {e}")
                     
 class BatchGenerator(Generator):
     """
@@ -200,7 +225,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False, random_num_nodes: bool = True, resolutions: list = [512]) -> None:
+    def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False, random_num_nodes: bool = True, resolutions: list = [512]) -> None:
         """
         Generates a batch of data structures.
         
@@ -225,7 +250,7 @@ class BatchGenerator(Generator):
         -------
         ```python
         batch_generator = BatchGenerator()
-        await batch_generator.generate_batch(
+        batch_generator.generate_batch(
             structure_class=BinaryTree,
             type='bit',
             yaml_name='binary_tree.yaml',
@@ -255,11 +280,8 @@ class BatchGenerator(Generator):
           variation: 1
         ```
         """
-        yaml_objects = []
         run = 1
         format = 1
-        
-        check_path_exists(save_path)
         
         for file_path in save_path.iterdir():
             if file_path.is_file() or file_path.is_symlink():
@@ -285,10 +307,11 @@ class BatchGenerator(Generator):
                 test_path = check_path_exists(Path('images/'))
                 test_name = 'test.png'
                 
-                structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes)
-                structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
-                await self.generator.draw_structure(
+                structure_generated = self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes)
+                structure_filled = self.generator.fill_structure(structure_instance=structure_generated)
+                self.generator.draw_structure(
                     structure_instance=structure_filled,
+                    yaml=False,
                     save=True,
                     save_path=test_path,
                     save_name=test_name,
@@ -306,18 +329,12 @@ class BatchGenerator(Generator):
             # create variations of each base structure
             for variation in range(1, variations + 1):
                 
-                structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
+                structure_filled = self.generator.fill_structure(structure_instance=structure_generated)
                         
                 if visual_combinations:
                     
-                    colors = ['#abe0f9', '#fee4b3', '#eeeeee']
-                    shapes = ['o', 's', 'd']
-                    fonts = ['sans-serif', 'serif', 'monospace']
-                    width = ['0.5', '1.0', '1.5']
-                    
                     format_combinations = list(itertools.product(width, colors, fonts))
-                    format = 1
-                    
+
                     for width, color, font in format_combinations:
                         
                         uuid = uuid4()
@@ -336,11 +353,14 @@ class BatchGenerator(Generator):
                                 else:
                                     logger.error(f"Method '{method_name}' not found in {structure_filled}.")
                                 
-                                object = await self.generator.draw_structure(
+                                self.generator.draw_structure(
                                     uuid=task_id,
                                     structure_instance=structure_filled,
                                     text=text['text'],
                                     expected=str(expected),
+                                    yaml=True,
+                                    yaml_path=yaml_path,
+                                    yaml_name=yaml_name,
                                     save=True,
                                     save_path=save_path,
                                     save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-{width.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_res-{str(res)}_idn-{str(uuid)}.png",
@@ -355,8 +375,6 @@ class BatchGenerator(Generator):
                                     num_nodes=len(structure_filled.graph.nodes),
                                     resolution=res,
                                 )
-                                
-                                yaml_objects.append(object)
                                 
                             run += 1
                             
@@ -380,11 +398,14 @@ class BatchGenerator(Generator):
                             else:
                                 logger.error(f"Method '{method_name}' not found in {structure_filled}.")
                                 
-                            object = await self.generator.draw_structure(
+                            self.generator.draw_structure(
                                 uuid=task_id,
                                 structure_instance=structure_filled,
                                 text=text['text'],
                                 expected=str(expected),
+                                yaml=True,
+                                yaml_path=yaml_path,
+                                yaml_name=yaml_name,
                                 save=True,
                                 save_path=save_path,
                                 save_name=f"{type}_run-{run}_gen-{generation}_var-{variation}_fmt-{format}_thk-10_clr-abe0f9_fnt-sansserif_res-{str(res)}_idn-{str(uuid)}.png",
@@ -397,12 +418,4 @@ class BatchGenerator(Generator):
                                 resolution=res,
                             )
                             
-                            yaml_objects.append(object)
-                            
                         run += 1
-                        
-        try:
-            await add_objects_async(file_path=yaml_path_joined, objects=yaml_objects)
-            logger.info(f"{structure_filled.formal_name} added to YAML file at {yaml_path_joined}.")
-        except Exception as e:
-            logger.error(f"Failed to add binary tree to YAML: {e}")
