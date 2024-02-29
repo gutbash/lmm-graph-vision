@@ -12,6 +12,9 @@ import asyncio
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from uuid import uuid4
+import cProfile
+import pstats
 
 load_dotenv()
 
@@ -32,64 +35,72 @@ text_path = Path('text/')
 
 batch_generator = BatchGenerator()
 generation = 3
-variation = 1
-'''
-batch_generator.generate_batch(
-    structure_class=BinaryTree,
-    type='bit',
-    yaml_name='binary_tree.yaml',
-    yaml_path=yaml_path,
-    save_path=image_path_binary_tree,
-    text_path=text_path,
-    text_name='binary_tree_text.yaml',
-    generations=generation,
-    variations=variation,
-    random_num_nodes=False,
-    resolutions=[256, 512, 1024, 2048],
-)
+variation = 3
 
-batch_generator.generate_batch(
-    structure_class=BinarySearchTree,
-    type='bst',
-    yaml_name='binary_search_tree.yaml',
-    yaml_path=yaml_path,
-    save_path=image_path_binary_search_tree,
-    text_path=text_path,
-    text_name='binary_search_tree_text.yaml',
-    generations=generation,
-    variations=variation,
-    random_num_nodes=False,
-    resolutions=[256, 512, 1024, 2048],
-)
+async def run_batch():
+    
+    await batch_generator.generate_batch(
+        structure_class=BinaryTree,
+        type='bit',
+        yaml_name='binary_tree.yaml',
+        yaml_path=yaml_path,
+        save_path=image_path_binary_tree,
+        text_path=text_path,
+        text_name='binary_tree_text.yaml',
+        generations=generation,
+        variations=variation,
+        random_num_nodes=False,
+        resolutions=[512],
+        visual_combinations=False,
+    )
+    '''
+    batch_generator.generate_batch(
+        structure_class=BinarySearchTree,
+        type='bst',
+        yaml_name='binary_search_tree.yaml',
+        yaml_path=yaml_path,
+        save_path=image_path_binary_search_tree,
+        text_path=text_path,
+        text_name='binary_search_tree_text.yaml',
+        generations=generation,
+        variations=variation,
+        random_num_nodes=False,
+        resolutions=[512],
+        visual_combinations=False,
+    )
+    '''
+    await batch_generator.generate_batch(
+        structure_class=UndirectedGraph,
+        type='ug',
+        yaml_name='undirected_graph.yaml',
+        yaml_path=yaml_path,
+        save_path=image_path_undirected_graph,
+        text_path=text_path,
+        text_name='undirected_graph_text.yaml',
+        generations=generation,
+        variations=variation,
+        random_num_nodes=False,
+        resolutions=[512],
+        visual_combinations=False,
+    )
 
-batch_generator.generate_batch(
-    structure_class=UndirectedGraph,
-    type='ug',
-    yaml_name='undirected_graph.yaml',
-    yaml_path=yaml_path,
-    save_path=image_path_undirected_graph,
-    text_path=text_path,
-    text_name='undirected_graph_text.yaml',
-    generations=generation,
-    variations=variation,
-    random_num_nodes=False,
-    resolutions=[256, 512, 1024, 2048],
-)
-
-batch_generator.generate_batch(
-    structure_class=DirectedGraph,
-    type='dg',
-    yaml_name='directed_graph.yaml',
-    yaml_path=yaml_path,
-    save_path=image_path_directed_graph,
-    text_path=text_path,
-    text_name='directed_graph_text.yaml',
-    generations=generation,
-    variations=variation,
-    random_num_nodes=False,
-    resolutions=[256, 512, 1024, 2048],
-)
-'''
+    await batch_generator.generate_batch(
+        structure_class=DirectedGraph,
+        type='dg',
+        yaml_name='directed_graph.yaml',
+        yaml_path=yaml_path,
+        save_path=image_path_directed_graph,
+        text_path=text_path,
+        text_name='directed_graph_text.yaml',
+        generations=generation,
+        variations=variation,
+        random_num_nodes=False,
+        resolutions=[512],
+        visual_combinations=False,
+    )
+    
+#asyncio.run(run_batch())
+    
 ### TEST EVALUATION ###
 
 openai = OpenAI(api_key=openai_api_key)
@@ -105,7 +116,7 @@ deepmind_messages = [
 ]
 
 openai_csv = 'openai.csv'
-deepmind_csv = 'deepmind.csv'
+deepmind_csv = f'deepmind-{uuid4()}.csv'
 
 evaluator = Evaluator()
 
@@ -115,8 +126,8 @@ messages = deepmind_messages
 
 async def run_eval():
 
-    for structure in ['binary_tree', 'undirected_graph', 'directed_graph']:
+    for structure in ['undirected_graph', 'directed_graph']:
 
-        await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name='deepmind_resolution.csv', repeats=1)
+        await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=csv_name, repeats=3)
 
 asyncio.run(run_eval())
