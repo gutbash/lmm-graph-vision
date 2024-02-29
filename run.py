@@ -34,11 +34,11 @@ text_path = Path('text/')
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
-generation = 3
-variation = 3
+generation = 1
+variation = 1
 
 async def run_batch():
-    
+    '''
     await batch_generator.generate_batch(
         structure_class=BinaryTree,
         type='bit',
@@ -54,7 +54,7 @@ async def run_batch():
         visual_combinations=False,
     )
     '''
-    batch_generator.generate_batch(
+    await batch_generator.generate_batch(
         structure_class=BinarySearchTree,
         type='bst',
         yaml_name='binary_search_tree.yaml',
@@ -98,8 +98,8 @@ async def run_batch():
         resolutions=[512],
         visual_combinations=False,
     )
-    
-#asyncio.run(run_batch())
+    '''
+asyncio.run(run_batch())
     
 ### TEST EVALUATION ###
 
@@ -130,4 +130,4 @@ async def run_eval():
 
         await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=csv_name, repeats=3)
 
-asyncio.run(run_eval())
+#asyncio.run(run_eval())
