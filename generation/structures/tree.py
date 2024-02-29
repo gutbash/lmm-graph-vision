@@ -406,7 +406,10 @@ class BinarySearchTree(Tree):
         if node is None:
             return
 
+        # Ensure the node is added with the value attribute
+        T.add_node(node.value, value=node.value)  # This line ensures each node has a 'value' attribute
         self.pos[node.value] = (x, y)
+        
         if node.left:
             T.add_edge(node.value, node.left.value)
             self._graphize(T, node.left, x - 1, y - 1)
@@ -416,13 +419,17 @@ class BinarySearchTree(Tree):
 
     def fill(self) -> None:
         """
-        Fills the graph nodes with the given values
+        Fills the graph nodes with the given values, ensuring the graph reflects the new node values.
         """
         if self.root is None:
             return
 
         used_values = set()
         self._fill_node(self.root, 1, 99, used_values)
+
+        # Update the graph with the new node values
+        self.graph.clear()
+        self._graphize(self.graph, self.root)
 
     def _fill_node(self, node: Optional[Tree.TreeNode], min_val: int, max_val: int, used_values: set) -> None:
         if node is None or min_val > max_val:
