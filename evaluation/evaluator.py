@@ -13,7 +13,8 @@ import re
 import aiofiles
 import csv
 import asyncio
-from difflib import SequenceMatcher
+from evaluation.similarity import calculate_similarity_list, calculate_similarity_dict
+from ast import literal_eval
 
 logger = Logger(__name__)
 
@@ -167,16 +168,18 @@ class Evaluator:
           if type(clean_matches[0]) is tuple:
             clean_matches = [item for tup in matches for item in tup if item]
           clean_match = str(clean_matches[0])
-              
-          if prompt.get('expected').strip("`][}{`") in content:
-            match = True
-          else:
-            match = False
             
-          trans = str.maketrans('', '', '`[]{},')
-          matcher = SequenceMatcher(None, prompt.get('expected').translate(trans), clean_match.translate(trans))
-          similarity = matcher.ratio() * 100
-
+          express_expected = literal_eval(prompt.get('expected'))
+          express_actual = literal_eval(clean_match)
+          
+          if type(express_expected) is list and type(express_actual) is list:
+            similarity = calculate_similarity_list(express_expected, express_actual)
+          elif type(express_expected) is dict and type(express_actual) is dict:
+            similarity = calculate_similarity_dict(express_expected, express_actual)
+          else:
+            logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_actual)}')
+            return
+          
           # Append new data to the DataFrame
           new_row = {
             'run': prompt.get('run'),
@@ -188,9 +191,10 @@ class Evaluator:
             'text_prompt': str([message.content for message in message_list if type(message) == UserMessage or type(message) == BaseMessage]).strip("]["),
             'image_prompt': image_path,
             'model_response': content.replace('\n', '\\n'),
-            'extracted_response': str(clean_matches).strip("]["),
+            'extracted_response': clean_match,
             'expected_response': prompt.get('expected'),
-            'match': match,
+            'match': True if similarity >= 100.0 else False,
+            'similarity': similarity,
             'node_font': prompt.get('font'),
             'node_color': prompt.get('color'),
             'edge_width': prompt.get('width'),

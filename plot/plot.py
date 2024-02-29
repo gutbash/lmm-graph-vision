@@ -5,7 +5,7 @@ from pathlib import Path
 from uuid import uuid4
 
 # Load the dataset
-file_path = Path('results/deepmind-be4f51e5-b254-45ff-8679-596bb5756fba.csv')
+file_path = Path('results/deepmind-9b121cc7-045c-4e33-9351-363d5febbea0.csv')
 
 def match_rate_per_structure_grouped_by_resolution(file_path: Path) -> None:
     """
