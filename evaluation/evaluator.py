@@ -13,7 +13,6 @@ import re
 import aiofiles
 import csv
 import asyncio
-from difflib import SequenceMatcher
 
 logger = Logger(__name__)
 
@@ -36,7 +35,7 @@ class Evaluator:
   columns : list
       the columns for the DataFrame
   """
-  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'similarity', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
+  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
   
   async def evaluate(self, model: Model, messages: List[Messages], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
     """
@@ -92,13 +91,8 @@ class Evaluator:
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
     
-    try:
-      async with aiofiles.open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
-        prompts = yaml.safe_load(await file.read())
-    except Exception as e:
-      tb = traceback.format_exc()
-      logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
-      raise FileNotFoundError(f'YAML file {yaml_name} not found.')
+    async with aiofiles.open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
+      prompts = yaml.safe_load(await file.read()) or []
 
     # Check if the file exists, if not, create a new one with headers
     if not file_exists:
@@ -116,8 +110,6 @@ class Evaluator:
         chunk_size = 1
     
     prompt_chunks = [prompts[i:i + chunk_size] for i in range(0, len(prompts), chunk_size)]
-    
-    total_chunks = len(prompt_chunks)
     
     for chunk_index, chunk in enumerate(prompt_chunks):
       chunk_num = chunk_index + 1
@@ -188,10 +180,9 @@ class Evaluator:
             'text_prompt': str([message.content for message in message_list if type(message) == UserMessage or type(message) == BaseMessage]).strip("]["),
             'image_prompt': image_path,
             'model_response': content.replace('\n', '\\n'),
-            'extracted_response': clean_match,
+            'extracted_response': str(clean_matches).strip("]["),
             'expected_response': prompt.get('expected'),
             'match': match,
-            'similarity': similarity,
             'node_font': prompt.get('font'),
             'node_color': prompt.get('color'),
             'edge_width': prompt.get('width'),

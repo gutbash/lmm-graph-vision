@@ -11,7 +11,7 @@
   text: Provide a single-line python list representing the post-order traversal of the binary tree.
   uuid: 14a518c5-ded0-47ba-9584-38debfc2d405
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[15, 86, 5]'
   font: sans-serif
@@ -25,7 +25,7 @@
   text: Provide a single-line python list representing the pre-order traversal of the binary tree.
   uuid: 465b4a44-9d57-4250-985a-1d28228eeb0d
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[86, 15, 5]'
   font: sans-serif
@@ -39,7 +39,7 @@
   text: Provide a single-line python list representing the in-order traversal of the binary tree.
   uuid: 62ff709a-7070-4efc-8496-341775f3e831
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[86, 5, 15]'
   font: sans-serif
@@ -81,7 +81,7 @@
   text: Provide a single-line python list representing the in-order traversal of the binary tree.
   uuid: 9ed75f06-db04-44f4-82e4-18934d94e58f
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[86, 5, 15]'
   font: sans-serif
@@ -151,7 +151,7 @@
   text: Provide a single-line python list representing the pre-order traversal of the binary tree.
   uuid: e35f0fa5-ad0f-4935-8123-77455ce2abc8
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[86, 15, 5]'
   font: sans-serif
@@ -165,7 +165,7 @@
   text: Provide a single-line python list representing the in-order traversal of the binary tree.
   uuid: 40a7ff62-5d79-4a7b-929d-2fe7c1c129d1
   variation: 1
-  width: 1.0
+  width: '1.0'
 - color: '#fee4b3'
   expected: '[8, 56, 43]'
   font: sans-serif

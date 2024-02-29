@@ -9,4 +9,3 @@ pipreqs
 openai
 google-generativeai
 aiofiles
-seaborn

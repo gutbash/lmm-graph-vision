@@ -75,16 +75,12 @@ The following example does the same as the previous example:
 from generation.structures.tree import BinaryTree
 from generation.generator import Generator
 from pathlib import Path
-import asyncio
 
 generator = Generator()
 
-async def run_generation():
-    generated = await generator.generate_structure(structure_class=BinaryTree)
-    filled = await generator.fill_structure(structure_instance=generated)
-    await generator.draw_structure(structure_instance=filled, save=True, save_path=Path('test/'), save_name='test.png')
-
-asyncio.run(run_generation())
+generated = generator.generate_structure(structure_class=BinaryTree)
+filled = generator.fill_structure(structure_instance=generated)
+generator.draw_structure(structure_instance=filled, save=True, save_path=Path('test/'), save_name='test.png')
 ```
 </details>
 
@@ -101,12 +97,10 @@ The following example generates a batch of binary trees:
 from generation.structures.tree import BinaryTree
 from generation.generator import BatchGenerator
 from pathlib import Path
-import asyncio
 
 batch_generator = BatchGenerator()
 
-async def run_batch():
-    await batch_generator.generate_batch(
+batch_generator.generate_batch(
     structure_class=BinaryTree,
     type='bit',
     yaml_name='binary_tree.yaml',
@@ -115,8 +109,31 @@ async def run_batch():
     text_path=Path('text/'),
     text_name='binary_tree_text.yaml',
 )
-    
-asyncio.run(run_batch())
+```
+</details>
+
+<details closed>
+<summary>Models</summary>
+
+### Models
+
+>Create instances of models for evaluation.
+
+There are two models that can be created for evaluation: `OpenAI` and `DeepMind`.
+
+The following example creates instances of both models:
+```python
+from evaluation.models.openai import OpenAI
+from evaluation.models.deepmind import DeepMind
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
+deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
+
+openai = OpenAI(api_key=openai_api_key)
+deepmind = DeepMind(api_key=deepmind_api_key)
 ```
 </details>
 
@@ -182,47 +199,6 @@ deepmind_messages = [
 </details>
 
 <details closed>
-<summary>Models</summary>
-
-### Models
-
->Create instances of models for evaluation.
-
-There are two models that can be created for evaluation: `OpenAI` and `DeepMind`.
-
-The following example creates instances of both models:
-```python
-from evaluation.models.openai import OpenAI
-from evaluation.models.deepmind import DeepMind
-from dotenv import load_dotenv
-import asyncio
-import os
-
-load_dotenv()
-openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
-deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
-
-openai = OpenAI(api_key=openai_api_key)
-deepmind = DeepMind(api_key=deepmind_api_key)
-```
-
-You can directly run completions from these models given a list of messages:
-```python
-from evaluation.models.messages.message import UserMessage, SystemMessage, ImageMessage, BaseMessage
-
-openai_messages = [UserMessage(content="{{content}}", images=["{{image}}"])]
-deepmind_messages = [BaseMessage(content="{{content}}"), ImageMessage(image="{{image}}")]
-
-async def run_completions():
-
-    await openai.arun(messages=openai_messages)
-    await deepmind.arun(messages=deepmind_messages)
-    
-asyncio.run(run_completions())
-```
-</details>
-
-<details closed>
 <summary>Evaluation</summary>
 
 ### Evaluation
@@ -236,7 +212,6 @@ from evaluation.models.openai import OpenAI
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage
 from pathlib import Path
 from dotenv import load_dotenv
-import asyncio
 import os
 
 load_dotenv()
@@ -250,18 +225,14 @@ messages = [UserMessage(content="{{content}}", images=["{{image}}"])]
 
 evaluator = Evaluator()
 
-async def run_evaluation():
-
-    await evaluator.evaluate(
-        model=openai,
-        messages=messages,
-        yaml_path=Path('data/'),
-        yaml_name='binary_tree.yaml',
-        csv_path=Path('results/'),
-        csv_name='openai.csv',
-        repeats=3,
-    )
-    
-asyncio.run(run_evaluation())
+evaluator.evaluate(
+    model=openai,
+    messages=messages,
+    limit=10,
+    yaml_path=Path('data/'),
+    yaml_name='binary_tree.yaml',
+    csv_path=Path('results/'),
+    csv_name='openai.csv'
+)
 ```
 </details>
