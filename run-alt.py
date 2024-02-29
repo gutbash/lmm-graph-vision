@@ -169,7 +169,7 @@ def test_BSTree_traversal():
     # InORder = Left, Root, Right
     # PostOrder = Left, Right, Root
     bst = BinarySearchTree()
-    print("==={ Tree Traversal Test }===")
+    print("==={ BSTree Traversal Test }===")
     bst.generate()
     print("Generation Complete")
     bst.fill()
@@ -304,6 +304,6 @@ if __name__ == "__main__":
 
     # [TEST TREE TRAVERSAL] #
     #test_BTree_traversal() # WORKING x10
-    test_BSTree_traversal() # Traversals KeyError
+    test_BSTree_traversal() # WORKING x2
     #test_UndirectedGraph_traversals() # WORKING x5; WORKING WITH LOCAL x5
     #test_DirectedGraph_traversals() # WORKING x5; WORKING WITH LOCAL x5
