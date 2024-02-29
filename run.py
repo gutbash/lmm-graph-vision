@@ -34,11 +34,11 @@ text_path = Path('text/')
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
-generation = 3
+generation = 5
 variation = 3
 
 async def run_batch():
-    
+    '''
     await batch_generator.generate_batch(
         structure_class=BinaryTree,
         type='bit',
@@ -50,11 +50,11 @@ async def run_batch():
         generations=generation,
         variations=variation,
         random_num_nodes=False,
-        resolutions=[512],
+        resolutions=[256, 512, 1024, 2048],
         visual_combinations=False,
     )
     '''
-    batch_generator.generate_batch(
+    await batch_generator.generate_batch(
         structure_class=BinarySearchTree,
         type='bst',
         yaml_name='binary_search_tree.yaml',
@@ -65,7 +65,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
         random_num_nodes=False,
-        resolutions=[512],
+        resolutions=[256, 512, 1024, 2048],
         visual_combinations=False,
     )
     '''
@@ -80,7 +80,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
         random_num_nodes=False,
-        resolutions=[512],
+        resolutions=[256, 512, 1024, 2048],
         visual_combinations=False,
     )
 
@@ -95,11 +95,11 @@ async def run_batch():
         generations=generation,
         variations=variation,
         random_num_nodes=False,
-        resolutions=[512],
+        resolutions=[256, 512, 1024, 2048],
         visual_combinations=False,
     )
-    
-#asyncio.run(run_batch())
+    '''
+asyncio.run(run_batch())
     
 ### TEST EVALUATION ###
 
@@ -126,8 +126,8 @@ messages = deepmind_messages
 
 async def run_eval():
 
-    for structure in ['undirected_graph', 'directed_graph']:
+    for structure in ['binary_tree', 'undirected_graph', 'directed_graph']:
 
         await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=csv_name, repeats=3)
 
-asyncio.run(run_eval())
+#asyncio.run(run_eval())

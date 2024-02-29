@@ -121,6 +121,7 @@ class Evaluator:
     
     for chunk_index, chunk in enumerate(prompt_chunks):
       chunk_num = chunk_index + 1
+      logger.info(f'Running {chunk_num} of {total_chunks} chunks')
     
       coroutines = []
 
@@ -161,7 +162,7 @@ class Evaluator:
           
           pattern = r'(\{.*?\})|(\[.*?\])'
           matches = re.findall(pattern, content)
-          logger.info(f'Matches: {matches}')
+          #logger.info(f'Matches: {matches}')
           clean_matches = [match for group in matches for match in group if match]
           if type(clean_matches[0]) is tuple:
             clean_matches = [item for tup in matches for item in tup if item]
@@ -172,7 +173,8 @@ class Evaluator:
           else:
             match = False
             
-          matcher = SequenceMatcher(None, prompt.get('expected').strip("``"), clean_match)
+          trans = str.maketrans('', '', '`[]{},')
+          matcher = SequenceMatcher(None, prompt.get('expected').translate(trans), clean_match.translate(trans))
           similarity = matcher.ratio() * 100
 
           # Append new data to the DataFrame
@@ -203,12 +205,9 @@ class Evaluator:
           
       # Sleep after processing each chunk to respect the rate limit
       logger.info(f'Completed {chunk_num} of {total_chunks} chunks')
-      #if chunk_num < total_chunks:  # Avoid sleeping after the last chunk
-        
-      logger.info(f'Elapsed time: {(chunk_num) * REQUEST_INTERVAL} out of {total_chunks * REQUEST_INTERVAL} seconds')
-      logger.info(f'Sleeping for {REQUEST_INTERVAL} seconds to respect rate limit...')
-    
-      await asyncio.sleep(REQUEST_INTERVAL)
+      if chunk_num < total_chunks:  # Avoid sleeping after the last chunk
+        logger.info(f'Sleeping for {REQUEST_INTERVAL} seconds to respect rate limit...')
+        await asyncio.sleep(REQUEST_INTERVAL)
       
     async with aiofiles.open(save_path, mode='a', newline='') as file:
         writer = csv.writer(file)
