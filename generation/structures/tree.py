@@ -18,6 +18,8 @@ class Tree:
     """
     A class used to represent a tree
     """
+    
+    methods: list = ['pre_order', 'in_order', 'post_order']
         
     def pre_order(self, structure_instance) -> list:
         """

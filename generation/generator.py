@@ -93,7 +93,7 @@ class Generator:
         
         return structure_instance
 
-    async def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, text: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512) -> None:
+    async def draw_structure(self, structure_instance: Type[Structure], uuid: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, run: int = 0, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512) -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -103,8 +103,6 @@ class Generator:
             the structure instance to fill
         uuid : UUID (default: None)
             the UUID of the object
-        text : str (default: None)
-            the text to add to the YAML file
         expected : str (default: None)
             the expected output of the model
         save : bool (default: False)
@@ -166,7 +164,7 @@ class Generator:
             logger.info(f"{structure_instance.formal_name} image saved to {filepath}.")
         return {
             'uuid': str(uuid),
-            'text': text.replace('\n', '') if text else None,
+            'task_type': task_type,
             'expected': expected,
             'structure': structure_instance.yaml_structure_type,
             'run': run,
@@ -200,7 +198,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, text_path: Path, text_name: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False, random_num_nodes: bool = True, resolutions: list = [512]) -> None:
+    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False, random_num_nodes: bool = True, resolutions: list = [512]) -> None:
         """
         Generates a batch of data structures.
         
@@ -216,10 +214,6 @@ class BatchGenerator(Generator):
             the path to the YAML file
         save_path : Path
             the path to save the images
-        text_path : Path
-            the path to the text file
-        text_name : Path
-            the name of the text file
             
         Example
         -------
@@ -265,13 +259,10 @@ class BatchGenerator(Generator):
             if file_path.is_file() or file_path.is_symlink():
                 file_path.unlink()
         
-        text_path_joined = validate_path(text_path, text_name, '.yaml')
         yaml_path_joined = validate_path(yaml_path, yaml_name, '.yaml')
         
         with open(yaml_path_joined, 'w') as file:
             file.write('')
-        with open(text_path_joined, 'r') as file:
-            text_prompts = yaml.safe_load(file)
         
         # create base structures
         for generation in range(1, generations + 1):
@@ -324,22 +315,21 @@ class BatchGenerator(Generator):
                         
                         for res in resolutions:
                         
-                            for text in text_prompts:
+                            for method in structure_filled.methods:
 
                                 task_id = uuid4()
                                 
                                 expected = None
-                                method_name = text['type']
-                                if hasattr(structure_filled, method_name):
-                                    method_to_call = getattr(structure_filled, method_name)
+                                if hasattr(structure_filled, method):
+                                    method_to_call = getattr(structure_filled, method)
                                     expected = method_to_call(structure_filled)
                                 else:
-                                    logger.error(f"Method '{method_name}' not found in {structure_filled}.")
+                                    logger.error(f"Method '{method}' not found in {structure_filled}.")
                                 
                                 object = await self.generator.draw_structure(
                                     uuid=task_id,
                                     structure_instance=structure_filled,
-                                    text=text['text'],
+                                    task_type=method,
                                     expected=str(expected),
                                     save=True,
                                     save_path=save_path,
@@ -368,22 +358,21 @@ class BatchGenerator(Generator):
                     
                     for res in resolutions:
                     
-                        for text in text_prompts:
+                        for method in structure_filled.methods:
                         
                             task_id = uuid4()
                             
                             expected = None
-                            method_name = text['type']
-                            if hasattr(structure_filled, method_name):
-                                method_to_call = getattr(structure_filled, method_name)
+                            if hasattr(structure_filled, method):
+                                method_to_call = getattr(structure_filled, method)
                                 expected = method_to_call(structure_filled)
                             else:
-                                logger.error(f"Method '{method_name}' not found in {structure_filled}.")
+                                logger.error(f"Method '{method}' not found in {structure_filled}.")
                                 
                             object = await self.generator.draw_structure(
                                 uuid=task_id,
                                 structure_instance=structure_filled,
-                                text=text['text'],
+                                task_type=method,
                                 expected=str(expected),
                                 save=True,
                                 save_path=save_path,

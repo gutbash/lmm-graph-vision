@@ -1,6 +1,0 @@
-- text: Provide a single-line python list representing the post-order traversal of the binary tree.
-  type: post_order
-- text: Provide a single-line python list representing the pre-order traversal of the binary tree.
-  type: pre_order
-- text: Provide a single-line python list representing the in-order traversal of the binary tree.
-  type: in_order

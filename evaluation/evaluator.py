@@ -3,7 +3,7 @@
 from pathlib import Path
 import pandas as pd
 import yaml
-from typing import TypeVar, List
+from typing import TypeVar, List, TypedDict, Literal
 from utils.logger import Logger
 import copy
 from PIL import Image
@@ -22,8 +22,11 @@ from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
 
-Messages = TypeVar("Messages", UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage)
-
+Message = TypeVar("Message", UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage)
+Task = Literal['post_order', 'pre_order', 'in_order', 'breadth_first_search', 'depth_first_search', 'adjacency_list']
+class Prompt(TypedDict):
+  messages: List[Message]
+  task: Task
 Model = TypeVar('Model', OpenAI, DeepMind)
 
 class Evaluator:
@@ -37,9 +40,9 @@ class Evaluator:
   columns : list
       the columns for the DataFrame
   """
-  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'text_task', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'similarity', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
+  columns: list = ['run', 'n_generation', 'n_variation', 'n_format', 'structure', 'task_type', 'text_prompt', 'image_prompt', 'model_response', 'extracted_response', 'expected_response', 'match', 'similarity', 'node_font', 'node_color', 'edge_width', 'task_id', 'attempt', 'num_nodes', 'resolution']
   
-  async def evaluate(self, model: Model, messages: List[Messages], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
+  async def evaluate(self, model: Model, prompts: List[Prompt], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
     """
     Evaluates the model.
     
@@ -47,7 +50,7 @@ class Evaluator:
     ----------
     model : Model
         the model to evaluate
-    messages : List[Messages]
+    prompts : List[Prompt]
         the messages to evaluate
     limit : int (optional = None)
         the limit for the evaluation
@@ -95,7 +98,7 @@ class Evaluator:
     
     try:
       async with aiofiles.open(validate_path(yaml_path, yaml_name, '.yaml'), 'r') as file:
-        prompts = yaml.safe_load(await file.read())
+        tasks = yaml.safe_load(await file.read())
     except Exception as e:
       tb = traceback.format_exc()
       logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
@@ -116,26 +119,33 @@ class Evaluator:
     if chunk_size == 0:
         chunk_size = 1
     
-    prompt_chunks = [prompts[i:i + chunk_size] for i in range(0, len(prompts), chunk_size)]
+    task_chunks = [tasks[i:i + chunk_size] for i in range(0, len(tasks), chunk_size)]
     
-    total_chunks = len(prompt_chunks)
+    total_chunks = len(task_chunks)
     
-    for chunk_index, chunk in enumerate(prompt_chunks):
+    for chunk_index, chunk in enumerate(task_chunks):
       chunk_num = chunk_index + 1
       logger.info(f'Running {chunk_num} of {total_chunks} chunks')
     
       coroutines = []
 
-      for i, prompt in enumerate(chunk):
+      for i, task in enumerate(chunk):
         for attempt in range(repeats):
-          message_list = copy.deepcopy(messages)
+          
+          message_list = None
+          
+          for prompt in prompts:
+            #logger.info(f'Prompt task: {prompt.get("task")}, task type: {task.get("task_type")}')
+            if prompt.get("task") == task.get('task_type'):
+              message_list = copy.deepcopy(prompt.get('messages'))
+              break
 
-          image_path = Path(prompt.get('image_path'))
+          image_path = Path(task.get('image_path'))
           
           for message in message_list:
             if hasattr(message, 'content'):
-              if "{{content}}" in message.content:
-                message.content = message.content.replace("{{content}}", prompt.get('text'))
+              if "{{structure}}" in message.content:
+                message.content = message.content.replace("{{structure}}", task.get('structure').replace('_', ' '))
             if hasattr(message, 'images'):
                 images = []
                 for image in message.images:
@@ -147,7 +157,7 @@ class Evaluator:
                 if message.image == "{{image}}":
                     message.image = image_path
                         
-          coroutines.append((model.arun(message_list), prompt))
+          coroutines.append((model.arun(message_list), task))
           
       logger.info(f'Running {len(coroutines)} coroutines...')
 
@@ -158,7 +168,7 @@ class Evaluator:
           logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
           return
     
-      for result, prompt in zip(results, [prompt for _, prompt in coroutines]):
+      for result, task in zip(results, [task for _, task in coroutines]):
           content = result
           
           pattern = r'(\{.*?\})|(\[.*?\])'
@@ -169,7 +179,7 @@ class Evaluator:
             clean_matches = [item for tup in matches for item in tup if item]
           clean_match = str(clean_matches[0])
             
-          express_expected = literal_eval(prompt.get('expected'))
+          express_expected = literal_eval(task.get('expected'))
           express_actual = literal_eval(clean_match)
           
           if type(express_expected) is list and type(express_actual) is list:
@@ -182,26 +192,26 @@ class Evaluator:
           
           # Append new data to the DataFrame
           new_row = {
-            'run': prompt.get('run'),
-            'n_generation': prompt.get('generation'),
-            'n_variation': prompt.get('variation'),
-            'n_format': prompt.get('format'),
-            'structure': prompt.get('structure'),
-            'text_task': str(prompt.get('text')),
+            'run': task.get('run'),
+            'n_generation': task.get('generation'),
+            'n_variation': task.get('variation'),
+            'n_format': task.get('format'),
+            'structure': task.get('structure'),
+            'task_type': task.get('task_type'),
             'text_prompt': str([message.content for message in message_list if type(message) == UserMessage or type(message) == BaseMessage]).strip("]["),
             'image_prompt': image_path,
             'model_response': content.replace('\n', '\\n'),
             'extracted_response': clean_match,
-            'expected_response': prompt.get('expected'),
+            'expected_response': task.get('expected'),
             'match': True if similarity >= 100.0 else False,
             'similarity': similarity,
-            'node_font': prompt.get('font'),
-            'node_color': prompt.get('color'),
-            'edge_width': prompt.get('width'),
-            'task_id': prompt.get('id'),
+            'node_font': task.get('font'),
+            'node_color': task.get('color'),
+            'edge_width': task.get('width'),
+            'task_id': task.get('id'),
             'attempt': attempt + 1,
-            'num_nodes': prompt.get('num_nodes'),
-            'resolution': prompt.get('resolution'),
+            'num_nodes': task.get('num_nodes'),
+            'resolution': task.get('resolution'),
           }
           
           new_rows.append(new_row)

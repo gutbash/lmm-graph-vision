@@ -7,6 +7,7 @@ from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
 
 from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
+from evaluation.prompts import OPENAI_PROMPTS, DEEPMIND_PROMPTS
 
 import asyncio
 import os
@@ -29,13 +30,12 @@ image_path_undirected_graph = Path('images/undirected_graph/')
 image_path_directed_graph = Path('images/directed_graph/')
 
 yaml_path = Path('data/')
-text_path = Path('text/')
 
 ### TEST BATCH GENERATION ###
 
 batch_generator = BatchGenerator()
-generation = 5
-variation = 3
+generation = 1
+variation = 1
 
 async def run_batch():
 
@@ -45,8 +45,6 @@ async def run_batch():
         yaml_name='binary_tree.yaml',
         yaml_path=yaml_path,
         save_path=image_path_binary_tree,
-        text_path=text_path,
-        text_name='binary_tree_text.yaml',
         generations=generation,
         variations=variation,
         random_num_nodes=False,
@@ -60,8 +58,6 @@ async def run_batch():
         yaml_name='binary_search_tree.yaml',
         yaml_path=yaml_path,
         save_path=image_path_binary_search_tree,
-        text_path=text_path,
-        text_name='binary_search_tree_text.yaml',
         generations=generation,
         variations=variation,
         random_num_nodes=False,
@@ -75,8 +71,6 @@ async def run_batch():
         yaml_name='undirected_graph.yaml',
         yaml_path=yaml_path,
         save_path=image_path_undirected_graph,
-        text_path=text_path,
-        text_name='undirected_graph_text.yaml',
         generations=generation,
         variations=variation,
         random_num_nodes=False,
@@ -90,8 +84,6 @@ async def run_batch():
         yaml_name='directed_graph.yaml',
         yaml_path=yaml_path,
         save_path=image_path_directed_graph,
-        text_path=text_path,
-        text_name='directed_graph_text.yaml',
         generations=generation,
         variations=variation,
         random_num_nodes=False,
@@ -109,15 +101,6 @@ p.sort_stats('cumulative').print_stats(10)
 openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
 
-openai_messages = [
-    UserMessage(content="{{content}}", images=["{{image}}"]),
-]
-
-deepmind_messages = [
-    BaseMessage(content="{{content}}"),
-    ImageMessage(image="{{image}}"),
-]
-
 openai_csv = 'openai.csv'
 deepmind_csv = f'deepmind-{uuid4()}.csv'
 
@@ -125,12 +108,12 @@ evaluator = Evaluator()
 
 model = deepmind
 csv_name = deepmind_csv
-messages = deepmind_messages
+prompts = DEEPMIND_PROMPTS
 
 async def run_eval():
 
     for structure in ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']:
 
-        await evaluator.evaluate(model=model, messages=messages, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=csv_name, repeats=3)
+        await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=csv_name, repeats=1)
 
 asyncio.run(run_eval())

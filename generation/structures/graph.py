@@ -17,6 +17,8 @@ class Graph:
     A graph
     """
     
+    methods: list = ['breadth_first_search', 'depth_first_search', 'adjacency_list']
+    
     def adjacency_list(self, structure_instance) -> dict:
         """
         Returns the adjacency list of the graph with node values as keys and lists of neighbor values as values.
