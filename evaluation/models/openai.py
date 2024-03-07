@@ -6,13 +6,13 @@ from pathlib import Path
 from typing import List, Dict, Literal, TypeVar
 import traceback
 
-from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, Roles
+from evaluation.models.messages.message import UserMessage, SystemMessage, ModelMessage
 from utils.logger import Logger
 from utils.encoder import encode_image
 
 logger = Logger(__name__)
 
-Messages = TypeVar("Messages", UserMessage, SystemMessage, AssistantMessage)
+Messages = TypeVar("Messages", UserMessage, SystemMessage, ModelMessage)
 
 class OpenAI:
     """
@@ -153,10 +153,10 @@ class OpenAI:
         
         try:
             
-            messages = [message.to_message() for message in messages]
+            messages = [message.to_openai() for message in messages]
             
             logger.info(f"Running OpenAI Completion...")
-            logger.info(messages)
+            logger.info(str(messages)[:200])
             start = perf_counter()
         
             completion = self.client.with_options(max_retries=5).chat.completions.create(
@@ -201,7 +201,7 @@ class OpenAI:
         client = openai.AsyncOpenAI(api_key=self.api_key)
         
         try:
-            messages = [message.to_message() for message in messages]
+            messages = [message.to_openai() for message in messages]
             
             logger.info(f"Running OpenAI Completion...")
             logger.info(messages)

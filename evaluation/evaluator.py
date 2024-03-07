@@ -20,9 +20,9 @@ logger = Logger(__name__)
 
 from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
-from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
+from evaluation.models.messages.message import UserMessage, SystemMessage, ModelMessage
 
-Message = TypeVar("Message", UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage)
+Message = TypeVar("Message", UserMessage, SystemMessage, ModelMessage)
 Task = Literal['post_order', 'pre_order', 'in_order', 'breadth_first_search', 'depth_first_search', 'adjacency_list']
 class Prompt(TypedDict):
   messages: List[Message]

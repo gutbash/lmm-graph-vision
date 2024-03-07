@@ -1,42 +1,42 @@
 - color: '#fee4b3'
-  expected: '[41, 1, 4]'
+  expected: '[5, 25, 58]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-646136a5-36d2-4690-86cf-69efbe707824.png
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9b2855b-2e87-4e79-9b54-8df70cc90e34.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_tree
   task_type: pre_order
-  uuid: 14a9b560-8fe1-4529-ab8a-fa0afec3c9c8
+  uuid: 45a0fe13-c605-4dc7-8b83-60f8a9a4bd43
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[1, 41, 4]'
+  expected: '[25, 5, 58]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-646136a5-36d2-4690-86cf-69efbe707824.png
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9b2855b-2e87-4e79-9b54-8df70cc90e34.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_tree
   task_type: in_order
-  uuid: aaf2c849-e130-481e-9969-b31b50e0cb08
+  uuid: a744d236-8f6f-40f0-b4b1-fa90363b4f57
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[1, 4, 41]'
+  expected: '[25, 58, 5]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-646136a5-36d2-4690-86cf-69efbe707824.png
+  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9b2855b-2e87-4e79-9b54-8df70cc90e34.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_tree
   task_type: post_order
-  uuid: 9e3c4220-4e1a-40c5-9727-debb98ad5165
+  uuid: c5bd08a9-27e3-4711-a0dc-c095d2d23d31
   variation: 1
   width: 1.0

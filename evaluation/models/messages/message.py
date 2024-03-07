@@ -9,11 +9,11 @@ logger = Logger(__name__)
 
 from utils.encoder import encode_image
 
-Roles = Literal["user", "assistant", "system"]
+Roles = Literal["user", "model", "system"]
 
 class UserMessage:
     """
-    User message for the OpenAI model.
+    User message for the model.
     
     Attributes
     ----------
@@ -25,11 +25,12 @@ class UserMessage:
         the images of the message
     """
     
+    turn: int = 0
     role: Roles = "user"
     content: str = None
     images: List[Union[Path, str]] = None
     
-    def __init__(self, content: str = None, images: List[Union[Path, str]] = None) -> None:
+    def __init__(self, content: str = None, images: List[Union[Path, str]] = None, turn: int = 0) -> None:
         """
         Initializes the UserMessage.
         
@@ -40,6 +41,7 @@ class UserMessage:
         images : List[Union[Path, str]]
             the images of the message
         """
+        self.turn = turn
         self.content = content
         self.images = images
         
@@ -47,9 +49,9 @@ class UserMessage:
             if isinstance(image, str) and image != "{{image}}":
                 logger.error("Image must be be either a Path or a string with the placerholder '{{image}}'.")
         
-    def to_message(self) -> dict:
+    def to_openai(self) -> dict:
         """
-        Converts message to API format.
+        Converts message to OpenAI API format.
         
         Returns
         -------
@@ -67,6 +69,77 @@ class UserMessage:
             "content": content_list + images_list
         }
         
+    def to_deepmind(self) -> dict:
+        """
+        Converts message to DeepMind API format.
+        
+        Returns
+        -------
+        dict
+            the message in API format
+        """
+        content_list = [{"text": self.content}] if self.content else []
+        images_list = [
+            {"inline_data": {"mime_type":"image/png", "data": encode_image(image_url)}}
+            for image_url in self.images
+        ] if self.images else []
+        
+        return {"parts": content_list + images_list, "role": "user"}
+    
+class ModelMessage:
+    """
+    Model message for the model.
+    
+    Attributes
+    ----------
+    role : Roles
+        the role of the message
+    content : str
+        the content of the message
+    """
+    turn: int = 0
+    role: Roles = "model"
+    content: str
+    
+    def __init__(self, content: str, turn: int = 0) -> None:
+        """
+        Initializes the ModelMessage.
+        
+        Parameters
+        ----------
+        content : str
+            the content of the message
+        """
+        self.turn = turn
+        self.content = content
+    
+    def to_openai(self) -> dict:
+        """
+        Converts message to OpenAI API format.
+        
+        Returns
+        -------
+        dict
+            the message in API format
+        """
+        return {
+            "role": "assistant",
+            "content": f"{self.content}"
+        }
+        
+    def to_deepmind(self) -> dict:
+        """
+        Converts message to DeepMind API format.
+        
+        Returns
+        -------
+        dict
+            the message in API format
+        """
+        content_list = [{"text": self.content}] if self.content else []
+        
+        return {"parts": content_list, "role": "model"}
+        
 class SystemMessage:
     """
     System message for the OpenAI model.
@@ -79,10 +152,11 @@ class SystemMessage:
         the content of the message
     """
     
+    turn: int = 0
     role: Roles = "system"
     content: str
     
-    def __init__(self, content: str) -> None:
+    def __init__(self, content: str, turn: int = 0) -> None:
         """
         Initializes the SystemMessage.
         
@@ -91,11 +165,12 @@ class SystemMessage:
         content : str
             the content of the message
         """
+        self.turn = turn
         self.content = content
     
-    def to_message(self) -> dict:
+    def to_openai(self) -> dict:
         """
-        Converts message to API format.
+        Converts message to OpenAI API format.
         
         Returns
         -------
@@ -106,111 +181,3 @@ class SystemMessage:
             "role": "system",
             "content": f"{self.content}"
         }
-        
-class AssistantMessage:
-    """
-    Assistant message for the OpenAI model.
-    
-    Attributes
-    ----------
-    role : Roles
-        the role of the message
-    content : str
-        the content of the message
-    """
-    role: Roles = "assistant"
-    content: str
-    
-    def __init__(self, content: str) -> None:
-        """
-        Initializes the AssistantMessage.
-        
-        Parameters
-        ----------
-        content : str
-            the content of the message
-        """
-        self.content = content
-    
-    def to_message(self) -> dict:
-        """
-        Converts message to API format.
-        
-        Returns
-        -------
-        dict
-            the message in API format
-        """
-        return {
-            "role": "assistant",
-            "content": f"{self.content}"
-        }
-        
-class ImageMessage:
-    """
-    Image message for the DeepMind model.
-    
-    Attributes
-    ----------
-    image : Union[Path, str]
-        the image of the message
-    """
-    image: Union[Path, str]
-    
-    def __init__(self, image: Union[Path, str]) -> None:
-        """
-        Initializes the ImageMessage.
-        
-        Parameters
-        ----------
-        image : Union[Path, str]
-            the image of the message
-        """
-        if isinstance(image, str) and image != "{{image}}":
-            logger.error("Image must be be either a Path or a string with the placerholder '{{image}}'.")
-        
-        self.image = image
-    
-    def to_message(self) -> Union[str, Image.Image]:
-        """
-        Converts message to API format.
-        
-        Returns
-        -------
-        Union[str, Image.Image]
-            the message in API format
-        """
-        return {"inline_data": {"mime_type":"image/png", "data": encode_image(self.image)}}
-        
-class BaseMessage:
-    """
-    Base message for the DeepMind model.
-    
-    Attributes
-    ----------
-    content : str
-        the content of the message
-    """
-    content: str
-    
-    def __init__(self, content: str) -> None:
-        """
-        Initializes the BaseMessage.
-        
-        Parameters
-        ----------
-        content : str
-            the content of the message
-        """
-        self.content = content
-    
-    def to_message(self) -> str:
-        """
-        Converts message to API format.
-        
-        Returns
-        -------
-        str
-            the message in API format
-        """
-        return {"text": self.content}

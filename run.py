@@ -6,8 +6,7 @@ from evaluation.evaluator import Evaluator
 from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
 
-from evaluation.models.messages.message import UserMessage, SystemMessage, AssistantMessage, ImageMessage, BaseMessage
-from evaluation.prompts import OPENAI_PROMPTS, DEEPMIND_PROMPTS
+from evaluation.prompts import PROMPTS_DEFAULT
 
 import asyncio
 import os
@@ -106,9 +105,9 @@ deepmind_csv = f'deepmind-{uuid4()}.csv'
 
 evaluator = Evaluator()
 
-model = deepmind
-csv_name = deepmind_csv
-prompts = DEEPMIND_PROMPTS
+model = openai
+csv_name = openai_csv
+prompts = PROMPTS_DEFAULT
 
 async def run_eval():
 

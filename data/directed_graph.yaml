@@ -3,13 +3,13 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ea033373-963b-492a-aa61-54d393fc0546.png
+  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ec22a713-44f8-4022-82d1-541ef492bc2a.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: directed_graph
   task_type: breadth_first_search
-  uuid: 7538136c-e1f7-4d28-9128-f5b66ca931a3
+  uuid: 3aa4f8dc-667c-4b41-9f94-d510fb672495
   variation: 1
   width: 1.0
 - color: '#fee4b3'
@@ -17,13 +17,13 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ea033373-963b-492a-aa61-54d393fc0546.png
+  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ec22a713-44f8-4022-82d1-541ef492bc2a.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: directed_graph
   task_type: depth_first_search
-  uuid: 7e36aca8-514e-4c5d-b70c-be46a85e197e
+  uuid: d1752dca-3f33-424e-bb5b-96cf6180e7ce
   variation: 1
   width: 1.0
 - color: '#fee4b3'
@@ -31,12 +31,12 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ea033373-963b-492a-aa61-54d393fc0546.png
+  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ec22a713-44f8-4022-82d1-541ef492bc2a.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: directed_graph
   task_type: adjacency_list
-  uuid: f15be40b-a385-46f3-a094-9d21209f874c
+  uuid: 3ae5ac8d-4b90-4aad-befa-f7e458ce702d
   variation: 1
   width: 1.0

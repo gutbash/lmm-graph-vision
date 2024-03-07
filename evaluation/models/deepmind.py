@@ -8,12 +8,12 @@ import httpx
 import json
 import asyncio
 
-from evaluation.models.messages.message import BaseMessage, ImageMessage
+from evaluation.models.messages.message import UserMessage, ModelMessage
 from typing import List, TypeVar
 
 logger = Logger(__name__)
 
-Messages = TypeVar("Messages", BaseMessage, ImageMessage)
+Messages = TypeVar("Messages", UserMessage, ModelMessage)
 
 class DeepMind:
     """
@@ -92,7 +92,7 @@ class DeepMind:
         
         try:
             
-            messages = [message.to_message() for message in messages]
+            messages = [message.to_deepmind() for message in messages]
             
             logger.info(f"Running DeepMind Completion...")
             logger.info(str(messages)[:200])
@@ -116,13 +116,13 @@ class DeepMind:
     
     async def arun(self, messages: List[Messages]) -> str:
         
-        messages = [message.to_message() for message in messages]
+        messages = [message.to_deepmind() for message in messages]
         
         headers = {
             'Content-Type': 'application/json',
         }
         
-        data = {"contents": [{"parts": messages}]}
+        data = {"contents": [messages]}
         
         timeout = httpx.Timeout(9999.0, connect=60.0)
         

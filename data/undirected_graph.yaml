@@ -3,13 +3,13 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9a46be6-b05d-44d9-bf01-183ac0a4986d.png
+  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a36fb569-a6b5-429c-ac97-0a402c7b74fe.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: undirected_graph
   task_type: breadth_first_search
-  uuid: 16a20f8f-a19e-4b8b-a357-58fd802a4903
+  uuid: 3ff108ca-751e-438e-82bd-775bfa4d4670
   variation: 1
   width: 1.0
 - color: '#fee4b3'
@@ -17,13 +17,13 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9a46be6-b05d-44d9-bf01-183ac0a4986d.png
+  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a36fb569-a6b5-429c-ac97-0a402c7b74fe.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: undirected_graph
   task_type: depth_first_search
-  uuid: 1013e6e3-7750-4df2-a29a-fa1b6c6d17f7
+  uuid: 2f18bd26-3106-4b5b-9c92-314ba5a02deb
   variation: 1
   width: 1.0
 - color: '#fee4b3'
@@ -31,12 +31,12 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9a46be6-b05d-44d9-bf01-183ac0a4986d.png
+  image_path: images/undirected_graph/ug_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a36fb569-a6b5-429c-ac97-0a402c7b74fe.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: undirected_graph
   task_type: adjacency_list
-  uuid: 7d7c47bd-daec-4b6e-93f1-80e661a56cc0
+  uuid: d4693700-fcde-4275-8b3d-447f121d93be
   variation: 1
   width: 1.0

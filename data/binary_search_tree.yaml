@@ -1,42 +1,42 @@
 - color: '#fee4b3'
-  expected: '[83, 7, 94]'
+  expected: '[48, 69, 86]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a959c697-2e48-4c7d-b0b3-8092671a0ee9.png
+  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937f7a45-08ae-40e2-bd3f-e5a353dc6592.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_search_tree
   task_type: pre_order
-  uuid: 48bfc136-f3b1-4007-9abc-bde2b3988b0a
+  uuid: 9be33c71-56c5-455c-9913-f3886e096dc9
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[7, 83, 94]'
+  expected: '[48, 69, 86]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a959c697-2e48-4c7d-b0b3-8092671a0ee9.png
+  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937f7a45-08ae-40e2-bd3f-e5a353dc6592.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_search_tree
   task_type: in_order
-  uuid: 53a9e658-7959-40e1-a92d-a6085dde6b8d
+  uuid: d821abf5-a1c1-453c-baee-b0ddfaf29f9c
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[7, 94, 83]'
+  expected: '[86, 69, 48]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a959c697-2e48-4c7d-b0b3-8092671a0ee9.png
+  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937f7a45-08ae-40e2-bd3f-e5a353dc6592.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_search_tree
   task_type: post_order
-  uuid: cffbbd6c-e804-40a7-9bf1-ecd6fd5184fe
+  uuid: 3a4266c9-4e0b-41b0-8ddb-6834f4084a7b
   variation: 1
   width: 1.0
