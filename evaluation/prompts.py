@@ -36,7 +36,7 @@
 
 # 7) Reread
 # Provide a single-line python list representing the post-order traversal of the {{structure}}.
-#   Think step-by-step and read the prompt again carefully.
+#   Think step by step and read the prompt again carefully.
 # Provide a single-line python list representing the post-order traversal of the {{structure}}.
 
 # 8) Serial
@@ -50,7 +50,7 @@
 
 # 10) Zero-shot Chain of Thought: Encourage LLM to simulate human thought process
 '''
-Let's think step-by-step to understand the {{structure}} data structure image presented. 
+Let's think step by step to understand the {{structure}} data structure image presented. 
 How would you approach finding its **TASK** traversal? 
 Your task is to provide a single-line Python list representing the **TASK** traversal of the {{structure}}.
 '''
@@ -62,7 +62,7 @@ Step 1: Identify the left subtree and perform a **TASK**.
 Step 2: Move to the right subtree and complete its **TASK**.
 Step 3: Visit the root of the {{structure}} last.
 Following these steps closely, your task is to provide a single-line Python list that represents the post-order
-    traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step-by-step.
+    traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step by step.
 '''
 
 # 12) Generate Knowledge: get LLM to generate information beforehand
@@ -93,7 +93,7 @@ single-line Python list representing the **TASK** of the {{structure}}.
 # 15) Golden Chain of Thought + Expert + Deliminator + Very Structured
 '''
 ## Context ##
-[ You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze. ]
+[ You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze. ]
 
 ## Task ##
 [ Your task is to:
@@ -171,7 +171,7 @@ PROMPTS_REPHRASE = [
     },
 ]
 
-#3) No Structure
+# 3) No Structure X
 PROMPTS_NO_STRUCTURE = [
     {
     'messages': [UserMessage(content="Provide a single-line python list representing the post-order traversal.", images=["{{image}}"])],
@@ -361,54 +361,54 @@ PROMPTS_EXPERT = [
     },
 ]
 
-# 7) Reread
-PROMPTS_REREAD = [
+# 7) Reread + Zero Shot CoT
+PROMPTS_ZERO_SHOT_COT_REREAD = [
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.
                              
-    Think step-by-step and read the prompt again carefully.
+    Read the prompt again: Provide a single-line python list representing the post-order traversal of the {{structure}}.
     
-    Provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'post_order'
     },
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the pre-order traversal of the {{structure}}.
                              
-    Think step-by-step and read the prompt again carefully.
+    Read the prompt again: Provide a single-line python list representing the pre-order traversal of the {{structure}}.
     
-    Provide a single-line python list representing the pre-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'pre_order'
     },
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the in-order traversal of the {{structure}}.
                              
-    Think step-by-step and read the prompt again carefully.
+    Read the prompt again: Provide a single-line python list representing the in-order traversal of the {{structure}}.
     
-    Provide a single-line python list representing the in-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'in_order'
     },
     {
     'messages': [UserMessage(content="""Provide a single-line python dictionary representing the adjacency list of the {{structure}}.
                              
-    Think step-by-step and read the prompt again carefully.
+    Read the prompt again: Provide a single-line python dictionary representing the adjacency list of the {{structure}}.
     
-    Provide a single-line python dictionary representing the adjacency list of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'adjacency_list'
     },
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.
                              
-    Think step-by-step and read the prompt again carefully.
+    Read the prompt again: Provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.
     
-    Provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'depth_first_search'
     },
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.
                              
-    Think step-by-step and read the prompt again carefully.
+    Read the prompt again: Provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.
     
-    Provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'breadth_first_search'
     },
 ]
@@ -459,7 +459,7 @@ PROMPTS_SERIAL = [
     },
 ]
 
-# 9) Polite
+# 9) Polite X
 PROMPTS_POLITE = [
     {
     'messages': [UserMessage(content="""Please provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
@@ -489,52 +489,40 @@ PROMPTS_POLITE = [
 
 # 10) Zero-shot Chain-of-Thought
 PROMPTS_ZERO_SHOT_COT = [
-    { # post-order
-    'messages': [UserMessage(content="""Let's think step-by-step to understand the {{structure}} data structure image presented.
-    
-    How would you approach finding its post-order traversal?
-    
-    Your task is to provide a single-line Python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'post_order'
     },
-    { # pre-order
-    'messages': [UserMessage(content="""Let's think step-by-step to understand the {{structure}} data structure image presented.
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the pre-order traversal of the {{structure}}.
                              
-    How would you approach finding its pre-order traversal?
-    
-    Your task is to provide a single-line Python list representing the pre-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'pre_order'
     },
-    { # in-order
-    'messages': [UserMessage(content="""Let's think step-by-step to understand the {{structure}} data structure image presented.
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the in-order traversal of the {{structure}}.
                              
-    How would you approach finding its in-order traversal?
-    
-    Your task is to provide a single-line Python list representing the in-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'in_order'
     },
-    { # Adjacency List
-    'messages': [UserMessage(content="""Let's think step-by-step to understand the {{structure}} data structure image presented.
+    {
+    'messages': [UserMessage(content="""Provide a single-line python dictionary representing the adjacency list of the {{structure}}.
                              
-    How would you approach finding its adjacency list?
-    
-    Your task is to provide a single-line Python dictionary representing the adjacency list of the {{structure}}.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'adjacency_list'
     },
-    { # depth-first Search
-    'messages': [UserMessage(content="""Let's think step-by-step to understand the {{structure}} data structure image presented.
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.
                              
-    How would you approach finding its depth-first search?
-    
-    Your task is to provide a single-line Python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'depth_first_search'
     },
-    { # breadth-first Search
-    'messages': [UserMessage(content="""Let's think step-by-step to understand the {{structure}} data structure image presented.
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.
                              
-    How would you approach finding its breadth-first search?
-    
-    Your task is to provide a single-line Python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    Let's think step by step.""", images=["{{image}}"])],
     'task': 'breadth_first_search'
     },
 ]
@@ -548,7 +536,7 @@ PROMPTS_GOLD_COT = [
     Step 2: Move to the right subtree and complete its post-order traversal.
     Step 3: Visit the root of the {{structure}} last.
     
-    Following these steps closely, your task is to provide a single-line Python list that represents the post-order traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step-by-step.""", images=["{{image}}"])],
+    Following these steps closely, your task is to provide a single-line Python list that represents the post-order traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step by step.""", images=["{{image}}"])],
     'task': 'post_order'
     },
     { # pre-order
@@ -558,7 +546,7 @@ PROMPTS_GOLD_COT = [
     Step 2: Move to the left subtree and perform a pre-order traversal.
     Step 3: Proceed to the right subtree and complete its pre-order traversal.
     
-    Following these steps closely, your task is to provide a single-line Python list that represents the pre-order traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step-by-step.""", images=["{{image}}"])],
+    Following these steps closely, your task is to provide a single-line Python list that represents the pre-order traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step by step.""", images=["{{image}}"])],
     'task': 'pre_order'
     },
     { # in-order
@@ -568,7 +556,7 @@ PROMPTS_GOLD_COT = [
     Step 2: Visit the root of the {{structure}}.
     Step 3: Proceed to the right subtree and complete its in-order traversal.
     
-    Following these steps closely, your task is to provide a single-line Python list that represents the in-order traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step-by-step.""", images=["{{image}}"])],
+    Following these steps closely, your task is to provide a single-line Python list that represents the in-order traversal of the {{structure}}, incorporating the sequence as if solving a puzzle step by step.""", images=["{{image}}"])],
         'task': 'in_order'
     },
     { # Adjacency List
@@ -578,7 +566,7 @@ PROMPTS_GOLD_COT = [
     Step 2: For every vertex in the graph, assign an empty list to the dictionary entry for that vertex to hold its adjacent vertices.
     Step 3: Iterate through all the edges in the graph, represented as pairs (u, v). For each pair, append v to the list of u's adjacent vertices in the dictionary. If the graph is undirected, also append u to v's list.
     
-    Following these steps closely, your task is to provide a single-line Python dictionary that represents the adjacency list of the {{structure}}, incorporating the sequence as if solving a puzzle step-by-step.""", images=["{{image}}"])],
+    Following these steps closely, your task is to provide a single-line Python dictionary that represents the adjacency list of the {{structure}}, incorporating the sequence as if solving a puzzle step by step.""", images=["{{image}}"])],
     'task': 'adjacency_list'
     },
     { # depth-first Search
@@ -588,7 +576,7 @@ PROMPTS_GOLD_COT = [
     Step 2: While S is not empty, pop a vertex v from S. If v has not been visited, mark it as visited and push all of its unvisited neighbors onto S.
     Step 3: Repeat Step 2 until the stack is empty or the desired node is found.
     
-    Following these steps closely, your task is to provide a single-line Python list that represents the depth-first search of the {{structure}} starting from the vertex with the smallest value, incorporating the sequence as if solving a puzzle step-by-step.""", images=["{{image}}"])],
+    Following these steps closely, your task is to provide a single-line Python list that represents the depth-first search of the {{structure}} starting from the vertex with the smallest value, incorporating the sequence as if solving a puzzle step by step.""", images=["{{image}}"])],
     'task': 'depth_first_search'
     },
     { # breadth-first Search
@@ -598,12 +586,12 @@ PROMPTS_GOLD_COT = [
     Step 2: While Q is not empty, dequeue a vertex v from Q. Visit v and enqueue all unvisited neighbors of v into Q.
     Step 3: Repeat Step 2 until the queue is empty or the desired node is found.
     
-    Following these steps closely, your task is to provide a single-line Python list that represents the breadth-first search of the {{structure}} starting from the vertex with the smallest value, incorporating the sequence as if solving a puzzle step-by-step.""", images=["{{image}}"])],
+    Following these steps closely, your task is to provide a single-line Python list that represents the breadth-first search of the {{structure}} starting from the vertex with the smallest value, incorporating the sequence as if solving a puzzle step by step.""", images=["{{image}}"])],
     'task': 'breadth_first_search'
     },
 ]
 
-# 12) Generate Knowledge
+# 12) Generate Knowledge X
 PROMPTS_GENERAL_KNOWLEDGE = [
     { # post-order
     'messages': [UserMessage(content="""Before solving for the post-order traversal of the given {{structure}}, let's first generate some foundational knowledge that could aid in understanding the task better. Consider the characteristics and properties of {{structure}} data structures. What are the key aspects that influence their traversal order? Utilize this generated knowledge to then provide a single-line Python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
@@ -631,7 +619,7 @@ PROMPTS_GENERAL_KNOWLEDGE = [
     },
 ]
 
-# 13) Role Play: expert + CoT
+# 13) Role Play: expert + CoT X
 PROMPTS_ROLEPLAY_EXPERT_COT = [
     { # post-order
     'messages': [UserMessage(content="""As an expert software engineer specializing in data structures and algorithms, your mission is to analyze a image of a {{structure}}. Given your extensive experience, how would you explain and perform a post-order traversal of this structure? Your task is to provide a single-line Python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
@@ -659,7 +647,7 @@ PROMPTS_ROLEPLAY_EXPERT_COT = [
     },
 ]
 
-# 14) Delimiters: clear structure
+# 14) Delimiters: clear structure X
 PROMPTS_DELIMIT = [
     { # post-order
     'messages': [UserMessage(content="""###Instruction### [Given a {{structure}}, perform a post-order traversal.]
@@ -703,7 +691,7 @@ PROMPTS_DELIMIT = [
 PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     { # post-order
     'messages': [UserMessage(content="""## Context ##
-    You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze.
+    You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
 
     ## Task ##
     Your task is to...
@@ -722,7 +710,7 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     },
     { # pre-order
     'messages': [UserMessage(content="""## Context ##
-    You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze.
+    You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
 
     ## Task ##
     Your task is to...
@@ -741,7 +729,7 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     },
     { # in-order
     'messages': [UserMessage(content="""## Context ##
-    You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze.
+    You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
 
     ## Task ##
     Your task is to...
@@ -760,7 +748,7 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     },
     { # Adjacency List
     'messages': [UserMessage(content="""## Context ##
-    You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze.
+    You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
 
     ## Task ##
     Your task is to...
@@ -779,7 +767,7 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     },
     { # depth-first Search
     'messages': [UserMessage(content="""## Context ##
-    You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze.
+    You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
 
     ## Task ##
     Your task is to...
@@ -798,7 +786,7 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     },
     { # breadth-first Search
     'messages': [UserMessage(content="""## Context ##
-    You are an expert computer scientist specializing in data structures and algorithms and you will be given an image of a {{structure}} data structure to analyze.
+    You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
 
     ## Task ##
     Your task is to...
