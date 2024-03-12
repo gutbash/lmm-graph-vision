@@ -1,42 +1,378 @@
 - color: '#fee4b3'
-  expected: '[48, 69, 86]'
+  expected: '[61, 18, 78]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937f7a45-08ae-40e2-bd3f-e5a353dc6592.png
+  image_path: images\binary_search_tree\bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-379d7a2e-1280-4453-a198-be41bf8f4261.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_search_tree
   task_type: pre_order
-  uuid: 9be33c71-56c5-455c-9913-f3886e096dc9
+  uuid: 5d37cfb4-eef0-46c4-bfde-5f39b2963872
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[48, 69, 86]'
+  expected: '[18, 61, 78]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937f7a45-08ae-40e2-bd3f-e5a353dc6592.png
+  image_path: images\binary_search_tree\bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-379d7a2e-1280-4453-a198-be41bf8f4261.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_search_tree
   task_type: in_order
-  uuid: d821abf5-a1c1-453c-baee-b0ddfaf29f9c
+  uuid: 83513218-e305-4567-8697-ec31ae94c66d
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[86, 69, 48]'
+  expected: '[18, 78, 61]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_search_tree/bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-937f7a45-08ae-40e2-bd3f-e5a353dc6592.png
+  image_path: images\binary_search_tree\bst_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-379d7a2e-1280-4453-a198-be41bf8f4261.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_search_tree
   task_type: post_order
-  uuid: 3a4266c9-4e0b-41b0-8ddb-6834f4084a7b
+  uuid: 044aa27d-0905-4775-b6b3-c679d22d2313
   variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[20, 12, 45]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_search_tree\bst_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-177a3804-1f9e-4085-8c76-c3cbccac621b.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: e88241da-7ac2-4dbf-b4cf-4fa5ed4d13f5
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[12, 20, 45]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_search_tree\bst_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-177a3804-1f9e-4085-8c76-c3cbccac621b.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: 47a66e1e-a60f-4a43-8b0e-be3ee6c8ff6b
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[12, 45, 20]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_search_tree\bst_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-177a3804-1f9e-4085-8c76-c3cbccac621b.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: db2075fd-6939-4053-8c6f-3d3e878a0a13
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[72, 33, 74]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_search_tree\bst_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-0cb57252-3892-4936-9f8b-6bc0364d9c09.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: 2e358c4f-92cf-453a-bf37-92cb2b16f5a1
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[33, 72, 74]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_search_tree\bst_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-0cb57252-3892-4936-9f8b-6bc0364d9c09.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: c7ab7b0a-7be7-469c-85fc-5e2566c6842c
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[33, 74, 72]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_search_tree\bst_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-0cb57252-3892-4936-9f8b-6bc0364d9c09.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: df037301-c287-4975-b966-0bc451cf8eac
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[3, 1, 1, 73, 29, 38]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ffb52321-0ae5-4e2c-b1aa-0e3ece107b6e.png
+  num_nodes: 5
+  resolution: 512
+  run: 4
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: a836081b-d794-4b41-86f9-9c1b983cf9bf
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 1, 3, 29, 38, 73]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ffb52321-0ae5-4e2c-b1aa-0e3ece107b6e.png
+  num_nodes: 5
+  resolution: 512
+  run: 4
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: b77f461e-945f-4b16-a0fa-c99c581e273b
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 1, 38, 29, 73, 3]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ffb52321-0ae5-4e2c-b1aa-0e3ece107b6e.png
+  num_nodes: 5
+  resolution: 512
+  run: 4
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: 5584f313-4f2e-46d1-8c8b-c2d4f74184f8
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[65, 57, 11, 66, 29, 38]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-3fdfb040-834b-4b32-b1e6-b058e7c8231e.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: a69c4460-6409-4d60-bd7c-96bcefca4d2d
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[11, 57, 65, 29, 38, 66]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-3fdfb040-834b-4b32-b1e6-b058e7c8231e.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: d8e02bf2-c7a0-4ae4-a305-5d6873aa125e
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[11, 57, 38, 29, 66, 65]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-3fdfb040-834b-4b32-b1e6-b058e7c8231e.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: fef9701d-bb5d-4cd6-8df1-17c38c4b084a
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[81, 27, 20, 89, 84, 86]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-55dcd1a0-ab62-4af9-b8da-dc84e10e9514.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: 6036545e-f8a7-4c30-bf83-39f49e1fba08
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[20, 27, 81, 84, 86, 89]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-55dcd1a0-ab62-4af9-b8da-dc84e10e9514.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: 359eefb9-edad-4367-a76b-f051eae5714a
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[20, 27, 86, 84, 89, 81]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_search_tree\bst_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-55dcd1a0-ab62-4af9-b8da-dc84e10e9514.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: 06f30637-b42e-4a8e-b10b-27aae75845ed
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[53, 32, 11, 13, 12, 96, 71, 98, 99]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-cac949c7-a046-44a7-bdea-715ebe3deaa6.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: a97fbd9c-df26-40b1-afe8-04fda97cdae2
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[11, 12, 13, 32, 53, 71, 96, 98, 99]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-cac949c7-a046-44a7-bdea-715ebe3deaa6.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: 502a87de-9c48-42db-b551-a8bc08632373
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[12, 13, 11, 32, 71, 99, 98, 96, 53]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-cac949c7-a046-44a7-bdea-715ebe3deaa6.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: cde21f81-7507-40c7-accf-78829655bcf6
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[67, 44, 26, 33, 31, 89, 73, 93, 99]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a91389da-15a0-4a9c-8f82-f5f984c040cf.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: 606953f8-b029-4160-bc46-4af250c06efc
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[26, 31, 33, 44, 67, 73, 89, 93, 99]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a91389da-15a0-4a9c-8f82-f5f984c040cf.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: bebaf66f-b023-4670-be07-05aa7a1d7fcb
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[31, 33, 26, 44, 73, 99, 93, 89, 67]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a91389da-15a0-4a9c-8f82-f5f984c040cf.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: 6fb0593f-319e-4b31-bd5c-354d71a4c9fb
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[5, 4, 2, 3, 31, 98, 26, 99, 99]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6ae857cb-3f56-4adc-937e-cb9ac8ec8d33.png
+  num_nodes: 8
+  resolution: 512
+  run: 9
+  structure: binary_search_tree
+  task_type: pre_order
+  uuid: 18cbc278-489e-4eec-8d02-5673735fd83b
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[2, 31, 3, 4, 5, 26, 98, 99, 99]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6ae857cb-3f56-4adc-937e-cb9ac8ec8d33.png
+  num_nodes: 8
+  resolution: 512
+  run: 9
+  structure: binary_search_tree
+  task_type: in_order
+  uuid: ad70cd73-f714-4254-8f9d-61187aa1c20a
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[31, 3, 2, 4, 26, 99, 99, 98, 5]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_search_tree\bst_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6ae857cb-3f56-4adc-937e-cb9ac8ec8d33.png
+  num_nodes: 8
+  resolution: 512
+  run: 9
+  structure: binary_search_tree
+  task_type: post_order
+  uuid: 7892c0e4-287e-4dea-8710-2f9c26eb14c3
+  variation: 3
   width: 1.0

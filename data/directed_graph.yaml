@@ -3,13 +3,13 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ec22a713-44f8-4022-82d1-541ef492bc2a.png
+  image_path: images\directed_graph\dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-90352651-9adb-4741-b42f-b13736ccdd85.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: directed_graph
   task_type: breadth_first_search
-  uuid: 3aa4f8dc-667c-4b41-9f94-d510fb672495
+  uuid: d931da75-9217-4c8f-b2dc-d3049cd7cfdd
   variation: 1
   width: 1.0
 - color: '#fee4b3'
@@ -17,26 +17,362 @@
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ec22a713-44f8-4022-82d1-541ef492bc2a.png
+  image_path: images\directed_graph\dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-90352651-9adb-4741-b42f-b13736ccdd85.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: directed_graph
   task_type: depth_first_search
-  uuid: d1752dca-3f33-424e-bb5b-96cf6180e7ce
+  uuid: c4004f58-508a-4e1c-bc40-cb71c43f099a
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '{1: [2], 2: [3], 3: [2]}'
+  expected: '{1: [2], 2: [3], 3: [1]}'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/directed_graph/dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-ec22a713-44f8-4022-82d1-541ef492bc2a.png
+  image_path: images\directed_graph\dg_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-90352651-9adb-4741-b42f-b13736ccdd85.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: directed_graph
   task_type: adjacency_list
-  uuid: 3ae5ac8d-4b90-4aad-befa-f7e458ce702d
+  uuid: d117741d-4e54-4b7d-8661-7d0764cc3e71
   variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\directed_graph\dg_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1ab32791-e9a7-4e33-9ff6-c05a88af3eb4.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: 8f406589-a485-4def-a509-09fdee093e23
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\directed_graph\dg_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1ab32791-e9a7-4e33-9ff6-c05a88af3eb4.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: 9311c572-70e2-42db-857f-8a079b48c96a
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [3], 3: [1]}'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\directed_graph\dg_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1ab32791-e9a7-4e33-9ff6-c05a88af3eb4.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: aefc9748-3059-4eee-9f71-c814ec6ccb0a
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\directed_graph\dg_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-077dbefc-0d2c-4376-b015-f9ee3c28b3e4.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: 06753449-1aa8-4ff8-ab18-30163bd32399
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\directed_graph\dg_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-077dbefc-0d2c-4376-b015-f9ee3c28b3e4.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: e6a48b82-32ab-47e1-9a3d-c16d7b574cce
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2], 2: [3], 3: [1]}'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\directed_graph\dg_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-077dbefc-0d2c-4376-b015-f9ee3c28b3e4.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: b6a7f48c-72f3-4b15-9477-3619b2743ef0
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 4, 3, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6b8cf5b9-b8ff-4389-a4eb-d0e92e697a16.png
+  num_nodes: 6
+  resolution: 512
+  run: 4
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: a55b53d4-07ab-427c-a70c-2e43d7436c95
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6b8cf5b9-b8ff-4389-a4eb-d0e92e697a16.png
+  num_nodes: 6
+  resolution: 512
+  run: 4
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: b0eda5be-7bb9-4631-8581-490da9bea306
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2, 4], 2: [3], 3: [4], 4: [5], 5: [6], 6: [4]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6b8cf5b9-b8ff-4389-a4eb-d0e92e697a16.png
+  num_nodes: 6
+  resolution: 512
+  run: 4
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: af6fb920-820e-439d-b951-2dd37a530166
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 4, 3, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-19002034-bbd1-408c-8c8f-e8ac59246f79.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: 0f3dfbb9-c794-4782-9015-5306426831dd
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-19002034-bbd1-408c-8c8f-e8ac59246f79.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: 30ac87af-b218-45b9-9be6-97677a85660b
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2, 4], 2: [3], 3: [4], 4: [5], 5: [6], 6: [4]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-19002034-bbd1-408c-8c8f-e8ac59246f79.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: 96178ec4-f3ba-4846-a541-e4c2c8d4d157
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 4, 3, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f8d4b213-8687-47ae-a46b-fe152d58b549.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: 1cdabd90-0f9b-4c87-89be-0b59d6056b10
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f8d4b213-8687-47ae-a46b-fe152d58b549.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: 5ad1d346-d69c-49c0-ae9e-e5b128c262f3
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2, 4], 2: [3], 3: [4], 4: [5], 5: [6], 6: [4]}'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\directed_graph\dg_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f8d4b213-8687-47ae-a46b-fe152d58b549.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: 85232a04-f809-4e62-b059-ddec19a8cc7a
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 5, 3, 6, 7, 8, 4, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6986fb1f-99f2-484e-8a2b-b0f471c54e29.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: d264fc51-60b1-4a60-8978-f929359172c0
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6986fb1f-99f2-484e-8a2b-b0f471c54e29.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: 9f98038a-8cf7-46db-95e4-c8022205d250
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2, 5], 2: [3], 3: [4], 4: [5, 1], 5: [6, 7, 8], 6: [7, 4], 7: [8, 5], 8: [9, 1, 5], 9: [2]}'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-6986fb1f-99f2-484e-8a2b-b0f471c54e29.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: a7ac11b4-325b-4c35-90d6-4bbdaa0b6079
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 5, 3, 6, 7, 8, 4, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-94ebacd7-7ef0-495e-b26c-643e7c48fbdc.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: de8dc47a-b9de-41c0-a59e-23aa03b3bfd3
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-94ebacd7-7ef0-495e-b26c-643e7c48fbdc.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: 69e98593-17fd-4419-8e6a-ba9e8ddf3925
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2, 5], 2: [3], 3: [4], 4: [5, 1], 5: [6, 7, 8], 6: [7, 4], 7: [8, 5], 8: [9, 1, 5], 9: [2]}'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-94ebacd7-7ef0-495e-b26c-643e7c48fbdc.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: 3cae6aa1-eaf7-4156-b3a1-249d4da3543a
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 5, 3, 6, 7, 8, 4, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fdd61412-dd83-4d0e-b78b-08426224e79c.png
+  num_nodes: 9
+  resolution: 512
+  run: 9
+  structure: directed_graph
+  task_type: breadth_first_search
+  uuid: 8535285e-f99c-43c4-bea6-cf6dcde36343
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[1, 2, 3, 4, 5, 6, 7, 8, 9]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fdd61412-dd83-4d0e-b78b-08426224e79c.png
+  num_nodes: 9
+  resolution: 512
+  run: 9
+  structure: directed_graph
+  task_type: depth_first_search
+  uuid: 58ab22ed-988e-4320-ab32-d227e14cab3a
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '{1: [2, 5], 2: [3], 3: [4], 4: [5, 1], 5: [6, 7, 8], 6: [7, 4], 7: [8, 5], 8: [9, 1, 5], 9: [2]}'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\directed_graph\dg_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fdd61412-dd83-4d0e-b78b-08426224e79c.png
+  num_nodes: 9
+  resolution: 512
+  run: 9
+  structure: directed_graph
+  task_type: adjacency_list
+  uuid: e429bd37-f0a0-4d3e-bf05-5e667b87e41e
+  variation: 3
   width: 1.0

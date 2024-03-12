@@ -1,1 +1,0 @@
-run,n_generation,n_variation,n_format,structure,task_type,text_prompt,image_prompt,model_response,extracted_response,expected_response,match,similarity,node_font,node_color,edge_width,task_id,attempt,num_nodes,resolution

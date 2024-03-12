@@ -1,42 +1,378 @@
 - color: '#fee4b3'
-  expected: '[5, 25, 58]'
+  expected: '[27, 23, 89]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9b2855b-2e87-4e79-9b54-8df70cc90e34.png
+  image_path: images\binary_tree\bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a5fbb19f-4f80-4c6e-85dc-e9636bacc641.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_tree
   task_type: pre_order
-  uuid: 45a0fe13-c605-4dc7-8b83-60f8a9a4bd43
+  uuid: 1e7d106b-1153-4d96-bb07-c63e6aaa9a62
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[25, 5, 58]'
+  expected: '[23, 27, 89]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9b2855b-2e87-4e79-9b54-8df70cc90e34.png
+  image_path: images\binary_tree\bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a5fbb19f-4f80-4c6e-85dc-e9636bacc641.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_tree
   task_type: in_order
-  uuid: a744d236-8f6f-40f0-b4b1-fa90363b4f57
+  uuid: 99376cd7-ca57-480b-b40b-0da6447fbb85
   variation: 1
   width: 1.0
 - color: '#fee4b3'
-  expected: '[25, 58, 5]'
+  expected: '[23, 89, 27]'
   font: sans-serif
   format: 1
   generation: 1
-  image_path: images/binary_tree/bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-f9b2855b-2e87-4e79-9b54-8df70cc90e34.png
+  image_path: images\binary_tree\bit_run-1_gen-1_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a5fbb19f-4f80-4c6e-85dc-e9636bacc641.png
   num_nodes: 3
   resolution: 512
   run: 1
   structure: binary_tree
   task_type: post_order
-  uuid: c5bd08a9-27e3-4711-a0dc-c095d2d23d31
+  uuid: 3e16d54b-91f4-4852-946f-33684585f9bb
   variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[92, 51, 88]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_tree\bit_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-35210b65-ff1b-4950-a138-8f7bfec6ad82.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_tree
+  task_type: pre_order
+  uuid: 9382dfaa-e73f-40d9-a8df-fd2c6e10fa12
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[51, 92, 88]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_tree\bit_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-35210b65-ff1b-4950-a138-8f7bfec6ad82.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_tree
+  task_type: in_order
+  uuid: 7d53157f-d9f9-48e9-8c28-5abcd9e2913b
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[51, 88, 92]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_tree\bit_run-2_gen-1_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-35210b65-ff1b-4950-a138-8f7bfec6ad82.png
+  num_nodes: 3
+  resolution: 512
+  run: 2
+  structure: binary_tree
+  task_type: post_order
+  uuid: 838f7b81-cb36-4f30-bc30-c5ca3043c1ed
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[60, 40, 18]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_tree\bit_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a3212e85-6853-4c14-91a0-60272f46211b.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: binary_tree
+  task_type: pre_order
+  uuid: 4213de03-0e37-4e0c-9ed9-afc557e50c13
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[40, 60, 18]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_tree\bit_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a3212e85-6853-4c14-91a0-60272f46211b.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: binary_tree
+  task_type: in_order
+  uuid: 73f31f94-83ac-4765-a6d4-bf08ceecc3e6
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[40, 18, 60]'
+  font: sans-serif
+  format: 1
+  generation: 1
+  image_path: images\binary_tree\bit_run-3_gen-1_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-a3212e85-6853-4c14-91a0-60272f46211b.png
+  num_nodes: 3
+  resolution: 512
+  run: 3
+  structure: binary_tree
+  task_type: post_order
+  uuid: 6fe841e5-ca07-4961-b7ec-6a9393009bd2
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[43, 97, 36, 29, 74, 30]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1e38c12e-f77b-4a75-8afb-3bf339653f05.png
+  num_nodes: 6
+  resolution: 512
+  run: 4
+  structure: binary_tree
+  task_type: pre_order
+  uuid: 40e93559-f18d-48df-a240-8f6fe7974df0
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[36, 97, 29, 43, 30, 74]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1e38c12e-f77b-4a75-8afb-3bf339653f05.png
+  num_nodes: 6
+  resolution: 512
+  run: 4
+  structure: binary_tree
+  task_type: in_order
+  uuid: ba6659d3-857b-4379-a9b3-bafcb151efb6
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[36, 29, 97, 30, 74, 43]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-4_gen-2_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1e38c12e-f77b-4a75-8afb-3bf339653f05.png
+  num_nodes: 6
+  resolution: 512
+  run: 4
+  structure: binary_tree
+  task_type: post_order
+  uuid: 0772cc8f-1546-49f7-82c2-2ae0b6fd4c52
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[36, 55, 8, 21, 55, 34]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-b4ff5b09-c4b1-4ae9-9928-b3481b3ccf9b.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: binary_tree
+  task_type: pre_order
+  uuid: d16d266c-1c5e-4813-a16e-06d6aa6b0b85
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[8, 55, 21, 36, 34, 55]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-b4ff5b09-c4b1-4ae9-9928-b3481b3ccf9b.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: binary_tree
+  task_type: in_order
+  uuid: 3c4faa65-b415-4476-b9de-b72e154f4cee
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[8, 21, 55, 34, 55, 36]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-5_gen-2_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-b4ff5b09-c4b1-4ae9-9928-b3481b3ccf9b.png
+  num_nodes: 6
+  resolution: 512
+  run: 5
+  structure: binary_tree
+  task_type: post_order
+  uuid: 50a8c06d-8f06-4863-b38a-ea301173109c
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[13, 97, 33, 64, 23, 34]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-b0aaa7ef-9775-46ed-8e1a-e5b54f289431.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_tree
+  task_type: pre_order
+  uuid: 63bf3101-d112-4218-a7be-37fadad40990
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[33, 97, 64, 13, 34, 23]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-b0aaa7ef-9775-46ed-8e1a-e5b54f289431.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_tree
+  task_type: in_order
+  uuid: e9211d8f-9a0f-4808-9c61-84c20eeb81fa
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[33, 64, 97, 34, 23, 13]'
+  font: sans-serif
+  format: 1
+  generation: 2
+  image_path: images\binary_tree\bit_run-6_gen-2_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-b0aaa7ef-9775-46ed-8e1a-e5b54f289431.png
+  num_nodes: 6
+  resolution: 512
+  run: 6
+  structure: binary_tree
+  task_type: post_order
+  uuid: 0d5754e1-5ef1-45f3-baaf-48a872140c1b
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[8, 63, 21, 26, 37, 16, 15, 59, 3]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1a38c08e-912a-4776-82a1-d111cf357b08.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: binary_tree
+  task_type: pre_order
+  uuid: 100f5967-52da-469d-9d99-60d4f7784435
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[26, 21, 37, 63, 16, 8, 59, 15, 3]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1a38c08e-912a-4776-82a1-d111cf357b08.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: binary_tree
+  task_type: in_order
+  uuid: c8fa296f-ddc0-466c-85df-aa69aff5b577
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[26, 37, 21, 16, 63, 59, 3, 15, 8]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-7_gen-3_var-1_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-1a38c08e-912a-4776-82a1-d111cf357b08.png
+  num_nodes: 9
+  resolution: 512
+  run: 7
+  structure: binary_tree
+  task_type: post_order
+  uuid: ab712717-c5af-4726-847e-231922cfd9d7
+  variation: 1
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[35, 93, 79, 35, 6, 24, 4, 83, 24]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-10bcae5f-a25b-4efa-b3c1-04448eb4b466.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: binary_tree
+  task_type: pre_order
+  uuid: d4a54dff-1847-454b-9dd4-64144e6f6c1e
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[35, 79, 6, 93, 24, 35, 83, 4, 24]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-10bcae5f-a25b-4efa-b3c1-04448eb4b466.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: binary_tree
+  task_type: in_order
+  uuid: a1420fed-6af0-4fff-bd65-9de149d0733a
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[35, 6, 79, 24, 93, 83, 24, 4, 35]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-8_gen-3_var-2_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-10bcae5f-a25b-4efa-b3c1-04448eb4b466.png
+  num_nodes: 9
+  resolution: 512
+  run: 8
+  structure: binary_tree
+  task_type: post_order
+  uuid: 29e94f1d-0496-48b9-815a-5128db4f609c
+  variation: 2
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[74, 98, 77, 37, 74, 50, 38, 7, 21]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fb6fc0eb-db78-4740-89b9-5be205a8ca62.png
+  num_nodes: 9
+  resolution: 512
+  run: 9
+  structure: binary_tree
+  task_type: pre_order
+  uuid: 9a2a000f-e707-4ec5-8982-17f3a2dc5273
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[37, 77, 74, 98, 50, 74, 7, 38, 21]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fb6fc0eb-db78-4740-89b9-5be205a8ca62.png
+  num_nodes: 9
+  resolution: 512
+  run: 9
+  structure: binary_tree
+  task_type: in_order
+  uuid: 03660d92-f1c4-461c-a011-d7c335793e48
+  variation: 3
+  width: 1.0
+- color: '#fee4b3'
+  expected: '[37, 74, 77, 50, 98, 7, 21, 38, 74]'
+  font: sans-serif
+  format: 1
+  generation: 3
+  image_path: images\binary_tree\bit_run-9_gen-3_var-3_fmt-1_thk-10_clr-abe0f9_fnt-sansserif_res-512_idn-fb6fc0eb-db78-4740-89b9-5be205a8ca62.png
+  num_nodes: 9
+  resolution: 512
+  run: 9
+  structure: binary_tree
+  task_type: post_order
+  uuid: efc19a53-7354-40eb-9c2b-7037999b796a
+  variation: 3
   width: 1.0

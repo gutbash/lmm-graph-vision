@@ -15,6 +15,7 @@ import csv
 import asyncio
 from evaluation.similarity import calculate_similarity_list, calculate_similarity_dict
 from ast import literal_eval
+import time
 
 logger = Logger(__name__)
 
@@ -90,7 +91,7 @@ class Evaluator:
     ```
     """
     
-    RATE_LIMIT = 60
+    RATE_LIMIT = 57
     REQUEST_INTERVAL = 60
     
     save_path = validate_path(csv_path, csv_name, '.csv')
@@ -122,6 +123,9 @@ class Evaluator:
     task_chunks = [tasks[i:i + chunk_size] for i in range(0, len(tasks), chunk_size)]
     
     total_chunks = len(task_chunks)
+    total_calls = len(tasks) * repeats
+    completed_calls = 0
+    start_time = time.time()
     
     for chunk_index, chunk in enumerate(task_chunks):
       chunk_num = chunk_index + 1
@@ -159,25 +163,34 @@ class Evaluator:
                         
           coroutines.append((model.arun(message_list), task))
           
-      logger.info(f'Running {len(coroutines)} coroutines...')
+        logger.info(f'Running {len(coroutines)} coroutines in this iteration...')
 
       try:
         results = await asyncio.gather(*[coro for coro, _ in coroutines])
+        completed_calls += len(results)
       except Exception as e:
           tb = traceback.format_exc()
           logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
           return
+
+      elapsed_time = time.time() - start_time
+      remaining_calls = total_calls - completed_calls
+      estimated_time_remaining = (elapsed_time / completed_calls) * remaining_calls if completed_calls > 0 else 0
+      
+      logger.info(f'Completed {completed_calls} of {total_calls} calls')
+      logger.info(f'Elapsed time: {elapsed_time:.2f} seconds')
+      logger.info(f'Estimated time remaining: {estimated_time_remaining:.2f} seconds')
     
       for result, task in zip(results, [task for _, task in coroutines]):
           content = result
           
           pattern = r'(\{.*?\})|(\[.*?\])'
           matches = re.findall(pattern, content)
-          #logger.info(f'Matches: {matches}')
+          logger.info(f'Matches: {matches}')
           clean_matches = [match for group in matches for match in group if match]
-          if type(clean_matches[0]) is tuple:
+          if type(clean_matches[-1]) is tuple:
             clean_matches = [item for tup in matches for item in tup if item]
-          clean_match = str(clean_matches[0])
+          clean_match = str(clean_matches[-1])
             
           express_expected = literal_eval(task.get('expected'))
           express_actual = literal_eval(clean_match)
@@ -198,7 +211,7 @@ class Evaluator:
             'n_format': task.get('format'),
             'structure': task.get('structure'),
             'task_type': task.get('task_type'),
-            'text_prompt': str([message.content for message in message_list if type(message) == UserMessage or type(message) == BaseMessage]).strip("]["),
+            'text_prompt': str([message.content for message in message_list if type(message) == UserMessage]).strip("]["),
             'image_prompt': image_path,
             'model_response': content.replace('\n', '\\n'),
             'extracted_response': clean_match,
