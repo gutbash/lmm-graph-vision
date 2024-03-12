@@ -3,9 +3,76 @@ import seaborn as sns
 import pandas as pd
 from pathlib import Path
 from uuid import uuid4
+import os
+from matplotlib.font_manager import FontProperties
+
+signifier_font_path = "plot/fonts/Test Signifier/TestSignifier-Medium.otf"
+sohne_font_path = "plot/fonts/Test Söhne Collection/Test Söhne/TestSöhne-Buch.otf"
+sohne_bold_font_path = "plot/fonts/Test Söhne Collection/Test Söhne/TestSöhne-Kräftig.otf"
+
+signifier_font = FontProperties(fname=signifier_font_path)
+sohne_font = FontProperties(fname=sohne_font_path)
+sohne_bold_font = FontProperties(fname=sohne_bold_font_path)
 
 # Load the dataset
-file_path = Path('results/deepmind-9b121cc7-045c-4e33-9351-363d5febbea0.csv')
+file_path = Path('results/deepmind-prompts_default.csv')
+
+def match_similarity_per_structure_grouped_by_num_nodes(file_path: Path) -> None:
+    df = pd.read_csv(file_path)
+    
+    # Calculate overall match rate and average similarity
+    overall_match_rate = df['match'].mean()
+    overall_average_similarity = df['similarity'].mean()
+    
+    # Grouping by 'structure' and 'num_nodes' to calculate match rate and average similarity
+    grouped_data = df.groupby(['structure', 'num_nodes']).agg(match_rate=('match', 'mean'), average_similarity=('similarity', 'mean')).reset_index()
+
+    # Setting the plot size a bit larger to accommodate legends and titles better
+    plt.figure(figsize=(16, 8))
+
+    # Match Rate Visualization
+    ax1 = plt.subplot(1, 2, 1)
+    match_plot = sns.barplot(x='num_nodes', y='match_rate', hue='structure', data=grouped_data, palette='coolwarm', ax=ax1)
+    plt.title('Accuracy of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=12, loc='left')
+    plt.xlabel('n nodes', fontproperties=sohne_font)
+    plt.ylabel('accuracy', fontproperties=sohne_font)
+    for spine in ax1.spines.values():
+        spine.set_visible(False)
+    leg = match_plot.legend(loc='upper right', bbox_to_anchor=(1.01, 1))
+    #leg.set_title('Structure', prop=sohne_font)
+    for text in leg.get_texts():
+        text.set_text(text.get_text().replace("_", " "))
+        text.set_fontproperties(sohne_font)
+    ax1.set_axisbelow(True)
+    ax1.grid(True, which='both', axis='y', linestyle='-', linewidth=0.5, color='lightgrey')
+
+    # Average Similarity Visualization
+    ax2 = plt.subplot(1, 2, 2)
+    similarity_plot = sns.barplot(x='num_nodes', y='average_similarity', hue='structure', data=grouped_data, palette='coolwarm', ax=ax2)
+    plt.title('Similarity of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=12, loc='left')
+    plt.xlabel('n nodes', fontproperties=sohne_font)
+    plt.ylabel('similarity', fontproperties=sohne_font)
+    for spine in ax2.spines.values():
+        spine.set_visible(False)
+    leg = similarity_plot.legend(loc='upper right', bbox_to_anchor=(1.01, 1))
+    #leg.set_title('Structure', prop=sohne_font)
+    for text in leg.get_texts():
+        text.set_text(text.get_text().replace("_", " "))
+        text.set_fontproperties(sohne_font)
+    ax2.set_axisbelow(True)
+    ax2.grid(True, which='both', axis='y', linestyle='-', linewidth=0.5, color='lightgrey')
+
+    # Display overall average similarity
+    plt.figtext(0.83, 0.92, f'Aggregate Mean Similarity - {overall_average_similarity:.2f}', ha='left', fontsize=10, color='red', fontproperties=sohne_font)
+    # Display overall match rate
+    plt.figtext(0.69, 0.92, f'Aggregate Mean Accuracy - {overall_match_rate:.2f}', ha='left', fontsize=10, color='red', fontproperties=sohne_font)
+
+    # Enhancing the suptitle formatting
+    plt.figtext(0.05, 0.92, f'{((file_path.name).replace("_", "-")).replace(".csv", "")}', va='center', fontsize=32, fontweight='bold', color='black', fontproperties=signifier_font)
+
+    # Adjust layout for better readability
+    plt.tight_layout(rect=[0.01, 0.01, 0.99, 0.87])
+    plt.savefig(f'plot/match_rate_and_similarity_by_structure_and_num_nodes-{(file_path.name).replace(".csv", "").upper()}.png', dpi=300)
 
 def match_rate_per_structure_grouped_by_resolution(file_path: Path) -> None:
     """
@@ -93,6 +160,12 @@ def similarity_heatmap(file_path: Path) -> None:
     plt.yticks(rotation=0)
     plt.savefig(f'plot/heatmap_of_average_similarity_by_structure_and_num_nodes-{(file_path.name).replace(".csv", "").capitalize()}.png')
     
-match_rate_per_structure_grouped_by_resolution(file_path)
-match_rate_per_num_nodes_and_resolution(file_path)
-similarity_heatmap(file_path)
+
+directory_path = Path('results')
+
+for file in directory_path.iterdir():
+    if file.is_file():
+        if file.name.endswith('.csv'):
+            match_similarity_per_structure_grouped_by_num_nodes(file)
+
+#match_similarity_per_structure_grouped_by_num_nodes(file_path)

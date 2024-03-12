@@ -127,6 +127,8 @@ class Evaluator:
     completed_calls = 0
     start_time = time.time()
     
+    logger.info(f'Total chunks: {total_chunks}, Total calls: {total_calls}')
+    
     for chunk_index, chunk in enumerate(task_chunks):
       chunk_num = chunk_index + 1
       logger.info(f'Running {chunk_num} of {total_chunks} chunks')
@@ -163,7 +165,7 @@ class Evaluator:
                         
           coroutines.append((model.arun(message_list), task))
           
-        logger.info(f'Running {len(coroutines)} coroutines in this iteration...')
+      logger.info(f'Running {len(coroutines)} coroutines in this iteration...')
 
       try:
         results = await asyncio.gather(*[coro for coro, _ in coroutines])
@@ -182,26 +184,40 @@ class Evaluator:
       logger.info(f'Estimated time remaining: {estimated_time_remaining:.2f} seconds')
     
       for result, task in zip(results, [task for _, task in coroutines]):
-          content = result
           
           pattern = r'(\{.*?\})|(\[.*?\])'
+          content = re.sub(' +', ' ', result.replace('\n', ''))
           matches = re.findall(pattern, content)
-          logger.info(f'Matches: {matches}')
-          clean_matches = [match for group in matches for match in group if match]
-          if type(clean_matches[-1]) is tuple:
-            clean_matches = [item for tup in matches for item in tup if item]
-          clean_match = str(clean_matches[-1])
-            
-          express_expected = literal_eval(task.get('expected'))
-          express_actual = literal_eval(clean_match)
-          
-          if type(express_expected) is list and type(express_actual) is list:
-            similarity = calculate_similarity_list(express_expected, express_actual)
-          elif type(express_expected) is dict and type(express_actual) is dict:
-            similarity = calculate_similarity_dict(express_expected, express_actual)
+          if matches == []:
+            logger.info(f'No matches found in content: {content}')
+            clean_match = ''
+            similarity = 0.0
           else:
-            logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_actual)}')
-            return
+            logger.info(f'Matches: {matches}')
+            clean_matches = [match for group in matches for match in group if match]
+            if type(clean_matches[-1]) is tuple:
+              clean_matches = [item for tup in matches for item in tup if item]
+            
+            express_expected = literal_eval(task.get('expected'))
+            for match in reversed(clean_matches):
+              if match != '[]' and match != '{}':
+                try:
+                  clean_match = str(match)
+                  express_actual = literal_eval(clean_match)
+                  break
+                except:
+                  pass
+              
+            
+            if type(express_expected) is list and type(express_actual) is list:
+              similarity = calculate_similarity_list(express_expected, express_actual)
+            elif type(express_expected) is dict and type(express_actual) is dict:
+              similarity = calculate_similarity_dict(express_expected, express_actual)
+            else:
+              logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_actual)}')
+              logger.info(f'Expected: {express_expected}, Actual: {express_actual}')
+              logger.info(f'Content: {content}')
+              raise Exception('Expected and actual types do not match')
           
           # Append new data to the DataFrame
           new_row = {

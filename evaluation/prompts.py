@@ -804,3 +804,42 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     'task': 'breadth_first_search'
     },
 ]
+
+PROMPTS_ZERO_SHOT_COT_POLITE = [
+    {
+    'messages': [UserMessage(content="""Please provide a single-line python list representing the post-order traversal of the {{structure}}.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
+    'task': 'post_order'
+    },
+    {
+    'messages': [UserMessage(content="""Please provide a single-line python list representing the pre-order traversal of the {{structure}}.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
+    'task': 'pre_order'
+    },
+    {
+    'messages': [UserMessage(content="""Please provide a single-line python list representing the in-order traversal of the {{structure}}.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
+    'task': 'in_order'
+    },
+    {
+    'messages': [UserMessage(content="""Please provide a single-line python dictionary representing the adjacency list of the {{structure}}.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
+    'task': 'adjacency_list'
+    },
+    {
+    'messages': [UserMessage(content="""Please provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
+    'task': 'depth_first_search'
+    },
+    {
+    'messages': [UserMessage(content="""Please provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.
+                             
+    Let's think step by step.""", images=["{{image}}"])],
+    'task': 'breadth_first_search'
+    },
+]
