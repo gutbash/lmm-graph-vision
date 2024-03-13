@@ -269,7 +269,7 @@ class BatchGenerator(Generator):
             
             approved = False
             structure_generated = None
-            num_nodes = generation * 3 if not random_num_nodes else None
+            num_nodes = generation + 2 if not random_num_nodes else None
             
             while not approved:
                 

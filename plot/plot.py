@@ -159,13 +159,64 @@ def similarity_heatmap(file_path: Path) -> None:
     plt.xticks(rotation=45)
     plt.yticks(rotation=0)
     plt.savefig(f'plot/heatmap_of_average_similarity_by_structure_and_num_nodes-{(file_path.name).replace(".csv", "").capitalize()}.png')
+
+def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
+    # Load datasets
+    df1 = pd.read_csv(file_path1)
+    df2 = pd.read_csv(file_path2)
     
+    # Process datasets
+    def process_data(df):
+        overall_match_rate = df['match'].mean()
+        overall_average_similarity = df['similarity'].mean()
+        grouped_data = df.groupby('num_nodes').agg(match_rate=('match', 'mean'), average_similarity=('similarity', 'mean')).reset_index()
+        return overall_match_rate, overall_average_similarity, grouped_data
+    
+    overall_match_rate1, overall_average_similarity1, grouped_data1 = process_data(df1)
+    overall_match_rate2, overall_average_similarity2, grouped_data2 = process_data(df2)
+    
+    # Plotting
+    plt.figure(figsize=(16, 8))
+    
+    # Match Rate Visualization
+    ax1 = plt.subplot(1, 2, 1)
+    for spine in ax1.spines.values():
+        spine.set_visible(False)
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['match_rate'], marker='o', label='zero-shot', linestyle='-', color='violet')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['match_rate'], marker='s', label='zero-shot-cot', linestyle='-')
+    plt.title('Accuracy of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=16)
+    plt.xlabel('Number of Nodes', fontproperties=sohne_font, fontsize=12)
+    plt.ylabel('Accuracy', fontproperties=sohne_font, fontsize=12)
+    leg = plt.legend()
+    for text in leg.get_texts():
+        text.set_text(text.get_text())
+        text.set_fontproperties(sohne_font)
+    plt.grid(True, which='both', linestyle='-', linewidth=0.5, color='lightgrey')
+    
+    # Average Similarity Visualization
+    ax2 = plt.subplot(1, 2, 2)
+    for spine in ax2.spines.values():
+        spine.set_visible(False)
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['average_similarity'], marker='o', label='zero-shot', linestyle='-', color='violet')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['average_similarity'], marker='s', label='zero-shot-cot', linestyle='-')
+    plt.title('Similarity of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=16)
+    plt.xlabel('Number of Nodes', fontproperties=sohne_font, fontsize=12)
+    plt.ylabel('Similarity', fontproperties=sohne_font, fontsize=12)
+    leg = plt.legend()
+    for text in leg.get_texts():
+        text.set_text(text.get_text())
+        text.set_fontproperties(sohne_font)
+    plt.grid(True, which='both', linestyle='-', linewidth=0.5, color='lightgrey')
+    
+    plt.tight_layout()
+    plt.savefig(f'results/comparison_{file_path1.stem}_vs_{file_path2.stem}.png', dpi=300)
 
 directory_path = Path('results')
-
+'''
 for file in directory_path.iterdir():
     if file.is_file():
         if file.name.endswith('.csv'):
             match_similarity_per_structure_grouped_by_num_nodes(file)
-
+'''
 #match_similarity_per_structure_grouped_by_num_nodes(file_path)
+compare_match_similarity(Path('results/deepmind-prompt_default.csv'), Path('results/deepmind-prompts_zero_shot_cot.csv'))
