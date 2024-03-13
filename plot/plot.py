@@ -182,9 +182,9 @@ def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
     ax1 = plt.subplot(1, 2, 1)
     for spine in ax1.spines.values():
         spine.set_visible(False)
-    plt.plot(grouped_data1['num_nodes'], grouped_data1['match_rate'], marker='o', label='zero-shot', linestyle='-', color='steelblue', lw=2.0, ms=6.0, solid_joinstyle='round')
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['match_rate'], marker='o', label='zero-shot', linestyle='-', color='#788296', lw=2.0, ms=6.0, solid_joinstyle='round')
     plt.plot(grouped_data2['num_nodes'], grouped_data2['match_rate'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round', color='cornflowerblue')
-    plt.title('Accuracy of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=16)
+    plt.title('Accuracy of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=12, loc='left')
     plt.xlabel('n nodes', fontproperties=sohne_font, fontsize=12)
     plt.ylabel('accuracy', fontproperties=sohne_font, fontsize=12)
     leg = plt.legend()
@@ -197,9 +197,9 @@ def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
     ax2 = plt.subplot(1, 2, 2)
     for spine in ax2.spines.values():
         spine.set_visible(False)
-    plt.plot(grouped_data1['num_nodes'], grouped_data1['average_similarity'], marker='o', label='zero-shot', linestyle='-', color='violet', lw=2.0, ms=6.0, solid_joinstyle='round')
-    plt.plot(grouped_data2['num_nodes'], grouped_data2['average_similarity'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round')
-    plt.title('Similarity of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=16)
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['average_similarity'], marker='o', label='zero-shot', linestyle='-', color='#788296', lw=2.0, ms=6.0, solid_joinstyle='round')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['average_similarity'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round', color='cornflowerblue')
+    plt.title('Similarity of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=12, loc='left')
     plt.xlabel('n nodes', fontproperties=sohne_font, fontsize=12)
     plt.ylabel('similarity', fontproperties=sohne_font, fontsize=12)
     leg = plt.legend()
@@ -209,7 +209,7 @@ def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
     plt.grid(True, which='both', linestyle='-', linewidth=0.5, color='lightgrey')
     
     plt.tight_layout()
-    plt.savefig(f'results/comparison_{file_path1.stem}_vs_{file_path2.stem}.png', dpi=300)
+    plt.savefig(f'plot/comparison_{file_path1.stem}_vs_{file_path2.stem}.png', dpi=300)
 
 directory_path = Path('results')
 '''
