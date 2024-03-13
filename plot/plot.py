@@ -176,17 +176,17 @@ def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
     overall_match_rate2, overall_average_similarity2, grouped_data2 = process_data(df2)
     
     # Plotting
-    plt.figure(figsize=(16, 8))
+    plt.figure(figsize=(12, 5))
     
     # Match Rate Visualization
     ax1 = plt.subplot(1, 2, 1)
     for spine in ax1.spines.values():
         spine.set_visible(False)
-    plt.plot(grouped_data1['num_nodes'], grouped_data1['match_rate'], marker='o', label='zero-shot', linestyle='-', color='violet')
-    plt.plot(grouped_data2['num_nodes'], grouped_data2['match_rate'], marker='s', label='zero-shot-cot', linestyle='-')
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['match_rate'], marker='o', label='zero-shot', linestyle='-', color='steelblue', lw=2.0, ms=6.0, solid_joinstyle='round')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['match_rate'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round', color='cornflowerblue')
     plt.title('Accuracy of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=16)
-    plt.xlabel('Number of Nodes', fontproperties=sohne_font, fontsize=12)
-    plt.ylabel('Accuracy', fontproperties=sohne_font, fontsize=12)
+    plt.xlabel('n nodes', fontproperties=sohne_font, fontsize=12)
+    plt.ylabel('accuracy', fontproperties=sohne_font, fontsize=12)
     leg = plt.legend()
     for text in leg.get_texts():
         text.set_text(text.get_text())
@@ -197,11 +197,11 @@ def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
     ax2 = plt.subplot(1, 2, 2)
     for spine in ax2.spines.values():
         spine.set_visible(False)
-    plt.plot(grouped_data1['num_nodes'], grouped_data1['average_similarity'], marker='o', label='zero-shot', linestyle='-', color='violet')
-    plt.plot(grouped_data2['num_nodes'], grouped_data2['average_similarity'], marker='s', label='zero-shot-cot', linestyle='-')
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['average_similarity'], marker='o', label='zero-shot', linestyle='-', color='violet', lw=2.0, ms=6.0, solid_joinstyle='round')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['average_similarity'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round')
     plt.title('Similarity of Predicted vs. Ground Truth', fontproperties=sohne_font, fontsize=16)
-    plt.xlabel('Number of Nodes', fontproperties=sohne_font, fontsize=12)
-    plt.ylabel('Similarity', fontproperties=sohne_font, fontsize=12)
+    plt.xlabel('n nodes', fontproperties=sohne_font, fontsize=12)
+    plt.ylabel('similarity', fontproperties=sohne_font, fontsize=12)
     leg = plt.legend()
     for text in leg.get_texts():
         text.set_text(text.get_text())
