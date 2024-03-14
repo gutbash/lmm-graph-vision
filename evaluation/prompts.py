@@ -116,7 +116,7 @@ Step 4: Compile the results into a single-line Python list. ]
 from evaluation.models.messages.message import UserMessage, SystemMessage, ModelMessage
 
 # 1) Default
-PROMPTS_DEFAULT = [
+PROMPTS_ZERO_SHOT = [
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'

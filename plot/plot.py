@@ -218,5 +218,6 @@ for file in directory_path.iterdir():
         if file.name.endswith('.csv'):
             match_similarity_per_structure_grouped_by_num_nodes(file)
 '''
-#match_similarity_per_structure_grouped_by_num_nodes(file_path)
+match_similarity_per_structure_grouped_by_num_nodes(Path('results/deepmind-prompt_default.csv'))
+match_similarity_per_structure_grouped_by_num_nodes(Path('results/deepmind-prompts_zero_shot_cot.csv'))
 compare_match_similarity(Path('results/deepmind-prompt_default.csv'), Path('results/deepmind-prompts_zero_shot_cot.csv'))

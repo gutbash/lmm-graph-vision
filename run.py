@@ -9,7 +9,7 @@ from evaluation.models.deepmind import DeepMind
 from utils.logger import Logger
 logger = Logger(__name__)
 
-from evaluation.prompts import PROMPTS_DEFAULT, PROMPTS_REPHRASE, PROMPTS_NO_STRUCTURE, PROMPTS_STEPS, PROMPTS_DEFINITION, PROMPTS_EXPERT, PROMPTS_ZERO_SHOT_COT_REREAD, PROMPTS_SERIAL, PROMPTS_POLITE, PROMPTS_ZERO_SHOT_COT, PROMPTS_GOLD_COT, PROMPTS_GENERAL_KNOWLEDGE, PROMPTS_ROLEPLAY_EXPERT_COT, PROMPTS_DELIMIT, PROMPTS_GOLD_COT_EXPERT_DELIMIT, PROMPTS_ZERO_SHOT_COT_POLITE
+from evaluation.prompts import PROMPTS_ZERO_SHOT, PROMPTS_REPHRASE, PROMPTS_NO_STRUCTURE, PROMPTS_STEPS, PROMPTS_DEFINITION, PROMPTS_EXPERT, PROMPTS_ZERO_SHOT_COT_REREAD, PROMPTS_SERIAL, PROMPTS_POLITE, PROMPTS_ZERO_SHOT_COT, PROMPTS_GOLD_COT, PROMPTS_GENERAL_KNOWLEDGE, PROMPTS_ROLEPLAY_EXPERT_COT, PROMPTS_DELIMIT, PROMPTS_GOLD_COT_EXPERT_DELIMIT, PROMPTS_ZERO_SHOT_COT_POLITE
 
 import asyncio
 import os
@@ -24,9 +24,9 @@ load_dotenv()
 openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
 deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
 
-PROMPTS = {'prompts_serial': PROMPTS_SERIAL, 'prompts_default': PROMPTS_DEFAULT, 'prompts_rephrase': PROMPTS_REPHRASE, 'prompts_no_structure': PROMPTS_NO_STRUCTURE, 'prompts_steps': PROMPTS_STEPS, 'prompts_definition': PROMPTS_DEFINITION, 'prompts_expert': PROMPTS_EXPERT, 'prompts_zero_shot_cot_reread': PROMPTS_ZERO_SHOT_COT_REREAD, 'prompts_polite': PROMPTS_POLITE, 'prompts_zero_shot_cot': PROMPTS_ZERO_SHOT_COT, 'prompts_gold_cot': PROMPTS_GOLD_COT, 'prompts_general_knowledge': PROMPTS_GENERAL_KNOWLEDGE, 'prompts_roleplay_expert_cot': PROMPTS_ROLEPLAY_EXPERT_COT, 'prompts_delimit': PROMPTS_DELIMIT, 'prompts_gold_cot_expert_delimit': PROMPTS_GOLD_COT_EXPERT_DELIMIT}
+PROMPTS = {'prompts_serial': PROMPTS_SERIAL, 'prompts_zero_shot': PROMPTS_ZERO_SHOT, 'prompts_rephrase': PROMPTS_REPHRASE, 'prompts_no_structure': PROMPTS_NO_STRUCTURE, 'prompts_steps': PROMPTS_STEPS, 'prompts_definition': PROMPTS_DEFINITION, 'prompts_expert': PROMPTS_EXPERT, 'prompts_zero_shot_cot_reread': PROMPTS_ZERO_SHOT_COT_REREAD, 'prompts_polite': PROMPTS_POLITE, 'prompts_zero_shot_cot': PROMPTS_ZERO_SHOT_COT, 'prompts_gold_cot': PROMPTS_GOLD_COT, 'prompts_general_knowledge': PROMPTS_GENERAL_KNOWLEDGE, 'prompts_roleplay_expert_cot': PROMPTS_ROLEPLAY_EXPERT_COT, 'prompts_delimit': PROMPTS_DELIMIT, 'prompts_gold_cot_expert_delimit': PROMPTS_GOLD_COT_EXPERT_DELIMIT}
 
-PROMPTS = {'prompt_default': PROMPTS_DEFAULT, 'prompts_gold_cot_expert_delimit': PROMPTS_GOLD_COT_EXPERT_DELIMIT, 'prompts_polite': PROMPTS_POLITE, 'prompts_zero_shot_cot': PROMPTS_ZERO_SHOT_COT, 'prompts_zero_shot_cot_polite': PROMPTS_ZERO_SHOT_COT_POLITE}
+PROMPTS = {'prompts_zero_shot': PROMPTS_ZERO_SHOT, 'prompts_zero_shot_cot': PROMPTS_ZERO_SHOT_COT}
 
 ### DEVELOP PATHS ###
 
@@ -41,7 +41,7 @@ yaml_path = Path('data/')
 
 batch_generator = BatchGenerator()
 generation = 7
-variation = 1
+variation = 3
 
 async def run_batch():
 
@@ -123,10 +123,7 @@ async def run_eval():
             
             try:
 
-                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}.csv', repeats=3)
-                
-                logger.info(f'Evaluation for {prompt_name} and {structure} completed. Sleeping for 60 seconds.')
-                await asyncio.sleep(60)
+                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-duel.csv', repeats=3)
                 
             except Exception as e:
                 logger.error(f'{e}')
