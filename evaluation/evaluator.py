@@ -60,7 +60,7 @@ class Evaluator:
   semaphore : asyncio.Semaphore
       the global semaphore for rate limiting
   """
-  columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'edge_width', 'num_nodes', 'resolution', 'task_id', 'image_id']
+  columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'node_shape', 'edge_width', 'arrow_style', 'num_nodes', 'resolution', 'task_id', 'image_id']
   rate_limiter = RateLimiter(1)
   
   def __init__(self) -> None:
@@ -200,7 +200,9 @@ class Evaluator:
         'similarity': similarity,
         'node_font': task.get('node_font'),
         'node_color': task.get('node_color'),
+        'node_shape': task.get('node_shape'),
         'edge_width': task.get('edge_width'),
+        'arrow_style': task.get('arrow_style'),
         'num_nodes': task.get('num_nodes'),
         'resolution': task.get('resolution'),
         'task_id': task.get('task_id'),
@@ -219,5 +221,5 @@ class Evaluator:
     async with aiofiles.open(save_path, mode='a', newline='') as file:
         writer = csv.writer(file)
         for index, new_row in enumerate(new_rows, start=1):
-            row_data = [str(index)] + [str(new_row[col]) for col in self.columns]
+            row_data = [str(index)] + [str(new_row[col]) for col in self.columns if col != 'run_id']
             await writer.writerow(row_data)

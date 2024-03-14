@@ -142,7 +142,7 @@ class UndirectedGraph(Graph):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
         
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """
         Visualizes the generated undirected graph.
         
@@ -270,7 +270,7 @@ class DirectedGraph(Graph):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-|>') -> None:
         """
         Visualizes the generated directed graph
         
@@ -321,7 +321,7 @@ class DirectedGraph(Graph):
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50), arrowstyle=arrow_style)
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

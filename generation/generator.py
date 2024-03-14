@@ -93,7 +93,7 @@ class Generator:
         
         return structure_instance
 
-    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512) -> None:
+    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512, arrow_style: str = '-|>') -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -153,7 +153,7 @@ class Generator:
         logger.info(f"Drawing {structure_instance.formal_name}...")
         start = perf_counter()
         
-        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, width=width, resolution=resolution)
+        structure_instance.draw(save=save, path=filepath, show=show, shape=shape, color=color, font=font, width=width, resolution=resolution, arrow_style=arrow_style)
         
         end = perf_counter()
         logger.info(f"╰── Drew {structure_instance.formal_name} in {round(end - start, 2)} seconds.")
@@ -172,7 +172,9 @@ class Generator:
             'image_path': str(filepath),
             'node_color': color,
             'node_font': font,
+            'node_shape': shape,
             'edge_width': float(width),
+            'arrow_style': arrow_style,
             'num_nodes': num_nodes,
             'resolution': resolution,
         }
@@ -196,7 +198,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, visual_combinations: bool = False, random_num_nodes: bool = True, resolutions: list = [512]) -> None:
+    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#fee4b3'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['1.0']) -> None:
         """
         Generates a batch of data structures.
         
@@ -226,6 +228,8 @@ class BatchGenerator(Generator):
         
         with open(yaml_path_joined, 'w') as file:
             file.write('')
+            
+        format_combinations = list(itertools.product(width, colors, fonts, shapes))
         
         # create base structures
         for generation in range(1, generations + 1):
@@ -256,28 +260,21 @@ class BatchGenerator(Generator):
                     approved = True
                 elif input_approved.lower() == 'x':
                     return
-            
+
             # create variations of each base structure
             for variation in range(1, variations + 1):
                 
                 structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
-                        
-                if visual_combinations:
+                format = 1
+                
+                for width, color, font, shape in format_combinations:
                     
-                    colors = ['#abe0f9', '#fee4b3', '#eeeeee']
-                    shapes = ['o', 's', 'd']
-                    fonts = ['sans-serif', 'serif', 'monospace']
-                    width = ['0.5', '1.0', '1.5']
-                    
-                    format_combinations = list(itertools.product(width, colors, fonts))
-                    format = 1
-                    
-                    for width, color, font in format_combinations:
-                        
-                        image_id = uuid4()
-                        
+                    for arw, arrow in enumerate(arrows):
+
                         for res in resolutions:
-                        
+                            
+                            image_id = uuid4()
+                    
                             for method in structure_filled.methods:
 
                                 task_id = uuid4()
@@ -288,7 +285,7 @@ class BatchGenerator(Generator):
                                     expected = method_to_call(structure_filled)
                                 else:
                                     logger.error(f"Method '{method}' not found in {structure_filled}.")
-                                
+                            
                                 object = await self.generator.draw_structure(
                                     image_id=image_id,
                                     task_id=task_id,
@@ -297,7 +294,7 @@ class BatchGenerator(Generator):
                                     expected=str(expected),
                                     save=True,
                                     save_path=save_path,
-                                    save_name=f"{type}_gen-{generation}_var-{variation}_fmt-{format}_thk-{width.replace('.', '')}_clr-{color.replace('#', '')}_fnt-{font.replace('-', '')}_res-{str(res)}_idn-{str(image_id)}.png",
+                                    save_name=f"{type}-gen_{generation}-var_{variation}-fmt_{format}-wid_{width.replace('.', '')}-col_{color.replace('#', '')}-fnt_{font.replace('-', '')}-shp_{shape}-arw_{arw}-res_{str(res)}-idn_{str(image_id)}.png",
                                     show=False,
                                     generation=generation,
                                     variation=variation,
@@ -305,49 +302,15 @@ class BatchGenerator(Generator):
                                     color=color,
                                     font=font,
                                     width=width,
+                                    shape=shape,
                                     num_nodes=len(structure_filled.graph.nodes),
                                     resolution=res,
+                                    arrow_style=arrow,
                                 )
-                                
+                            
                                 yaml_objects.append(object)
-                            
-                        format += 1
                         
-                else:
-                    
-                    image_id = uuid4()
-                    
-                    for res in resolutions:
-                    
-                        for method in structure_filled.methods:
-                        
-                            task_id = uuid4()
-                            
-                            expected = None
-                            if hasattr(structure_filled, method):
-                                method_to_call = getattr(structure_filled, method)
-                                expected = method_to_call(structure_filled)
-                            else:
-                                logger.error(f"Method '{method}' not found in {structure_filled}.")
-                                
-                            object = await self.generator.draw_structure(
-                                image_id=image_id,
-                                task_id=task_id,
-                                structure_instance=structure_filled,
-                                task_type=method,
-                                expected=str(expected),
-                                save=True,
-                                save_path=save_path,
-                                save_name=f"{type}_gen-{generation}_var-{variation}_fmt-{format}_thk-10_clr-abe0f9_fnt-sansserif_res-{str(res)}_idn-{str(image_id)}.png",
-                                show=False,
-                                generation=generation,
-                                variation=variation,
-                                format=format,
-                                num_nodes=len(structure_filled.graph.nodes),
-                                resolution=res,
-                            )
-                            
-                            yaml_objects.append(object)
+                    format += 1
                         
         try:
             await add_objects_async(file_path=yaml_path_joined, objects=yaml_objects)

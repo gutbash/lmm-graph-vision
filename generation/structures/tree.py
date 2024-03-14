@@ -263,7 +263,7 @@ class BinaryTree(Tree):
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
 
-    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
+    def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """
         Draw the binary tree
 
@@ -447,7 +447,7 @@ class BinarySearchTree(Tree):
         self._fill_node(node.left, min_val, node.value - 1, used_values)
         self._fill_node(node.right, node.value + 1, max_val, used_values)
 
-    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512) -> None:
+    def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """
         Draw the binary search tree
         

@@ -21,14 +21,18 @@ import pstats
 
 load_dotenv()
 
+### keys ###
+
 openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
 deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
 
+### prompts ###
+
 PROMPTS = {'prompts_serial': PROMPTS_SERIAL, 'prompts_zero_shot': PROMPTS_ZERO_SHOT, 'prompts_rephrase': PROMPTS_REPHRASE, 'prompts_no_structure': PROMPTS_NO_STRUCTURE, 'prompts_steps': PROMPTS_STEPS, 'prompts_definition': PROMPTS_DEFINITION, 'prompts_expert': PROMPTS_EXPERT, 'prompts_zero_shot_cot_reread': PROMPTS_ZERO_SHOT_COT_REREAD, 'prompts_polite': PROMPTS_POLITE, 'prompts_zero_shot_cot': PROMPTS_ZERO_SHOT_COT, 'prompts_gold_cot': PROMPTS_GOLD_COT, 'prompts_general_knowledge': PROMPTS_GENERAL_KNOWLEDGE, 'prompts_roleplay_expert_cot': PROMPTS_ROLEPLAY_EXPERT_COT, 'prompts_delimit': PROMPTS_DELIMIT, 'prompts_gold_cot_expert_delimit': PROMPTS_GOLD_COT_EXPERT_DELIMIT}
 
-PROMPTS = {'prompts_zero_shot': PROMPTS_ZERO_SHOT, 'prompts_zero_shot_cot': PROMPTS_ZERO_SHOT_COT}
+PROMPTS = {'prompts_zero_shot': PROMPTS_ZERO_SHOT}
 
-### DEVELOP PATHS ###
+### paths ###
 
 image_path_binary_tree = Path('images/binary_tree/')
 image_path_binary_search_tree = Path('images/binary_search_tree/')
@@ -37,14 +41,23 @@ image_path_directed_graph = Path('images/directed_graph/')
 
 yaml_path = Path('data/')
 
-### TEST BATCH GENERATION ###
+### combinations ###
+
+colors = ['#abe0f9', '#fee4b3', '#eeeeee']
+shapes = ['o', 's', 'd']
+fonts = ['sans-serif', 'serif', 'monospace']
+width = ['0.5', '1.0', '1.5']
+arrows = ['->', '-|>']
+resolutions = [256, 512, 1024, 2048]
+
+###### test generation ######
 
 batch_generator = BatchGenerator()
 generation = 7
-variation = 3
+variation = 1
 
 async def run_batch():
-
+    """
     await batch_generator.generate_batch(
         structure_class=BinaryTree,
         type='bit',
@@ -53,9 +66,6 @@ async def run_batch():
         save_path=image_path_binary_tree,
         generations=generation,
         variations=variation,
-        random_num_nodes=False,
-        resolutions=[512],
-        visual_combinations=False,
     )
 
     await batch_generator.generate_batch(
@@ -66,9 +76,6 @@ async def run_batch():
         save_path=image_path_binary_search_tree,
         generations=generation,
         variations=variation,
-        random_num_nodes=False,
-        resolutions=[512],
-        visual_combinations=False,
     )
 
     await batch_generator.generate_batch(
@@ -79,11 +86,8 @@ async def run_batch():
         save_path=image_path_undirected_graph,
         generations=generation,
         variations=variation,
-        random_num_nodes=False,
-        resolutions=[512],
-        visual_combinations=False,
     )
-
+    """
     await batch_generator.generate_batch(
         structure_class=DirectedGraph,
         type='dg',
@@ -92,17 +96,12 @@ async def run_batch():
         save_path=image_path_directed_graph,
         generations=generation,
         variations=variation,
-        random_num_nodes=False,
-        resolutions=[512],
-        visual_combinations=False,
+        arrows=arrows,
     )
+    
 #asyncio.run(run_batch())
-'''
-cProfile.run('asyncio.run(run_batch())', 'batch_stats')
-p = pstats.Stats('batch_stats')
-p.sort_stats('cumulative').print_stats(10)
-'''
-### TEST EVALUATION ###
+
+###### test evaluation ######
 
 openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
@@ -119,14 +118,17 @@ async def run_eval():
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']:
+        for structure in ['directed_graph']:
             
             try:
 
-                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-duel.csv', repeats=3)
+                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-arrow.csv', repeats=3)
                 
             except Exception as e:
                 logger.error(f'{e}')
                 return
 
 asyncio.run(run_eval())
+
+#TODO: control graph edge count
+#TODO: control node values between structures
