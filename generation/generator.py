@@ -234,11 +234,11 @@ class BatchGenerator(Generator):
         # create base structures
         for generation in range(1, generations + 1):
             
-            approved = False
+            generation_approved = False
             structure_generated = None
             num_nodes = generation + 2 if not random_num_nodes else None
             
-            while not approved:
+            while not generation_approved:
                 
                 test_path = check_path_exists(Path('images/'))
                 test_name = 'test.png'
@@ -253,19 +253,20 @@ class BatchGenerator(Generator):
                     show=False,
                 )
                 
-                logger.warning(f"Check {test_path / test_name}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n(X) Exit\n")
+                logger.warning(f"[G{generation}N{num_nodes}] Check {test_path / test_name}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n(X) Exit\n")
                 input_approved = input(">>> ")
                 
                 if input_approved.lower() == 'y':
-                    approved = True
+                    generation_approved = True
                 elif input_approved.lower() == 'x':
                     return
 
             # create variations of each base structure
             for variation in range(1, variations + 1):
-                
-                structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
+
                 format = 1
+
+                structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
                 
                 for width, color, font, shape in format_combinations:
                     

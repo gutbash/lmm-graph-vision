@@ -149,7 +149,6 @@ class BinaryTree(Tree):
         """
         Generates a random binary tree
         """
-
         if not num_nodes:
             num_nodes = random.randint(3, 18)
 
@@ -160,98 +159,79 @@ class BinaryTree(Tree):
         root = Tree.TreeNode(root_value)
         values_set = {root_value}
         nodes = [root]
-        queue = [root]
-
-        # Ensure root has two children
-        for _ in range(2):
-            child_value = random.randint(1, 99)
-            while child_value in values_set:
-                child_value = random.randint(1, 99)
-
-            child_node = Tree.TreeNode(child_value)
-            if queue[0].left is None:
-                queue[0].left = child_node
-            else:
-                queue[0].right = child_node
-            values_set.add(child_value)
-            nodes.append(child_node)
-            queue.append(child_node)
-
-        # Continue with random tree generation
-        while len(nodes) < num_nodes:
-            current = queue.pop(0)
-
-            if len(nodes) < num_nodes and current.left is None:
-                left_child_value = random.randint(1, 99)
-                while left_child_value in values_set:
-                    left_child_value = random.randint(1, 99)
-
-                left_child = Tree.TreeNode(left_child_value)
-                current.left = left_child
-                values_set.add(left_child_value)
-                nodes.append(left_child)
-                queue.append(left_child)
-
-            if len(nodes) < num_nodes and current.right is None:
-                right_child_value = random.randint(1, 99)
-                while right_child_value in values_set:
-                    right_child_value = random.randint(1, 99)
-
-                right_child = Tree.TreeNode(right_child_value)
-                current.right = right_child
-                values_set.add(right_child_value)
-                nodes.append(right_child)
-                queue.append(right_child)
-
         self.root = root
 
-        def graphize(T: nx.Graph, node: Tree.TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
-            """
-            Graphizes the binary tree
+        while len(nodes) < num_nodes:
+            node = random.choice(nodes)
 
-            Parameters
-            ----------
-            T : nx.Graph
-                the graph to be drawn
-            node : Tree.TreeNode
-                the current node
-            x : int
-                the x coordinate of the current node (default is 0)
-            y : int
-                the y coordinate of the current node (default is 0)
-            layer_height : Optional[int]
-                the height of the current layer (default is None)
-            layer_width : Optional[int]
-                the width of the current layer (default is None)
+            if random.choice([True, False]):
+                if node.left is None:
+                    child_value = random.randint(1, 99)
+                    while child_value in values_set:
+                        child_value = random.randint(1, 99)
 
-            Raises
-            ------
-            ValueError
-                if the node is None
-            """
-            
-            if node:
-                if layer_height is None:
-                    layer_height = random.randint(3, 6)  # Random height for each layer
-                if layer_width is None:
-                    layer_width = 2
-
-                current_pos = (x, y)
-                self.pos[node.value] = current_pos
-
-                if node.left:
-                    T.add_edge(node.value, node.left.value)
-                    graphize(T, node.left, x - layer_width, y - 1, layer_height / 2, layer_width / 2)
-                if node.right:
-                    T.add_edge(node.value, node.right.value)
-                    graphize(T, node.right, x + layer_width, y - 1, layer_height / 2, layer_width / 2)
-                else:
-                    T.add_node(node.value)
+                    child = Tree.TreeNode(child_value)
+                    node.left = child
+                    values_set.add(child_value)
+                    nodes.append(child)
             else:
-                raise ValueError("The node is None")
-            self.graph = T
+                if node.right is None:
+                    child_value = random.randint(1, 99)
+                    while child_value in values_set:
+                        child_value = random.randint(1, 99)
+
+                    child = Tree.TreeNode(child_value)
+                    node.right = child
+                    values_set.add(child_value)
+                    nodes.append(child)
             
-        graphize(self.graph, self.root)
+        self._graphize(self.graph, self.root)
+        
+    def _graphize(self, T: nx.Graph, node: Tree.TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
+        """
+        Graphizes the binary tree
+
+        Parameters
+        ----------
+        T : nx.Graph
+            the graph to be drawn
+        node : Tree.TreeNode
+            the current node
+        x : int
+            the x coordinate of the current node (default is 0)
+        y : int
+            the y coordinate of the current node (default is 0)
+        layer_height : Optional[int]
+            the height of the current layer (default is None)
+        layer_width : Optional[int]
+            the width of the current layer (default is None)
+
+        Raises
+        ------
+        ValueError
+            if the node is None
+        """
+        
+        if node:
+            if layer_height is None:
+                layer_height = random.randint(3, 6)  # Random height for each layer
+            if layer_width is None:
+                layer_width = 2
+
+            current_pos = (x, y)
+            self.pos[node.value] = current_pos
+
+            if node.left:
+                T.add_edge(node.value, node.left.value)
+                self._graphize(T, node.left, x - layer_width, y - 1, layer_height / 2, layer_width / 2)
+            if node.right:
+                T.add_edge(node.value, node.right.value)
+                self._graphize(T, node.right, x + layer_width, y - 1, layer_height / 2, layer_width / 2)
+            else:
+                T.add_node(node.value)
+        else:
+            raise ValueError("The node is None")
+        self.graph = T
 
     def fill(self) -> None:
         """
@@ -374,78 +354,103 @@ class BinarySearchTree(Tree):
         """
         Generates a random binary search tree
         """
-        used_values = set()
-
         if not num_nodes:
             num_nodes = random.randint(3, 18)
-            
+
         if num_nodes <= 0:
             return
-        
-        self.root = self._insert_node(None, random.randint(1, 99), used_values)
 
-        for _ in range(1, num_nodes):
-            self._insert_node(self.root, random.randint(1, 99), used_values)
+        # Generate unique values for the nodes
+        values = random.sample(range(1, 100), num_nodes)
+
+        # Insert nodes with random values while maintaining the BST property
+        self.root = None
+        for value in values:
+            self.insert(value)
 
         self._graphize(self.graph, self.root)
 
-    def _insert_node(self, current: Optional[Tree.TreeNode], value: int, used_values: set) -> Tree.TreeNode:
-        if value in used_values:
-            return current
+    def insert(self, value: int) -> None:
+        """
+        Inserts a new node with the given value into the binary search tree
+        """
+        new_node = Tree.TreeNode(value)
 
-        if current is None:
-            used_values.add(value)
-            return Tree.TreeNode(value)
-
-        if value < current.value:
-            current.left = self._insert_node(current.left, value, used_values)
+        if self.root is None:
+            self.root = new_node
+            #print("This is the root:",self.root.value)
         else:
-            current.right = self._insert_node(current.right, value, used_values)
-        
-        return current
+            current = self.root
+            while True:
+                if value < current.value:
+                    if current.left is None:
+                        current.left = new_node
+                        #print("This is the left:",current.left.value)
+                        break
+                    current = current.left
+                else:
+                    if current.right is None:
+                        current.right = new_node
+                        #print("This is the right:",current.right.value)
+                        break
+                    current = current.right
 
-    def _graphize(self, T: nx.Graph, node: Optional[Tree.TreeNode], x: int = 0, y: int = 0) -> None:
+    def _graphize(self, T: nx.Graph, node: Optional[Tree.TreeNode], x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
         if node is None:
             return
 
-        # Ensure the node is added with the value attribute
-        T.add_node(node.value, value=node.value)  # This line ensures each node has a 'value' attribute
-        self.pos[node.value] = (x, y)
-        
+        if layer_height is None:
+            layer_height = random.randint(3, 6)  # Random height for each layer
+        if layer_width is None:
+            layer_width = 2
+
+        current_pos = (x, y)
+        self.pos[node.value] = current_pos
+
+        T.add_node(node.value, value=node.value)
+
         if node.left:
             T.add_edge(node.value, node.left.value)
-            self._graphize(T, node.left, x - 1, y - 1)
+            self._graphize(T, node.left, x - layer_width, y - 1, layer_height / 2, layer_width / 2)
         if node.right:
             T.add_edge(node.value, node.right.value)
-            self._graphize(T, node.right, x + 1, y - 1)
+            self._graphize(T, node.right, x + layer_width, y - 1, layer_height / 2, layer_width / 2)
 
     def fill(self) -> None:
         """
         Fills the graph nodes with the given values, ensuring the graph reflects the new node values.
+        Attempts to refill the tree if the BST properties cannot be maintained within the value bounds.
         """
-        if self.root is None:
-            return
+        while True:
+            try:
+                used_values = set()
+                self._fill_node(self.root, 1, 99, used_values)
 
-        used_values = set()
-        self._fill_node(self.root, 1, 99, used_values)
-
-        # Update the graph with the new node values
-        self.graph.clear()
-        self._graphize(self.graph, self.root)
+                # Clear and recreate the graph to reflect updated node values
+                self.graph.clear()
+                self.pos.clear()
+                self._graphize(self.graph, self.root)
+                break  # Break the loop if _fill_node completes without exceptions
+            except ValueError:
+                # If an exception is caught, the tree filling starts over
+                continue
 
     def _fill_node(self, node: Optional[Tree.TreeNode], min_val: int, max_val: int, used_values: set) -> None:
-        if node is None or min_val > max_val:
+        if node is None:
             return
 
-        new_value = random.randint(min_val, max_val)
-        while new_value in used_values:
-            new_value = random.randint(min_val, max_val)
+        possible_values = set(range(min_val, max_val + 1)) - used_values
+        if not possible_values:
+            raise ValueError("No available values within the specified range")
 
+        new_value = random.choice(list(possible_values))
         node.value = new_value
         used_values.add(new_value)
 
-        self._fill_node(node.left, min_val, node.value - 1, used_values)
-        self._fill_node(node.right, node.value + 1, max_val, used_values)
+        # Recursively update left and right subtrees with updated bounds
+        # and prepare to catch exceptions if bounds are violated
+        self._fill_node(node.left, min_val, new_value - 1, used_values)
+        self._fill_node(node.right, new_value + 1, max_val, used_values)
 
     def draw(self, save: bool = False, path: Optional[Any] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """

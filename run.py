@@ -49,15 +49,16 @@ fonts = ['sans-serif', 'serif', 'monospace']
 width = ['0.5', '1.0', '1.5']
 arrows = ['->', '-|>']
 resolutions = [256, 512, 1024, 2048]
+structures = ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']
 
 ###### test generation ######
 
 batch_generator = BatchGenerator()
 generation = 7
-variation = 1
+variation = 5
 
 async def run_batch():
-    """
+    
     await batch_generator.generate_batch(
         structure_class=BinaryTree,
         type='bit',
@@ -67,7 +68,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
     )
-
+    
     await batch_generator.generate_batch(
         structure_class=BinarySearchTree,
         type='bst',
@@ -77,7 +78,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
     )
-
+    """
     await batch_generator.generate_batch(
         structure_class=UndirectedGraph,
         type='ug',
@@ -87,7 +88,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
     )
-    """
+    
     await batch_generator.generate_batch(
         structure_class=DirectedGraph,
         type='dg',
@@ -98,8 +99,8 @@ async def run_batch():
         variations=variation,
         arrows=arrows,
     )
-    
-#asyncio.run(run_batch())
+    """
+asyncio.run(run_batch())
 
 ###### test evaluation ######
 
@@ -118,17 +119,27 @@ async def run_eval():
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['directed_graph']:
+        for structure in ['binary_search_tree']:
             
             try:
 
-                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-arrow.csv', repeats=3)
+                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-node-values.csv', repeats=3)
                 
             except Exception as e:
                 logger.error(f'{e}')
                 return
 
-asyncio.run(run_eval())
+#asyncio.run(run_eval())
 
 #TODO: control graph edge count
 #TODO: control node values between structures
+
+# how many edges?
+# how many vertices?
+# degree of node n?
+# shortest path?
+
+#TODO: showcase visual parameter influences
+#TODO: showcase node value influences
+#TODO: showcase arrow style influences
+#TODO: showcase edge number influences
