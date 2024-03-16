@@ -14,6 +14,7 @@ from time import perf_counter
 from typing import Type, Optional, TypeVar, Literal
 import itertools
 from uuid import uuid4, UUID
+import inspect
 
 logger = Logger(__name__)
 
@@ -60,8 +61,12 @@ class Generator:
         start = perf_counter()
         
         structure_instance = structure_class()
-        structure_instance.generate(num_nodes=num_nodes, num_edges=num_edges)
-        
+        # Check if 'generate' method accepts 'num_edges'
+        if 'num_edges' in inspect.signature(structure_instance.generate).parameters:
+            structure_instance.generate(num_nodes=num_nodes, num_edges=num_edges)
+        else:
+            structure_instance.generate(num_nodes=num_nodes)
+
         end = perf_counter()
         logger.info(f"╰── Generated {structure_class.formal_name} in {round(end - start, 2)} seconds.")
         
