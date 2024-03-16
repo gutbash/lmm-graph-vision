@@ -53,7 +53,7 @@ resolutions = [256, 512, 1024, 2048]
 ###### test generation ######
 
 batch_generator = BatchGenerator()
-generation = 7
+generation = 5
 variation = 1
 
 async def run_batch():
@@ -78,6 +78,7 @@ async def run_batch():
         variations=variation,
     )
 
+    """
     await batch_generator.generate_batch(
         structure_class=UndirectedGraph,
         type='ug',
@@ -86,6 +87,7 @@ async def run_batch():
         save_path=image_path_undirected_graph,
         generations=generation,
         variations=variation,
+        num_edges=[3, 6, 5, 6]
     )
     """
     await batch_generator.generate_batch(
@@ -97,9 +99,12 @@ async def run_batch():
         generations=generation,
         variations=variation,
         arrows=arrows,
+        num_edges=[3, 4, 5, 6]
     )
+    """
     
-#asyncio.run(run_batch())
+asyncio.run(run_batch())
+
 
 ###### test evaluation ######
 
@@ -128,7 +133,9 @@ async def run_eval():
                 logger.error(f'{e}')
                 return
 
-asyncio.run(run_eval())
+#asyncio.run(run_eval())
 
 #TODO: control graph edge count
+            
+
 #TODO: control node values between structures

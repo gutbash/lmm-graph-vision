@@ -108,7 +108,7 @@ class UndirectedGraph(Graph):
         self.large = large
         self.graph = nx.Graph()
         
-    def generate(self, num_nodes: int = None) -> None:
+    def generate(self, num_nodes: int = None, num_edges: int = None) -> None:
         """
         Generates a random undirected graph with basic structure.
         """
@@ -123,7 +123,8 @@ class UndirectedGraph(Graph):
         for i in range(1, num_nodes):
             G.add_edge(i - 1, i)
 
-        additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
+        #additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
+        additional_edges = num_edges - (num_nodes - 1)  # already added num_nodes-1 edges
 
         while additional_edges > 0:
             source, target = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
@@ -235,7 +236,7 @@ class DirectedGraph(Graph):
         self.large = large
         self.graph = nx.DiGraph()
 
-    def generate(self, num_nodes: int = None) -> None:
+    def generate(self, num_nodes: int = None, num_edges: int = None) -> None:
         """
         Generates a directed graph with basic structure.
         """
@@ -251,8 +252,10 @@ class DirectedGraph(Graph):
         for i in range(1, num_nodes):
             G.add_edge(i - 1, i)
 
-        # Randomize additional edges with control to avoid clutter
-        additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
+        # ~~Randomize additional edges with control to avoid clutter~~
+        #additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
+        additional_edges = num_edges - (num_nodes - 1)  # Already added num_nodes-1 edges
+
         while additional_edges > 0:
             source, target = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
             if source != target and not G.has_edge(source, target):
