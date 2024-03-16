@@ -87,6 +87,7 @@ async def run_batch():
         save_path=image_path_undirected_graph,
         generations=generation,
         variations=variation,
+        num_edges=[3, 6, 5, 6]
     )
     
     await batch_generator.generate_batch(
@@ -98,6 +99,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
         arrows=arrows,
+        num_edges=[3, 4, 5, 6]
     )
     """
 asyncio.run(run_batch())
@@ -132,6 +134,8 @@ async def run_eval():
 #asyncio.run(run_eval())
 
 #TODO: control graph edge count
+            
+
 #TODO: control node values between structures
 
 # how many edges?

@@ -39,7 +39,7 @@ class Generator:
     ```
     """
 
-    async def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None) -> Type[Structure]:
+    async def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None, num_edges: int = None) -> Type[Structure]:
         """
         Generates an empty structure instance and returns it.
         
@@ -60,7 +60,7 @@ class Generator:
         start = perf_counter()
         
         structure_instance = structure_class()
-        structure_instance.generate(num_nodes=num_nodes)
+        structure_instance.generate(num_nodes=num_nodes, num_edges=num_edges)
         
         end = perf_counter()
         logger.info(f"╰── Generated {structure_class.formal_name} in {round(end - start, 2)} seconds.")
@@ -198,7 +198,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#fee4b3'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['1.0']) -> None:
+    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, num_edges: Optional[list] = None, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#fee4b3'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['1.0']) -> None:
         """
         Generates a batch of data structures.
         
@@ -242,8 +242,11 @@ class BatchGenerator(Generator):
                 
                 test_path = check_path_exists(Path('images/'))
                 test_name = 'test.png'
-                
-                structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes)
+
+                # get the number of edges for the current generation
+                current_num_edges = num_edges[generation - 1] if num_edges and generation <= len(num_edges) else None
+
+                structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes, num_edges=current_num_edges)
                 structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
                 await self.generator.draw_structure(
                     structure_instance=structure_filled,
