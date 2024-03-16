@@ -123,8 +123,10 @@ class UndirectedGraph(Graph):
         for i in range(1, num_nodes):
             G.add_edge(i - 1, i)
 
-        #additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
-        additional_edges = num_edges - (num_nodes - 1)  # already added num_nodes-1 edges
+        if not num_edges:
+            additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
+        else:
+            additional_edges = num_edges - (num_nodes - 1)  # already added num_nodes-1 edges
 
         while additional_edges > 0:
             source, target = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
@@ -253,8 +255,10 @@ class DirectedGraph(Graph):
             G.add_edge(i - 1, i)
 
         # ~~Randomize additional edges with control to avoid clutter~~
-        #additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
-        additional_edges = num_edges - (num_nodes - 1)  # Already added num_nodes-1 edges
+        if not num_edges:
+            additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
+        else:
+            additional_edges = num_edges - (num_nodes - 1)  # Already added num_nodes-1 edges
 
         while additional_edges > 0:
             source, target = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)

@@ -147,7 +147,7 @@ class Generator:
             
         filepath = validate_path(save_path, save_name, '.png')
 
-        if has_negative_value([generation, variation, format]):
+        if has_negative_value([variation, format]):
             raise ValueError("Generation, variation, and format must be non-negative integers.")
         
         logger.info(f"Drawing {structure_instance.formal_name}...")
@@ -234,87 +234,89 @@ class BatchGenerator(Generator):
         # create base structures
         for generation in range(1, generations + 1):
             
-            generation_approved = False
-            structure_generated = None
-            num_nodes = generation + 2 if not random_num_nodes else None
+            for subgeneration in range(3):
             
-            while not generation_approved:
+                generation_approved = False
+                structure_generated = None
+                num_nodes = generation + 2 if not random_num_nodes else None
                 
-                test_path = check_path_exists(Path('images/'))
-                test_name = 'test.png'
-
-                # get the number of edges for the current generation
-                current_num_edges = num_edges[generation - 1] if num_edges and generation <= len(num_edges) else None
-
-                structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes, num_edges=current_num_edges)
-                structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
-                await self.generator.draw_structure(
-                    structure_instance=structure_filled,
-                    save=True,
-                    save_path=test_path,
-                    save_name=test_name,
-                    show=False,
-                )
-                
-                logger.warning(f"[G{generation}N{num_nodes}] Check {test_path / test_name}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n(X) Exit\n")
-                input_approved = input(">>> ")
-                
-                if input_approved.lower() == 'y':
-                    generation_approved = True
-                elif input_approved.lower() == 'x':
-                    return
-
-            # create variations of each base structure
-            for variation in range(1, variations + 1):
-
-                format = 1
-
-                structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
-                
-                for width, color, font, shape in format_combinations:
+                while not generation_approved:
                     
-                    for arw, arrow in enumerate(arrows):
+                    test_path = check_path_exists(Path('images/'))
+                    test_name = 'test.png'
 
-                        for res in resolutions:
-                            
-                            image_id = uuid4()
+                    # get the number of edges for the current generation
+                    current_num_edges = num_edges[generation - 1] if num_edges and generation <= len(num_edges) else None
+
+                    structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes, num_edges=current_num_edges)
+                    structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
+                    await self.generator.draw_structure(
+                        structure_instance=structure_filled,
+                        save=True,
+                        save_path=test_path,
+                        save_name=test_name,
+                        show=False,
+                    )
                     
-                            for method in structure_filled.methods:
+                    logger.warning(f"[G{generation}-{subgeneration}N{num_nodes}] Check {test_path / test_name}. Approve this generation?\n\n(Y) Approved, continue generating\n(N) Denied, regenerate\n(X) Exit\n")
+                    input_approved = input(">>> ")
+                    
+                    if input_approved.lower() == 'y':
+                        generation_approved = True
+                    elif input_approved.lower() == 'x':
+                        return
 
-                                task_id = uuid4()
-                                
-                                expected = None
-                                if hasattr(structure_filled, method):
-                                    method_to_call = getattr(structure_filled, method)
-                                    expected = method_to_call(structure_filled)
-                                else:
-                                    logger.error(f"Method '{method}' not found in {structure_filled}.")
-                            
-                                object = await self.generator.draw_structure(
-                                    image_id=image_id,
-                                    task_id=task_id,
-                                    structure_instance=structure_filled,
-                                    task_type=method,
-                                    expected=str(expected),
-                                    save=True,
-                                    save_path=save_path,
-                                    save_name=f"{type}-gen_{generation}-var_{variation}-fmt_{format}-wid_{width.replace('.', '')}-col_{color.replace('#', '')}-fnt_{font.replace('-', '')}-shp_{shape}-arw_{arw}-res_{str(res)}-idn_{str(image_id)}.png",
-                                    show=False,
-                                    generation=generation,
-                                    variation=variation,
-                                    format=format,
-                                    color=color,
-                                    font=font,
-                                    width=width,
-                                    shape=shape,
-                                    num_nodes=len(structure_filled.graph.nodes),
-                                    resolution=res,
-                                    arrow_style=arrow,
-                                )
-                            
-                                yaml_objects.append(object)
+                # create variations of each base structure
+                for variation in range(1, variations + 1):
+
+                    format = 1
+
+                    structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
+                    
+                    for width, color, font, shape in format_combinations:
                         
-                    format += 1
+                        for arw, arrow in enumerate(arrows):
+
+                            for res in resolutions:
+                                
+                                image_id = uuid4()
+                        
+                                for method in structure_filled.methods:
+
+                                    task_id = uuid4()
+                                    
+                                    expected = None
+                                    if hasattr(structure_filled, method):
+                                        method_to_call = getattr(structure_filled, method)
+                                        expected = method_to_call(structure_filled)
+                                    else:
+                                        logger.error(f"Method '{method}' not found in {structure_filled}.")
+                                
+                                    object = await self.generator.draw_structure(
+                                        image_id=image_id,
+                                        task_id=task_id,
+                                        structure_instance=structure_filled,
+                                        task_type=method,
+                                        expected=str(expected),
+                                        save=True,
+                                        save_path=save_path,
+                                        save_name=f"{type}-gen_{generation}_{subgeneration}-var_{variation}-fmt_{format}-wid_{width.replace('.', '')}-col_{color.replace('#', '')}-fnt_{font.replace('-', '')}-shp_{shape}-arw_{arw}-res_{str(res)}-idn_{str(image_id)}.png",
+                                        show=False,
+                                        generation=f"{generation}-{subgeneration}",
+                                        variation=variation,
+                                        format=format,
+                                        color=color,
+                                        font=font,
+                                        width=width,
+                                        shape=shape,
+                                        num_nodes=len(structure_filled.graph.nodes),
+                                        resolution=res,
+                                        arrow_style=arrow,
+                                    )
+                                
+                                    yaml_objects.append(object)
+                            
+                        format += 1
                         
         try:
             await add_objects_async(file_path=yaml_path_joined, objects=yaml_objects)

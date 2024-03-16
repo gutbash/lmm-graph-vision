@@ -43,13 +43,13 @@ yaml_path = Path('data/')
 
 ### combinations ###
 
-colors = ['#abe0f9', '#fee4b3', '#eeeeee']
-shapes = ['o', 's', 'd']
-fonts = ['sans-serif', 'serif', 'monospace']
-width = ['0.5', '1.0', '1.5']
-arrows = ['->', '-|>']
-resolutions = [256, 512, 1024, 2048]
-structures = ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']
+COLORS = ['#abe0f9', '#fee4b3', '#eeeeee']
+SHAPES = ['o', 's', 'd']
+FONTS = ['sans-serif', 'serif', 'monospace']
+WIDTH = ['0.5', '1.0', '1.5']
+ARROWS = ['->', '-|>']
+RESOLUTIONS = [256, 512, 1024, 2048]
+STRUCTURES = ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']
 
 ###### test generation ######
 
@@ -87,7 +87,6 @@ async def run_batch():
         save_path=image_path_undirected_graph,
         generations=generation,
         variations=variation,
-        num_edges=[3, 6, 5, 6]
     )
     
     await batch_generator.generate_batch(
@@ -99,10 +98,9 @@ async def run_batch():
         generations=generation,
         variations=variation,
         arrows=arrows,
-        num_edges=[3, 4, 5, 6]
     )
     """
-asyncio.run(run_batch())
+#asyncio.run(run_batch())
 
 ###### test evaluation ######
 
@@ -121,7 +119,7 @@ async def run_eval():
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['binary_search_tree']:
+        for structure in ['binary_tree', 'binary_search_tree']:
             
             try:
 
@@ -131,11 +129,9 @@ async def run_eval():
                 logger.error(f'{e}')
                 return
 
-#asyncio.run(run_eval())
+asyncio.run(run_eval())
 
 #TODO: control graph edge count
-            
-
 #TODO: control node values between structures
 
 # how many edges?
