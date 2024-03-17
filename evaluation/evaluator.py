@@ -61,13 +61,13 @@ class Evaluator:
       the global semaphore for rate limiting
   """
   columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'node_shape', 'edge_width', 'arrow_style', 'num_nodes', 'resolution', 'task_id', 'image_id']
-  rate_limiter = RateLimiter(1)
+  rate_limiter = RateLimiter(0.9)
   
   def __init__(self) -> None:
     self.total_calls = 0
     self.completed_calls = 0
   
-  async def evaluate(self, model: Model, prompts: List[Prompt], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
+  async def evaluate(self, model: Model, prompts: list[Prompt], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
     """
     Evaluates the model.
     
@@ -93,6 +93,11 @@ class Evaluator:
     pd.errors.EmptyDataError
         if the CSV file is empty
     """
+    if isinstance(model, OpenAI):
+      self.rate_limiter.calls_per_second = 5.0 # based on tier 4 300,000 RPM + 150,000 TPM
+    elif isinstance(model, DeepMind):
+      self.rate_limiter.calls_per_second = 0.9
+    
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
     
@@ -150,13 +155,14 @@ class Evaluator:
       
       logger.info(f'[T{self.completed_calls}/{self.total_calls}] Complete')
       
+      clean_match = ''
+      similarity = 0.0
+      
       pattern = r'(\{.*?\})|(\[.*?\])'
       content = re.sub(' +', ' ', result.replace('\n', ''))
       matches = re.findall(pattern, content)
       if matches == []:
-        logger.info(f'No matches found in content: {content}')
-        clean_match = ''
-        similarity = 0.0
+        logger.error(f'No matches found in content: {content}')
       else:
         logger.info(f'Matches: {matches}')
         clean_matches = [match for group in matches for match in group if match]
@@ -181,7 +187,7 @@ class Evaluator:
           logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_actual)}')
           logger.info(f'Expected: {express_expected}, Actual: {express_actual}')
           logger.info(f'Content: {content}')
-          raise Exception('Expected and actual types do not match')
+          #raise Exception('Expected and actual types do not match')
       
       # Append new data to the list of new rows
       new_row = {

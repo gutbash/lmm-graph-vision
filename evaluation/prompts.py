@@ -118,15 +118,43 @@ from evaluation.models.messages.message import UserMessage, SystemMessage, Model
 # 1) Default
 PROMPTS_ZERO_SHOT = [
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the post-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the pre-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the pre-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'pre_order'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the in-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the in-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'in_order'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line Python dict[int, list[int]] representing the adjacency list for the image of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'adjacency_list'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the depth-first search for the image of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'task': 'depth_first_search'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list[int] representing the breadth-first search for the image of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'task': 'breadth_first_search'
+    },
+]
+
+# 1) Root attention
+PROMPTS_ZERO_SHOT_ROOT_ATTENTION = [
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}. The root node is always placed as the highest node toward the top of the image.""", images=["{{image}}"])],
+    'task': 'post_order'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the pre-order traversal of the {{structure}}. The root node is always placed as the highest node toward the top of the image.""", images=["{{image}}"])],
+    'task': 'pre_order'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the in-order traversal of the {{structure}}. The root node is always placed as the highest node toward the top of the image.""", images=["{{image}}"])],
     'task': 'in_order'
     },
     {
@@ -142,6 +170,7 @@ PROMPTS_ZERO_SHOT = [
     'task': 'breadth_first_search'
     },
 ]
+
 
 # 2) Rephrase
 PROMPTS_REPHRASE = [

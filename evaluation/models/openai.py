@@ -207,7 +207,7 @@ class OpenAI:
             logger.info(messages)
             start = perf_counter()
             
-            completion = await client.with_options(max_retries=5).chat.completions.create(
+            completion = await client.with_options(max_retries=10).chat.completions.create(
                 messages=messages,
                 model=self.model,
                 frequency_penalty=self.frequency_penalty,

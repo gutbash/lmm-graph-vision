@@ -9,7 +9,7 @@ from evaluation.models.deepmind import DeepMind
 from utils.logger import Logger
 logger = Logger(__name__)
 
-from evaluation.prompts import PROMPTS_ZERO_SHOT, PROMPTS_REPHRASE, PROMPTS_NO_STRUCTURE, PROMPTS_STEPS, PROMPTS_DEFINITION, PROMPTS_EXPERT, PROMPTS_ZERO_SHOT_COT_REREAD, PROMPTS_SERIAL, PROMPTS_POLITE, PROMPTS_ZERO_SHOT_COT, PROMPTS_GOLD_COT, PROMPTS_GENERAL_KNOWLEDGE, PROMPTS_ROLEPLAY_EXPERT_COT, PROMPTS_DELIMIT, PROMPTS_GOLD_COT_EXPERT_DELIMIT, PROMPTS_ZERO_SHOT_COT_POLITE
+from evaluation.prompts import PROMPTS_ZERO_SHOT, PROMPTS_REPHRASE, PROMPTS_NO_STRUCTURE, PROMPTS_STEPS, PROMPTS_DEFINITION, PROMPTS_EXPERT, PROMPTS_ZERO_SHOT_COT_REREAD, PROMPTS_SERIAL, PROMPTS_POLITE, PROMPTS_ZERO_SHOT_COT, PROMPTS_GOLD_COT, PROMPTS_GENERAL_KNOWLEDGE, PROMPTS_ROLEPLAY_EXPERT_COT, PROMPTS_DELIMIT, PROMPTS_GOLD_COT_EXPERT_DELIMIT, PROMPTS_ZERO_SHOT_COT_POLITE, PROMPTS_ZERO_SHOT_ROOT_ATTENTION
 
 import asyncio
 import os
@@ -55,10 +55,10 @@ STRUCTURES = ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed
 
 batch_generator = BatchGenerator()
 generation = 7
-variation = 5
+variation = 1
 
 async def run_batch():
-    
+    """
     await batch_generator.generate_batch(
         structure_class=BinaryTree,
         type='bit',
@@ -78,7 +78,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
     )
-    """
+    
     await batch_generator.generate_batch(
         structure_class=UndirectedGraph,
         type='ug',
@@ -88,7 +88,7 @@ async def run_batch():
         generations=generation,
         variations=variation,
     )
-    
+    """
     await batch_generator.generate_batch(
         structure_class=DirectedGraph,
         type='dg',
@@ -97,10 +97,8 @@ async def run_batch():
         save_path=image_path_directed_graph,
         generations=generation,
         variations=variation,
-        arrows=arrows,
+        arrows=ARROWS,
     )
-    """
-#asyncio.run(run_batch())
 
 ###### test evaluation ######
 
@@ -112,23 +110,24 @@ deepmind_csv = f'deepmind'
 
 evaluator = Evaluator()
 
-model = deepmind
-csv_name = deepmind_csv
+model = openai
+csv_name = openai_csv
 
 async def run_eval():
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['binary_tree', 'binary_search_tree']:
+        for structure in ['directed_graph']:
             
             try:
 
-                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-node-values.csv', repeats=3)
+                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-arrows.csv', repeats=3)
                 
             except Exception as e:
                 logger.error(f'{e}')
                 return
-
+            
+#asyncio.run(run_batch())
 asyncio.run(run_eval())
 
 #TODO: control graph edge count

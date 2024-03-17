@@ -98,7 +98,7 @@ class Generator:
         
         return structure_instance
 
-    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.0', num_nodes: int = 0, resolution: int = 512, arrow_style: str = '-|>') -> None:
+    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.5', num_nodes: int = 0, resolution: int = 512, arrow_style: str = '-|>') -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -203,7 +203,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, num_edges: Optional[list] = None, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#fee4b3'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['1.0']) -> None:
+    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, num_edges: Optional[list] = None, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#fee4b3'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['1.5']) -> None:
         """
         Generates a batch of data structures.
         

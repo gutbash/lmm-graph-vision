@@ -20,6 +20,13 @@ class Tree:
     """
     
     methods: list = ['pre_order', 'in_order', 'post_order']
+    
+    def _calculate_depth(self, node: 'Tree.TreeNode') -> int:
+        if node is None:
+            return 0
+        left_depth = self._calculate_depth(node.left)
+        right_depth = self._calculate_depth(node.right)
+        return max(left_depth, right_depth) + 1
         
     def pre_order(self, structure_instance) -> list:
         """

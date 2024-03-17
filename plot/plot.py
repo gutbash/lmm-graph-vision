@@ -160,7 +160,7 @@ def similarity_heatmap(file_path: Path) -> None:
     plt.yticks(rotation=0)
     plt.savefig(f'plot/heatmap_of_average_similarity_by_structure_and_num_nodes-{(file_path.name).replace(".csv", "").capitalize()}.png')
 
-def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
+def compare_match_similarity_by_num_nodes(file_path1: Path, file_path2: Path) -> None:
     # Load datasets
     df1 = pd.read_csv(file_path1)
     df2 = pd.read_csv(file_path2)
@@ -210,14 +210,158 @@ def compare_match_similarity(file_path1: Path, file_path2: Path) -> None:
     
     plt.tight_layout()
     plt.savefig(f'plot/comparison_{file_path1.stem}_vs_{file_path2.stem}.png', dpi=300)
+    
 
-directory_path = Path('results')
-'''
-for file in directory_path.iterdir():
-    if file.is_file():
-        if file.name.endswith('.csv'):
-            match_similarity_per_structure_grouped_by_num_nodes(file)
-'''
-match_similarity_per_structure_grouped_by_num_nodes(Path('results/deepmind-prompt_default.csv'))
-match_similarity_per_structure_grouped_by_num_nodes(Path('results/deepmind-prompts_zero_shot_cot.csv'))
-compare_match_similarity(Path('results/deepmind-prompt_default.csv'), Path('results/deepmind-prompts_zero_shot_cot.csv'))
+def match_similarity_by_variation_num_nodes(file_path: Path) -> None:
+    
+    data = pd.read_csv(file_path)
+
+    # Set the aesthetic style of the plots
+    sns.set_style("whitegrid")
+
+    # Identify unique structures
+    structures = data['structure'].unique()
+
+    # Loop through each structure to create plots
+    for structure in structures:
+        fig, axes = plt.subplots(2, 1, figsize=(10, 8), dpi=300)
+        for spine in axes[0].spines.values():
+            spine.set_visible(False)
+        for spine in axes[1].spines.values():
+            spine.set_visible(False)
+        fig.suptitle(f"deepmind-{structure.replace('_', '-')}", fontsize=16, fontproperties=signifier_font, x=0.175, y=0.95)
+
+        # Filter data for the current structure
+        structure_data = data[data['structure'] == structure]
+
+        # Group by variation_id and num_nodes to calculate mean similarity and match rate
+        summary = structure_data.groupby(['generation_id', 'variation_id', 'num_nodes']).agg(
+            mean_similarity=('similarity', 'mean'),
+            match_rate=('match', 'mean')
+        ).reset_index()
+
+        # Plot for match rate
+        sns.lineplot(ax=axes[0], data=summary, x='num_nodes', y='match_rate', marker='o', lw=2.0, ms=6.0)
+        axes[0].set_title('Accuracy by Number of Nodes', fontproperties=sohne_font, loc='left')
+        axes[0].set_xlabel('n nodes', fontproperties=sohne_font)
+        axes[0].set_ylabel('accuracy', fontproperties=sohne_font)
+
+        # Plot for mean similarity
+        sns.lineplot(ax=axes[1], data=summary, x='num_nodes', y='mean_similarity', marker='o')
+        axes[1].set_title('Similarity by Number of Nodes', fontproperties=sohne_font, loc='left')
+        axes[1].set_xlabel('n nodes', fontproperties=sohne_font)
+        axes[1].set_ylabel('similarity', fontproperties=sohne_font)
+
+        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        plt.savefig(f'plot/match_similarity_by_variation_num_nodes_{structure}.png')
+        
+def match_similarity_by_variation_generation(file_path: Path) -> None:
+    
+    data = pd.read_csv(file_path)
+
+    # Set the aesthetic style of the plots
+    sns.set_style("whitegrid")
+
+    # Identify unique structures
+    structures = data['structure'].unique()
+
+    # Loop through each structure to create plots
+    for structure in structures:
+        fig, axes = plt.subplots(2, 1, figsize=(10, 8), dpi=300)
+        for spine in axes[0].spines.values():
+            spine.set_visible(False)
+        for spine in axes[1].spines.values():
+            spine.set_visible(False)
+        fig.suptitle(f"deepmind-{structure.replace('_', '-')}", fontsize=16, fontproperties=signifier_font, x=0.175, y=0.95)
+
+        # Filter data for the current structure
+        structure_data = data[data['structure'] == structure]
+
+        # Group by variation_id and num_nodes to calculate mean similarity and match rate
+        summary = structure_data.groupby(['generation_id', 'variation_id']).agg(
+            mean_similarity=('similarity', 'mean'),
+            match_rate=('match', 'mean')
+        ).reset_index()
+
+        # Plot for match rate
+        sns.lineplot(ax=axes[0], data=summary, x='generation_id', y='match_rate', marker='o', lw=2.0, ms=6.0)
+        axes[0].set_title('Accuracy by Generation with Variation Deviations', fontproperties=sohne_font, loc='left')
+        axes[0].set_xlabel('generation', fontproperties=sohne_font)
+        axes[0].set_ylabel('accuracy', fontproperties=sohne_font)
+
+        # Plot for mean similarity
+        sns.lineplot(ax=axes[1], data=summary, x='generation_id', y='mean_similarity', marker='o')
+        axes[1].set_title('Similarity by Generation with Variation Deviations', fontproperties=sohne_font, loc='left')
+        axes[1].set_xlabel('generation', fontproperties=sohne_font)
+        axes[1].set_ylabel('similarity', fontproperties=sohne_font)
+
+        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        plt.savefig(f'plot/match_similarity_by_variation_num_nodes_{structure}.png')
+        
+def match_similarity_by_arrow(file_path1: Path, file_path2: Path) -> None:
+        
+    df_openai = pd.read_csv(file_path1)
+    df_deepmind = pd.read_csv(file_path2)
+
+    def prepare_data(df):
+        # Calculate mean of `match` and `similarity` grouped by `arrow_style`
+        # For `match`, first convert boolean to int
+        df['match'] = df['match'].astype(int)
+        grouped = df.groupby('arrow_style').agg({'match': 'mean', 'similarity': 'mean'}).reset_index()
+        return grouped
+
+    # Prepare data
+    data_openai = prepare_data(df_openai)
+    data_deepmind = prepare_data(df_deepmind)
+    
+    # Adjusting the data scale for similarity
+    data_openai['similarity'] = data_openai['similarity'] / 100
+    data_deepmind['similarity'] = data_deepmind['similarity'] / 100
+
+    # Plot settings
+    sns.set_theme(style="whitegrid", palette="coolwarm")
+
+    # Recreate figure for the adjusted axis orientation
+    fig, axes = plt.subplots(2, 2, figsize=(5, 5), dpi=300)
+
+    # Adjusted Dot plots with switched axes
+    sns.stripplot(y="match", x="arrow_style", data=data_openai, ax=axes[0, 0], size=10, jitter=True, palette="coolwarm", marker='o')
+    sns.stripplot(y="match", x="arrow_style", data=data_deepmind, ax=axes[0, 1], size=10, jitter=True, palette="coolwarm", marker='o')
+    sns.stripplot(y="similarity", x="arrow_style", data=data_openai, ax=axes[1, 0], size=10, jitter=True, palette="coolwarm", marker='o')
+    sns.stripplot(y="similarity", x="arrow_style", data=data_deepmind, ax=axes[1, 1], size=10, jitter=True, palette="coolwarm", marker='o')
+
+    for ax in axes.flat:
+        
+        # Set font for all tick labels
+        for label in ax.get_yticklabels():
+            label.set_fontproperties(sohne_font)
+    
+    # Titles and customization after switching axes
+    #fig.suptitle('directed graph by arrow style', fontsize=16, fontproperties=signifier_font)
+    axes[0, 0].set_title('OpenAI', fontsize=24, fontproperties=sohne_font)
+    axes[0, 1].set_title('DeepMind', fontsize=24, fontproperties=sohne_font)
+    axes[0, 0].set_ylim(0, 1)
+    #axes[0, 1].set_title('OpenAI - Similarity', fontsize=14)
+    axes[0, 1].set_ylim(0, 1)
+    #axes[1, 0].set_title('DeepMind - Match Rate', fontsize=14)
+    axes[1, 0].set_ylim(0, 1)
+    #axes[1, 1].set_title('DeepMind - Similarity', fontsize=14)
+    axes[1, 1].set_ylim(0, 1)
+    
+    axes[0, 0].set_ylabel('Accuracy', fontproperties=sohne_font)
+    axes[1, 0].set_ylabel('Similarity', fontproperties=sohne_font)
+    #axes[0, 1].set_ylabel('Accuracy', fontproperties=sohne_font)
+    #axes[1, 1].set_ylabel('Similarity', fontproperties=sohne_font)
+    
+    for ax in axes.flat:
+        #ax.set_xlabel('Arrow Style')
+        ax.label_outer()
+
+    # Adjusting layout and axes for clarity with switched orientation
+    plt.tight_layout(rect=[0, 0, 1, 1])
+    for ax in axes.flat:
+        ax.set_xlabel('')
+        
+    plt.savefig(f'plot/match_similarity_by_arrow_style.png', dpi=300)
+
+match_similarity_by_arrow(Path('results/openai-prompts_zero_shot-arrows.csv'), Path('results/deepmind-prompts_zero_shot-arrows.csv'))
