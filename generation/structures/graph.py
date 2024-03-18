@@ -7,10 +7,10 @@ from pathlib import Path
 from typing import Optional, Literal
 from utils.colors import hex_to_rgb_float
 
-Color = Literal['#abe0f9', '#fee4b3', '#eeeeee']
+Color = Literal['#ffffff', '#ffff00', '#ff0000']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
-Width = Literal['0.5', '1.0', '1.5']
+Width = Literal['1.0', '3.0', '5.0']
 
 class Graph:
     """
@@ -108,14 +108,14 @@ class UndirectedGraph(Graph):
         self.large = large
         self.graph = nx.Graph()
         
-    def generate(self, num_nodes: int = None, num_edges: int = None) -> None:
+    def generate(self, num_nodes: int = None, extra_edges: int = None) -> None:
         """
-        Generates a random undirected graph with basic structure.
+        Generates a random undirected graph with basic structure and assigns random node values from 1 to 9.
         """
         G = nx.Graph()
 
         if not num_nodes:
-            num_nodes = random.randint(3, 18)
+            num_nodes = random.randint(3, 9)
             
         if num_nodes <= 0:
             return
@@ -123,27 +123,42 @@ class UndirectedGraph(Graph):
         for i in range(1, num_nodes):
             G.add_edge(i - 1, i)
 
-        if not num_edges:
-            additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
-        else:
-            additional_edges = num_edges - (num_nodes - 1)  # already added num_nodes-1 edges
+        # Calculate the maximum additional edges that can be added
+        max_extra_edges = num_nodes * 2
 
-        while additional_edges > 0:
+        if extra_edges is None:
+            extra_edges = random.randint(0, max_extra_edges)
+        else:
+            extra_edges = min(extra_edges, max_extra_edges)
+
+        # Randomly add extra edges
+        attempted_extra_edges = extra_edges
+        max_iterations = extra_edges * 10  # Set a maximum iteration limit
+        iterations = 0
+
+        while attempted_extra_edges > 0 and iterations < max_iterations:
             source, target = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
             if source != target and not G.has_edge(source, target):
                 G.add_edge(source, target)
-                additional_edges -= 1
+                attempted_extra_edges -= 1
+            iterations += 1
+
+        # Assign random node values from 1 to 9
+        for node in G.nodes:
+            G.nodes[node]['value'] = random.randint(1, 9)
 
         self.graph = G
 
     def fill(self) -> None:
         """
-        Fills the graph nodes with given values.
+        Fills the graph nodes with unique random values from 1 to the number of nodes.
         """
-        values = [i for i in range(1, len(self.graph)+1)]
-
-        for i, node in enumerate(self.graph.nodes):
-            self.graph.nodes[node]['value'] = values[i]
+        num_nodes = len(self.graph.nodes)
+        values = list(range(1, num_nodes + 1))
+        random.shuffle(values)
+        
+        for node, value in zip(self.graph.nodes, values):
+            self.graph.nodes[node]['value'] = value
         
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """
@@ -193,7 +208,7 @@ class UndirectedGraph(Graph):
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, edgecolors=hex_to_rgb_float(color, -50), alpha=1.0)
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, edgecolors='black', alpha=1.0)
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -238,14 +253,14 @@ class DirectedGraph(Graph):
         self.large = large
         self.graph = nx.DiGraph()
 
-    def generate(self, num_nodes: int = None, num_edges: int = None) -> None:
+    def generate(self, num_nodes: int = None, extra_edges: int = None) -> None:
         """
-        Generates a directed graph with basic structure.
+        Generates a directed graph with basic structure and assigns random node values from 1 to 9.
         """
         G = nx.DiGraph()
 
         if not num_nodes:
-            num_nodes = random.randint(3, 18)
+            num_nodes = random.randint(3, 9)
             
         if num_nodes <= 0:
             return
@@ -254,28 +269,42 @@ class DirectedGraph(Graph):
         for i in range(1, num_nodes):
             G.add_edge(i - 1, i)
 
-        # ~~Randomize additional edges with control to avoid clutter~~
-        if not num_edges:
-            additional_edges = random.randint(1, num_nodes * (num_nodes - 1) // 4)
-        else:
-            additional_edges = num_edges - (num_nodes - 1)  # Already added num_nodes-1 edges
+        # Calculate the maximum additional edges that can be added
+        max_extra_edges = num_nodes * 2
 
-        while additional_edges > 0:
+        if extra_edges is None:
+            extra_edges = random.randint(0, max_extra_edges)
+        else:
+            extra_edges = min(extra_edges, max_extra_edges)
+
+        # Randomly add extra edges
+        attempted_extra_edges = extra_edges
+        max_iterations = extra_edges * 10  # Set a maximum iteration limit
+        iterations = 0
+
+        while attempted_extra_edges > 0 and iterations < max_iterations:
             source, target = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
             if source != target and not G.has_edge(source, target):
                 G.add_edge(source, target)
-                additional_edges -= 1
+                attempted_extra_edges -= 1
+            iterations += 1
+
+        # Assign random node values from 1 to 9
+        for node in G.nodes:
+            G.nodes[node]['value'] = random.randint(1, 9)
 
         self.graph = G
         
     def fill(self) -> None:
         """
-        Fills the graph nodes with the given values.
+        Fills the graph nodes with unique random values from 1 to the number of nodes.
         """
-        values = [i for i in range(1, len(self.graph)+1)]
-
-        for i, node in enumerate(self.graph.nodes):
-            self.graph.nodes[node]['value'] = values[i]
+        num_nodes = len(self.graph.nodes)
+        values = list(range(1, num_nodes + 1))
+        random.shuffle(values)
+        
+        for node, value in zip(self.graph.nodes, values):
+            self.graph.nodes[node]['value'] = value
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-|>') -> None:
         """
@@ -328,7 +357,7 @@ class DirectedGraph(Graph):
         plt.figure(figsize=(figure_size, figure_size))
         
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50), arrowstyle=arrow_style)
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors='black', arrowstyle=arrow_style, min_source_margin=20) # alt edge colors hex_to_rgb_float(color, -50)
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

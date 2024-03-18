@@ -50,6 +50,7 @@ def calculate_similarity_dict(dict1, dict2) -> float:
     Calculate the overall similarity between two dictionaries based on the Jaccard Index
     of their list values for each key.
     """
+    
     # Combine keys from both dictionaries to ensure all are considered
     all_keys = set(dict1.keys()).union(dict2.keys())
     total_similarity = 0

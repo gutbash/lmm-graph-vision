@@ -18,10 +18,10 @@ import inspect
 
 logger = Logger(__name__)
 
-Color = Literal['#abe0f9', '#fee4b3', '#eeeeee']
+Color = Literal['#ffffff', '#ffff00', '#ff0000']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
-Width = Literal['0.5', '1.0', '1.5']
+Width = Literal['1.0', '3.0', '5.0']
 
 Structure = TypeVar('Structure', BinaryTree, BinarySearchTree, UndirectedGraph, DirectedGraph)
 
@@ -40,7 +40,7 @@ class Generator:
     ```
     """
 
-    async def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None, num_edges: int = None) -> Type[Structure]:
+    async def generate_structure(self, structure_class: Type[Structure], num_nodes: int = None, extra_edges: int = None) -> Type[Structure]:
         """
         Generates an empty structure instance and returns it.
         
@@ -62,8 +62,8 @@ class Generator:
         
         structure_instance = structure_class()
         # Check if 'generate' method accepts 'num_edges'
-        if 'num_edges' in inspect.signature(structure_instance.generate).parameters:
-            structure_instance.generate(num_nodes=num_nodes, num_edges=num_edges)
+        if 'extra_edges' in inspect.signature(structure_instance.generate).parameters:
+            structure_instance.generate(num_nodes=num_nodes, extra_edges=extra_edges)
         else:
             structure_instance.generate(num_nodes=num_nodes)
 
@@ -98,7 +98,7 @@ class Generator:
         
         return structure_instance
 
-    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#fee4b3', font: Font = 'sans-serif', width: Width = '1.5', num_nodes: int = 0, resolution: int = 512, arrow_style: str = '-|>') -> None:
+    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#ffffff', font: Font = 'sans-serif', width: Width = '5.0', num_nodes: int = 0, resolution: int = 512, arrow_style: str = '-|>') -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -203,7 +203,7 @@ class BatchGenerator(Generator):
         """
         self.generator = Generator()
 
-    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, num_edges: Optional[list] = None, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#fee4b3'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['1.5']) -> None:
+    async def generate_batch(self, structure_class: Type[Structure], type: StructureAbbreviation, yaml_name: YamlName, yaml_path: Path, save_path: Path, generations: int = 1, variations: int = 1, random_num_nodes: bool = False, extra_edges: Optional[list] = None, resolutions: list = [512], arrows: list = ['-|>'], colors: list = ['#ffffff'], shapes: list = ['o'], fonts: list = ['sans-serif'], width: list = ['5.0']) -> None:
         """
         Generates a batch of data structures.
         
@@ -243,7 +243,7 @@ class BatchGenerator(Generator):
             
                 generation_approved = False
                 structure_generated = None
-                num_nodes = generation + 2 if not random_num_nodes else None
+                num_nodes = generation * 3 if not random_num_nodes else None
                 
                 while not generation_approved:
                     
@@ -251,9 +251,8 @@ class BatchGenerator(Generator):
                     test_name = 'test.png'
 
                     # get the number of edges for the current generation
-                    current_num_edges = num_edges[generation - 1] if num_edges and generation <= len(num_edges) else None
 
-                    structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes, num_edges=current_num_edges)
+                    structure_generated = await self.generator.generate_structure(structure_class=structure_class, num_nodes=num_nodes)
                     structure_filled = await self.generator.fill_structure(structure_instance=structure_generated)
                     await self.generator.draw_structure(
                         structure_instance=structure_filled,

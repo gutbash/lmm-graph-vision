@@ -7,10 +7,10 @@ from pathlib import Path
 from typing import Optional, Literal, Any
 from utils.colors import hex_to_rgb_float
 
-Color = Literal['#abe0f9', '#fee4b3', '#eeeeee']
+Color = Literal['#ffffff', '#ffff00', '#ff0000']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
-Width = Literal['0.5', '1.0', '1.5']
+Width = Literal['1.0', '3.0', '5.0']
 
 Traversal = Literal['preorder', 'inorder', 'postorder']
 
@@ -153,45 +153,35 @@ class BinaryTree(Tree):
         self.graph = nx.Graph()
 
     def generate(self, num_nodes: int = None) -> None:
-        """
-        Generates a random binary tree
-        """
         if not num_nodes:
-            num_nodes = random.randint(3, 18)
+            num_nodes = random.randint(3, 9)
 
         if num_nodes <= 0:
             return
 
-        root_value = random.randint(1, 99)
+        values = random.sample(range(1, 10), num_nodes)
+        root_value = values[0]
         root = Tree.TreeNode(root_value)
-        values_set = {root_value}
         nodes = [root]
         self.root = root
 
-        while len(nodes) < num_nodes:
-            node = random.choice(nodes)
+        for value in values[1:]:
+            while True:
+                node = random.choice(nodes)
 
-            if random.choice([True, False]):
-                if node.left is None:
-                    child_value = random.randint(1, 99)
-                    while child_value in values_set:
-                        child_value = random.randint(1, 99)
+                if random.choice([True, False]):
+                    if node.left is None:
+                        child = Tree.TreeNode(value)
+                        node.left = child
+                        nodes.append(child)
+                        break
+                else:
+                    if node.right is None:
+                        child = Tree.TreeNode(value)
+                        node.right = child
+                        nodes.append(child)
+                        break
 
-                    child = Tree.TreeNode(child_value)
-                    node.left = child
-                    values_set.add(child_value)
-                    nodes.append(child)
-            else:
-                if node.right is None:
-                    child_value = random.randint(1, 99)
-                    while child_value in values_set:
-                        child_value = random.randint(1, 99)
-
-                    child = Tree.TreeNode(child_value)
-                    node.right = child
-                    values_set.add(child_value)
-                    nodes.append(child)
-            
         self._graphize(self.graph, self.root)
         
     def _graphize(self, T: nx.Graph, node: Tree.TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
@@ -242,11 +232,11 @@ class BinaryTree(Tree):
 
     def fill(self) -> None:
         """
-        Fills the graph nodes with the given values
+        Fills the graph nodes with unique values within the range of 1 to 9.
         """
-
-        values = [random.randrange(1, 99, 1) for _ in range(len(self.graph))]
-        #print("These are new node values:",values)
+        num_nodes = len(self.graph)
+        values = random.sample(range(1, 10), num_nodes)
+        
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
 
@@ -303,7 +293,7 @@ class BinaryTree(Tree):
         #print(self.pos)
 
         # Draw nodes and edges
-        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=node_size, node_color=color, node_shape=shape, font_family=font, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
+        nx.draw(self.graph, self.pos, labels={node: data['value'] for node, data in self.graph.nodes(data=True)}, with_labels=True, font_weight='bold', node_size=node_size, node_color=color, node_shape=shape, font_family=font, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors='black')
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)
@@ -362,13 +352,13 @@ class BinarySearchTree(Tree):
         Generates a random binary search tree
         """
         if not num_nodes:
-            num_nodes = random.randint(3, 18)
+            num_nodes = random.randint(3, 9)
 
         if num_nodes <= 0:
             return
 
         # Generate unique values for the nodes
-        values = random.sample(range(1, 100), num_nodes)
+        values = random.sample(range(1, 10), num_nodes)
 
         # Insert nodes with random values while maintaining the BST property
         self.root = None
@@ -431,7 +421,7 @@ class BinarySearchTree(Tree):
         while True:
             try:
                 used_values = set()
-                self._fill_node(self.root, 1, 99, used_values)
+                self._fill_node(self.root, 1, 9, used_values)
 
                 # Clear and recreate the graph to reflect updated node values
                 self.graph.clear()
@@ -509,7 +499,7 @@ class BinarySearchTree(Tree):
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
-        nx.draw(self.graph, self.pos, with_labels=True, node_size=node_size, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors=hex_to_rgb_float(color, -50))
+        nx.draw(self.graph, self.pos, with_labels=True, node_size=node_size, node_color=color, font_weight='bold', node_shape=shape, font_family=font, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors='black')
         
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

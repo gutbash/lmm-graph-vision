@@ -116,7 +116,34 @@ Step 4: Compile the results into a single-line Python list. ]
 from evaluation.models.messages.message import UserMessage, SystemMessage, ModelMessage
 
 # 1) Default
-PROMPTS_ZERO_SHOT = [
+ZERO_SHOT_OLD = [
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'post_order'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the pre-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'pre_order'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the in-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'in_order'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python dictionary representing the adjacency list of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'adjacency_list'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'task': 'depth_first_search'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'task': 'breadth_first_search'
+    },
+]
+
+ZERO_SHOT = [
     {
     'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the post-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -138,13 +165,13 @@ PROMPTS_ZERO_SHOT = [
     'task': 'depth_first_search'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list[int] representing the breadth-first search for the image of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the breadth-first search for the image of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
     'task': 'breadth_first_search'
     },
 ]
 
 # 1) Root attention
-PROMPTS_ZERO_SHOT_ROOT_ATTENTION = [
+ZERO_SHOT_ROOT_ATTENTION = [
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}. The root node is always placed as the highest node toward the top of the image.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -173,7 +200,7 @@ PROMPTS_ZERO_SHOT_ROOT_ATTENTION = [
 
 
 # 2) Rephrase
-PROMPTS_REPHRASE = [
+REPHRASE = [
     {
     'messages': [UserMessage(content="""Attached is an image of a {{structure}} data structure. Provide its post-order traversal represented as a single-line python list.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -201,7 +228,7 @@ PROMPTS_REPHRASE = [
 ]
 
 # 3) No Structure X
-PROMPTS_NO_STRUCTURE = [
+NO_STRUCTURE = [
     {
     'messages': [UserMessage(content="Provide a single-line python list representing the post-order traversal.", images=["{{image}}"])],
     'task': 'post_order'
@@ -229,7 +256,7 @@ PROMPTS_NO_STRUCTURE = [
 ]
 
 # 4) Steps
-PROMPTS_STEPS = [
+STEPS = [
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}} by following the steps below:
                              
@@ -301,7 +328,7 @@ PROMPTS_STEPS = [
 ]
 
 # 5) Definition
-PROMPTS_DEFINITION = [
+DEFINITION = [
     {
     'messages': [UserMessage(content="""Post-order traversal is a method of visiting all the nodes in a tree data structure where each node is visited after its subtrees have been visited.
                              
@@ -351,7 +378,7 @@ PROMPTS_DEFINITION = [
 ]
 
 # 6) Expert
-PROMPTS_EXPERT = [
+EXPERT = [
     {
     'messages': [UserMessage(content="""You are a leading expert in data structures and algorithms, with a comprehensive understanding of both fundamental and advanced concepts. Your expertise spans across various data structures such as arrays, linked lists, trees, graphs, stacks, queues, and hash tables, as well as algorithms for searching, sorting, graph processing, and dynamic programming. You are adept at analyzing the time and space complexity of algorithms and can effortlessly apply this knowledge to solve complex computational problems. Your advice is sought after for optimizing code for efficiency, scalability, and performance. With your deep insights into theoretical computer science, you can guide on the selection of the most appropriate data structures and algorithms for any given problem. You are also familiar with real-world applications of these concepts in software development, data analysis, and system design.
                              
@@ -391,7 +418,7 @@ PROMPTS_EXPERT = [
 ]
 
 # 7) Reread + Zero Shot CoT
-PROMPTS_ZERO_SHOT_COT_REREAD = [
+ZERO_SHOT_COT_REREAD = [
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.
                              
@@ -443,7 +470,7 @@ PROMPTS_ZERO_SHOT_COT_REREAD = [
 ]
 
 # 8) Serial
-PROMPTS_SERIAL = [
+SERIAL = [
     {
     'messages': [UserMessage(content="""Input: {{structure}} Data Structure
     Input Type: Image File
@@ -489,7 +516,7 @@ PROMPTS_SERIAL = [
 ]
 
 # 9) Polite X
-PROMPTS_POLITE = [
+POLITE = [
     {
     'messages': [UserMessage(content="""Please provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -517,7 +544,7 @@ PROMPTS_POLITE = [
 ]
 
 # 10) Zero-shot Chain-of-Thought
-PROMPTS_ZERO_SHOT_COT = [
+ZERO_SHOT_COT = [
     {
     'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.
                              
@@ -557,7 +584,7 @@ PROMPTS_ZERO_SHOT_COT = [
 ]
 
 # 11) Golden Chain-of-Thought
-PROMPTS_GOLD_COT = [
+GOLD_COT = [
     { # post-order
     'messages': [UserMessage(content="""Given the image of a {{structure}}, let's follow the step-by-step process below to perform a post-order traversal.
                              
@@ -621,7 +648,7 @@ PROMPTS_GOLD_COT = [
 ]
 
 # 12) Generate Knowledge X
-PROMPTS_GENERAL_KNOWLEDGE = [
+GENERAL_KNOWLEDGE = [
     { # post-order
     'messages': [UserMessage(content="""Before solving for the post-order traversal of the given {{structure}}, let's first generate some foundational knowledge that could aid in understanding the task better. Consider the characteristics and properties of {{structure}} data structures. What are the key aspects that influence their traversal order? Utilize this generated knowledge to then provide a single-line Python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -649,7 +676,7 @@ PROMPTS_GENERAL_KNOWLEDGE = [
 ]
 
 # 13) Role Play: expert + CoT X
-PROMPTS_ROLEPLAY_EXPERT_COT = [
+ROLEPLAY_EXPERT_COT = [
     { # post-order
     'messages': [UserMessage(content="""As an expert software engineer specializing in data structures and algorithms, your mission is to analyze a image of a {{structure}}. Given your extensive experience, how would you explain and perform a post-order traversal of this structure? Your task is to provide a single-line Python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -677,7 +704,7 @@ PROMPTS_ROLEPLAY_EXPERT_COT = [
 ]
 
 # 14) Delimiters: clear structure X
-PROMPTS_DELIMIT = [
+DELIMIT = [
     { # post-order
     'messages': [UserMessage(content="""###Instruction### [Given a {{structure}}, perform a post-order traversal.]
     ###Context### [The {{structure}} is the data structure that is visually represented in the attached image.]
@@ -717,7 +744,7 @@ PROMPTS_DELIMIT = [
 ]
 
 # 15) Golden Chain of Thought + Expert + Deliminator + Very Structured
-PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
+GOLD_COT_EXPERT_DELIMIT = [
     { # post-order
     'messages': [UserMessage(content="""## Context ##
     You are an expert computer scientist specializing in data structures and algorithms. You are given an image of a {{structure}} data structure to analyze.
@@ -834,7 +861,7 @@ PROMPTS_GOLD_COT_EXPERT_DELIMIT = [
     },
 ]
 
-PROMPTS_ZERO_SHOT_COT_POLITE = [
+ZERO_SHOT_COT_POLITE = [
     {
     'messages': [UserMessage(content="""Please provide a single-line python list representing the post-order traversal of the {{structure}}.
                              
