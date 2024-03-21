@@ -1,7 +1,7 @@
 colorlog==6.8.2
 matplotlib==3.8.2
 networkx==3.2.1
-pandas==2.2.0
+pandas==1.5.3
 python-dotenv==1.0.1
 PyYAML==6.0.1
 Requests==2.31.0
@@ -10,3 +10,7 @@ openai
 google-generativeai
 aiofiles
 seaborn
+scikit-learn
+torch
+torchvision
+timm
