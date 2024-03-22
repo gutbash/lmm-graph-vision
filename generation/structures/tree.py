@@ -3,6 +3,8 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
+import dgl
+from dgl import DGLGraph
 from pathlib import Path
 from typing import Optional, Literal, Any
 from utils.colors import hex_to_rgb_float
@@ -76,6 +78,30 @@ class Tree:
 
         return _post_order(structure_instance.root, structure_instance.graph)
     
+    def _adjacency_list(self, structure_instance) -> dict:
+        """
+        Returns the adjacency list of the graph with node values as keys and lists of neighbor values as values.
+        
+        Returns
+        -------
+        dict
+            the adjacency list of the graph
+        """
+        
+        adj_list = {}
+        for node in structure_instance.graph.nodes:
+            # Get the value of the node
+            node_value = structure_instance.graph.nodes[node]['value']
+            # Get the values of the neighbors
+            neighbor_values = [structure_instance.graph.nodes[neighbor]['value'] for neighbor in structure_instance.graph.neighbors(node)]
+            # Store in the dictionary
+            adj_list[node_value] = neighbor_values
+
+        return adj_list
+    
+    def to_dgl(self, structure_instance) -> DGLGraph:
+        return dgl.from_networkx(structure_instance.graph, node_attrs=['value'])
+    
     class TreeNode:
         """
         A class used to represent a tree node
@@ -133,10 +159,13 @@ class BinaryTree(Tree):
     root: Optional['Tree.TreeNode'] = None
     pos: dict = {}
     graph: Optional[nx.Graph] = nx.Graph()
+    dgl_graph: DGLGraph = DGLGraph()
     
     default_file_name: str = 'bt_test.png'
     yaml_structure_type: str = 'binary_tree'
     formal_name: str = 'Binary Tree'
+    
+    num_nodes: int = 0
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -181,8 +210,18 @@ class BinaryTree(Tree):
                         node.right = child
                         nodes.append(child)
                         break
+        
+        self.num_nodes = num_nodes
 
         self._graphize(self.graph, self.root)
+        
+        print("Nodes and their values:")
+        for node in self.graph.nodes(data=True):
+            print(node)
+            
+        print(f"Number of nodes: {self.graph.number_of_nodes()}")
+        
+        self.dgl_graph = self.to_dgl(self)
         
     def _graphize(self, T: nx.Graph, node: Tree.TreeNode, x: int = 0, y: int = 0, layer_height: Optional[int] = None, layer_width: Optional[int] = None) -> None:
         """
@@ -220,12 +259,15 @@ class BinaryTree(Tree):
 
             if node.left:
                 T.add_edge(node.value, node.left.value)
+                T.nodes[node.value]['value'] = node.value
                 self._graphize(T, node.left, x - layer_width, y - 1, layer_height / 2, layer_width / 2)
             if node.right:
                 T.add_edge(node.value, node.right.value)
+                T.nodes[node.value]['value'] = node.value
                 self._graphize(T, node.right, x + layer_width, y - 1, layer_height / 2, layer_width / 2)
             else:
                 T.add_node(node.value)
+                T.nodes[node.value]['value'] = node.value
         else:
             raise ValueError("The node is None")
         self.graph = T
@@ -239,6 +281,8 @@ class BinaryTree(Tree):
         
         for i, node in enumerate(self.graph.nodes):
             self.graph.nodes[node]['value'] = values[i]
+        
+        self.dgl_graph = self.to_dgl(self)
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """
@@ -328,10 +372,13 @@ class BinarySearchTree(Tree):
     root: Optional['Tree.TreeNode'] = None
     pos: dict = {}
     graph: Optional[nx.Graph] = nx.Graph()
+    dgl_graph: DGLGraph = DGLGraph()
     
     default_file_name: str = 'bst_test.png'
     yaml_structure_type: str = 'binary_search_tree'
     formal_name: str = 'Binary Search Tree'
+    
+    num_nodes: int = 0
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -364,8 +411,12 @@ class BinarySearchTree(Tree):
         self.root = None
         for value in values:
             self.insert(value)
+            
+        self.num_nodes = num_nodes
 
         self._graphize(self.graph, self.root)
+        
+        self.dgl_graph = self.to_dgl(self)
 
     def insert(self, value: int) -> None:
         """
@@ -408,10 +459,14 @@ class BinarySearchTree(Tree):
 
         if node.left:
             T.add_edge(node.value, node.left.value)
+            T.nodes[node.value]['value'] = node.value
             self._graphize(T, node.left, x - layer_width, y - 1, layer_height / 2, layer_width / 2)
         if node.right:
             T.add_edge(node.value, node.right.value)
+            T.nodes[node.value]['value'] = node.value
             self._graphize(T, node.right, x + layer_width, y - 1, layer_height / 2, layer_width / 2)
+            
+        self.graph = T
 
     def fill(self) -> None:
         """
@@ -431,6 +486,7 @@ class BinarySearchTree(Tree):
             except ValueError:
                 # If an exception is caught, the tree filling starts over
                 continue
+        self.dgl_graph = self.to_dgl(self)
 
     def _fill_node(self, node: Optional[Tree.TreeNode], min_val: int, max_val: int, used_values: set) -> None:
         if node is None:

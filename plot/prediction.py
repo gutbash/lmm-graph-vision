@@ -1,345 +1,403 @@
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, precision_score, recall_score, f1_score, roc_curve, auc, confusion_matrix
-from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder, StandardScaler
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import TruncatedSVD
-from sklearn.pipeline import make_pipeline, Pipeline
-from sklearn.decomposition import PCA
-from pathlib import Path
-from joblib import dump
+import matplotlib.pyplot as plt
+import seaborn as sns
 from joblib import load
-import torch
-import timm
-from torchvision import transforms
+from sklearn.metrics import roc_curve, auc, confusion_matrix, precision_recall_curve, average_precision_score, accuracy_score, mean_squared_error
+from scipy.stats import t, ttest_1samp, norm
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+from pathlib import Path
+from mpl_toolkits.mplot3d import Axes3D
 from PIL import Image
+from matplotlib.font_manager import FontProperties, fontManager
+
+signifier_font_path = "plot/fonts/Test Signifier/TestSignifier-Medium.otf"
+sohne_font_path = "plot/fonts/Test Söhne Collection/Test Söhne/TestSöhne-Buch.otf"
+sohne_bold_font_path = "plot/fonts/Test Söhne Collection/Test Söhne/TestSöhne-Kräftig.otf"
+
+signifier_font = FontProperties(fname=signifier_font_path)
+sohne_font = FontProperties(fname=sohne_font_path)
+sohne_bold_font = FontProperties(fname=sohne_bold_font_path)
+
+signifier_font_name = signifier_font.get_name()
+sohne_font_name = sohne_font.get_name()
+sohne_bold_font_name = sohne_bold_font.get_name()
+
+# Register the fonts with Matplotlib's font manager
+fontManager.addfont(signifier_font_path)
+fontManager.addfont(sohne_font_path)
+fontManager.addfont(sohne_bold_font_path)
+
+plt.rcParams['font.family'] = sohne_font_name
 
 def read_data(csv_path: Path):
-    print(f"Reading data from {csv_path}")
     return pd.read_csv(csv_path)
 
-def extract_image_features(image_paths, model_name='efficientvit_l3.r384_in1k', target_size=512, device='cuda', batch_size=32):
+def plot_actual_vs_predicted(y_actual, y_predicted):
+    plt.figure(figsize=(5, 5))
+    sns.scatterplot(x=y_actual, y=y_predicted, alpha=0.5, label='Predictions')
+    plt.plot([y_actual.min(), y_actual.max()], [y_actual.min(), y_actual.max()], 'r--', lw=2, label='Perfect Prediction')
+    # set spine color
+    # set grid color
+    plt.grid(color='lightgray')
+    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.13, y=0.96, ha='left')
+    plt.legend(loc="lower right")
+    plt.xlabel('Actual Similarity')
+    plt.ylabel('Predicted Similarity')
+    plt.title('Actual vs. Predicted Similarity', loc='left', fontproperties=sohne_bold_font, fontsize=12)
+    plt.grid(False)
+    plt.tight_layout()
+    plt.savefig("plot/actual_vs_predicted.png", dpi=300)
+    
+def plot_residuals(y_actual, y_predicted):
+    residuals = y_actual - y_predicted
+    plt.figure(figsize=(5, 5))
+    sns.scatterplot(x=y_predicted, y=residuals, alpha=0.6, label='Residuals')
+    # set grid color
+    #plt.grid(color='lightgray')
+    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.122, y=0.96, ha='left')
+    plt.axhline(y=0, color='r', linestyle='--', label='No Residual')
+    plt.xlabel('Predicted Similarity')
+    plt.ylabel('Residuals')
+    plt.legend(loc="upper right")
+    plt.title('Residuals of Predicted Similarity', loc='left', fontproperties=sohne_bold_font, fontsize=12)
+    plt.grid(False)
+    plt.tight_layout()
+    plt.rcParams['axes.unicode_minus'] = False
+    plt.savefig("plot/residuals.png", dpi=300)
+
+def plot_roc_curve(y_actual, y_score):
+    fpr, tpr, thresholds = roc_curve(y_actual, y_score)
+    roc_auc = auc(fpr, tpr)
+
+    plt.figure(figsize=(5, 5))
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC Curve\nAUC %0.2f' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--', label='Chance Level\nAUC 0.50')
+    # set grid color
+    #plt.grid(color='lightgray')
+    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.122, y=0.96, ha='left')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curve for Match Prediction', loc='left', fontproperties=sohne_bold_font, fontsize=12)
+    plt.legend(loc="lower right")
+    plt.grid(False)
+    plt.tight_layout()
+    plt.savefig("plot/roc_curve.png", dpi=300)
+    
+def plot_confusion_matrix(y_actual, y_pred, class_names):
+    matrix = confusion_matrix(y_actual, y_pred)
+    plt.figure(figsize=(5, 5))
+    sns.heatmap(matrix, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
+    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.15, y=0.88, ha='left')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.title('Confusion Matrix for Match Prediction', loc='left', fontproperties=sohne_bold_font, fontsize=12)
+    plt.tight_layout()
+    plt.savefig("plot/confusion_matrix.png", dpi=300)
+    
+def plot_precision_recall_curve(y_actual, y_score):
+    precision, recall, _ = precision_recall_curve(y_actual, y_score)
+    avg_precision = average_precision_score(y_actual, y_score)
+    
+    plt.figure(figsize=(5, 5))
+    plt.plot(recall, precision, color='darkorange', lw=2, label=f'Precision-Recall Curve\nAvg. Precision: {avg_precision:.2f}')
+    plt.plot([0, 1], [0.5, 0.5], color='navy', lw=2, linestyle='--', label='Chance Level')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.title('Precision-Recall Curve for Match Prediction', loc='left', fontproperties=sohne_bold_font, fontsize=12)
+    plt.legend(loc="lower left")
+    plt.tight_layout()
+    plt.savefig("plot/precision_recall_curve.png", dpi=300)
+    
+def plot_feature_correlation(X, feature_names):
+    feature_names = [truncate_name(name).replace("_", " ") for name in feature_names]
+    corr_matrix = pd.DataFrame(X, columns=feature_names).corr()
+    # remove minus sign
+    plt.rcParams['axes.unicode_minus'] = False
+    plt.figure(figsize=(45, 40))
+    # reverse the cmap
+    sns.heatmap(corr_matrix, annot=False, cmap="coolwarm_r", linewidths=0.1)
+    plt.title("Feature Correlation Heatmap", fontproperties=sohne_bold_font, fontsize=24, loc='left')
+    plt.tick_params(axis='both', which='major', labelsize=12)
+    #plt.tight_layout()
+    plt.savefig("plot/feature_correlation_heatmap.png", dpi=100)
+
+def plot_tsne(X, y_class, perplexity=30):
+    tsne = TSNE(n_components=2, perplexity=perplexity, random_state=42)
+    X_tsne = tsne.fit_transform(X)
+
+    # Plot t-SNE visualization for the entire dataset
+    plt.figure(figsize=(6, 5))
+    scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y_class, cmap='viridis', alpha=0.5)
+    plt.colorbar(scatter)
+    plt.title("t-SNE Feature Space", fontproperties=sohne_bold_font, fontsize=12, loc='left')
+    plt.xlabel("t-SNE Component 1")
+    plt.ylabel("t-SNE Component 2")
+    plt.tight_layout()
+    plt.savefig("plot/tsne_plot.png", dpi=300)
+    
+def regression_confidence_intervals(y_test, y_pred, alpha=0.05):
+    n = len(y_test)
+    mse = mean_squared_error(y_test, y_pred)
+    se = np.sqrt(mse / n)
+    t_value = t.ppf(1 - alpha / 2, n - 1)
+    lower = np.mean(y_pred) - t_value * se
+    upper = np.mean(y_pred) + t_value * se
+    return lower, upper
+
+def classification_confidence_intervals(y_test, y_pred, alpha=0.05):
+    n = len(y_test)
+    p = accuracy_score(y_test, y_pred)
+    se = np.sqrt(p * (1 - p) / n)
+    z_value = 1.96  # Assuming a large sample size and 95% confidence level
+    lower = p - z_value * se
+    upper = p + z_value * se
+    return lower, upper
+    
+def print_model_specifications(model):
     """
-    extract_image_features function will extract features from the images using a pre-trained model.
+    Prints specifications of a given model. Works with standalone models
+    and sklearn pipelines.
     """
-    print("Starting to extract image features...")
-    # model_name can be set to any model supported by timm. For ViT, consider 'vit_base_patch16_224' as a starting point.
-    model = timm.create_model(model_name, pretrained=True, num_classes=0, global_pool='avg')
-    model.eval()
-    model.to(device)
-
-    with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'a') as f:
-        print(f"Model {model_name} loaded and moved to {device}", file=f)
-
-    preprocess = transforms.Compose([
-        transforms.Resize((target_size, target_size)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
-
-    # Identify and process unique images
-    path_to_features = {}
-
-    def preprocess_batch(image_batch_paths):
-        images = [Image.open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / img_path).convert('RGB') for img_path in image_batch_paths]
-        tensors = [preprocess(img) for img in images]
-        print(f"Preprocessed {len(tensors)} images.")
-        return torch.stack(tensors).to(device)
-
-    print("Processing unique images...")
-    for i in range(0, len(image_paths), batch_size):
-        batch_paths = image_paths[i:i+batch_size]
-        img_tensors = preprocess_batch(batch_paths)
-
-        with torch.no_grad():
-            batch_features = model(img_tensors)
-
-        for path, features in zip(batch_paths, batch_features):
-            path_to_features[path] = features.cpu().numpy()
-
-    # Map extracted features back to the original dataset order
-    features = np.array([path_to_features[path] for path in image_paths])
-
-    print("Image feature extraction complete.")
-    return features
-
-def apply_pca(features, n_components='mle'):
-    """
-    Apply PCA to reduce dimensions of features.
-    If n_components is 'mle', PCA will choose the number of components by 'mle' algorithm.
-    If n_components is None, it will retain components explaining a certain variance ratio.
-    """
-    print("Applying PCA to reduce dimensions...")
-    pca = PCA(n_components=n_components, svd_solver='full', random_state=42)
-    pca_features = pca.fit_transform(features)
-    dump(pca, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/pca_image_model.joblib'))
-    with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'a') as f:
-        print(f"Reduced dimensions: {pca_features.shape[1]}")
-    return pca_features
-
-def feature_engineering(df, image_paths, device='cuda'):
-    # The feature engineering steps will go here.
-    # This will include binning, encoding, interaction terms, and text processing.
-    # The output will be an engineered feature matrix X and targets y_reg and y_class.
-    # Function to convert hex node_color to RGB
-    def hex_to_rgb(value):
-        value = value.lstrip('#')
-        lv = len(value)
-        return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
-    
-    # Construct feature names
-    feature_names = []
-    
-    # One-hot Encode 'edge_width'
-    edge_width_encoder = OneHotEncoder(categories='auto', drop=None, sparse=False)
-    edge_width_encoded = edge_width_encoder.fit_transform(df[['edge_width']])
-    edge_width_features = [f'edge_width_{int(category)}' for category in edge_width_encoder.categories_[0]]
-    feature_names.extend(edge_width_features)
-
-    # Extract image features from the 'image_prompt' column which contains the image paths
-    unique_image_paths = list(set(image_paths))
-    image_features = extract_image_features(unique_image_paths, device=device)
-    # Apply PCA to the image features
-    pca_image_features = apply_pca(image_features, n_components=50)
-    original_to_pca_index_map = {path: index for index, path in enumerate(unique_image_paths)}
-    # Create names for PCA features
-    pca_feature_names = [f'image_pca_{i}' for i in range(pca_image_features.shape[1])]
-    feature_names.extend(pca_feature_names)
-    
-    # Create a mapping from unique image paths to their PCA-transformed features
-    path_to_pca_features = dict(zip(unique_image_paths, pca_image_features))
-    
-    # Map PCA-transformed features back to the original dataset order, including handling duplicates
-    ordered_pca_features = np.array([path_to_pca_features[path] for path in image_paths])
-
-    # One-hot Encode 'num_nodes'
-    num_nodes_encoder = OneHotEncoder(categories='auto', drop=None, sparse=False)
-    num_nodes_encoded = num_nodes_encoder.fit_transform(df[['num_nodes']])
-    num_nodes_features = [f'num_nodes_{category}' for category in num_nodes_encoder.categories_[0]]
-    feature_names.extend(num_nodes_features)
-
-    # Convert 'node_color' to RGB and normalize
-    node_colors_rgb = np.array(list(map(hex_to_rgb, df['node_color']))) / 255.0
-
-    # For RGB components of 'node_color'
-    feature_names.extend(['node_color_rgb_red', 'node_color_rgb_green', 'node_color_rgb_blue'])
-
-    # 3. Create Interaction Feature: 'num_nodes' * 'edge_width'
-    node_edge_interaction = df['num_nodes'].values.reshape(-1, 1) * df['edge_width'].values.reshape(-1, 1)
-    # For interaction feature
-    feature_names.extend(['num_nodes_edge_width_interaction'])
-
-    # 4. One-hot Encode 'structure', 'task', 'variation_id', and 'generation_id'
-    structure_encoder = OneHotEncoder()
-    structure_encoded = structure_encoder.fit_transform(df[['structure']]).toarray()
-    structure_features = [f'structure_{category}' for category in structure_encoder.categories_[0]]
-    feature_names.extend(structure_features)
-
-    task_encoder = OneHotEncoder()
-    task_encoded = task_encoder.fit_transform(df[['task']]).toarray()
-    task_features = [f'task_{category}' for category in task_encoder.categories_[0]]
-    feature_names.extend(task_features)
-
-    variation_id_encoder = OneHotEncoder()
-    variation_id_encoded = variation_id_encoder.fit_transform(df[['variation_id']].astype(str)).toarray()
-    variation_id_features = [f'variation_id_{category}' for category in variation_id_encoder.categories_[0]]
-    feature_names.extend(variation_id_features)
-
-    generation_id_encoder = OneHotEncoder()
-    generation_id_encoded = generation_id_encoder.fit_transform(df[['generation_id']].astype(str)).toarray()
-    generation_id_features = [f'generation_id_{category}' for category in generation_id_encoder.categories_[0]]
-    feature_names.extend(generation_id_features)
-    
-    # one hot encode 'text_prompt'
-    text_prompt_encoder = OneHotEncoder()
-    text_prompt_encoded = text_prompt_encoder.fit_transform(df[['text_prompt']]).toarray()
-    text_prompt_features = [f'text_prompt_{category}' for category in text_prompt_encoder.categories_[0]]
-    feature_names.extend(text_prompt_features)
-
-    # Advanced NLP on 'text_prompt': Using TF-IDF followed by SVD for dimensionality reduction
-    tfidf_vectorizer = TfidfVectorizer(stop_words='english', max_features=100)
-    text_prompt_tfidf = tfidf_vectorizer.fit_transform(df['text_prompt'])
-    svd = TruncatedSVD(n_components=20, random_state=42)
-    text_prompt_tfidf_svd = svd.fit_transform(text_prompt_tfidf)
-    
-    # Instead of adding TF-IDF vectorizer feature names directly to feature_names, 
-    # we create SVD component feature names for clarity
-    text_prompt_svd_feature_names = [f'text_prompt_svd_{i}' for i in range(text_prompt_tfidf_svd.shape[1])]
-    feature_names.extend(text_prompt_svd_feature_names)
-    
-    # Number of components to examine
-    n_components_to_examine = 5  # Or whatever number makes sense for your analysis
-
-    for i in range(n_components_to_examine):
-        component_loadings = svd.components_[i]
-        loading_scores = dict(zip(feature_names, component_loadings))
-        sorted_loading_scores = sorted(loading_scores.items(), key=lambda x: x[1], reverse=True)
+    if hasattr(model, 'steps'):  # It's a Pipeline
+        print("Model is a Pipeline. Steps:")
+        for step_name, step_process in model.steps:
+            print(f"\nStep: {step_name}")
+            print(f"Process: {step_process}")
+            
+            # If the step is a transformer or estimator with parameters, print them
+            if hasattr(step_process, 'get_params'):
+                print("Parameters:")
+                params = step_process.get_params()
+                for param_name, param_value in params.items():
+                    print(f"    {param_name}: {param_value}")
+    else:
+        # Standalone model, just print its parameters
+        print("Model Specifications:")
+        print(model)
         
-        with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'w') as f:
+        if hasattr(model, 'get_params'):
+            print("Parameters:")
+            params = model.get_params()
+            for param_name, param_value in params.items():
+                print(f"    {param_name}: {param_value}")
+                
+def regression_hypothesis_test(y_test, y_pred, baseline_mse, alpha=0.05):
+    mse = mean_squared_error(y_test, y_pred)
+    n = len(y_test)
+    se = np.sqrt(mse / n)
+    t_statistic, p_value = ttest_1samp(y_pred, baseline_mse)
+    
+    print(f"Regression Hypothesis Test:")
+    print(f"Null Hypothesis: Model MSE = {baseline_mse}")
+    print(f"Alternative Hypothesis: Model MSE != {baseline_mse}")
+    print(f"t-statistic: {t_statistic:.4f}")
+    print(f"p-value: {p_value:.4f}")
+    
+    if p_value < alpha:
+        print("Reject the null hypothesis. The model's performance is significantly different from the baseline.")
+    else:
+        print("Fail to reject the null hypothesis. The model's performance is not significantly different from the baseline.")
+
+def classification_hypothesis_test(y_test, y_pred, baseline_accuracy, alpha=0.05):
+    accuracy = accuracy_score(y_test, y_pred)
+    n = len(y_test)
+    
+    z_statistic = (accuracy - baseline_accuracy) / np.sqrt((baseline_accuracy * (1 - baseline_accuracy)) / n)
+    p_value = 2 * (1 - norm.cdf(abs(z_statistic)))
+    
+    print(f"Classification Hypothesis Test:")
+    print(f"Null Hypothesis: Model Accuracy = {baseline_accuracy}")
+    print(f"Alternative Hypothesis: Model Accuracy != {baseline_accuracy}")
+    print(f"z-statistic: {z_statistic:.4f}")
+    print(f"p-value: {p_value:.4f}")
+    
+    if p_value < alpha:
+        print("Reject the null hypothesis. The model's performance is significantly different from the baseline.")
+    else:
+        print("Fail to reject the null hypothesis. The model's performance is not significantly different from the baseline.")
+
+def plot_pca_variance(data):
+    pca = PCA().fit(data)  # `data` is your feature matrix
+    plt.figure(figsize=(5, 5))
+    plt.plot(np.cumsum(pca.explained_variance_ratio_))
+    # label legend
+    plt.title('PCA Variance Explained', fontproperties=sohne_bold_font, fontsize=12, loc='left')
+    plt.xlabel('Components')
+    plt.ylabel('Cumulative Explained Variance')
+    plt.tight_layout()
+    plt.savefig("plot/pca_variance.png", dpi=100)
+    
+def truncate_name(name, max_length=20):
+    """Truncate or pad a string to a specific length."""
+    if len(name) > max_length:
+        return name[:max_length-3] + "..."
+    else:
+        return name
+
+def plot_feature_importances_with_model(feature_names, model, title):
+    """
+    Plot the top N feature importances for a model (regression or classification) with signs and truncated labels.
+    
+    Parameters:
+    - feature_names: list of feature names
+    - model: the model object (sklearn model or pipeline with 'regressor' or 'classifier' step)
+    - title: title for the plot
+    """
+    # Extract coefficients from the model
+    if hasattr(model, 'named_steps'):
+        if 'regressor' in model.named_steps:
+            model_coefs = model.named_steps['regressor'].coef_
+        elif 'classifier' in model.named_steps:
+            model_coefs = model.named_steps['classifier'].coef_[0]  # Assuming binary classification or one-vs-rest
+        else:
+            raise ValueError("The model provided does not have 'regressor' or 'classifier' steps with accessible coefficients.")
+    elif hasattr(model, 'coef_'):
+        model_coefs = model.coef_[0]  # Assuming binary classification or one-vs-rest
+    else:
+        raise ValueError("The model provided does not have coefficients accessible via 'coef_'.")
+
+    # Plot the feature importances for the model
+    plt.figure(figsize=(5, 15))
+    sorted_idx = np.argsort(np.abs(model_coefs))[::-1]
+    top_n = len(feature_names)  # Show top 30 features for clarity
+    plt.barh(range(top_n), model_coefs[sorted_idx[:top_n]], color='cadetblue', align='center')
+    truncated_feature_names = [name.replace("_", " ") if len(name) <= 20 else name[:17].replace("_", " ").replace("'", "") + "..." for name in np.array(feature_names)[sorted_idx[:top_n]]]
+    plt.yticks(range(top_n), truncated_feature_names)
+    plt.gca().invert_yaxis()  # Display the highest importance at the top
+    plt.title(title, fontproperties=sohne_bold_font, fontsize=10, loc='left', pad=5)
+    # change y tick font size
+    plt.yticks(fontsize=5)
+    plt.rcParams['axes.unicode_minus'] = False
+    plt.xlabel('Coefficient Magnitude', fontsize=10)
+    plt.ylabel('Features', fontsize=10)
+    plt.grid(True, which='major', linestyle='--', linewidth=0.1)
+    plt.tight_layout()
+    plt.savefig(f"plot/feature_importances_{title}.png", dpi=300)
+    
+def plot_3d_pca(pca_image_features, y_class):
+    X_pca_3d = pca_image_features[:, :3]
+
+    # Plotting
+    fig = plt.figure(figsize=(5, 5))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Coloring by the classification target for better visual distinction
+    scatter = ax.scatter(X_pca_3d[:, 0], X_pca_3d[:, 1], X_pca_3d[:, 2], c=y_class, cmap='viridis', alpha=0.5)
+
+    # Adding color bar
+    cbar = fig.colorbar(scatter, ax=ax)
+    cbar.set_label('Class')
+
+    ax.set_title('PCA Image Feature Space', fontproperties=sohne_bold_font, fontsize=12, loc='left')
+    ax.set_xlabel('PCA Component 1')
+    ax.set_ylabel('PCA Component 2')
+    ax.set_zlabel('PCA Component 3')
+
+    plt.tight_layout()
+    plt.savefig("plot/3d_pca.png", dpi=300)
+    
+def plot_pca_loadings_heatmap(pca, feature_names, n_components=3):
+    loadings = pca.components_[:n_components, :]
+    
+    loadings_df = pd.DataFrame(loadings[:, :len(feature_names)], columns=feature_names, index=[f'PC{i+1}' for i in range(n_components)])
+    truncated_feature_names = [truncate_name(name) for name in feature_names]
+    
+    plt.figure(figsize=(10, 20))
+    sns.heatmap(loadings_df.T, cmap='coolwarm', annot=True, fmt=".2f")
+    plt.title(f'PCA Loadings Heatmap for First {n_components} Principal Components', fontproperties=sohne_bold_font, fontsize=12, loc='left')
+    plt.ylabel('Original Features', fontsize=14)
+    plt.xlabel('Principal Components', fontsize=14)
+    # truncate y axis labels
+    plt.yticks(ticks=np.arange(len(feature_names)), labels=truncated_feature_names, fontsize=8)
+    plt.tight_layout()
+    plt.savefig("plot/pca_loadings_heatmap.png", dpi=300)
+
+def main(DATA_PATH, CSV_PATH):
+    
+    df = read_data(CSV_PATH)
+    
+    metrics_reg = load(DATA_PATH / Path('regression_metrics.joblib'))
+    metrics_class = load(DATA_PATH / Path('classification_metrics.joblib'))
+    model_reg = load(DATA_PATH / Path('regression_model.joblib'))
+    model_class = load(DATA_PATH / Path('classification_model.joblib'))
+    feature_names = load(DATA_PATH / Path('feature_names.joblib')) # Load the feature names
+    X = load(DATA_PATH / Path('X.joblib')) # Load the feature matrix
+    svd = load(DATA_PATH / Path('svd.joblib')) # Load the SVD model
+    tfidf_vectorizer = load(DATA_PATH / Path('tfidf_vectorizer.joblib')) # Load the TF-IDF vectorizer
+    text_prompt_tfidf_svd = load(DATA_PATH / Path('text_prompt_tfidf_svd.joblib')) # Load the SVD-transformed TF-IDF vectors for the text prompt
+    pca = load(DATA_PATH / Path('pca_image_model.joblib'))
+    pca_image_features = load(DATA_PATH / Path('pca_image_features.joblib'))
+    y_class = load(DATA_PATH / Path('y_class.joblib'))
+    original_to_pca_index_map = load(DATA_PATH / Path('original_to_pca_index_map.joblib'))
+    inverted_map = {v: k for k, v in original_to_pca_index_map.items()}
+    y_class_aligned = y_class.reindex(index=pd.Index(inverted_map.keys())).values
+    
+    if hasattr(model_reg, 'named_steps'):
+        regression_coefs = model_reg.named_steps['regressor'].coef_
+    else:
+        regression_coefs = model_reg.coef_
+
+    if hasattr(model_class, 'named_steps'):
+        classification_coefs = model_class.named_steps['classifier'].coef_[0]
+    else:
+        classification_coefs = model_class.coef_[0]
+
+    print("Shape of X:", X.shape)
+    print("Number of feature names:", len(feature_names))
+
+    if X.shape[1] != len(feature_names):
+        print("Mismatch between data shape and feature names!")
+        # Update feature_names to match the number of columns in X
+        feature_names = [f"Feature_{i}" for i in range(X.shape[1])]
+        print("Updated feature names:", feature_names)
         
-            print(f"\nTop contributing terms for text_prompt_svd_{i}:", file=f)
-            for term, score in sorted_loading_scores[:10]:  # Top 10 terms
-                print(f"{term}: {score}", file=f)
+    mean_target = np.mean(metrics_reg['y_test'])
+    median_target = np.median(metrics_reg['y_test'])
 
-            print(f"\nBottom contributing terms for text_prompt_svd_{i}:", file=f)
-            for term, score in sorted_loading_scores[-10:]:  # Bottom 10 terms
-                print(f"{term}: {score}", file=f)
+    # Predictions by the mean and median predictor are just the mean and median values repeated for each test instance
+    mean_predictions = np.full_like(metrics_reg['y_test'], fill_value=mean_target)
+    median_predictions = np.full_like(metrics_reg['y_test'], fill_value=median_target)
 
-    # Combining all new features into a single feature matrix X
-    X = np.hstack([
-        edge_width_encoded,  # Assuming it's 2D
-        ordered_pca_features, # 2D from PCA
-        num_nodes_encoded,  # Assuming it's 2D
-        node_colors_rgb,  # Reshaping just in case
-        node_edge_interaction,  # Assuming it's 2D
-        structure_encoded,  # 2D from OneHotEncoder
-        task_encoded,  # 2D from OneHotEncoder
-        variation_id_encoded,  # 2D from OneHotEncoder
-        generation_id_encoded,  # 2D from OneHotEncoder
-        text_prompt_encoded,  # 2D from OneHotEncoder
-        text_prompt_tfidf_svd,  # 2D from SVD
-    ])
+    # Calculate MSE for the mean and median predictor
+    baseline_mse_mean = mean_squared_error(metrics_reg['y_test'], mean_predictions)
+    baseline_mse_median = mean_squared_error(metrics_reg['y_test'], median_predictions)
     
-    assert X.shape[1] == len(feature_names), f"Mismatch between features and feature names: {X.shape[1]} != {len(feature_names)}"
-
-    # Target for regression (similarity) and classification (match)
-    y_reg = df['similarity'] / 100.0
-    y_class = df['match']
+    #baseline_accuracy = accuracy_score(metrics_class['y_test'], metrics_class['y_test'].value_counts().idxmax())
     
-    dump(feature_names, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/feature_names.joblib'))
-    dump(X, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/X.joblib'))
-    dump(svd, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/svd.joblib'))
-    dump(tfidf_vectorizer, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/tfidf_vectorizer.joblib'))
-    dump(text_prompt_tfidf_svd, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/text_prompt_tfidf_svd.joblib'))
-    dump(pca_image_features, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/pca_image_features.joblib'))
-    dump(image_features, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/image_features.joblib'))
-    dump(y_reg, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/y_reg.joblib'))
-    dump(y_class, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/y_class.joblib'))
-    dump(text_prompt_tfidf, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/text_prompt_tfidf.joblib'))
-    dump(original_to_pca_index_map, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/original_to_pca_index_map.joblib'))
-
-    return X, y_reg, y_class, feature_names
-
-def train_models(X, y_reg, y_class):
-    # The model training steps will go here.
-    # This will include splitting the data, training regression and classification models,
-    # and printing out performance metrics.
-    # Split the data for the regression task
-    print("Training models...")
-    X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X, y_reg, test_size=0.2, random_state=42)
-
-    pipeline_reg = Pipeline([
-        ('scaler', StandardScaler()),
-        ('regressor', LinearRegression())
-    ])
-    pipeline_reg.fit(X_train_reg, y_train_reg)
-    y_pred_reg = pipeline_reg.predict(X_test_reg)
-    mse_reg = mean_squared_error(y_test_reg, y_pred_reg)
-    r2_reg = r2_score(y_test_reg, y_pred_reg)
-    metrics_reg = {'mse': mse_reg, 'r2': r2_reg, 'y_test': y_test_reg, 'y_pred': y_pred_reg}
-
-    # Split the data for the classification task
-    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X, y_class, test_size=0.2, random_state=42)
-    pipeline_class = Pipeline([
-        ('scaler', StandardScaler()),
-        ('classifier', LogisticRegression(max_iter=1000, random_state=42))
-    ])
-    pipeline_class.fit(X_train_class, y_train_class)
-
-    # Predictions and probabilities for evaluation
-    y_pred_class = pipeline_class.predict(X_test_class)
-    y_pred_prob_class = pipeline_class.predict_proba(X_test_class)[:, 1]
-
-    # Calculate metrics (assuming y_test_class is defined)
-    accuracy_class = accuracy_score(y_test_class, y_pred_class)
-    precision_class = precision_score(y_test_class, y_pred_class)
-    recall_class = recall_score(y_test_class, y_pred_class)
-    f1_class = f1_score(y_test_class, y_pred_class)
-
-    # Update the metrics dictionary accordingly
-    metrics_class = {
-        'accuracy': accuracy_class, 'precision': precision_class,
-        'recall': recall_class, 'f1': f1_class, 'y_test': y_test_class,
-        'y_pred': y_pred_class, 'y_pred_prob': y_pred_prob_class
-    }
-
-    # After fitting the regression model:
-    y_train_pred_reg = pipeline_reg.predict(X_train_reg)
-    mse_train_reg = mean_squared_error(y_train_reg, y_train_pred_reg)
-    r2_train_reg = r2_score(y_train_reg, y_train_pred_reg)
-    with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'a') as f:
-        print("Training Regression Metrics:", {'mse': mse_train_reg, 'r2': r2_train_reg}, file=f)
-
-    # Similarly, after fitting the classification model:
-    y_train_pred_class = pipeline_class.predict(X_train_class)
-    accuracy_train_class = accuracy_score(y_train_class, y_train_pred_class)
-    precision_train_class = precision_score(y_train_class, y_train_pred_class)
-    recall_train_class = recall_score(y_train_class, y_train_pred_class)
-    f1_train_class = f1_score(y_train_class, y_train_pred_class)
-    with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'a') as f:
-        print("Training Classification Metrics:", {'accuracy': accuracy_train_class, 'precision': precision_train_class, 'recall': recall_train_class, 'f1': f1_train_class}, file=f)
-
-    print("Model training complete.")
-
-    dump(pipeline_reg, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/regression_model.joblib'))
-    dump(pipeline_class, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/classification_model.joblib'))
-    dump(metrics_reg, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/regression_metrics.joblib'))
-    dump(metrics_class, Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path('results/classification_metrics.joblib'))
-
-    return pipeline_reg, pipeline_class, metrics_reg, metrics_class
-
-def print_feature_importance(pipeline_reg, pipeline_class, feature_names):
-    with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'a') as f:
-        # For Linear Regression (effect sizes)
-        print("Feature importances for Linear Regression:", file=f)
-        # Assuming reg_model is a LinearRegression model or a pipeline ending with it
-        if hasattr(pipeline_reg, 'named_steps'):
-            reg_coefs = pipeline_reg.named_steps['regressor'].coef_
-        else:
-            reg_coefs = pipeline_reg.coef_
-
-        for feature, coef in zip(feature_names, reg_coefs):
-            print(f"{feature}: {coef:.4f}", file=f)
-
-        # For Logistic Regression (effect sizes)
-        print("\nFeature importances for Logistic Regression:", file=f)
-        # Access the 'classifier' step in the pipeline
-        if hasattr(pipeline_class, 'named_steps'):
-            class_coefs = np.abs(pipeline_class.named_steps['classifier'].coef_[0])
-        else:
-            class_coefs = np.abs(pipeline_class.coef_[0])
-
-        sorted_indices = np.argsort(class_coefs)[::-1]  # Sorting them in descending order
-        for idx in sorted_indices:
-            print(f"{feature_names[idx]}: {class_coefs[idx]:.4f}", file=f)
-
-def main(csv_path):
-    # Read the data
-    df = read_data(csv_path)
-
-    image_paths = df['image_prompt'].tolist()  # Convert the column to a list
-
-    # Perform feature engineering
-    X, y_reg, y_class, feature_names = feature_engineering(df, image_paths)
-
-    # Train the models and get metrics
-    pipeline_reg, pipeline_class, metrics_reg, metrics_class = train_models(X, y_reg, y_class)
-
-    print_feature_importance(pipeline_reg, pipeline_class, feature_names)
-
-    print("Regression Metrics:", metrics_reg)
-    print("Classification Metrics:", metrics_class)
-
-    # Print out the metrics
-    with open(Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / f'results/analysis.txt', 'a') as f:
-        print("Regression Metrics:", metrics_reg, file=f)
-        print("Classification Metrics:", metrics_class, file=f)
+    print(baseline_mse_mean, baseline_mse_median)
+    
+    # Plot the results
+    plot_pca_variance(X)
+    plot_actual_vs_predicted(metrics_reg['y_test'], metrics_reg['y_pred'])
+    plot_residuals(metrics_reg['y_test'], metrics_reg['y_pred'])
+    plot_roc_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
+    plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
+    #plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
+    #plot_feature_correlation(X, feature_names)
+    #plot_tsne(X, y_class=y_class, perplexity=30)
+    plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
+    plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
+    
+    plot_3d_pca(pca_image_features, y_class_aligned)
+    plot_pca_loadings_heatmap(pca, feature_names, n_components=3)
+    
+    #print(regression_confidence_intervals(metrics_reg['y_test'], metrics_reg['y_pred']))
+    #print(classification_confidence_intervals(metrics_class['y_test'], metrics_class['y_pred']))
+    
+    #regression_hypothesis_test(metrics_reg['y_test'], metrics_reg['y_pred'], baseline_mse_mean)
+    #classification_hypothesis_test(metrics_class['y_test'], metrics_class['y_pred'], baseline_accuracy)
+    
+    #print_model_specifications(model_reg)
+    #print_model_specifications(model_class)
 
 if __name__ == "__main__":
     print("Script execution started.")
     # Provide the path to your CSV file here
-    CSV_PATH = Path('/content/drive/MyDrive/lmm-graph-tree-vqa') / Path("results/archive/large-course/deepmind-zero_shot-large_course.csv")
-    main(CSV_PATH)
+    DATA_PATH = Path('results/archive/large-course-plus')
+    CSV_PATH = Path('results/archive/large-course-plus/deepmind-zero_shot-large_course_plus.csv')
+    main(DATA_PATH, CSV_PATH)
     print("Script execution completed.")

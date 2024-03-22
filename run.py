@@ -24,6 +24,7 @@ load_dotenv()
 ### keys ###
 
 openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
+#openai_api_key = os.environ.get('OPENAI_API_KEY_HCI')
 deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
 
 ### prompts ###
@@ -41,10 +42,10 @@ yaml_path = Path('data/')
 
 ### combinations ###
 
-COLORS = ['#ffffff', '#ffff00', '#ff0000'] # white, yellow, red, green, blue
+COLORS = ['#ffffff', '#ffff00'] # white, yellow, red, green, blue
 SHAPES = ['o', 's', 'd']
 FONTS = ['sans-serif', 'serif', 'monospace']
-WIDTH = ['1.0', '3.0', '5.0']
+WIDTH = ['1.0', '5.0']
 ARROWS = ['->', '-|>']
 RESOLUTIONS = [256, 512, 1024, 2048]
 STRUCTURES = ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']
@@ -52,7 +53,7 @@ STRUCTURES = ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed
 ###### test generation ######
 
 batch_generator = BatchGenerator()
-generation = 3
+generation = 7
 variation = 3
 
 async def run_batch():
@@ -115,20 +116,20 @@ deepmind_csv = f'deepmind'
 
 evaluator = Evaluator()
 
-model = deepmind
-csv_name = deepmind_csv
+model = openai
+csv_name = openai_csv
 
-eval_name = 'large_course'
+eval_name = 'large_course_plus'
 
 async def run_eval():
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['binary_tree', 'binary_search_tree', 'undirected_graph', 'directed_graph']:
+        for structure in ['undirected_graph', 'directed_graph']:
             
             try:
 
-                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3)
+                await evaluator.evaluate(model=model, prompts=prompts, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=None)
                 
             except Exception as e:
                 logger.error(f'{e}')

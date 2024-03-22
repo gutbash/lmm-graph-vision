@@ -3,6 +3,8 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
+import dgl
+from dgl import DGLGraph
 from pathlib import Path
 from typing import Optional, Literal
 from utils.colors import hex_to_rgb_float
@@ -18,6 +20,9 @@ class Graph:
     """
     
     methods: list = ['breadth_first_search', 'depth_first_search', 'adjacency_list']
+    
+    def _adjacency_list(self, structure_instance) -> dict:
+        return self.adjacency_list(structure_instance)
     
     def adjacency_list(self, structure_instance) -> dict:
         """
@@ -71,6 +76,9 @@ class Graph:
         dfs_nodes = list(nx.dfs_tree(structure_instance.graph, source=start_node).nodes)
         dfs_values = [structure_instance.graph.nodes[node]['value'] for node in dfs_nodes]
         return dfs_values
+    
+    def to_dgl(self, structure_instance) -> DGLGraph:
+        return dgl.from_networkx(structure_instance.graph, node_attrs=['value'])
 
 class UndirectedGraph(Graph):
     """
@@ -91,10 +99,14 @@ class UndirectedGraph(Graph):
     """
     large: bool = False
     graph: nx.DiGraph = nx.DiGraph()
+    dgl_graph: DGLGraph = DGLGraph()
     
     default_file_name: str = 'ug_test.png'
     yaml_structure_type: str = 'undirected_graph'
     formal_name: str = 'Undirected Graph'
+    
+    num_nodes: int = 0
+    num_edges: int = 0
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -146,8 +158,12 @@ class UndirectedGraph(Graph):
         # Assign random node values from 1 to 9
         for node in G.nodes:
             G.nodes[node]['value'] = random.randint(1, 9)
+            
+        self.num_nodes = num_nodes
+        self.num_edges = num_nodes - 1 + extra_edges
 
         self.graph = G
+        self.dgl_graph = self.to_dgl(self)
 
     def fill(self) -> None:
         """
@@ -159,6 +175,8 @@ class UndirectedGraph(Graph):
         
         for node, value in zip(self.graph.nodes, values):
             self.graph.nodes[node]['value'] = value
+            
+        self.dgl_graph = self.to_dgl(self)
         
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-') -> None:
         """
@@ -236,10 +254,14 @@ class DirectedGraph(Graph):
     """
     large: bool = False
     graph: nx.DiGraph = nx.DiGraph()
+    dgl_graph: DGLGraph = DGLGraph()
     
     default_file_name: str = 'dg_test.png'
     yaml_structure_type: str = 'directed_graph'
     formal_name: str = 'Directed Graph'
+    
+    num_nodes: int = 0
+    num_edges: int = 0
     
     def __init__(self, large: bool = False) -> None:
         """
@@ -292,8 +314,12 @@ class DirectedGraph(Graph):
         # Assign random node values from 1 to 9
         for node in G.nodes:
             G.nodes[node]['value'] = random.randint(1, 9)
+            
+        self.num_nodes = num_nodes
+        self.num_edges = num_nodes - 1 + extra_edges
 
         self.graph = G
+        self.dgl_graph = self.to_dgl(self)
         
     def fill(self) -> None:
         """
@@ -305,6 +331,8 @@ class DirectedGraph(Graph):
         
         for node, value in zip(self.graph.nodes, values):
             self.graph.nodes[node]['value'] = value
+            
+        self.dgl_graph = self.to_dgl(self)
 
     def draw(self, save: bool = False, path: Optional[Path] = None, show: bool = True, shape: Shape = 'o', color: Color = '#abe0f9', font: Font = 'sans-serif', width: Width = '1.0', resolution: int = 512, arrow_style: str = '-|>') -> None:
         """

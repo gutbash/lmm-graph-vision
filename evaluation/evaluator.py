@@ -60,14 +60,14 @@ class Evaluator:
   semaphore : asyncio.Semaphore
       the global semaphore for rate limiting
   """
-  columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'node_shape', 'edge_width', 'arrow_style', 'num_nodes', 'resolution', 'task_id', 'image_id']
+  columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'node_shape', 'edge_width', 'arrow_style', 'num_nodes', 'num_edges', 'dgl_graph', 'resolution', 'task_id', 'image_id']
   rate_limiter = RateLimiter(0.9)
   
   def __init__(self) -> None:
     self.total_calls = 0
     self.completed_calls = 0
   
-  async def evaluate(self, model: Model, prompts: list[Prompt], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1) -> None:
+  async def evaluate(self, model: Model, prompts: list[Prompt], yaml_path: Path, yaml_name: str, csv_path: Path, csv_name: str, repeats: int = 1, limit: int = None) -> None:
     """
     Evaluates the model.
     
@@ -155,37 +155,39 @@ class Evaluator:
       
       logger.info(f'[T{self.completed_calls}/{self.total_calls}] Complete')
       
-      clean_match = ''
-      similarity = 0.0
-      
       pattern = r'(\{.*?\})|(\[.*?\])'
       content = re.sub(' +', ' ', result.replace('\n', ''))
       matches = re.findall(pattern, content)
+      express_expected = literal_eval(task.get('ground_truth'))
+      express_predicted = ''
+      similarity = 0.0
       if matches == []:
         logger.error(f'No matches found in content: {content}')
       else:
         logger.info(f'Matches: {matches}')
         clean_matches = [match for group in matches for match in group if match]
-        if type(clean_matches[-1]) is tuple:
-          clean_matches = [item for tup in matches for item in tup if item]
-        
-        express_expected = literal_eval(task.get('ground_truth'))
+        logger.info(f'Clean matches: {clean_matches}')
         for match in reversed(clean_matches):
           if match != '[]' and match != '{}':
             try:
-              clean_match = str(match)
-              express_actual = literal_eval(clean_match)
+              clean_pattern = "[^][{},:0-9]"
+              cleaned_string = re.sub(clean_pattern, "", str(match))
+              if cleaned_string[-1] == '}':
+                cleaned_string = '{' + cleaned_string.strip('}').strip('{') + '}'
+              elif cleaned_string[-1] == ']':
+                cleaned_string = '[' + cleaned_string.strip(']').strip('[') + ']'
+              express_predicted = literal_eval(cleaned_string)
               break
             except:
               pass
           
-        if type(express_expected) is list and type(express_actual) is list:
-          similarity = calculate_similarity_list(express_expected, express_actual)
-        elif type(express_expected) is dict and type(express_actual) is dict:
-          similarity = calculate_similarity_dict(express_expected, express_actual)
+        if type(express_expected) is list and type(express_predicted) is list:
+          similarity = calculate_similarity_list(express_expected, express_predicted)
+        elif type(express_expected) is dict and type(express_predicted) is dict:
+          similarity = calculate_similarity_dict(express_expected, express_predicted)
         else:
-          logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_actual)}')
-          logger.info(f'Expected: {express_expected}, Actual: {express_actual}')
+          logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_predicted)}')
+          logger.info(f'Expected: {express_expected}, Actual: {express_predicted}')
           logger.info(f'Content: {content}')
           #raise Exception('Expected and actual types do not match')
       
@@ -200,7 +202,7 @@ class Evaluator:
         'text_prompt': str([message.content for message in message_list if type(message) == UserMessage]).strip("]["),
         'image_prompt': image_path,
         'response': content.replace('\n', '\\n'),
-        'predicted': clean_match,
+        'predicted': express_predicted,
         'ground_truth': task.get('ground_truth'),
         'match': True if similarity >= 100.0 else False,
         'similarity': similarity,
@@ -210,6 +212,8 @@ class Evaluator:
         'edge_width': task.get('edge_width'),
         'arrow_style': task.get('arrow_style'),
         'num_nodes': task.get('num_nodes'),
+        'num_edges': task.get('num_edges'),
+        'dgl_graph': task.get('dgl_graph'),
         'resolution': task.get('resolution'),
         'task_id': task.get('task_id'),
         'image_id': task.get('image_id')
@@ -219,13 +223,21 @@ class Evaluator:
         
     coroutines = []
     for task in tasks:
+      if limit is not None:
+        if len(coroutines) >= limit:
+          break
       for attempt in range(repeats):
         coroutines.append(process_task(task, attempt))
         
     await asyncio.gather(*coroutines)
-      
-    async with aiofiles.open(save_path, mode='a', newline='') as file:
-        writer = csv.writer(file)
-        for index, new_row in enumerate(new_rows, start=1):
-            row_data = [str(index)] + [str(new_row[col]) for col in self.columns if col != 'run_id']
-            await writer.writerow(row_data)
+    
+    try:
+      async with aiofiles.open(save_path, mode='a', newline='') as file:
+          writer = csv.writer(file)
+          for index, new_row in enumerate(new_rows, start=1):
+              row_data = [str(index)] + [str(new_row[col]) for col in self.columns if col != 'run_id']
+              await writer.writerow(row_data)
+    except Exception as e:
+      tb = traceback.format_exc()
+      logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+      raise Exception('Error writing to CSV')

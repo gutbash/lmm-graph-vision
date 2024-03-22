@@ -6,6 +6,7 @@ from utils.serializer import add_objects_async
 from utils.colors import Colors
 from utils.logger import Logger
 from utils.files import validate_path, check_path_exists, has_negative_value
+from dgl import DGLGraph
 import os
 
 from pathlib import Path
@@ -98,7 +99,7 @@ class Generator:
         
         return structure_instance
 
-    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#ffffff', font: Font = 'sans-serif', width: Width = '5.0', num_nodes: int = 0, resolution: int = 512, arrow_style: str = '-|>') -> None:
+    async def draw_structure(self, structure_instance: Type[Structure], image_id: UUID = None, task_id: UUID = None, task_type: str = None, expected: str = None, save: bool = False, save_path: Path = Path('.'), save_name: Optional[str] = None, show: bool = True, generation: int = 0, variation: int = 0, format: int = 0, shape: Shape = 'o', color: Color = '#ffffff', font: Font = 'sans-serif', width: Width = '5.0', num_nodes: int = 0, num_edges: int = 0, dgl_graph: DGLGraph = None, resolution: int = 512, arrow_style: str = '-|>') -> None:
         """
         Draws the structure instance and saves the image to a file and/or adds the object to a YAML file.
         
@@ -181,6 +182,8 @@ class Generator:
             'edge_width': float(width),
             'arrow_style': arrow_style,
             'num_nodes': num_nodes,
+            'num_edges': num_edges,
+            'dgl_graph': dgl_graph,
             'resolution': resolution,
         }
                     
@@ -243,7 +246,7 @@ class BatchGenerator(Generator):
             
                 generation_approved = False
                 structure_generated = None
-                num_nodes = generation * 3 if not random_num_nodes else None
+                num_nodes = generation + 2 if not random_num_nodes else None
                 
                 while not generation_approved:
                     
@@ -314,6 +317,8 @@ class BatchGenerator(Generator):
                                         width=width,
                                         shape=shape,
                                         num_nodes=len(structure_filled.graph.nodes),
+                                        num_edges=len(structure_filled.graph.edges),
+                                        dgl_graph=structure_filled._adjacency_list(structure_filled),
                                         resolution=res,
                                         arrow_style=arrow,
                                     )

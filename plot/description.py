@@ -1,15 +1,10 @@
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from joblib import load
-from sklearn.metrics import roc_curve, auc, confusion_matrix, precision_recall_curve, average_precision_score, accuracy_score, mean_squared_error
-from scipy.stats import t, ttest_1samp, norm
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
+import pandas as pd
 from pathlib import Path
-from mpl_toolkits.mplot3d import Axes3D
-from PIL import Image
+import numpy as np
+from uuid import uuid4
+import os
 from matplotlib.font_manager import FontProperties, fontManager
 
 signifier_font_path = "plot/fonts/Test Signifier/TestSignifier-Medium.otf"
@@ -31,366 +26,689 @@ fontManager.addfont(sohne_bold_font_path)
 
 plt.rcParams['font.family'] = sohne_font_name
 
-def read_data(csv_path: Path):
-    return pd.read_csv(csv_path)
+# Load the dataset
+file_path = Path('results/deepmind-prompts_default.csv')
 
-def plot_actual_vs_predicted(y_actual, y_predicted):
-    plt.figure(figsize=(5, 5))
-    sns.scatterplot(x=y_actual, y=y_predicted, alpha=0.5, label='Predictions')
-    plt.plot([y_actual.min(), y_actual.max()], [y_actual.min(), y_actual.max()], 'r--', lw=2, label='Perfect Prediction')
-    # set spine color
-    # set grid color
-    plt.grid(color='lightgray')
-    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.13, y=0.96, ha='left')
-    plt.legend(loc="lower right")
-    plt.xlabel('Actual Similarity')
-    plt.ylabel('Predicted Similarity')
-    plt.title('Actual vs. Predicted Similarity', loc='left', fontproperties=sohne_bold_font, fontsize=12)
-    plt.grid(False)
-    plt.tight_layout()
-    plt.savefig("plot/actual_vs_predicted.png", dpi=300)
+def match_similarity_per_structure_grouped_by_num_nodes(file_path: Path) -> None:
+    df = pd.read_csv(file_path)
     
-def plot_residuals(y_actual, y_predicted):
-    residuals = y_actual - y_predicted
-    plt.figure(figsize=(5, 5))
-    sns.scatterplot(x=y_predicted, y=residuals, alpha=0.6, label='Residuals')
-    # set grid color
-    #plt.grid(color='lightgray')
-    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.122, y=0.96, ha='left')
-    plt.axhline(y=0, color='r', linestyle='--', label='No Residual')
-    plt.xlabel('Predicted Similarity')
-    plt.ylabel('Residuals')
-    plt.legend(loc="upper right")
-    plt.title('Residuals of Predicted Similarity', loc='left', fontproperties=sohne_bold_font, fontsize=12)
-    plt.grid(False)
-    plt.tight_layout()
-    plt.rcParams['axes.unicode_minus'] = False
-    plt.savefig("plot/residuals.png", dpi=300)
+    # Calculate overall match rate and average similarity
+    overall_match_rate = df['match'].mean()
+    overall_average_similarity = df['similarity'].mean()
+    df['similarity'] = df['similarity'] / 100
+    
+    # Grouping by 'structure' and 'num_nodes' to calculate match rate and average similarity
+    grouped_data = df.groupby(['structure', 'num_nodes']).agg(match_rate=('match', 'mean'), average_similarity=('similarity', 'mean')).reset_index()
 
-def plot_roc_curve(y_actual, y_score):
-    fpr, tpr, thresholds = roc_curve(y_actual, y_score)
-    roc_auc = auc(fpr, tpr)
+    # Setting the plot size a bit larger to accommodate legends and titles better
+    plt.figure(figsize=(16, 8))
 
-    plt.figure(figsize=(5, 5))
-    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC Curve\nAUC %0.2f' % roc_auc)
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--', label='Chance Level\nAUC 0.50')
-    # set grid color
-    #plt.grid(color='lightgray')
-    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.122, y=0.96, ha='left')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC Curve for Match Prediction', loc='left', fontproperties=sohne_bold_font, fontsize=12)
-    plt.legend(loc="lower right")
-    plt.grid(False)
-    plt.tight_layout()
-    plt.savefig("plot/roc_curve.png", dpi=300)
-    
-def plot_confusion_matrix(y_actual, y_pred, class_names):
-    matrix = confusion_matrix(y_actual, y_pred)
-    plt.figure(figsize=(5, 5))
-    sns.heatmap(matrix, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
-    #plt.suptitle(f'{CSV_PATH.stem.replace("_", "-")}', fontproperties=sohne_bold_font, fontsize=16, x=0.15, y=0.88, ha='left')
-    plt.xlabel('Predicted')
-    plt.ylabel('Actual')
-    plt.title('Confusion Matrix for Match Prediction', loc='left', fontproperties=sohne_bold_font, fontsize=12)
-    plt.tight_layout()
-    plt.savefig("plot/confusion_matrix.png", dpi=300)
-    
-def plot_precision_recall_curve(y_actual, y_score):
-    precision, recall, _ = precision_recall_curve(y_actual, y_score)
-    avg_precision = average_precision_score(y_actual, y_score)
-    
-    plt.figure(figsize=(5, 5))
-    plt.plot(recall, precision, color='darkorange', lw=2, label=f'Precision-Recall Curve\nAvg. Precision: {avg_precision:.2f}')
-    plt.plot([0, 1], [0.5, 0.5], color='navy', lw=2, linestyle='--', label='Chance Level')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('Recall')
-    plt.ylabel('Precision')
-    plt.title('Precision-Recall Curve for Match Prediction', loc='left', fontproperties=sohne_bold_font, fontsize=12)
-    plt.legend(loc="lower left")
-    plt.tight_layout()
-    plt.savefig("plot/precision_recall_curve.png", dpi=300)
-    
-def plot_feature_correlation(X, feature_names):
-    corr_matrix = pd.DataFrame(X, columns=feature_names).corr()
-    plt.figure(figsize=(90, 70))
-    sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", linewidths=0.5)
-    plt.title("Feature Correlation Heatmap")
-    plt.savefig("plot/feature_correlation_heatmap.png", dpi=100)
+    # Match Rate Visualization
+    ax1 = plt.subplot(1, 2, 1)
+    match_plot = sns.barplot(x='num_nodes', y='match_rate', hue='structure', data=grouped_data, palette='coolwarm', ax=ax1)
+    #plt.title('Accuracy of Predicted vs. Ground Truth', fontsize=12, loc='left')
+    plt.xlabel('number of nodes')
+    plt.ylabel('accuracy')
+    for spine in ax1.spines.values():
+        spine.set_visible(False)
+    leg = match_plot.legend(loc='upper right', bbox_to_anchor=(1.01, 1))
+    #leg.set_title('Structure', prop=sohne_font)
+    for text in leg.get_texts():
+        text.set_text(text.get_text().replace("_", " "))
+    ax1.set_axisbelow(True)
+    ax1.grid(True, which='both', axis='y', linestyle='-', linewidth=0.5, color='lightgrey')
 
-def plot_tsne(X, y_class, perplexity=30):
-    tsne = TSNE(n_components=2, perplexity=perplexity, random_state=42)
-    X_tsne = tsne.fit_transform(X)
-
-    # Plot t-SNE visualization for the entire dataset
-    plt.figure(figsize=(6, 5))
-    scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y_class, cmap='viridis', alpha=0.5)
-    plt.colorbar(scatter)
-    plt.title("t-SNE Feature Space", fontproperties=sohne_bold_font, fontsize=12, loc='left')
-    plt.xlabel("t-SNE Component 1")
-    plt.ylabel("t-SNE Component 2")
-    plt.tight_layout()
-    plt.savefig("plot/tsne_plot.png", dpi=300)
+    # Average Similarity Visualization
+    ax2 = plt.subplot(1, 2, 2)
+    similarity_plot = sns.barplot(x='num_nodes', y='average_similarity', hue='structure', data=grouped_data, palette='coolwarm', ax=ax2)
+    #plt.title('Similarity of Predicted vs. Ground Truth', fontsize=12, loc='left')
+    plt.xlabel('number of nodes')
+    plt.ylabel('similarity')
+    for spine in ax2.spines.values():
+        spine.set_visible(False)
+    leg = similarity_plot.legend(loc='upper right', bbox_to_anchor=(1.01, 1))
+    #leg.set_title('Structure', prop=sohne_font)
+    for text in leg.get_texts():
+        text.set_text(text.get_text().replace("_", " "))
+    ax2.set_axisbelow(True)
+    ax2.grid(True, which='both', axis='y', linestyle='-', linewidth=0.5, color='lightgrey')
     
-def regression_confidence_intervals(y_test, y_pred, alpha=0.05):
-    n = len(y_test)
-    mse = mean_squared_error(y_test, y_pred)
-    se = np.sqrt(mse / n)
-    t_value = t.ppf(1 - alpha / 2, n - 1)
-    lower = np.mean(y_pred) - t_value * se
-    upper = np.mean(y_pred) + t_value * se
-    return lower, upper
+    ax1.set_ylim(0, 1)
+    ax2.set_ylim(0, 1)
 
-def classification_confidence_intervals(y_test, y_pred, alpha=0.05):
-    n = len(y_test)
-    p = accuracy_score(y_test, y_pred)
-    se = np.sqrt(p * (1 - p) / n)
-    z_value = 1.96  # Assuming a large sample size and 95% confidence level
-    lower = p - z_value * se
-    upper = p + z_value * se
-    return lower, upper
-    
-def print_model_specifications(model):
+    # Display overall average similarity
+    plt.figtext(0.83, 0.92, f'Aggregate Mean Similarity - {overall_average_similarity:.2f}', ha='left', fontsize=10, color='red')
+    # Display overall match rate
+    plt.figtext(0.69, 0.92, f'Aggregate Mean Accuracy - {overall_match_rate:.2f}', ha='left', fontsize=10, color='red')
+
+    # Enhancing the suptitle formatting
+    plt.figtext(0.05, 0.92, f'{((file_path.name).replace("_", "-")).replace(".csv", "")}', va='center', fontsize=32, fontweight='bold', color='black')
+
+    # Adjust layout for better readability
+    plt.tight_layout(rect=[0.01, 0.01, 0.99, 0.87])
+    plt.savefig(f'plot/match_rate_and_similarity_by_structure_and_num_nodes-{(file_path.name).replace(".csv", "").upper()}.png', dpi=300)
+
+def match_rate_per_structure_grouped_by_resolution(file_path: Path) -> None:
     """
-    Prints specifications of a given model. Works with standalone models
-    and sklearn pipelines.
+    Plots the match rate per structure grouped by resolution.
+    
+    Parameters
+    ----------
+    file_path : Path
+        the path to the results CSV file
     """
-    if hasattr(model, 'steps'):  # It's a Pipeline
-        print("Model is a Pipeline. Steps:")
-        for step_name, step_process in model.steps:
-            print(f"\nStep: {step_name}")
-            print(f"Process: {step_process}")
-            
-            # If the step is a transformer or estimator with parameters, print them
-            if hasattr(step_process, 'get_params'):
-                print("Parameters:")
-                params = step_process.get_params()
-                for param_name, param_value in params.items():
-                    print(f"    {param_name}: {param_value}")
-    else:
-        # Standalone model, just print its parameters
-        print("Model Specifications:")
-        print(model)
-        
-        if hasattr(model, 'get_params'):
-            print("Parameters:")
-            params = model.get_params()
-            for param_name, param_value in params.items():
-                print(f"    {param_name}: {param_value}")
-                
-def regression_hypothesis_test(y_test, y_pred, baseline_mse, alpha=0.05):
-    mse = mean_squared_error(y_test, y_pred)
-    n = len(y_test)
-    se = np.sqrt(mse / n)
-    t_statistic, p_value = ttest_1samp(y_pred, baseline_mse)
-    
-    print(f"Regression Hypothesis Test:")
-    print(f"Null Hypothesis: Model MSE = {baseline_mse}")
-    print(f"Alternative Hypothesis: Model MSE != {baseline_mse}")
-    print(f"t-statistic: {t_statistic:.4f}")
-    print(f"p-value: {p_value:.4f}")
-    
-    if p_value < alpha:
-        print("Reject the null hypothesis. The model's performance is significantly different from the baseline.")
-    else:
-        print("Fail to reject the null hypothesis. The model's performance is not significantly different from the baseline.")
+    # Load the dataset
+    data = pd.read_csv(file_path)
 
-def classification_hypothesis_test(y_test, y_pred, baseline_accuracy, alpha=0.05):
-    accuracy = accuracy_score(y_test, y_pred)
-    n = len(y_test)
-    
-    z_statistic = (accuracy - baseline_accuracy) / np.sqrt((baseline_accuracy * (1 - baseline_accuracy)) / n)
-    p_value = 2 * (1 - norm.cdf(abs(z_statistic)))
-    
-    print(f"Classification Hypothesis Test:")
-    print(f"Null Hypothesis: Model Accuracy = {baseline_accuracy}")
-    print(f"Alternative Hypothesis: Model Accuracy != {baseline_accuracy}")
-    print(f"z-statistic: {z_statistic:.4f}")
-    print(f"p-value: {p_value:.4f}")
-    
-    if p_value < alpha:
-        print("Reject the null hypothesis. The model's performance is significantly different from the baseline.")
-    else:
-        print("Fail to reject the null hypothesis. The model's performance is not significantly different from the baseline.")
+    # Display the first few rows of the dataframe to understand its structure
+    #data.head()
 
-def plot_pca_variance(data):
-    pca = PCA().fit(data)  # `data` is your feature matrix
-    plt.figure(figsize=(5, 5))
-    plt.plot(np.cumsum(pca.explained_variance_ratio_))
-    # label legend
-    plt.title('PCA Variance Explained', fontproperties=sohne_bold_font, fontsize=12, loc='left')
-    plt.xlabel('Components')
-    plt.ylabel('Cumulative Explained Variance')
-    plt.tight_layout()
-    plt.savefig("plot/pca_variance.png", dpi=100)
+    # Calculate the match rate per structure for each resolution group
+    match_rates = data.groupby(['resolution', 'structure'])['similarity'].mean().reset_index()
     
-def truncate_name(name, max_length=20):
-    """Truncate or pad a string to a specific length."""
-    if len(name) > max_length:
-        return name[:max_length-3] + "..."
-    else:
-        return name
+    print(match_rates[(match_rates['resolution'] == 256) & (match_rates['structure'] == 'undirected_graph')])
 
-def plot_feature_importances_with_model(feature_names, model, title):
-    """
-    Plot the top N feature importances for a model (regression or classification) with signs and truncated labels.
+    # Pivot the table for plotting
+    pivot_match_rates = match_rates.pivot(index='resolution', columns='structure', values='similarity')
+    print(pivot_match_rates)
+
+    # Plotting the bar chart
+    plt.figure(figsize=(12, 6))
+    sns.set_palette(sns.color_palette("deep", len(match_rates['structure'].unique())))
+    bar_plot = sns.barplot(data=match_rates, x='resolution', y='similarity', hue='structure', zorder=2)
+    for bar in bar_plot.patches:
+        if bar.get_height() > 0:
+            bar_plot.annotate(format(bar.get_height(), '.2f'), 
+                            (bar.get_x() + bar.get_width() / 2, bar.get_height()), 
+                            ha='center', va='center',
+                            size=9, xytext=(0, 8),
+                            textcoords='offset points')
+    plt.title('Average Similarity Rate per Structure Grouped by Resolution')
+    plt.xlabel('Resolution (Pixels)')
+    plt.ylabel('Similarity Rate')
+    plt.legend(title='Structure')
+    #plt.grid(True, axis='y', which='both', linewidth=0.5, zorder=1, linestyle='-')
+    plt.savefig(f'plot/similarity_rate_per_structure_grouped_by_resolution-{(file_path.name).replace(".csv", "").capitalize()}.png')
+    plt.close()
+
+def match_rate_per_num_nodes_and_resolution(file_path: Path) -> None:
     
-    Parameters:
-    - feature_names: list of feature names
-    - model: the model object (sklearn model or pipeline with 'regressor' or 'classifier' step)
-    - title: title for the plot
-    """
-    # Extract coefficients from the model
-    if hasattr(model, 'named_steps'):
-        if 'regressor' in model.named_steps:
-            model_coefs = model.named_steps['regressor'].coef_
-        elif 'classifier' in model.named_steps:
-            model_coefs = model.named_steps['classifier'].coef_[0]  # Assuming binary classification or one-vs-rest
-        else:
-            raise ValueError("The model provided does not have 'regressor' or 'classifier' steps with accessible coefficients.")
-    elif hasattr(model, 'coef_'):
-        model_coefs = model.coef_[0]  # Assuming binary classification or one-vs-rest
-    else:
-        raise ValueError("The model provided does not have coefficients accessible via 'coef_'.")
-
-    # Plot the feature importances for the model
-    plt.figure(figsize=(5, 5))
-    sorted_idx = np.argsort(np.abs(model_coefs))[::-1]
-    top_n = 30  # Show top 30 features for clarity
-    plt.barh(range(top_n), model_coefs[sorted_idx[:top_n]], color='cadetblue', align='center')
-    truncated_feature_names = [name.replace("_", " ") if len(name) <= 20 else name[:17].replace("_", " ").replace("'", "") + "..." for name in np.array(feature_names)[sorted_idx[:top_n]]]
-    plt.yticks(range(top_n), truncated_feature_names)
-    plt.gca().invert_yaxis()  # Display the highest importance at the top
-    plt.title(title, fontproperties=sohne_bold_font, fontsize=10, loc='left', pad=5)
-    # remove minus sign from x ticks
-    plt.rcParams['axes.unicode_minus'] = False
-    plt.xlabel('Coefficient Magnitude', fontsize=10)
-    plt.ylabel('Features', fontsize=10)
-    plt.grid(True, which='both', linestyle='--', linewidth=0.5)
-    plt.tight_layout()
-    plt.savefig(f"plot/feature_importances_{title}.png", dpi=300)
+    # Load the dataset
+    data = pd.read_csv(file_path)
     
-def plot_3d_pca(pca_image_features, y_class):
-    X_pca_3d = pca_image_features[:, :3]
+    # Calculate the probability of match for each combination of num_nodes and resolution
+    prob_df = data.groupby(['num_nodes', 'resolution'])['similarity'].mean().reset_index()
 
+    # Pivot the dataframe to create a matrix suitable for heatmap plotting
+    pivot_df = prob_df.pivot(index="num_nodes", columns="resolution", values="similarity")
+
+    # Plotting the heatmap
+    plt.figure(figsize=(12, 8))
+    sns.heatmap(pivot_df, annot=True, cmap="YlGnBu", fmt=".2f")
+    plt.title('Average Similarity Rate by Number of Nodes and Resolution')
+    plt.xlabel('Resolution')
+    plt.ylabel('Number of Nodes')
+    #plt.show()
+    plt.savefig(f'plot/probability_of_similarity_by_num_nodes_and_resolution-{(file_path.name).replace(".csv", "").capitalize()}.png')
+    plt.close()
+    
+def similarity_heatmap(file_path: Path) -> None:
+    
+    df = pd.read_csv(file_path)
+    
+    print()
+    
+    # Group by structure and num_nodes, then calculate the mean similarity
+    grouped_df = df.groupby(['structure', 'num_nodes'])['similarity'].mean().unstack().fillna(0)
+
+    # Create the heatmap
+    plt.figure(figsize=(12, 8))
+    heatmap = sns.heatmap(grouped_df, annot=True, fmt=".1f", cmap='magma', linewidths=.5)
+    plt.title('Average Similarity Rate by Structure and Number of Nodes', fontsize=16)
+    plt.xlabel('Number of Nodes', fontsize=12)
+    plt.ylabel('Structure', fontsize=12)
+    plt.xticks(rotation=45)
+    plt.yticks(rotation=0)
+    plt.savefig(f'plot/heatmap_of_average_similarity_by_structure_and_num_nodes-{(file_path.name).replace(".csv", "").capitalize()}.png')
+
+def compare_match_similarity_by_num_nodes(file_path1: Path, file_path2: Path) -> None:
+    # Load datasets
+    df1 = pd.read_csv(file_path1)
+    df2 = pd.read_csv(file_path2)
+    
+    # Process datasets
+    def process_data(df):
+        overall_match_rate = df['match'].mean()
+        overall_average_similarity = df['similarity'].mean()
+        grouped_data = df.groupby('num_nodes').agg(match_rate=('match', 'mean'), average_similarity=('similarity', 'mean')).reset_index()
+        return overall_match_rate, overall_average_similarity, grouped_data
+    
+    overall_match_rate1, overall_average_similarity1, grouped_data1 = process_data(df1)
+    overall_match_rate2, overall_average_similarity2, grouped_data2 = process_data(df2)
+    
     # Plotting
-    fig = plt.figure(figsize=(5, 5))
-    ax = fig.add_subplot(111, projection='3d')
-
-    # Coloring by the classification target for better visual distinction
-    scatter = ax.scatter(X_pca_3d[:, 0], X_pca_3d[:, 1], X_pca_3d[:, 2], c=y_class, cmap='viridis', alpha=0.5)
-
-    # Adding color bar
-    cbar = fig.colorbar(scatter, ax=ax)
-    cbar.set_label('Class')
-
-    ax.set_title('PCA Image Feature Space', fontproperties=sohne_bold_font, fontsize=12, loc='left')
-    ax.set_xlabel('PCA Component 1')
-    ax.set_ylabel('PCA Component 2')
-    ax.set_zlabel('PCA Component 3')
-
+    plt.figure(figsize=(12, 5))
+    
+    # Match Rate Visualization
+    ax1 = plt.subplot(1, 2, 1)
+    for spine in ax1.spines.values():
+        spine.set_visible(False)
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['match_rate'], marker='o', label='zero-shot', linestyle='-', color='#788296', lw=2.0, ms=6.0, solid_joinstyle='round')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['match_rate'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round', color='cornflowerblue')
+    plt.title('Accuracy of Predicted vs. Ground Truth', fontsize=12, loc='left')
+    plt.xlabel('n nodes', fontsize=12)
+    plt.ylabel('accuracy', fontsize=12)
+    leg = plt.legend()
+    for text in leg.get_texts():
+        text.set_text(text.get_text())
+    plt.grid(True, which='both', linestyle='-', linewidth=0.5, color='lightgrey')
+    
+    # Average Similarity Visualization
+    ax2 = plt.subplot(1, 2, 2)
+    for spine in ax2.spines.values():
+        spine.set_visible(False)
+    plt.plot(grouped_data1['num_nodes'], grouped_data1['average_similarity'], marker='o', label='zero-shot', linestyle='-', color='#788296', lw=2.0, ms=6.0, solid_joinstyle='round')
+    plt.plot(grouped_data2['num_nodes'], grouped_data2['average_similarity'], marker='s', label='zero-shot-cot', linestyle='-', lw=2.0, ms=6.0, solid_joinstyle='round', color='cornflowerblue')
+    plt.title('Similarity of Predicted vs. Ground Truth', fontsize=12, loc='left')
+    plt.xlabel('n nodes', fontsize=12)
+    plt.ylabel('similarity', fontsize=12)
+    leg = plt.legend()
+    for text in leg.get_texts():
+        text.set_text(text.get_text())
+    plt.grid(True, which='both', linestyle='-', linewidth=0.5, color='lightgrey')
+    
     plt.tight_layout()
-    plt.savefig("plot/3d_pca.png", dpi=300)
+    plt.savefig(f'plot/comparison_{file_path1.stem}_vs_{file_path2.stem}.png', dpi=300)
     
-def plot_pca_loadings_heatmap(pca, feature_names, n_components=3):
-    loadings = pca.components_[:n_components, :]
-    
-    loadings_df = pd.DataFrame(loadings[:, :len(feature_names)], columns=feature_names, index=[f'PC{i+1}' for i in range(n_components)])
-    truncated_feature_names = [truncate_name(name) for name in feature_names]
-    
-    plt.figure(figsize=(10, 20))
-    sns.heatmap(loadings_df.T, cmap='coolwarm', annot=True, fmt=".2f")
-    plt.title(f'PCA Loadings Heatmap for First {n_components} Principal Components', fontproperties=sohne_bold_font, fontsize=12, loc='left')
-    plt.ylabel('Original Features', fontsize=14)
-    plt.xlabel('Principal Components', fontsize=14)
-    # truncate y axis labels
-    plt.yticks(ticks=np.arange(len(feature_names)), labels=truncated_feature_names, fontsize=8)
-    plt.tight_layout()
-    plt.savefig("plot/pca_loadings_heatmap.png", dpi=300)
 
-def main(DATA_PATH, CSV_PATH):
-    
-    df = read_data(CSV_PATH)
-    
-    metrics_reg = load(DATA_PATH / Path('regression_metrics.joblib'))
-    metrics_class = load(DATA_PATH / Path('classification_metrics.joblib'))
-    model_reg = load(DATA_PATH / Path('regression_model.joblib'))
-    model_class = load(DATA_PATH / Path('classification_model.joblib'))
-    feature_names = load(DATA_PATH / Path('feature_names.joblib')) # Load the feature names
-    X = load(DATA_PATH / Path('X.joblib')) # Load the feature matrix
-    svd = load(DATA_PATH / Path('svd.joblib')) # Load the SVD model
-    tfidf_vectorizer = load(DATA_PATH / Path('tfidf_vectorizer.joblib')) # Load the TF-IDF vectorizer
-    text_prompt_tfidf_svd = load(DATA_PATH / Path('text_prompt_tfidf_svd.joblib')) # Load the SVD-transformed TF-IDF vectors for the text prompt
-    pca = load(DATA_PATH / Path('pca_image_model.joblib'))
-    pca_image_features = load(DATA_PATH / Path('pca_image_features.joblib'))
-    y_class = load(DATA_PATH / Path('y_class.joblib'))
-    original_to_pca_index_map = load(DATA_PATH / Path('original_to_pca_index_map.joblib'))
-    inverted_map = {v: k for k, v in original_to_pca_index_map.items()}
-    y_class_aligned = y_class.reindex(index=pd.Index(inverted_map.keys())).values
-    
-    if hasattr(model_reg, 'named_steps'):
-        regression_coefs = model_reg.named_steps['regressor'].coef_
-    else:
-        regression_coefs = model_reg.coef_
+def match_similarity_by_variation_num_nodes(file_path: Path) -> None:
+    data = pd.read_csv(file_path)
+    #sns.set_style("whitegrid")
 
-    if hasattr(model_class, 'named_steps'):
-        classification_coefs = model_class.named_steps['classifier'].coef_[0]
-    else:
-        classification_coefs = model_class.coef_[0]
+    data['similarity'] = data['similarity'] / 100
+    structures = data['structure'].unique()
+    num_structures = len(structures)
 
-    print("Shape of X:", X.shape)
-    print("Number of feature names:", len(feature_names))
+    fig, axes = plt.subplots(2, num_structures, figsize=(12, 6), dpi=300, sharex=True, sharey=True)
+    #fig.suptitle("Accuracy and Similarity by Number of Nodes", fontsize=16, y=0.95)
 
-    if X.shape[1] != len(feature_names):
-        print("Mismatch between data shape and feature names!")
-        # Update feature_names to match the number of columns in X
-        feature_names = [f"Feature_{i}" for i in range(X.shape[1])]
-        print("Updated feature names:", feature_names)
+    for i, structure in enumerate(structures):
+        structure_data = data[data['structure'] == structure]
+        summary = structure_data.groupby(['generation_id', 'variation_id', 'num_nodes']).agg(
+            mean_similarity=('similarity', 'mean'),
+            match_rate=('match', 'mean')
+        ).reset_index()
+
+        sns.lineplot(ax=axes[0, i], data=summary, x='num_nodes', y='match_rate', marker='o', lw=2.0, ms=6.0)
+        axes[0, i].set_title(f"{structure.replace('_', ' ')}", loc='left')
+        axes[0, i].set_xlabel('n nodes')
+        axes[0, i].set_ylabel('accuracy')
+
+        sns.lineplot(ax=axes[1, i], data=summary, x='num_nodes', y='mean_similarity', marker='o')
+        axes[1, i].set_xlabel('n nodes')
+        axes[1, i].set_ylabel('similarity')
         
-    mean_target = np.mean(metrics_reg['y_test'])
-    median_target = np.median(metrics_reg['y_test'])
+        for ax in axes.flat:
+            # Hide top and right spines for each subplot
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['left'].set_color((0, 0, 0, 0.2))
+            ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+            
+        axes[0, i].set_xticks([3, 4, 5, 6, 7, 8, 9])
+        axes[1, i].set_xticks([3, 4, 5, 6, 7, 8, 9])
 
-    # Predictions by the mean and median predictor are just the mean and median values repeated for each test instance
-    mean_predictions = np.full_like(metrics_reg['y_test'], fill_value=mean_target)
-    median_predictions = np.full_like(metrics_reg['y_test'], fill_value=median_target)
+    fig.text(0.05, 0.92, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    fig.suptitle('Mean Predicted vs Ground Truth Performance by Variation per Number of Nodes with Standard Deviation', fontsize=12, x=0.05, y=0.90, ha='left')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.90])
+    plt.savefig('plot/match_similarity_by_variation_num_nodes.png')
+        
+def match_similarity_by_variation_generation(file_path: Path) -> None:
+    data = pd.read_csv(file_path)
+    #sns.set_style("whitegrid")
+    #sns.set_theme(style="whitegrid")
 
-    # Calculate MSE for the mean and median predictor
-    baseline_mse_mean = mean_squared_error(metrics_reg['y_test'], mean_predictions)
-    baseline_mse_median = mean_squared_error(metrics_reg['y_test'], median_predictions)
-    
-    #baseline_accuracy = accuracy_score(metrics_class['y_test'], metrics_class['y_test'].value_counts().idxmax())
-    
-    print(baseline_mse_mean, baseline_mse_median)
-    
-    # Plot the results
-    plot_pca_variance(X)
-    plot_actual_vs_predicted(metrics_reg['y_test'], metrics_reg['y_pred'])
-    plot_residuals(metrics_reg['y_test'], metrics_reg['y_pred'])
-    plot_roc_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
-    plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
-    plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
-    #plot_feature_correlation(X, feature_names)
-    plot_tsne(X, y_class=y_class, perplexity=30)
-    plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
-    plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
-    
-    plot_3d_pca(pca_image_features, y_class_aligned)
-    plot_pca_loadings_heatmap(pca, feature_names, n_components=3)
-    
-    #print(regression_confidence_intervals(metrics_reg['y_test'], metrics_reg['y_pred']))
-    #print(classification_confidence_intervals(metrics_class['y_test'], metrics_class['y_pred']))
-    
-    #regression_hypothesis_test(metrics_reg['y_test'], metrics_reg['y_pred'], baseline_mse_mean)
-    #classification_hypothesis_test(metrics_class['y_test'], metrics_class['y_pred'], baseline_accuracy)
-    
-    print_model_specifications(model_reg)
-    print_model_specifications(model_class)
+    data['similarity'] = data['similarity'] / 100
+    structures = data['structure'].unique()
+    num_structures = len(structures)
 
-if __name__ == "__main__":
-    print("Script execution started.")
-    # Provide the path to your CSV file here
-    DATA_PATH = Path('results/archive/large-course')
-    CSV_PATH = Path('results/archive/large-course/deepmind-zero_shot-large_course.csv')
-    main(DATA_PATH, CSV_PATH)
-    print("Script execution completed.")
+    fig, axes = plt.subplots(2, num_structures, figsize=(12, 6), dpi=300, sharex=True, sharey=True)
+    #fig.suptitle("Accuracy and Similarity by Generation with Variation Deviations", fontsize=16, y=0.95)
+
+    for i, structure in enumerate(structures):
+        structure_data = data[data['structure'] == structure]
+        summary = structure_data.groupby(['generation_id', 'variation_id']).agg(
+            mean_similarity=('similarity', 'mean'),
+            match_rate=('match', 'mean')
+        ).reset_index()
+
+        sns.lineplot(ax=axes[0, i], data=summary, x='generation_id', y='match_rate', marker='o', lw=2.0, ms=6.0)
+        axes[0, i].set_title(f"{structure.replace('_', ' ')}", loc='left')
+        axes[0, i].set_xlabel('generation')
+        axes[0, i].set_ylabel('accuracy')
+
+        sns.lineplot(ax=axes[1, i], data=summary, x='generation_id', y='mean_similarity', marker='o')
+        axes[1, i].set_xlabel('generation')
+        axes[1, i].set_ylabel('similarity')
+        
+        for ax in axes.flat:
+            # Hide top and right spines for each subplot
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['left'].set_color((0, 0, 0, 0.2))
+            ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+
+    fig.text(0.05, 0.92, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    fig.suptitle('Mean Predicted vs Ground Truth Performance by Variation per Generation with Standard Deviation', fontsize=12, x=0.05, y=0.90, ha='left')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.90])
+    plt.savefig('plot/match_similarity_by_variation_generation.png')
+        
+def match_similarity_by_arrow(file_path1: Path, file_path2: Path) -> None:
+        
+    df_1 = pd.read_csv(file_path1)
+    df_2 = pd.read_csv(file_path2)
+
+    def prepare_data(df):
+        # Calculate mean of `match` and `similarity` grouped by `arrow_style`
+        # For `match`, first convert boolean to int
+        df['match'] = df['match'].astype(int)
+        grouped = df.groupby('arrow_style').agg({'match': 'mean', 'similarity': 'mean'}).reset_index()
+        return grouped
+
+    # Prepare data
+    data_1 = prepare_data(df_1)
+    data_2 = prepare_data(df_2)
+    
+    # Adjusting the data scale for similarity
+    data_1['similarity'] = data_1['similarity'] / 100
+    data_2['similarity'] = data_2['similarity'] / 100
+
+    # Plot settings
+    sns.set_theme(style="whitegrid", palette="coolwarm")
+
+    # Recreate figure for the adjusted axis orientation
+    fig, axes = plt.subplots(2, 2, figsize=(5, 5), dpi=300)
+
+    # Adjusted Dot plots with switched axes
+    sns.stripplot(y="match", x="arrow_style", data=data_1, ax=axes[0, 0], size=10, jitter=True, palette="coolwarm", marker='o')
+    sns.stripplot(y="match", x="arrow_style", data=data_2, ax=axes[0, 1], size=10, jitter=True, palette="coolwarm", marker='o')
+    sns.stripplot(y="similarity", x="arrow_style", data=data_1, ax=axes[1, 0], size=10, jitter=True, palette="coolwarm", marker='o')
+    sns.stripplot(y="similarity", x="arrow_style", data=data_2, ax=axes[1, 1], size=10, jitter=True, palette="coolwarm", marker='o')
+    
+    # Titles and customization after switching axes
+    #fig.suptitle('directed graph by arrow style', fontsize=16)
+    axes[0, 0].set_title(f'{file_path1.stem}', fontsize=24)
+    axes[0, 1].set_title(f'{file_path2.stem}', fontsize=24)
+    axes[0, 0].set_ylim(0, 1)
+    #axes[0, 1].set_title('OpenAI - Similarity', fontsize=14)
+    axes[0, 1].set_ylim(0, 1)
+    #axes[1, 0].set_title('DeepMind - Match Rate', fontsize=14)
+    axes[1, 0].set_ylim(0, 1)
+    #axes[1, 1].set_title('DeepMind - Similarity', fontsize=14)
+    axes[1, 1].set_ylim(0, 1)
+    
+    axes[0, 0].set_ylabel('Accuracy')
+    axes[1, 0].set_ylabel('Similarity')
+    #axes[0, 1].set_ylabel('Accuracy')
+    #axes[1, 1].set_ylabel('Similarity')
+    
+    for ax in axes.flat:
+        #ax.set_xlabel('Arrow Style')
+        ax.label_outer()
+
+    # Adjusting layout and axes for clarity with switched orientation
+    plt.tight_layout(rect=[0, 0, 1, 1])
+    for ax in axes.flat:
+        ax.set_xlabel('')
+        
+    plt.savefig(f'plot/match_similarity_by_arrow_style.png', dpi=300)
+    
+def match_similarity_by_color(file_path: Path) -> None:
+        
+    df = pd.read_csv(file_path)
+
+    def prepare_data(df):
+        # Calculate mean of `match` and `similarity` grouped by `arrow_style`
+        # For `match`, first convert boolean to int
+        df['match'] = df['match'].astype(int)
+        grouped = df.groupby('node_color').agg({'match': 'mean', 'similarity': 'mean'}).reset_index()
+        return grouped
+
+    # Prepare data
+    data = prepare_data(df)
+    
+    # Adjusting the data scale for similarity
+    data['similarity'] = data['similarity'] / 100
+
+    # Plot settings
+    sns.set_theme(style="whitegrid", palette="coolwarm")
+
+    # Recreate figure for the adjusted axis orientation
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3), dpi=300)
+
+    # Adjusted Dot plots with switched axes
+    sns.barplot(y="match", x="node_color", data=data, ax=axes[0], palette="coolwarm")
+    sns.barplot(y="similarity", x="node_color", data=data, ax=axes[1], palette="coolwarm")
+
+    for ax in axes.flat:
+        
+        for label in ax.get_xticklabels():
+            label.set_text((label.get_text()).replace('#', ''))
+    
+    # Titles and customization after switching axes
+    fig.suptitle('deepmind-zero-shot-color', fontsize=16, y=0.95)
+    #axes[0, 0].set_title('OpenAI', fontsize=24)
+    #axes[0, 1].set_title('DeepMind', fontsize=24)
+    axes[0].set_ylim(0, 0.8)
+    axes[1].set_ylim(0, 0.8)
+    
+    axes[0].set_ylabel('Accuracy')
+    axes[1].set_ylabel('Similarity')
+    axes[0].set_xlabel('Node Color')
+    axes[1].set_xlabel('Node Color')
+    
+    for ax in axes.flat:
+        # Hide top and right spines for each subplot
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.spines['left'].set_color((0, 0, 0, 0.2))
+        ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+
+    # Adjusting layout and axes for clarity with switched orientation
+    plt.tight_layout(rect=[0, 0, 1, 1])
+        
+    plt.savefig(f'plot/match_similarity_by_color.png', dpi=300)
+    
+def match_similarity_by_width(file_path: Path) -> None:
+        
+    df = pd.read_csv(file_path)
+
+    def prepare_data(df):
+        # Calculate mean of `match` and `similarity` grouped by `arrow_style`
+        # For `match`, first convert boolean to int
+        df['match'] = df['match'].astype(int)
+        grouped = df.groupby('edge_width').agg({'match': 'mean', 'similarity': 'mean'}).reset_index()
+        return grouped
+
+    # Prepare data
+    data = prepare_data(df)
+    
+    # Adjusting the data scale for similarity
+    data['similarity'] = data['similarity'] / 100
+
+    # Plot settings
+    sns.set_theme(style="whitegrid", palette="coolwarm")
+
+    # Recreate figure for the adjusted axis orientation
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3), dpi=300)
+
+    # Adjusted Dot plots with switched axes
+    sns.barplot(y="match", x="edge_width", data=data, ax=axes[0], palette="coolwarm")
+    sns.barplot(y="similarity", x="edge_width", data=data, ax=axes[1], palette="coolwarm")
+
+    for ax in axes.flat:
+        for label in ax.get_xticklabels():
+            label.set_text((label.get_text()).replace('#', ''))
+    
+    # Titles and customization after switching axes
+    fig.suptitle((file_path.stem).replace('_', '-'), fontsize=16, y=0.95)
+    #axes[0, 0].set_title('OpenAI', fontsize=24)
+    #axes[0, 1].set_title('DeepMind', fontsize=24)
+    axes[0].set_ylim(0, 0.8)
+    axes[1].set_ylim(0, 0.8)
+    
+    axes[0].set_ylabel('Accuracy')
+    axes[1].set_ylabel('Similarity')
+    axes[0].set_xlabel('Edge Width')
+    axes[1].set_xlabel('Edge Width')
+    
+    for ax in axes.flat:
+        # Hide top and right spines for each subplot
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.spines['left'].set_color((0, 0, 0, 0.2))
+        ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+
+    # Adjusting layout and axes for clarity with switched orientation
+    plt.tight_layout(rect=[0, 0, 1, 1])
+        
+    plt.savefig(f'plot/match_similarity_by_width.png', dpi=300)
+    
+def heatmap_match_similarity_by_width_and_color(file_path: Path) -> None:
+    data = pd.read_csv(file_path)
+
+    data['node_color'] = data['node_color'].str.replace('#ff0000', 'red').str.replace('#ffff00', 'yellow').str.replace('#ffffff', 'white')
+    data['similarity'] = data['similarity'] / 100
+
+    structures = data['structure'].unique()
+
+    figs, axes = plt.subplots(2, 4, figsize=(16, 8), dpi=300, sharex=True, sharey=True)
+
+    for i, structure in enumerate(structures):
+        structure_data = data[data['structure'] == structure]
+
+        # Heatmap of match and similarity grouped by structure of edge_width by node_color
+        # Preparing the data
+        heatmap_data_match = structure_data.groupby(['edge_width', 'node_color'])['similarity'].mean().unstack().fillna(0)
+        heatmap_data_similarity = structure_data.groupby(['edge_width', 'node_color'])['match'].mean().unstack().fillna(0)
+
+        # Heatmap for match
+        sns.heatmap(data=heatmap_data_match, annot=True, fmt=".2f", cmap='YlGnBu', linewidths=0, ax=axes[0, i], vmin=0, vmax=1)
+        axes[0, i].set_title(f'similarity of {(structure).replace("_", " ")}', fontsize=12)
+        axes[0, i].set_xlabel('', fontsize=10)
+        axes[0, i].set_ylabel('', fontsize=10)
+
+        # Heatmap for similarity
+        sns.heatmap(data=heatmap_data_similarity, annot=True, fmt=".2f", cmap='YlGnBu', linewidths=0, ax=axes[1, i], vmin=0, vmax=1)
+        axes[1, i].set_title(f'accuracy of {(structure).replace("_", " ")}', fontsize=12)
+        axes[1, i].set_xlabel('node color', fontsize=10)
+        axes[1, i].set_ylabel('', fontsize=10)
+        
+    axes[0, 0].set_ylabel('edge width', fontsize=10)
+    axes[1, 0].set_ylabel('edge width', fontsize=10)
+
+    for ax in axes.flat:
+        # remove '#' from the x tick labels
+        for label in ax.get_xticklabels():
+            label.set_text(label.get_text().replace('#', ''))
+
+    figs.text(0.04, 0.93, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    figs.suptitle('Mean Predicted vs Ground Truth Performance by Edge Width and Node Color', fontsize=12, x=0.04, y=0.91, ha='left')
+
+    plt.tight_layout(rect=[0, 0, 1, 0.91])
+
+    plt.savefig(f'plot/heatmap_of_match_and_similarity_by_width_and_color.png', dpi=300)
+    
+def line_plot_match_similarity_by_edge_width(file_path: Path) -> None:
+    data = pd.read_csv(file_path)
+    data['similarity'] = data['similarity'] / 100
+    data['structure'] = data['structure'].replace('_', ' ', regex=True)
+    
+    structures = data['structure'].unique()
+    
+    fig, axes = plt.subplots(2, len(structures), figsize=(12, 6), sharex=True, sharey=True)
+    
+    for i, structure in enumerate(structures):
+        structure_data = data[data['structure'] == structure]
+        
+        sns.lineplot(data=structure_data, x='edge_width', y='match', estimator='mean', ci='sd', ax=axes[0, i], marker='o')
+        axes[0, i].set_ylabel('accuracy')
+        axes[0, i].set_xlabel('edge width')
+        axes[0, i].set_title(structure, loc='left')
+        
+        sns.lineplot(data=structure_data, x='edge_width', y='similarity', estimator='mean', ci='sd', ax=axes[1, i], marker='o')
+        axes[1, i].set_ylabel('similarity')
+        axes[1, i].set_xlabel('edge width')
+        #axes[i, 1].set_title(structure)
+        
+        axes[0, i].set_ylim(0, 1)
+        axes[1, i].set_ylim(0, 1)
+        axes[0, i].set_xticks([1.0, 3.0, 5.0])
+        axes[1, i].set_xticks([1.0, 3.0, 5.0])
+        
+        for ax in axes.flat:
+            # Hide top and right spines for each subplot
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['left'].set_color((0, 0, 0, 0.2))
+            ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+    
+    fig.text(0.05, 0.92, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    fig.suptitle('Mean Predicted vs Ground Truth Performance by Edge Width with Standard Deviation', fontsize=12, x=0.05, y=0.90, ha='left')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.90])
+    plt.savefig(f'plot/match_similarity_by_edge_width.png', dpi=300)
+
+
+def line_plot_match_similarity_by_num_nodes(file_path: Path) -> None:
+    data = pd.read_csv(file_path)
+    data['similarity'] = data['similarity'] / 100
+    data['structure'] = data['structure'].replace('_', ' ', regex=True)
+    
+    structures = data['structure'].unique()
+    
+    fig, axes = plt.subplots(2, len(structures), figsize=(12, 6), sharex=True, sharey=True)
+    fig.suptitle('Match and Similarity by Number of Nodes', fontsize=16)
+    
+    for i, structure in enumerate(structures):
+        structure_data = data[data['structure'] == structure]
+        
+        sns.lineplot(data=structure_data, x='num_nodes', y='match', estimator='mean', ci='sd', ax=axes[0, i], marker='o')
+        axes[0, i].set_ylabel('accuracy')
+        axes[0, i].set_xlabel('number of nodes')
+        axes[0, i].set_title(structure, loc='left')
+        
+        sns.lineplot(data=structure_data, x='num_nodes', y='similarity', estimator='mean', ci='sd', ax=axes[1, i], marker='o')
+        axes[1, i].set_ylabel('similarity')
+        axes[1, i].set_xlabel('number of nodes')
+        #axes[i, 1].set_title(structure)
+        
+        axes[0, i].set_ylim(0, 1)
+        axes[1, i].set_ylim(0, 1)
+        
+        axes[0, i].set_xticks([3, 6, 9])
+        axes[1, i].set_xticks([3, 6, 9])
+        
+        for ax in axes.flat:
+            # Hide top and right spines for each subplot
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['left'].set_color((0, 0, 0, 0.2))
+            ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+            
+        axes[0, i].set_xticks([3, 4, 5, 6, 7, 8, 9])
+        axes[1, i].set_xticks([3, 4, 5, 6, 7, 8, 9])
+    
+    fig.text(0.05, 0.92, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    fig.suptitle('Mean Predicted vs Ground Truth Performance by Number of Nodes with Standard Deviation', fontsize=12, x=0.05, y=0.90, ha='left')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.90])
+    plt.savefig(f'plot/match_similarity_by_num_nodes.png', dpi=300)
+
+
+def bar_plot_match_similarity_by_color(file_path: Path) -> None:
+    # Bar plot of match and similarity grouped by structure of node_color
+    data = pd.read_csv(file_path)
+    data['similarity'] = data['similarity'] / 100
+    data['structure'] = data['structure'].replace('_', ' ', regex=True)
+    data['node_color'] = data['node_color'].str.replace('#ff0000', 'red').str.replace('#ffff00', 'yellow').str.replace('#ffffff', 'white')
+
+    structures = data['structure'].unique()
+    num_structures = len(structures)
+
+    fig, axes = plt.subplots(2, num_structures, figsize=(12, 6), sharex=True, sharey=True)
+    fig.suptitle('Accuracy and Similarity by Node Color', fontsize=16, y=0.95)
+
+    for i, structure in enumerate(structures):
+        structure_data = data[data['structure'] == structure]
+
+        sns.barplot(data=structure_data, x='node_color', y='match', estimator=np.mean, ci='sd', ax=axes[0, i], palette='viridis')
+
+        axes[0, i].set_title(f'{structure}', fontsize=12, pad=10, fontproperties=sohne_bold_font)
+
+        sns.barplot(data=structure_data, x='node_color', y='similarity', estimator=np.mean, ci='sd', ax=axes[1, i], palette='viridis')
+        
+        axes[0, i].set_xlabel('node color')
+        axes[1, i].set_xlabel('node color')
+        axes[0, i].set_ylabel('accuracy')
+        axes[1, i].set_ylabel('similarity')
+
+        #axes[1, i].set_title(f'{structure}', fontsize=12, pad=10, fontproperties=sohne_bold_font)
+
+        axes[0, i].set_ylim(0, 1)
+        axes[1, i].set_ylim(0, 1)
+
+    for ax in axes.flat:
+        # Hide top and right spines for each subplot
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.spines['left'].set_color((0, 0, 0, 0.2))
+        ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+
+    fig.text(0.05, 0.92, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    fig.suptitle('Mean Predicted vs Ground Truth Performance by Node Color', fontsize=12, x=0.05, y=0.90, ha='left')
+
+    plt.tight_layout(rect=[0, 0, 1, 0.90])
+    plt.savefig(f'plot/match_similarity_by_color.png', dpi=300)
+
+def bar_plot_match_similarity_by_task(file_path: Path) -> None:
+    data = pd.read_csv(file_path)
+    data['similarity'] = data['similarity'] / 100
+    data['structure'] = data['structure'].replace('_', ' ', regex=True)
+    data['task'] = data['task'].str.replace('_', ' ')
+
+    # Define the task groups
+    task_groups = {
+        'Trees': ['post order', 'pre order', 'in order'],
+        'Graphs': ['breadth first search', 'depth first search', 'adjacency list']
+    }
+
+    # Create a figure with separate subplots for each task group
+    fig, axes = plt.subplots(2, len(task_groups), figsize=(10, 10), sharex=False, sharey=True)
+
+    for i, (group_name, tasks) in enumerate(task_groups.items()):
+        # Filter the data for the current task group
+        group_data = data[data['task'].isin(tasks)]
+
+        # Grouping by 'task' and 'structure' for the match plot
+        sns.barplot(data=group_data, x='task', y='match', hue='structure', estimator=np.mean, ci='sd', ax=axes[0, i], palette='coolwarm')
+        axes[0, i].set_ylabel('accuracy')
+        axes[0, i].set_xlabel('')
+        axes[0, i].set_ylim(0, 1)
+        axes[0, i].set_xticklabels([])
+
+        # Grouping by 'task' and 'structure' for the similarity plot
+        sns.barplot(data=group_data, x='task', y='similarity', hue='structure', estimator=np.mean, ci='sd', ax=axes[1, i], palette='coolwarm')
+        axes[1, i].set_ylabel('similarity')
+        axes[1, i].set_xlabel('task')
+        axes[1, i].set_ylim(0, 1)
+        axes[1, i].get_legend().remove()
+        
+        # remove spines
+        for ax in axes.flat:
+            # Hide top and right spines for each subplot
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['left'].set_color((0, 0, 0, 0.2))
+            ax.spines['bottom'].set_color((0, 0, 0, 0.2))
+            
+    axes[0, 0].legend(title='structure', loc='upper right')
+    axes[0, 1].legend(title='structure', loc='upper left')
+
+    fig.text(0.07, 0.95, file_path.stem.replace('_', '-'), fontsize=24, ha='left', fontproperties=sohne_bold_font)
+    fig.suptitle('Mean Predicted vs Ground Truth Performance by Task', fontsize=12, x=0.07, y=0.93, ha='left')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.93])
+    plt.savefig(f'plot/match_similarity_by_task_grouped.png', dpi=300)
+
+match_similarity_per_structure_grouped_by_num_nodes(Path('results/openai-zero_shot-large_course_plus.csv'))
+heatmap_match_similarity_by_width_and_color(Path('results/openai-zero_shot-large_course_plus.csv'))
+line_plot_match_similarity_by_edge_width(Path('results/openai-zero_shot-large_course_plus.csv'))
+line_plot_match_similarity_by_num_nodes(Path('results/openai-zero_shot-large_course_plus.csv'))
+#line_plot_match_similarity_by_variation_generation(Path('results/openai-zero_shot-large_course_plus.csv'))
+bar_plot_match_similarity_by_color(Path('results/openai-zero_shot-large_course_plus.csv'))
+bar_plot_match_similarity_by_task(Path('results/openai-zero_shot-large_course_plus.csv'))
+match_similarity_by_variation_generation(Path('results/openai-zero_shot-large_course_plus.csv'))
+match_similarity_by_variation_num_nodes(Path('results/openai-zero_shot-large_course_plus.csv'))
