@@ -84,7 +84,27 @@ class UserMessage:
             for image_url in self.images
         ] if self.images else []
         
-        return {"parts": content_list + images_list, "role": "user"}
+        return {"parts": images_list + content_list, "role": "user"}
+   
+    def to_anthropic(self) -> dict:
+        """
+        Converts message to Anthropic API format.
+        
+        Returns
+        -------
+        dict
+            the message in API format
+        """
+        content_list = [{"type": "text", "text": f"{self.content}"}] if self.content else []
+        images_list = [
+            {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": encode_image(image_url)}}
+            for image_url in self.images
+        ] if self.images else []
+
+        return {
+            "role": "user",
+            "content": images_list + content_list
+        }
     
 class ModelMessage:
     """
@@ -139,6 +159,20 @@ class ModelMessage:
         content_list = [{"text": self.content}] if self.content else []
         
         return {"parts": content_list, "role": "model"}
+    
+    def to_anthropic(self) -> dict:
+        """
+        Converts message to Anthropic API format.
+        
+        Returns
+        -------
+        dict
+            the message in API format
+        """
+        return {
+            "role": "assistant",
+            "content": f"{self.content}"
+        }
         
 class SystemMessage:
     """

@@ -72,7 +72,7 @@ class OpenAI:
     temperature: float = 1.0 # 0.0 to 2.0
     top_p: float = 1.0 # 0.0 to 1.0
     
-    def __init__(self, api_key: str, frequency_penalty: float = 0.0, presence_penalty: float = 0.0, logit_bias: Dict[str, int] = None, logprobs: bool = False, top_logprobs: int = None, max_tokens: int = 500, n: int = None, seed: int = None, stop: List[str] = None, temperature: float = 1.0, top_p: float = 1.0) -> None:
+    def __init__(self, api_key: str, frequency_penalty: float = 0.0, presence_penalty: float = 0.0, logit_bias: Dict[str, int] = None, logprobs: bool = False, top_logprobs: int = None, max_tokens: int = 1000, n: int = None, seed: int = None, stop: List[str] = None, temperature: float = 1.0, top_p: float = 1.0) -> None:
         """
         Initialize the OpenAI model.
         
@@ -175,7 +175,8 @@ class OpenAI:
         
         except Exception as e:
             tb = traceback.format_exc()
-            logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+            #logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
+            logger.error(f"429 Resource Exhausted")
             return
         
         id = completion.id

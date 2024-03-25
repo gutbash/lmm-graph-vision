@@ -376,9 +376,9 @@ def main(DATA_PATH, CSV_PATH):
     plot_residuals(metrics_reg['y_test'], metrics_reg['y_pred'])
     plot_roc_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
     plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
-    #plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
-    #plot_feature_correlation(X, feature_names)
-    #plot_tsne(X, y_class=y_class, perplexity=30)
+    plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
+    plot_feature_correlation(X, feature_names)
+    plot_tsne(X, y_class=y_class, perplexity=30)
     plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
     plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
     
@@ -397,7 +397,7 @@ def main(DATA_PATH, CSV_PATH):
 if __name__ == "__main__":
     print("Script execution started.")
     # Provide the path to your CSV file here
-    DATA_PATH = Path('results/archive/large-course-plus')
-    CSV_PATH = Path('results/archive/large-course-plus/deepmind-zero_shot-large_course_plus.csv')
+    DATA_PATH = Path('results/archive/large-course-plus/openai')
+    CSV_PATH = Path('results/archive/large-course-plus/openai/openai-zero_shot-large_course_plus.csv')
     main(DATA_PATH, CSV_PATH)
     print("Script execution completed.")

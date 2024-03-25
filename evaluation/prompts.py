@@ -116,34 +116,34 @@ Step 4: Compile the results into a single-line Python list. ]
 from evaluation.models.messages.message import UserMessage, SystemMessage, ModelMessage
 
 # 1) Default
-ZERO_SHOT_OLD = [
+ZERO_SHOT = [
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the post-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the post-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the pre-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the pre-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'pre_order'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the in-order traversal of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the in-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'in_order'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python dictionary representing the adjacency list of the {{structure}}.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'adjacency_list'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the depth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the depth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
     'task': 'depth_first_search'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line python list representing the breadth-first search of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the breadth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
     'task': 'breadth_first_search'
     },
 ]
 
-ZERO_SHOT = [
+ZERO_SHOT_OLD = [
     {
     'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the post-order traversal for the image of the {{structure}}.""", images=["{{image}}"])],
     'task': 'post_order'
@@ -161,11 +161,56 @@ ZERO_SHOT = [
     'task': 'adjacency_list'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the depth-first search for the image of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the depth-first search for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
     'task': 'depth_first_search'
     },
     {
-    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the breadth-first search for the image of the {{structure}} starting from the vertex with the smallest value.""", images=["{{image}}"])],
+    'messages': [UserMessage(content="""Provide a single-line Python list[int] representing the breadth-first search for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
+    'task': 'breadth_first_search'
+    },
+]
+
+ZERO_SHOT_A = [
+    {
+    'messages': [UserMessage(content="""Provide a Python dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'adjacency_list'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
+    'task': 'depth_first_search'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
+    'task': 'breadth_first_search'
+    },
+]
+
+ZERO_SHOT_B = [
+    {
+    'messages': [UserMessage(content="""Provide the adjacency list for the image of the {{structure}} as a Python dict[int, list[int]] of vertices and their edges.""", images=["{{image}}"])],
+    'task': 'adjacency_list'
+    },
+    {
+    'messages': [UserMessage(content="""Provide the depth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}} as a Python list[int] of vertices.""", images=["{{image}}"])],
+    'task': 'depth_first_search'
+    },
+    {
+    'messages': [UserMessage(content="""Provide the breadth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}} as a Python list[int] of vertices.""", images=["{{image}}"])],
+    'task': 'breadth_first_search'
+    },
+]
+
+ZERO_SHOT_C = [
+    {
+    'messages': [UserMessage(content="""Provide a dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the {{structure}}.""", images=["{{image}}"])],
+    'task': 'adjacency_list'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the depth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
+    'task': 'depth_first_search'
+    },
+    {
+    'messages': [UserMessage(content="""Provide a list[int] of vertices representing the breadth-first search traversal for the image of the {{structure}} starting from vertex {{vertex}}.""", images=["{{image}}"])],
     'task': 'breadth_first_search'
     },
 ]

@@ -22,6 +22,7 @@ logger = Logger(__name__)
 
 from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
+from evaluation.models.anthropic import Anthropic
 from evaluation.models.messages.message import UserMessage, SystemMessage, ModelMessage
 
 Message = TypeVar("Message", UserMessage, SystemMessage, ModelMessage)
@@ -29,7 +30,7 @@ Task = Literal['post_order', 'pre_order', 'in_order', 'breadth_first_search', 'd
 class Prompt(TypedDict):
   messages: List[Message]
   task: Task
-Model = TypeVar('Model', OpenAI, DeepMind)
+Model = TypeVar('Model', OpenAI, DeepMind, Anthropic)
 
 class RateLimiter:
     def __init__(self, calls_per_second):
@@ -61,7 +62,9 @@ class Evaluator:
       the global semaphore for rate limiting
   """
   columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'node_shape', 'edge_width', 'arrow_style', 'num_nodes', 'num_edges', 'dgl_graph', 'resolution', 'task_id', 'image_id']
-  rate_limiter = RateLimiter(0.9)
+  rate_limiter: RateLimiter = RateLimiter(0.9)
+  completed_calls: int = 0
+  total_calls: int = 0
   
   def __init__(self) -> None:
     self.total_calls = 0
@@ -97,6 +100,8 @@ class Evaluator:
       self.rate_limiter.calls_per_second = 5.0 # based on tier 4 300,000 RPM + 150,000 TPM
     elif isinstance(model, DeepMind):
       self.rate_limiter.calls_per_second = 0.9
+    elif isinstance(model, Anthropic):
+      self.rate_limiter.calls_per_second = 10.0
     
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
@@ -133,11 +138,14 @@ class Evaluator:
           break
 
       image_path = Path(task.get('image_path'))
+      express_expected = literal_eval(task.get('ground_truth'))
       
       for message in message_list:
         if hasattr(message, 'content'):
           if "{{structure}}" in message.content:
             message.content = message.content.replace("{{structure}}", task.get('structure').replace('_', ' '))
+          if "{{vertex}}" in message.content:
+            message.content = message.content.replace("{{vertex}}", str(express_expected[0]))
         if hasattr(message, 'images'):
             images = []
             for image in message.images:
@@ -158,7 +166,6 @@ class Evaluator:
       pattern = r'(\{.*?\})|(\[.*?\])'
       content = re.sub(' +', ' ', result.replace('\n', ''))
       matches = re.findall(pattern, content)
-      express_expected = literal_eval(task.get('ground_truth'))
       express_predicted = ''
       similarity = 0.0
       if matches == []:
@@ -241,3 +248,5 @@ class Evaluator:
       tb = traceback.format_exc()
       logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
       raise Exception('Error writing to CSV')
+    
+    

@@ -9,10 +9,10 @@ from pathlib import Path
 from typing import Optional, Literal
 from utils.colors import hex_to_rgb_float
 
-Color = Literal['#ffffff', '#ffff00', '#ff0000']
+Color = Literal['#ffffff', '#ffff00']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
-Width = Literal['1.0', '3.0', '5.0']
+Width = Literal['1.0', '5.0']
 
 class Graph:
     """
@@ -384,8 +384,13 @@ class DirectedGraph(Graph):
         # Create a figure with the calculated size
         plt.figure(figsize=(figure_size, figure_size))
         
+        if width == '1.0':
+            min_source_margin = 0
+        else:
+            min_source_margin = 20
+        
         labels = {node: self.graph.nodes[node].get('value', node) for node in self.graph.nodes}
-        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors='black', arrowstyle=arrow_style, min_source_margin=20) # alt edge colors hex_to_rgb_float(color, -50)
+        nx.draw(self.graph, pos, with_labels=True, font_weight='bold', arrowsize=arrow_size, node_size=node_size, node_color=color, node_shape=shape, font_family=font, labels=labels, font_size=font_size, linewidths=edge_width, width=edge_width, alpha=1.0, edgecolors='black', arrowstyle=arrow_style, min_source_margin=min_source_margin) # alt edge colors hex_to_rgb_float(color, -50)
 
         if save:
             plt.savefig(fname=path if path else self.default_file_name, format='png', dpi=dpi)

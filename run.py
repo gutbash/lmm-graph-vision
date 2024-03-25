@@ -5,11 +5,12 @@ from generation.structures.graph import UndirectedGraph, DirectedGraph
 from evaluation.evaluator import Evaluator
 from evaluation.models.openai import OpenAI
 from evaluation.models.deepmind import DeepMind
+from evaluation.models.anthropic import Anthropic
 
 from utils.logger import Logger
 logger = Logger(__name__)
 
-from evaluation.prompts import ZERO_SHOT_OLD, REPHRASE, NO_STRUCTURE, STEPS, DEFINITION, EXPERT, ZERO_SHOT_COT_REREAD, SERIAL, POLITE, ZERO_SHOT_COT, GOLD_COT, GENERAL_KNOWLEDGE, ROLEPLAY_EXPERT_COT, DELIMIT, GOLD_COT_EXPERT_DELIMIT, ZERO_SHOT_COT_POLITE, ZERO_SHOT_ROOT_ATTENTION, ZERO_SHOT
+from evaluation.prompts import REPHRASE, NO_STRUCTURE, STEPS, DEFINITION, EXPERT, ZERO_SHOT_COT_REREAD, SERIAL, POLITE, ZERO_SHOT_COT, GOLD_COT, GENERAL_KNOWLEDGE, ROLEPLAY_EXPERT_COT, DELIMIT, GOLD_COT_EXPERT_DELIMIT, ZERO_SHOT_COT_POLITE, ZERO_SHOT_ROOT_ATTENTION, ZERO_SHOT, ZERO_SHOT_A, ZERO_SHOT_B, ZERO_SHOT_C
 
 import asyncio
 import os
@@ -26,6 +27,7 @@ load_dotenv()
 openai_api_key = os.environ.get('OPENAI_API_KEY_DEV')
 #openai_api_key = os.environ.get('OPENAI_API_KEY_HCI')
 deepmind_api_key = os.environ.get('DEEPMIND_API_KEY_DEV')
+anthropic_api_key = os.environ.get('ANTHROPIC_API_KEY_DEV')
 
 ### prompts ###
 
@@ -110,22 +112,15 @@ async def run_batch():
 
 openai = OpenAI(api_key=openai_api_key)
 deepmind = DeepMind(api_key=deepmind_api_key)
-
-openai_csv = f'openai'
-deepmind_csv = f'deepmind'
+anthropic = Anthropic(api_key=anthropic_api_key)
 
 evaluator = Evaluator()
 
-model = openai
-csv_name = openai_csv
-
-eval_name = 'large_course_plus'
-
-async def run_eval():
+async def run_eval(eval_name, model, csv_name):
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['undirected_graph', 'directed_graph']:
+        for structure in ['directed_graph']:
             
             try:
 
@@ -136,17 +131,4 @@ async def run_eval():
                 return
             
 #asyncio.run(run_batch())
-asyncio.run(run_eval())
-
-#TODO: control graph edge count
-#TODO: control node values between structures
-
-# how many edges?
-# how many vertices?
-# degree of node n?
-# shortest path?
-
-#TODO: showcase visual parameter influences
-#TODO: showcase node value influences
-#TODO: showcase arrow style influences
-#TODO: showcase edge number influences
+asyncio.run(run_eval(eval_name='large-macro', model=anthropic, csv_name='anthropic'))

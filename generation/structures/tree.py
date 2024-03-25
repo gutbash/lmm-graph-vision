@@ -9,10 +9,10 @@ from pathlib import Path
 from typing import Optional, Literal, Any
 from utils.colors import hex_to_rgb_float
 
-Color = Literal['#ffffff', '#ffff00', '#ff0000']
+Color = Literal['#ffffff', '#ffff00']
 Shape = Literal['o', 's', 'd']
 Font = Literal['sans-serif', 'serif', 'monospace']
-Width = Literal['1.0', '3.0', '5.0']
+Width = Literal['1.0', '5.0']
 
 Traversal = Literal['preorder', 'inorder', 'postorder']
 

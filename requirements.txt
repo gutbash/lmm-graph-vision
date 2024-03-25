@@ -15,3 +15,4 @@ torch
 torchvision
 timm
 dgl
+anthropic
