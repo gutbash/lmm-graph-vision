@@ -120,7 +120,7 @@ async def run_eval(eval_name, model, csv_name):
     
     for prompt_name, prompts in PROMPTS.items():
 
-        for structure in ['directed_graph']:
+        for structure in ['undirected_graph']:
             
             try:
 
@@ -131,4 +131,4 @@ async def run_eval(eval_name, model, csv_name):
                 return
             
 #asyncio.run(run_batch())
-asyncio.run(run_eval(eval_name='large-macro', model=anthropic, csv_name='anthropic'))
+asyncio.run(run_eval(eval_name='large_macro', model=anthropic, csv_name='anthropic'))

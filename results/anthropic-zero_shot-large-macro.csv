@@ -1,1 +1,0 @@
-run_id,generation_id,variation_id,format_id,attempt_id,structure,task,text_prompt,image_prompt,response,predicted,ground_truth,match,similarity,node_font,node_color,node_shape,edge_width,arrow_style,num_nodes,num_edges,dgl_graph,resolution,task_id,image_id

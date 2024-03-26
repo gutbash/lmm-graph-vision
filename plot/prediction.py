@@ -263,7 +263,7 @@ def plot_feature_importances_with_model(feature_names, model, title):
     # Plot the feature importances for the model
     plt.figure(figsize=(5, 15))
     sorted_idx = np.argsort(np.abs(model_coefs))[::-1]
-    top_n = len(feature_names)  # Show top 30 features for clarity
+    top_n = 30  # Show top 30 features for clarity
     plt.barh(range(top_n), model_coefs[sorted_idx[:top_n]], color='cadetblue', align='center')
     truncated_feature_names = [name.replace("_", " ") if len(name) <= 20 else name[:17].replace("_", " ").replace("'", "") + "..." for name in np.array(feature_names)[sorted_idx[:top_n]]]
     plt.yticks(range(top_n), truncated_feature_names)
@@ -368,22 +368,22 @@ def main(DATA_PATH, CSV_PATH):
     
     #baseline_accuracy = accuracy_score(metrics_class['y_test'], metrics_class['y_test'].value_counts().idxmax())
     
-    print(baseline_mse_mean, baseline_mse_median)
+    #print(baseline_mse_mean, baseline_mse_median)
     
     # Plot the results
-    plot_pca_variance(X)
-    plot_actual_vs_predicted(metrics_reg['y_test'], metrics_reg['y_pred'])
-    plot_residuals(metrics_reg['y_test'], metrics_reg['y_pred'])
+    #plot_pca_variance(X)
+    #plot_actual_vs_predicted(metrics_reg['y_test'], metrics_reg['y_pred'])
+    #plot_residuals(metrics_reg['y_test'], metrics_reg['y_pred'])
     plot_roc_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
-    plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
+    #plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
     plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
-    plot_feature_correlation(X, feature_names)
-    plot_tsne(X, y_class=y_class, perplexity=30)
-    plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
+    #plot_feature_correlation(X, feature_names)
+    #plot_tsne(X, y_class=y_class, perplexity=30)
+    #plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
     plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
     
-    plot_3d_pca(pca_image_features, y_class_aligned)
-    plot_pca_loadings_heatmap(pca, feature_names, n_components=3)
+    #plot_3d_pca(pca_image_features, y_class_aligned)
+    #plot_pca_loadings_heatmap(pca, feature_names, n_components=3)
     
     #print(regression_confidence_intervals(metrics_reg['y_test'], metrics_reg['y_pred']))
     #print(classification_confidence_intervals(metrics_class['y_test'], metrics_class['y_pred']))
@@ -397,7 +397,9 @@ def main(DATA_PATH, CSV_PATH):
 if __name__ == "__main__":
     print("Script execution started.")
     # Provide the path to your CSV file here
-    DATA_PATH = Path('results/archive/large-course-plus/openai')
-    CSV_PATH = Path('results/archive/large-course-plus/openai/openai-zero_shot-large_course_plus.csv')
-    main(DATA_PATH, CSV_PATH)
+    DATA_PATH_1 = Path('results/archive/large-macro/openai')
+    DATA_PATH_2 = Path('results/archive/large-macro/deepmind')
+    DATA_PATH_3 = Path('results/archive/large-macro/anthropic')
+    CSV_PATH = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
+    main(DATA_PATH_1, CSV_PATH)
     print("Script execution completed.")

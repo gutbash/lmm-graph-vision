@@ -40,15 +40,19 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path) -> None:
     df2 = pd.read_csv(file_path_2)
 
     # Prepare a figure to contain subplots
-    fig, axes = plt.subplots(1, 2, figsize=(8, 5), sharey=True)  # Now sharing the y-axis
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)  # Now sharing the y-axis
 
     models = ['gpt-4-vision-preview', 'gemini-pro-vision']
     
     axes[0].set_ylabel('Accuracy')
+    
+    model_colors = [(230/255,110/255,180/255,0.15), (179/255,110/255,230/255,0.15)]
 
     for subplot_index, (df, ax) in enumerate(zip([df1, df2], axes), start=1):
         # Group by 'structure' and 'num_nodes' to calculate match rate
         grouped_data = df.groupby(['structure', 'num_nodes']).agg(match_rate=('match', 'mean')).reset_index()
+        # normalize match to 0-100 scale
+        grouped_data['match_rate'] = grouped_data['match_rate'] * 100
 
         # Get unique structures and num_nodes
         structures = grouped_data['structure'].unique()
@@ -58,7 +62,10 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path) -> None:
         x_ticks = np.arange(len(num_nodes))
 
         # Define a custom color palette
+        color_palette = sns.color_palette('coolwarm', n_colors=len(grouped_data.columns))
         color_palette = ['#22577a', '#38a3a5', '#57cc99', '#80ed99']
+        color_palette = ['#2fff00', '#00e0e9', '#00aaff', '#9500ff']
+        color_palette = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']
 
         # Calculate the width of each bar
         bar_width = 0.8 / len(structures)
@@ -86,13 +93,15 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path) -> None:
         ax.set_axisbelow(True)
         ax.grid(True, which='both', axis='y', linestyle='-', linewidth=1, color='lightgrey', alpha=0.25)
 
-        ax.set_ylim(0, 1)
+        ax.set_ylim(0, 100)
+        
+        model_name = f'{models[subplot_index - 1]}'
 
         # Setting the title for each subplot
-        ax.set_title(f'{models[subplot_index - 1]}', fontsize=12, loc='left', pad=15)
+        ax.set_title(model_name, fontsize=10, loc='left', pad=15, bbox=dict(facecolor=model_colors[subplot_index-1], edgecolor='none', boxstyle='round,pad=0.3,rounding_size=0.7'))
 
     axes[1].legend(loc='upper right', bbox_to_anchor=(1, 1.25))
-    plt.suptitle('Zero-shot accuracy by number of nodes', fontproperties=sohne_bold_font, fontsize=16, x=0.3275, y=0.85)
+    plt.suptitle('Zero-shot accuracy by number of nodes', fontproperties=sohne_bold_font, fontsize=16, x=0.22, y=0.85)
 
     # Adjust layout for better readability
     plt.tight_layout(rect=[0.00, 0.00, 1, 1])
@@ -566,7 +575,7 @@ def line_plot_match_similarity_by_edge_width(file_path: Path) -> None:
     plt.savefig(f'plot/match_similarity_by_edge_width.png', dpi=300, transparent=True)
 
 
-def line_plot_match_similarity_by_num_nodes(file_path: Path) -> None:
+def line_plot_accuracy_by_num_nodes(file_path: Path) -> None:
     data = pd.read_csv(file_path)
     data['similarity'] = data['similarity'] / 100
     data['structure'] = data['structure'].replace('_', ' ', regex=True)
@@ -721,6 +730,8 @@ def accuracy_by_task(file_path1: Path, file_path2: Path) -> None:
     plt.subplots_adjust(wspace=-1.1)
     
     models = ['gpt-4-vision-preview', 'gemini-pro-vision']
+    
+    model_colors = [(230/255,110/255,180/255,0.15), (179/255,110/255,230/255,0.15)]
 
     for idx, file_path in enumerate([file_path1, file_path2]):
         data = pd.read_csv(file_path)
@@ -730,9 +741,15 @@ def accuracy_by_task(file_path1: Path, file_path2: Path) -> None:
 
         # Calculate the mean of 'match' for each task and structure combination
         match_rate = data.groupby(['task', 'structure'])['match'].mean().unstack()
+        # normalize to 0-100 scale
+        match_rate = match_rate * 100
+        # switch the two halfs of the dataframe
+        match_rate = pd.concat([match_rate.iloc[:, 2:], match_rate.iloc[:, :2]], axis=1)
 
         # Generate a color palette from the following list
         color_palette = ['#22577a', '#38a3a5', '#57cc99', '#80ed99']
+        color_palette = ['#2fff00', '#00e0e9', '#00aaff', '#9500ff']
+        color_palette = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']
         palette = sns.color_palette(color_palette, n_colors=len(match_rate.columns))
 
         # The width of the bars
@@ -758,8 +775,8 @@ def accuracy_by_task(file_path1: Path, file_path2: Path) -> None:
         
         axs[idx].grid(True, which='both', axis='y', linestyle='-', linewidth=1, color='lightgrey', alpha=0.25)
 
-        axs[idx].set_title(f'{models[idx]}', fontsize=12, loc='left', pad=12.5)
-        axs[idx].set_ylim(0, 1)
+        axs[idx].set_title(f'{models[idx]}', fontsize=10, loc='left', pad=12.5, bbox=dict(facecolor=model_colors[idx], edgecolor='none', boxstyle='round,pad=0.3,rounding_size=0.7'))
+        axs[idx].set_ylim(0, 100)
         axs[idx].set_xticks(range(len(match_rate.index)))
         axs[idx].set_xticklabels(match_rate.index, rotation=45, ha="right")
         axs[idx].set_ylabel('Accuracy' if idx == 0 else '')
@@ -813,16 +830,37 @@ def calculate_accuracies(file_path1, file_path2):
     accuracy_pass3_overall_model = accuracy_pass3_overall_model.reset_index().rename(columns={0: 'Pass@3 Overall Accuracy'})
     accuracy_results_overall_model = pd.merge(accuracy_pass1_overall_model, accuracy_pass3_overall_model, on='model')
     
-    return accuracy_results_structure_model, accuracy_results_overall_model
+    # Calculating accuracies for grouped structures
+    def calculate_grouped_accuracy(df, attempts, group_mapping):
+        df['grouped_structure'] = df['structure'].map(group_mapping)
+        results = df.groupby(['grouped_structure', 'model', 'format_id', 'variation_id', 'generation_id', 'task']).apply(accuracy_for_criteria, attempts=attempts)
+        return results.groupby(['grouped_structure', 'model']).mean()
+
+    group_mapping = {
+        'binary_tree': 'binary_tree_group',
+        'binary_search_tree': 'binary_tree_group',
+        'directed_graph': 'graph_group',
+        'undirected_graph': 'graph_group'
+    }
+
+    accuracy_pass1_grouped_structure_model = calculate_grouped_accuracy(combined_data, 1, group_mapping)
+    accuracy_pass3_grouped_structure_model = calculate_grouped_accuracy(combined_data, 3, group_mapping)
+
+    accuracy_pass1_grouped_structure_model = accuracy_pass1_grouped_structure_model.reset_index().rename(columns={0: 'Pass@1 Accuracy'})
+    accuracy_pass3_grouped_structure_model = accuracy_pass3_grouped_structure_model.reset_index().rename(columns={0: 'Pass@3 Accuracy'})
+    accuracy_results_grouped_structure_model = pd.merge(accuracy_pass1_grouped_structure_model, accuracy_pass3_grouped_structure_model, on=['grouped_structure', 'model'])
     
-path_1 = Path('results/openai-zero_shot-large-macro-edit.csv')
-path_2 = Path('results/deepmind-zero_shot-large-macro.csv')
+    return accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model
+    
+path_1 = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
+path_2 = Path('results/anthropic-zero_shot-large_macro.csv')
 
-accuracy_by_num_nodes(path_1, path_2)
-accuracy_by_task(path_1, path_2)
-#match_similarity_by_variation_num_nodes(path_1)
+#accuracy_by_num_nodes(path_1, path_2)
+#accuracy_by_task(path_1, path_2)
+##match_similarity_by_variation_num_nodes(path_1)
 
-#accuracy_results_structure_model, accuracy_results_overall_model = calculate_accuracies(path_1, path_2)
+accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_2)
 
-#print(accuracy_results_structure_model)
-#print(accuracy_results_overall_model)
+print(accuracy_results_structure_model)
+print(accuracy_results_overall_model)
+print(accuracy_results_grouped_structure_model)

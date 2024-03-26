@@ -101,7 +101,7 @@ class Evaluator:
     elif isinstance(model, DeepMind):
       self.rate_limiter.calls_per_second = 0.9
     elif isinstance(model, Anthropic):
-      self.rate_limiter.calls_per_second = 10.0
+      self.rate_limiter.calls_per_second = 15.0 # 1000 RPM
     
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
@@ -163,7 +163,11 @@ class Evaluator:
       
       logger.info(f'[T{self.completed_calls}/{self.total_calls}] Complete')
       
-      pattern = r'(\{.*?\})|(\[.*?\])'
+      if prompt.get('task') == 'adjacency_list':
+        pattern = r'(\{.*?\})'
+      else:
+        pattern = r'(\[.*?\])'
+
       content = re.sub(' +', ' ', result.replace('\n', ''))
       matches = re.findall(pattern, content)
       express_predicted = ''
@@ -172,21 +176,20 @@ class Evaluator:
         logger.error(f'No matches found in content: {content}')
       else:
         logger.info(f'Matches: {matches}')
-        clean_matches = [match for group in matches for match in group if match]
+        if isinstance(matches[0], tuple):
+          clean_matches = [match for group in matches for match in group if match]
+        else:
+          clean_matches = [match for match in matches if match]
         logger.info(f'Clean matches: {clean_matches}')
-        for match in reversed(clean_matches):
-          if match != '[]' and match != '{}':
-            try:
-              clean_pattern = "[^][{},:0-9]"
-              cleaned_string = re.sub(clean_pattern, "", str(match))
-              if cleaned_string[-1] == '}':
-                cleaned_string = '{' + cleaned_string.strip('}').strip('{') + '}'
-              elif cleaned_string[-1] == ']':
-                cleaned_string = '[' + cleaned_string.strip(']').strip('[') + ']'
-              express_predicted = literal_eval(cleaned_string)
-              break
-            except:
-              pass
+        
+        longest_match = max(clean_matches, key=len)
+        clean_pattern = "[^][{},:0-9]"
+        cleaned_string = re.sub(clean_pattern, "", str(longest_match))
+        if cleaned_string[-1] == '}':
+          cleaned_string = '{' + cleaned_string.strip('}').strip('{') + '}'
+        elif cleaned_string[-1] == ']':
+          cleaned_string = '[' + cleaned_string.strip(']').strip('[') + ']'
+        express_predicted = literal_eval(cleaned_string)
           
         if type(express_expected) is list and type(express_predicted) is list:
           similarity = calculate_similarity_list(express_expected, express_predicted)

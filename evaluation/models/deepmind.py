@@ -9,11 +9,12 @@ import json
 import asyncio
 
 from evaluation.models.messages.message import UserMessage, ModelMessage
-from typing import List, TypeVar
+from typing import List, TypeVar, Literal
 
 logger = Logger(__name__)
 
 Messages = TypeVar("Messages", UserMessage, ModelMessage)
+Model = Literal['gemini-pro-vision', 'gemini-1.5-pro-latest']
 
 class DeepMind:
     """
@@ -40,7 +41,7 @@ class DeepMind:
     client: deepmind.GenerativeModel
     model: str = 'gemini-pro-vision'
     
-    def __init__(self, api_key: str) -> None:
+    def __init__(self, api_key: str, model: Model = 'gemini-pro-vision') -> None:
         """
         Initializes the DeepMind model.
         
@@ -51,6 +52,7 @@ class DeepMind:
         """
         self.api_key = api_key
         self.client = deepmind.GenerativeModel(self.model)
+        self.model = model
         
         deepmind.configure(api_key=api_key)
         

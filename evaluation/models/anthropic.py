@@ -7,11 +7,12 @@ import anthropic
 import asyncio
 
 from evaluation.models.messages.message import UserMessage, ModelMessage
-from typing import List, TypeVar
+from typing import List, TypeVar, Literal
 
 logger = Logger(__name__)
 
 Messages = TypeVar("Messages", UserMessage, ModelMessage)
+Model = Literal['claude-3-opus-20240229', 'claude-3-sonnet-20240229', 'claude-3-haiku-20240307']
 
 class Anthropic:
     """
@@ -31,7 +32,7 @@ class Anthropic:
     client: anthropic.Anthropic
     model: str = 'claude-3-opus-20240229'
     
-    def __init__(self, api_key: str) -> None:
+    def __init__(self, api_key: str, model: Model = 'claude-3-opus-20240229') -> None:
         """
         Initializes the DeepMind model.
         
@@ -42,6 +43,7 @@ class Anthropic:
         """
         self.api_key = api_key
         self.client = anthropic.AsyncAnthropic(api_key=api_key)
+        self.model = model
     
     async def arun(self, messages: List[Messages]) -> str:
         
