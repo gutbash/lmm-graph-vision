@@ -39,9 +39,10 @@ class DeepMind:
     
     api_key: str
     client: deepmind.GenerativeModel
-    model: str = 'gemini-pro-vision'
+    model: Model = 'gemini-pro-vision'
+    calls_per_second: float = 0.9
     
-    def __init__(self, api_key: str, model: Model = 'gemini-pro-vision') -> None:
+    def __init__(self, api_key: str, model: Model = 'gemini-pro-vision', calls_per_second: float = 0.9) -> None:
         """
         Initializes the DeepMind model.
         
@@ -53,6 +54,7 @@ class DeepMind:
         self.api_key = api_key
         self.client = deepmind.GenerativeModel(self.model)
         self.model = model
+        self.calls_per_second = calls_per_second
         
         deepmind.configure(api_key=api_key)
         
@@ -128,7 +130,7 @@ class DeepMind:
         
         timeout = httpx.Timeout(9999.0, connect=60.0)
         
-        max_retries = 10
+        max_retries = 10000
         retry_delay_yellow = 10
         retry_delay_red = 60
         

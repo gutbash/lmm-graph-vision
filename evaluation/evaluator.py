@@ -62,7 +62,7 @@ class Evaluator:
       the global semaphore for rate limiting
   """
   columns: list = ['run_id', 'generation_id', 'variation_id', 'format_id', 'attempt_id', 'structure', 'task', 'text_prompt', 'image_prompt', 'response', 'predicted', 'ground_truth', 'match', 'similarity', 'node_font', 'node_color', 'node_shape', 'edge_width', 'arrow_style', 'num_nodes', 'num_edges', 'dgl_graph', 'resolution', 'task_id', 'image_id']
-  rate_limiter: RateLimiter = RateLimiter(0.9)
+  rate_limiter: RateLimiter
   completed_calls: int = 0
   total_calls: int = 0
   
@@ -96,12 +96,8 @@ class Evaluator:
     pd.errors.EmptyDataError
         if the CSV file is empty
     """
-    if isinstance(model, OpenAI):
-      self.rate_limiter.calls_per_second = 5.0 # based on tier 4 300,000 RPM + 150,000 TPM
-    elif isinstance(model, DeepMind):
-      self.rate_limiter.calls_per_second = 0.9
-    elif isinstance(model, Anthropic):
-      self.rate_limiter.calls_per_second = 15.0 # 1000 RPM
+    
+    self.rate_limiter = RateLimiter(model.calls_per_second)
     
     save_path = validate_path(csv_path, csv_name, '.csv')
     file_exists = save_path.is_file()
@@ -175,12 +171,12 @@ class Evaluator:
       if matches == []:
         logger.error(f'No matches found in content: {content}')
       else:
-        logger.info(f'Matches: {matches}')
+        #logger.info(f'Matches: {matches}')
         if isinstance(matches[0], tuple):
           clean_matches = [match for group in matches for match in group if match]
         else:
           clean_matches = [match for match in matches if match]
-        logger.info(f'Clean matches: {clean_matches}')
+        #logger.info(f'Clean Matches: {clean_matches}')
         
         longest_match = max(clean_matches, key=len)
         clean_pattern = "[^][{},:0-9]"
@@ -190,6 +186,8 @@ class Evaluator:
         elif cleaned_string[-1] == ']':
           cleaned_string = '[' + cleaned_string.strip(']').strip('[') + ']'
         express_predicted = literal_eval(cleaned_string)
+        
+        logger.info(f'Ground Truth: {express_expected} | Predicted: {express_predicted}')
           
         if type(express_expected) is list and type(express_predicted) is list:
           similarity = calculate_similarity_list(express_expected, express_predicted)
@@ -197,7 +195,6 @@ class Evaluator:
           similarity = calculate_similarity_dict(express_expected, express_predicted)
         else:
           logger.error(f'Expected and actual types do not match: {type(express_expected)} and {type(express_predicted)}')
-          logger.info(f'Expected: {express_expected}, Actual: {express_predicted}')
           logger.info(f'Content: {content}')
           #raise Exception('Expected and actual types do not match')
       

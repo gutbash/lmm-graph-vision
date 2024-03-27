@@ -31,8 +31,9 @@ class Anthropic:
     api_key: str
     client: anthropic.Anthropic
     model: str = 'claude-3-opus-20240229'
+    calls_per_second: float = 15.0
     
-    def __init__(self, api_key: str, model: Model = 'claude-3-opus-20240229') -> None:
+    def __init__(self, api_key: str, model: Model = 'claude-3-opus-20240229', calls_per_second: float = 15.0) -> None:
         """
         Initializes the DeepMind model.
         
@@ -41,6 +42,7 @@ class Anthropic:
         api_key : str
             the API key for the DeepMind client
         """
+        self.calls_per_second = calls_per_second
         self.api_key = api_key
         self.client = anthropic.AsyncAnthropic(api_key=api_key)
         self.model = model
