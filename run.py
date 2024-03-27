@@ -126,7 +126,7 @@ async def evaluate_model(evaluator, eval_name, model, csv_name, prompts=PROMPTS,
     for prompt_name, prompts_group in prompts.items():
         for structure in structures:
             try:
-                await evaluator.evaluate(model=model, prompts=prompts_group, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=1)
+                await evaluator.evaluate(model=model, prompts=prompts_group, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=None)
             except Exception as e:
                 logger.error(f'{e}')
                 return
