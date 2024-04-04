@@ -853,7 +853,7 @@ def calculate_accuracies(file_path1, file_path2):
     return accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model
     
 path_1 = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
-path_2 = Path('results/archive/large-macro/anthropic/anthropic-zero_shot-large_macro.csv')
+path_2 = Path('results/archive/large-macro/anthropic/anthropic-sonnet-zero_shot-large_macro.csv')
 
 #accuracy_by_num_nodes(path_1, path_2)
 #accuracy_by_task(path_1, path_2)
