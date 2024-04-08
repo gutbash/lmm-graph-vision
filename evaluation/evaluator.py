@@ -185,7 +185,13 @@ class Evaluator:
           cleaned_string = '{' + cleaned_string.strip('}').strip('{') + '}'
         elif cleaned_string[-1] == ']':
           cleaned_string = '[' + cleaned_string.strip(']').strip('[') + ']'
-        express_predicted = literal_eval(cleaned_string)
+          
+        try:
+          express_predicted = literal_eval(cleaned_string)
+        except SyntaxError as e:
+          logger.error(f'Error parsing model response: {e}')
+          logger.info(f'Content: {content}')
+          return
         
         logger.info(f'Ground Truth: {express_expected} | Predicted: {express_predicted}')
           

@@ -135,7 +135,7 @@ async def run_evaluations():
     # Create a list of coroutines for the evaluations you want to run
     tasks = [
         evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=anthropic, csv_name='anthropic-haiku', structures=['directed_graph', 'undirected_graph', 'binary_search_tree', 'binary_tree']),
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=openai, csv_name='openai-dg', structures=['directed_graph']),
+        #evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=openai, csv_name='openai-dg', structures=['directed_graph']),
     ]
     
     # Run the tasks concurrently

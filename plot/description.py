@@ -34,21 +34,25 @@ plt.rcParams['font.family'] = sohne_font_name
 # Load the dataset
 file_path = Path('results/deepmind-prompts_default.csv')
 
-def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path) -> None:
+def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path, file_path_3: Path, file_path_4: Path, file_path_5: Path, file_path_6: Path) -> None:
     # Read each CSV file into a DataFrame
     df1 = pd.read_csv(file_path_1)
     df2 = pd.read_csv(file_path_2)
+    df3 = pd.read_csv(file_path_3)
+    df4 = pd.read_csv(file_path_4)
+    df5 = pd.read_csv(file_path_5)
+    df6 = pd.read_csv(file_path_6)
 
     # Prepare a figure to contain subplots
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)  # Now sharing the y-axis
-
-    models = ['gpt-4-vision-preview', 'gemini-pro-vision']
+    fig, axes = plt.subplots(2, 3, figsize=(10, 5), sharey=True, sharex=True)  # Now sharing the y-axis
     
-    axes[0].set_ylabel('Accuracy')
-    
-    model_colors = [(230/255,110/255,180/255,0.15), (179/255,110/255,230/255,0.15)]
+    axes[0, 0].set_ylabel('Accuracy')
+    axes[1, 0].set_ylabel('Accuracy')
+    axes[1, 0].set_xlabel('Number of Nodes')
+    axes[1, 1].set_xlabel('Number of Nodes')
+    axes[1, 2].set_xlabel('Number of Nodes')
 
-    for subplot_index, (df, ax) in enumerate(zip([df1, df2], axes), start=1):
+    for subplot_index, (df, ax) in enumerate(zip([df1, df2, df3, df4, df5, df6], axes.flatten()), start=1):
         # Group by 'structure' and 'num_nodes' to calculate match rate
         grouped_data = df.groupby(['structure', 'num_nodes']).agg(match_rate=('match', 'mean')).reset_index()
         # normalize match to 0-100 scale
@@ -62,9 +66,6 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path) -> None:
         x_ticks = np.arange(len(num_nodes))
 
         # Define a custom color palette
-        color_palette = sns.color_palette('coolwarm', n_colors=len(grouped_data.columns))
-        color_palette = ['#22577a', '#38a3a5', '#57cc99', '#80ed99']
-        color_palette = ['#2fff00', '#00e0e9', '#00aaff', '#9500ff']
         color_palette = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']
 
         # Calculate the width of each bar
@@ -85,27 +86,20 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path) -> None:
         ax.set_xticks(x_ticks)
         ax.set_xticklabels(num_nodes)
 
-        ax.set_xlabel('Number of Nodes')
-
         for spine in ax.spines.values():
-            spine.set_visible(False)
+            spine.set_visible(True)
+            spine.set_color((0, 0, 0, 0.05))
 
         ax.set_axisbelow(True)
         ax.grid(True, which='both', axis='y', linestyle='-', linewidth=1, color='lightgrey', alpha=0.25)
 
         ax.set_ylim(0, 100)
-        
-        model_name = f'{models[subplot_index - 1]}'
 
-        # Setting the title for each subplot
-        ax.set_title(model_name, fontsize=10, loc='left', pad=15, bbox=dict(facecolor=model_colors[subplot_index-1], edgecolor='none', boxstyle='round,pad=0.3,rounding_size=0.7'))
-
-    axes[1].legend(loc='upper right', bbox_to_anchor=(1, 1.25))
-    plt.suptitle('Zero-shot accuracy by number of nodes', fontproperties=sohne_bold_font, fontsize=16, x=0.22, y=0.85)
+    #axes[1, 1].legend(loc='upper right', bbox_to_anchor=(1, 1.25))
 
     # Adjust layout for better readability
     plt.tight_layout(rect=[0.00, 0.00, 1, 1])
-
+    plt.subplots_adjust(wspace=0.1, hspace=0.3)
     # Save the figure
     plt.savefig('plot/accuracy_by_num_nodes.pdf', dpi=300, transparent=True, bbox_inches='tight', format='pdf')
     
@@ -723,39 +717,32 @@ def bar_plot_accuracy_by_task_stacked(file_path1: Path, file_path2: Path) -> Non
     plt.tight_layout(rect=[0, 0, 1, 1.05])
     plt.savefig(f'plot/match_similarity_by_task_overlay_sorted.pdf', dpi=300, transparent=True, format='pdf', bbox_inches='tight')
     
-def accuracy_by_task(file_path1: Path, file_path2: Path) -> None:
-    fig, axs = plt.subplots(1, 2, figsize=(8, 5), sharey=True)
-    
-    #adjust subplot spacing
-    plt.subplots_adjust(wspace=-1.1)
-    
-    models = ['gpt-4-vision-preview', 'gemini-pro-vision']
-    
-    model_colors = [(230/255,110/255,180/255,0.15), (179/255,110/255,230/255,0.15)]
+def accuracy_by_task(file_paths: list[Path]) -> None:
+    fig, axs = plt.subplots(3, 2, figsize=(5, 6), sharey=True, sharex=True)
 
-    for idx, file_path in enumerate([file_path1, file_path2]):
+    for idx, file_path in enumerate(file_paths):
         data = pd.read_csv(file_path)
-        data['similarity'] = data['similarity'] / 100
         data['structure'] = data['structure'].replace('_', ' ', regex=True)
         data['task'] = data['task'].str.replace('_', ' ', regex=True)
 
         # Calculate the mean of 'match' for each task and structure combination
         match_rate = data.groupby(['task', 'structure'])['match'].mean().unstack()
-        # normalize to 0-100 scale
+        # Normalize to 0-100 scale
         match_rate = match_rate * 100
-        # switch the two halfs of the dataframe
-        match_rate = pd.concat([match_rate.iloc[:, 2:], match_rate.iloc[:, :2]], axis=1)
+        # Switch the two halves of the dataframe
+        match_rate = pd.concat([match_rate.iloc[:, :2], match_rate.iloc[:, 2:]], axis=1)
 
         # Generate a color palette from the following list
-        color_palette = ['#22577a', '#38a3a5', '#57cc99', '#80ed99']
-        color_palette = ['#2fff00', '#00e0e9', '#00aaff', '#9500ff']
         color_palette = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']
         palette = sns.color_palette(color_palette, n_colors=len(match_rate.columns))
 
         # The width of the bars
         bar_width = 1.5 / len(match_rate.columns)
         
-        for j, task in enumerate(match_rate.index):
+        # Get the current subplot
+        ax = axs[idx // 2, idx % 2]
+        
+        for j, task in enumerate(reversed(match_rate.index)):
             non_zero_structures = match_rate.loc[task][match_rate.loc[task] > 0].index
             num_non_zero = len(non_zero_structures)
             
@@ -766,28 +753,28 @@ def accuracy_by_task(file_path1: Path, file_path2: Path) -> None:
                 # Calculate the position of the bar
                 pos = j - (num_non_zero - 1) * bar_width / 2 + i * bar_width
                 # Plot the bar for the current structure
-                axs[idx].bar(pos, value, color=color, label=structure, width=bar_width, alpha=1)
+                ax.bar(pos, value, color=color, label=structure, width=bar_width, alpha=1)
         
-        axs[idx].set_axisbelow(True)
+        ax.set_axisbelow(True)
         for spine in ['top', 'right', 'left', 'bottom']:
-            axs[idx].spines[spine].set_visible(False)
-        #axs[idx].spines['bottom'].set_visible(True)
+            ax.spines[spine].set_visible(True)
+            ax.spines[spine].set_color((0, 0, 0, 0.05))
         
-        axs[idx].grid(True, which='both', axis='y', linestyle='-', linewidth=1, color='lightgrey', alpha=0.25)
+        ax.grid(True, which='both', axis='y', linestyle='-', linewidth=1, color='lightgrey', alpha=0.25)
 
-        axs[idx].set_title(f'{models[idx]}', fontsize=10, loc='left', pad=12.5, bbox=dict(facecolor=model_colors[idx], edgecolor='none', boxstyle='round,pad=0.3,rounding_size=0.7'))
-        axs[idx].set_ylim(0, 100)
-        axs[idx].set_xticks(range(len(match_rate.index)))
-        axs[idx].set_xticklabels(match_rate.index, rotation=45, ha="right")
-        axs[idx].set_ylabel('Accuracy' if idx == 0 else '')
-        # Ensure the legend is only added once per subplot
-        if idx == 1:
-            # manually create the legend with square color patches
+        ax.set_ylim(0, 100)
+        ax.set_xticks(range(len(match_rate.index)))
+        ax.set_xticklabels(reversed(match_rate.index), rotation=45, ha="right")
+        ax.set_ylabel('Accuracy' if idx % 2 == 0 else '')
+        
+        # Ensure the legend is only added once in the last subplot
+        if idx == len(file_paths) - 1:
+            # Manually create the legend with square color patches
             legend_elements = [Patch(facecolor=palette[i], label=structure) for i, structure in enumerate(match_rate.columns)]
-            axs[idx].legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1, 1.275))
-    
-    plt.suptitle('Zero-shot accuracy by task', fontproperties=sohne_bold_font, fontsize=16, x=0.081, y=0.87, ha='left')
-    plt.tight_layout(rect=[0, 0, 1, 1.05])
+            #ax.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1, 1.275))
+
+    plt.tight_layout(rect=[0, 0, 1, 1])
+    plt.subplots_adjust(wspace=0.1, hspace=0.4)
     plt.savefig(f'plot/accuracy_by_task.pdf', dpi=300, transparent=True, format='pdf', bbox_inches='tight')
     
 def calculate_accuracies(file_path1, file_path2):
@@ -853,14 +840,20 @@ def calculate_accuracies(file_path1, file_path2):
     return accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model
     
 path_1 = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
-path_2 = Path('results/archive/large-macro/anthropic/anthropic-sonnet-zero_shot-large_macro.csv')
+path_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-15-zero_shot-large_macro.csv')
+path_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
+path_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
+path_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
+path_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
 
-#accuracy_by_num_nodes(path_1, path_2)
-#accuracy_by_task(path_1, path_2)
+paths = [path_1, path_2, path_3, path_4, path_5, path_6]
+
+accuracy_by_num_nodes(path_1, path_2, path_3, path_4, path_5, path_6)
+accuracy_by_task(paths)
 ##match_similarity_by_variation_num_nodes(path_1)
 
-accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_2)
+#accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_2)
 
-print(accuracy_results_structure_model)
-print(accuracy_results_overall_model)
-print(accuracy_results_grouped_structure_model)
+#print(accuracy_results_structure_model)
+#print(accuracy_results_overall_model)
+#print(accuracy_results_grouped_structure_model)

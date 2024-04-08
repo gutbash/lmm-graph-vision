@@ -261,22 +261,30 @@ def plot_feature_importances_with_model(feature_names, model, title):
         raise ValueError("The model provided does not have coefficients accessible via 'coef_'.")
 
     # Plot the feature importances for the model
-    plt.figure(figsize=(5, 15))
+    plt.figure(figsize=(5, 5))
     sorted_idx = np.argsort(np.abs(model_coefs))[::-1]
     top_n = 30  # Show top 30 features for clarity
     plt.barh(range(top_n), model_coefs[sorted_idx[:top_n]], color='cadetblue', align='center')
-    truncated_feature_names = [name.replace("_", " ") if len(name) <= 20 else name[:17].replace("_", " ").replace("'", "") + "..." for name in np.array(feature_names)[sorted_idx[:top_n]]]
+    truncated_feature_names = [name.replace("_", " ") if len(name) <= 20 else name[:13].replace("_", " ").replace("'", "") + "..." for name in np.array(feature_names)[sorted_idx[:top_n]]]
     plt.yticks(range(top_n), truncated_feature_names)
     plt.gca().invert_yaxis()  # Display the highest importance at the top
-    plt.title(title, fontproperties=sohne_bold_font, fontsize=10, loc='left', pad=5)
+    #plt.title(title, fontproperties=sohne_bold_font, fontsize=10, loc='left', pad=5)
+    # set spine color
+    for spine in plt.gca().spines.values():
+        spine.set_color((0, 0, 0, 0.05))
+        
+    # set x range
+    plt.xticks([-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0])
     # change y tick font size
-    plt.yticks(fontsize=5)
+    plt.yticks(fontsize=8)
     plt.rcParams['axes.unicode_minus'] = False
     plt.xlabel('Coefficient Magnitude', fontsize=10)
     plt.ylabel('Features', fontsize=10)
-    plt.grid(True, which='major', linestyle='--', linewidth=0.1)
+    # send grid to back
+    plt.gca().set_axisbelow(True)
+    plt.grid(True, color='#F2F2F2', axis='x')
     plt.tight_layout()
-    plt.savefig(f"plot/feature_importances_{title}.png", dpi=300)
+    plt.savefig(f"plot/feature_importances_{title}.pdf", dpi=300, transparent=True)
     
 def plot_3d_pca(pca_image_features, y_class):
     X_pca_3d = pca_image_features[:, :3]
@@ -374,9 +382,9 @@ def main(DATA_PATH, CSV_PATH):
     #plot_pca_variance(X)
     #plot_actual_vs_predicted(metrics_reg['y_test'], metrics_reg['y_pred'])
     #plot_residuals(metrics_reg['y_test'], metrics_reg['y_pred'])
-    plot_roc_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
+    #plot_roc_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
     #plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
-    plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
+    #plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
     #plot_feature_correlation(X, feature_names)
     #plot_tsne(X, y_class=y_class, perplexity=30)
     #plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
@@ -398,8 +406,16 @@ if __name__ == "__main__":
     print("Script execution started.")
     # Provide the path to your CSV file here
     DATA_PATH_1 = Path('results/archive/large-macro/openai')
-    DATA_PATH_2 = Path('results/archive/large-macro/deepmind')
-    DATA_PATH_3 = Path('results/archive/large-macro/anthropic')
-    CSV_PATH = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
-    main(DATA_PATH_1, CSV_PATH)
+    DATA_PATH_2 = Path('results/archive/large-macro/deepmind/1.5')
+    DATA_PATH_3 = Path('results/archive/large-macro/deepmind/1.0')
+    DATA_PATH_4 = Path('results/archive/large-macro/anthropic/opus')
+    DATA_PATH_5 = Path('results/archive/large-macro/anthropic/sonnet')
+    DATA_PATH_6 = Path('results/archive/large-macro/anthropic/haiku')
+    CSV_PATH_1 = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
+    CSV_PATH_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-15-zero_shot-large_macro.csv')
+    CSV_PATH_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
+    CSV_PATH_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
+    CSV_PATH_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
+    CSV_PATH_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
+    main(DATA_PATH_5, CSV_PATH_5)
     print("Script execution completed.")
