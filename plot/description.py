@@ -783,8 +783,8 @@ def calculate_accuracies(file_path1, file_path2):
     data2 = pd.read_csv(file_path2)
     
     # Add a column to each dataframe to identify the model (source file)
-    data1['model'] = file_path1.stem.split('-')[0]
-    data2['model'] = file_path2.stem.split('-')[0]
+    data1['model'] = file_path1.stem.split('_')[0]
+    data2['model'] = file_path2.stem.split('_')[0]
     
     # Combine both datasets for easier manipulation
     combined_data = pd.concat([data1, data2])
@@ -838,22 +838,23 @@ def calculate_accuracies(file_path1, file_path2):
     accuracy_results_grouped_structure_model = pd.merge(accuracy_pass1_grouped_structure_model, accuracy_pass3_grouped_structure_model, on=['grouped_structure', 'model'])
     
     return accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model
-    
-path_1 = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
+
+path_0 = Path('results/archive/large-macro/openai/gpt-4-turbo/openai-zero_shot-large_macro_edit.csv')
+path_1 = Path('results/archive/large-macro/openai/gpt-4o/openai-gpt-4o-zero_shot-large_macro.csv')
 path_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-15-zero_shot-large_macro.csv')
 path_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
 path_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
 path_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
 path_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
 
-paths = [path_1, path_2, path_3, path_4, path_5, path_6]
+paths = [path_0, path_1, path_2, path_3, path_4, path_5]
 
-accuracy_by_num_nodes(path_1, path_2, path_3, path_4, path_5, path_6)
+accuracy_by_num_nodes(path_0, path_1, path_2, path_3, path_4, path_5)
 accuracy_by_task(paths)
 ##match_similarity_by_variation_num_nodes(path_1)
 
-#accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_2)
+accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_0)
 
-#print(accuracy_results_structure_model)
-#print(accuracy_results_overall_model)
-#print(accuracy_results_grouped_structure_model)
+print(accuracy_results_structure_model)
+print(accuracy_results_overall_model)
+print(accuracy_results_grouped_structure_model)
