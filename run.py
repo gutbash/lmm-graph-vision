@@ -114,10 +114,10 @@ async def run_batch():
 ###### test evaluation ######
 
 openai = OpenAI(api_key=openai_api_key, model='gpt-4o')
-deepmind_a = DeepMind(api_key=deepmind_api_key_a, calls_per_second=15/60, model='gemini-1.5-flash-latest')
-deepmind_b = DeepMind(api_key=deepmind_api_key_b, calls_per_second=15/60, model='gemini-1.5-flash-latest')
-deepmind_c = DeepMind(api_key=deepmind_api_key_c, calls_per_second=15/60, model='gemini-1.5-flash-latest')
-deepmind_d = DeepMind(api_key=deepmind_api_key_d, calls_per_second=15/60, model='gemini-1.5-flash-latest')
+deepmind_a = DeepMind(api_key=deepmind_api_key_a, calls_per_second=15/60, model='gemini-1.5-pro')
+deepmind_b = DeepMind(api_key=deepmind_api_key_b, calls_per_second=15/60, model='gemini-1.5-pro')
+deepmind_c = DeepMind(api_key=deepmind_api_key_c, calls_per_second=15/60, model='gemini-1.5-pro')
+deepmind_d = DeepMind(api_key=deepmind_api_key_d, calls_per_second=15/60, model='gemini-1.5-pro')
 anthropic = Anthropic(api_key=anthropic_api_key, model='claude-3-haiku-20240307')
 
 evaluator = Evaluator()
@@ -126,7 +126,7 @@ async def evaluate_model(evaluator, eval_name, model, csv_name, prompts=PROMPTS,
     for prompt_name, prompts_group in prompts.items():
         for structure in structures:
             try:
-                await evaluator.evaluate(model=model, prompts=prompts_group, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=1)
+                await evaluator.evaluate(model=model, prompts=prompts_group, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=None)
             except Exception as e:
                 logger.error(f'{e}')
                 return
@@ -134,10 +134,7 @@ async def evaluate_model(evaluator, eval_name, model, csv_name, prompts=PROMPTS,
 async def run_evaluations():
     # Create a list of coroutines for the evaluations you want to run
     tasks = [
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_a, csv_name='deepmind-gemini-1.5-flash_a', structures=['binary_tree']),
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_b, csv_name='deepmind-gemini-1.5-flash_b', structures=['binary_search_tree']),
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_c, csv_name='deepmind-gemini-1.5-flash_c', structures=['undirected_graph']),
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_d, csv_name='deepmind-gemini-1.5-flash_d', structures=['directed_graph']),
+        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_a, csv_name='deepmind-gemini-1.5-pro', structures=['binary_tree']),
     ]
     
     # Run the tasks concurrently

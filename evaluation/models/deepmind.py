@@ -163,8 +163,6 @@ class DeepMind:
                     #await asyncio.sleep(retry_delay_red)
                     continue
                 
-                print(completion)
-                
                 content = completion['candidates'][0]['content']['parts'][0]['text']
                 
                 logger.info(f"│\n         │\n{content}\n         │")

@@ -839,7 +839,7 @@ def calculate_accuracies(file_path1, file_path2):
     
     return accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model
 
-path_0 = Path('results/archive/large-macro/openai/gpt-4-turbo/openai-zero_shot-large_macro_edit.csv')
+path_0 = Path('results/deepmind-gemini-1.5-flash-zero_shot-large_macro.csv')
 path_1 = Path('results/archive/large-macro/openai/gpt-4o/openai-gpt-4o-zero_shot-large_macro.csv')
 path_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-15-zero_shot-large_macro.csv')
 path_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
@@ -849,8 +849,8 @@ path_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_
 
 paths = [path_0, path_1, path_2, path_3, path_4, path_5]
 
-accuracy_by_num_nodes(path_0, path_1, path_2, path_3, path_4, path_5)
-accuracy_by_task(paths)
+#accuracy_by_num_nodes(path_0, path_1, path_2, path_3, path_4, path_5)
+#accuracy_by_task(paths)
 ##match_similarity_by_variation_num_nodes(path_1)
 
 accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_0)
