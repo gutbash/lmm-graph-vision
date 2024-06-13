@@ -263,9 +263,9 @@ def plot_feature_importances_with_model(feature_names, model, title):
         raise ValueError("The model provided does not have coefficients accessible via 'coef_'.")
 
     # Plot the feature importances for the model
-    plt.figure(figsize=(5, 5))
+    plt.figure(figsize=(5, 3))
     sorted_idx = np.argsort(np.abs(model_coefs))[::-1]
-    top_n = 30  # Show top 30 features for clarity
+    top_n = 10  # Show top 30 features for clarity
     plt.barh(range(top_n), model_coefs[sorted_idx[:top_n]], color='cadetblue', align='center')
     truncated_feature_names = [name.replace("_", " ") if len(name) <= 20 else name[:13].replace("_", " ").replace("'", "") + "..." for name in np.array(feature_names)[sorted_idx[:top_n]]]
     plt.yticks(range(top_n), truncated_feature_names)
@@ -421,12 +421,12 @@ def main(DATA_PATH, CSV_PATH):
     #plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
     #plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
     #plot_feature_correlation(X, feature_names)
-    plot_tsne(X, y_class=y_class, perplexity=30)
+    #plot_tsne(X, y_class=y_class, perplexity=30)
     #plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
-    #plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
+    plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
     #plot_partial_dependence_with_model(model_reg, X, feature_names, 'num_edges_20')
     
-    plot_3d_pca(pca_image_features, y_class_aligned)
+    #plot_3d_pca(pca_image_features, y_class_aligned)
     #plot_pca_loadings_heatmap(pca, feature_names, n_components=3)
     
     #print(regression_confidence_intervals(metrics_reg['y_test'], metrics_reg['y_pred']))
@@ -441,17 +441,21 @@ def main(DATA_PATH, CSV_PATH):
 if __name__ == "__main__":
     print("Script execution started.")
     # Provide the path to your CSV file here
-    DATA_PATH_1 = Path('results/archive/large-macro/openai')
+    DATA_PATH_0 = Path('results/archive/large-macro/openai/gpt-4o')
+    DATA_PATH_1 = Path('results/archive/large-macro/openai/gpt-4-turbo')
     DATA_PATH_2 = Path('results/archive/large-macro/deepmind/1.5')
     DATA_PATH_3 = Path('results/archive/large-macro/deepmind/1.0')
-    DATA_PATH_4 = Path('results/archive/large-macro/anthropic/opus')
+    DATA_PATH_4 = Path('results/archive/large-macro/deepmind/1.5 Flash')
     DATA_PATH_5 = Path('results/archive/large-macro/anthropic/sonnet')
     DATA_PATH_6 = Path('results/archive/large-macro/anthropic/haiku')
-    CSV_PATH_1 = Path('results/archive/large-macro/openai/openai-zero_shot-large_macro_edit.csv')
-    CSV_PATH_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-15-zero_shot-large_macro.csv')
+    DATA_PATH_7 = Path('results/archive/large-macro/anthropic/opus')
+    CSV_PATH_0 = Path('results/archive/large-macro/openai/gpt-4o/openai-gpt-4o-zero_shot-large_macro-linux.csv')
+    CSV_PATH_1 = Path('results/archive/large-macro/openai/gpt-4-turbo/openai-zero_shot-large_macro_edit.csv')
+    CSV_PATH_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-gemini-1.5-pro-zero_shot-large_macro.csv')
     CSV_PATH_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
-    CSV_PATH_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
+    CSV_PATH_4 = Path('results/archive/large-macro/deepmind/1.5 Flash/deepmind-gemini-1.5-flash-zero_shot-large_macro.csv')
     CSV_PATH_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
     CSV_PATH_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
-    main(DATA_PATH_1, CSV_PATH_1)
+    CSV_PATH_7 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
+    main(DATA_PATH_7, CSV_PATH_7)
     print("Script execution completed.")

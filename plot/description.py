@@ -102,8 +102,8 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path, file_path_3: Pat
     plt.subplots_adjust(wspace=0.1, hspace=0.3)
     # Save the figure
     plt.savefig('plot/accuracy_by_num_nodes.pdf', dpi=300, transparent=True, bbox_inches='tight', format='pdf')
-    
-def accuracy_by_num_edges(file_path_1: Path, file_path_2: Path, file_path_3: Path, file_path_4: Path, file_path_5: Path, file_path_6: Path) -> None:
+
+def accuracy_by_num_edges(file_path_1: Path, file_path_2: Path, file_path_3: Path, file_path_4: Path, file_path_5: Path, file_path_6: Path, file_path_7: Path, file_path_8: Path) -> None:
     # Read each CSV file into a DataFrame
     df1 = pd.read_csv(file_path_1)
     df2 = pd.read_csv(file_path_2)
@@ -111,23 +111,26 @@ def accuracy_by_num_edges(file_path_1: Path, file_path_2: Path, file_path_3: Pat
     df4 = pd.read_csv(file_path_4)
     df5 = pd.read_csv(file_path_5)
     df6 = pd.read_csv(file_path_6)
+    df7 = pd.read_csv(file_path_7)
+    df8 = pd.read_csv(file_path_8)
 
     # Prepare a figure to contain subplots
-    fig, axes = plt.subplots(2, 3, figsize=(10, 5), sharey=True, sharex=True)  # Now sharing the y-axis
-    
+    fig, axes = plt.subplots(2, 4, figsize=(15, 5), sharey=True, sharex=True)  # Now sharing the y-axis
+
     axes[0, 0].set_ylabel('Accuracy')
     axes[1, 0].set_ylabel('Accuracy')
     axes[1, 0].set_xlabel('Number of Edges')
     axes[1, 1].set_xlabel('Number of Edges')
     axes[1, 2].set_xlabel('Number of Edges')
+    axes[1, 3].set_xlabel('Number of Edges')
 
-    for subplot_index, (df, ax) in enumerate(zip([df1, df2, df3, df4, df5, df6], axes.flatten()), start=1):
-        # Group by 'structure' and 'num_nodes' to calculate match rate
+    for subplot_index, (df, ax) in enumerate(zip([df1, df2, df3, df4, df5, df6, df7, df8], axes.flatten()), start=1):
+        # Group by 'structure' and 'num_edges' to calculate match rate
         grouped_data = df.groupby(['structure', 'num_edges']).agg(match_rate=('match', 'mean')).reset_index()
         # normalize match to 0-100 scale
         grouped_data['match_rate'] = grouped_data['match_rate'] * 100
 
-        # Get unique structures and num_nodes
+        # Get unique structures and num_edges
         structures = grouped_data['structure'].unique()
         num_edges = grouped_data['num_edges'].unique()
 
@@ -144,7 +147,7 @@ def accuracy_by_num_edges(file_path_1: Path, file_path_2: Path, file_path_3: Pat
         for i, structure in enumerate(structures):
             structure_data = grouped_data[grouped_data['structure'] == structure]
             
-            # Re-index structure_data with num_nodes
+            # Re-index structure_data with num_edges
             structure_data.set_index('num_edges', inplace=True)
             structure_data = structure_data.reindex(num_edges).fillna(0)
 
@@ -913,23 +916,26 @@ def calculate_accuracies(file_path1, file_path2):
     
     return accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model
 
-path_0 = Path('results/deepmind-gemini-1.5-flash-zero_shot-large_macro.csv')
-path_1 = Path('results/archive/large-macro/openai/gpt-4o/openai-gpt-4o-zero_shot-large_macro.csv')
-path_2 = Path('results/archive/large-macro/deepmind/1.5/deepmind-15-zero_shot-large_macro.csv')
-path_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
-path_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
-path_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
-path_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
+path_0 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
+path_1 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
+path_2 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
 
-paths = [path_0, path_1, path_2, path_3, path_4, path_5]
+path_3 = Path('results/archive/large-macro/deepmind/1.0/deepmind-zero_shot-large_macro.csv')
+path_4 = Path('results/archive/large-macro/deepmind/1.5/deepmind-gemini-1.5-pro-zero_shot-large_macro.csv')
+path_5 = Path('results/archive/large-macro/deepmind/1.5 Flash/deepmind-gemini-1.5-flash-zero_shot-large_macro.csv')
+
+path_6 = Path('results/archive/large-macro/openai/gpt-4-turbo/openai-zero_shot-large_macro_edit.csv')
+path_7 = Path('results/archive/large-macro/openai/gpt-4o/openai-gpt-4o-zero_shot-large_macro-linux.csv')
+
+paths = [path_0, path_1, path_2, path_3, path_4, path_5, path_6, path_7]
 
 #accuracy_by_num_nodes(path_0, path_1, path_2, path_3, path_4, path_5)
 #accuracy_by_task(paths)
 ##match_similarity_by_variation_num_nodes(path_1)
-accuracy_by_num_edges(path_1, path_2, path_3, path_4, path_5, path_6)
+accuracy_by_num_edges(path_0, path_1, path_2, path_3, path_4, path_5, path_6, path_7)
 
-accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_0)
+#accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_0)
 
-print(accuracy_results_structure_model)
-print(accuracy_results_overall_model)
-print(accuracy_results_grouped_structure_model)
+#print(accuracy_results_structure_model)
+#print(accuracy_results_overall_model)
+#print(accuracy_results_grouped_structure_model)

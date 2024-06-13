@@ -1,0 +1,549 @@
+
+Top contributing terms for text_prompt_svd_4:
+num_nodes_9: 0.7071067811865542
+num_nodes_6: 4.484082076218647e-13
+num_edges_14: 7.328542663325845e-15
+num_edges_16: 7.328542663325845e-15
+num_edges_18: 7.328542663325845e-15
+density_bin_5: 7.328542663325845e-15
+num_edges_4: 7.217520360863329e-15
+num_nodes_10: 1.2648629304440601e-15
+num_nodes_4: 1.1555173757177737e-15
+num_nodes_8: 1.0831630573824996e-15
+
+Bottom contributing terms for text_prompt_svd_4:
+num_edges_8: -4.647016869697951e-16
+density_bin_2: -4.647016869697951e-16
+num_edges_6: -8.925558416042167e-16
+num_edges_7: -8.925558416042167e-16
+num_edges_10: -3.494396866468062e-15
+num_edges_20: -8.190482679912806e-15
+density_bin_1: -8.93103509940066e-15
+num_edges_3: -1.0961232963038128e-14
+num_nodes_7: -4.5417826604997166e-13
+density_bin_3: -0.707106781186541
+Training Regression Metrics: {'mse': 0.03545406910101542, 'r2': 0.5084925263580263}
+Training Classification Metrics: {'accuracy': 0.8317486564696155, 'precision': 0.8364643545279383, 'recall': 0.8650062266500622, 'f1': 0.8504958981266071}
+Feature importances for Linear Regression:
+num_nodes_4: -58579570593.4116
+num_nodes_5: -107786488180.9276
+num_nodes_6: -157963389931.0869
+num_nodes_7: -225502554559.6506
+num_nodes_8: -315285069810.7980
+num_nodes_9: -436728650514.1573
+num_nodes_10: -648186528855.6367
+num_edges_3: 58946552384.3690
+num_edges_4: 186602287744.5089
+num_edges_6: 180164117902.6233
+num_edges_7: 126448472403.4563
+num_edges_8: 189076769671.8399
+num_edges_10: 180649858621.1960
+num_edges_12: 148497300774.5150
+num_edges_14: 165506966677.2407
+num_edges_16: 158011502209.4684
+num_edges_18: 82160182151.3350
+num_edges_20: 110773369276.5038
+num_edges_22: 82160182151.3192
+density_bin_1: 523463489165.2217
+density_bin_2: 731760766846.2968
+density_bin_3: 536142737700.6537
+density_bin_4: 429848496564.4234
+density_bin_5: 311427107370.4896
+density_bin_6: 314834809410.8444
+avg_degree_bin_1: -89397775075.9496
+avg_degree_bin_2: -89397775075.9059
+in_degree_hist_0: 260637720492.2445
+in_degree_hist_2: -993328077845.3739
+in_degree_hist_3: 244099086169.4116
+in_degree_hist_4: -1450898984760.1057
+in_degree_hist_5: 287852587755.1791
+in_degree_hist_6: 249337979046.2342
+in_degree_hist_7: 226320545793.4840
+in_degree_hist_9: 197349515299.4129
+out_degree_hist_0: 41784864547.2866
+out_degree_hist_2: 1027119610622.2185
+out_degree_hist_3: 43119363391.4533
+out_degree_hist_4: 1491527181687.7412
+out_degree_hist_5: 41525595959.6440
+out_degree_hist_6: 40098836933.2679
+out_degree_hist_7: -103435756816.9737
+out_degree_hist_9: 35923324901.4477
+edge_width_1: 6962777555.0971
+edge_width_5: 6962777555.1165
+img_pca_cmp_0: -0.0132
+img_pca_cmp_1: 0.0406
+img_pca_cmp_2: -0.0262
+img_pca_cmp_3: -0.0925
+img_pca_cmp_4: -0.0886
+img_pca_cmp_5: 0.0314
+img_pca_cmp_6: 0.0105
+img_pca_cmp_7: 0.0237
+img_pca_cmp_8: -0.0164
+img_pca_cmp_9: 0.0074
+img_pca_cmp_10: 0.0075
+img_pca_cmp_11: -0.0068
+img_pca_cmp_12: -0.0132
+img_pca_cmp_13: 0.0052
+img_pca_cmp_14: -0.0086
+img_pca_cmp_15: -0.0017
+img_pca_cmp_16: 0.0072
+img_pca_cmp_17: -0.0205
+img_pca_cmp_18: -0.0012
+img_pca_cmp_19: -0.0029
+img_pca_cmp_20: 0.0076
+img_pca_cmp_21: 0.0024
+img_pca_cmp_22: 0.0142
+img_pca_cmp_23: -0.0109
+img_pca_cmp_24: -0.0202
+img_pca_cmp_25: -0.0263
+img_pca_cmp_26: 0.0098
+img_pca_cmp_27: -0.0013
+img_pca_cmp_28: -0.0013
+img_pca_cmp_29: -0.0201
+img_pca_cmp_30: 0.0168
+img_pca_cmp_31: -0.0087
+img_pca_cmp_32: -0.0130
+img_pca_cmp_33: -0.0015
+img_pca_cmp_34: -0.0110
+img_pca_cmp_35: -0.0103
+img_pca_cmp_36: -0.0217
+img_pca_cmp_37: 0.0017
+img_pca_cmp_38: 0.0005
+img_pca_cmp_39: -0.0175
+img_pca_cmp_40: 0.0140
+img_pca_cmp_41: -0.0034
+img_pca_cmp_42: -0.0191
+img_pca_cmp_43: -0.0015
+img_pca_cmp_44: 0.0007
+img_pca_cmp_45: -0.0065
+img_pca_cmp_46: -0.0143
+img_pca_cmp_47: 0.0113
+img_pca_cmp_48: -0.0031
+img_pca_cmp_49: 0.0106
+img_pca_cmp_50: 0.0008
+img_pca_cmp_51: -0.0119
+img_pca_cmp_52: -0.0109
+img_pca_cmp_53: -0.0123
+img_pca_cmp_54: 0.0015
+img_pca_cmp_55: -0.0111
+img_pca_cmp_56: -0.0067
+img_pca_cmp_57: 0.0000
+img_pca_cmp_58: -0.0053
+img_pca_cmp_59: 0.0139
+img_pca_cmp_60: 0.0028
+img_pca_cmp_61: 0.0087
+img_pca_cmp_62: 0.0028
+img_pca_cmp_63: 0.0040
+img_pca_cmp_64: 0.0136
+img_pca_cmp_65: -0.0028
+img_pca_cmp_66: 0.0120
+img_pca_cmp_67: 0.0042
+img_pca_cmp_68: -0.0141
+img_pca_cmp_69: -0.0012
+img_pca_cmp_70: 0.0144
+img_pca_cmp_71: -0.0005
+img_pca_cmp_72: -0.0024
+img_pca_cmp_73: -0.0101
+img_pca_cmp_74: 0.0008
+img_pca_cmp_75: -0.0119
+img_pca_cmp_76: -0.0092
+img_pca_cmp_77: 0.0007
+img_pca_cmp_78: 0.0092
+img_pca_cmp_79: -0.0004
+img_pca_cmp_80: 0.0088
+img_pca_cmp_81: -0.0058
+img_pca_cmp_82: -0.0120
+img_pca_cmp_83: -0.0044
+img_pca_cmp_84: -0.0054
+img_pca_cmp_85: -0.0014
+img_pca_cmp_86: 0.0048
+img_pca_cmp_87: -0.0014
+img_pca_cmp_88: 0.0009
+img_pca_cmp_89: -0.0049
+img_pca_cmp_90: -0.0071
+img_pca_cmp_91: 0.0098
+img_pca_cmp_92: 0.0048
+img_pca_cmp_93: 0.0012
+img_pca_cmp_94: 0.0103
+img_pca_cmp_95: 0.0001
+img_pca_cmp_96: -0.0070
+img_pca_cmp_97: 0.0066
+img_pca_cmp_98: -0.0092
+img_pca_cmp_99: -0.0032
+node_rgb_red_channel: -128616916469.4707
+node_rgb_green_channel: -92964979757.0687
+node_rgb_blue_channel: 0.0530
+num_nodes_edge_width_interaction: -0.0237
+str_binary_search_tree: 272703476478.9831
+str_binary_tree: -594693320527.4939
+str_directed_graph: -234134786617.6200
+str_undirected_graph: 207286161503.7126
+task_adjacency_list: -981772457780.2732
+task_breadth_first_search: 847947452947.3125
+task_depth_first_search: -734820050781.0386
+task_in_order: -619967877357.5306
+task_post_order: -255301314600.6584
+task_pre_order: 42600605594.4678
+var_id_1: 338021084593.7618
+var_id_2: 338021084593.7583
+var_id_3: 337496125301.0766
+gen_id_1-0: 44229528743.1982
+gen_id_1-1: 45145619792.6526
+gen_id_1-2: 44659897995.4839
+gen_id_2-0: 43918972057.3781
+gen_id_2-1: 44781933803.1127
+gen_id_2-2: 44903563853.9991
+gen_id_3-0: 43918972057.3399
+gen_id_3-1: 44167629762.7198
+gen_id_3-2: 44537453095.5913
+gen_id_4-0: 44781933803.0160
+gen_id_4-1: 44476076180.6256
+gen_id_4-2: 45445964939.3049
+gen_id_5-0: 44105625051.9827
+gen_id_5-1: 44842799341.3868
+gen_id_5-2: 44537453095.4694
+gen_id_6-0: 44105625051.9319
+gen_id_6-1: 45024791436.2097
+gen_id_6-2: 45445964939.1799
+gen_id_7-0: 44476076180.4544
+gen_id_7-1: 44476076180.4484
+gen_id_7-2: 43981296650.6664
+txt_prompt_'Provide a Python dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the directed graph.': 127752346959.4478
+txt_prompt_'Provide a Python dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the undirected graph.': -6380270235.3082
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 1.': -211181692327.1611
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 2.': -284241952037.5644
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 3.': -313623757666.8882
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 4.': -239508917495.8520
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 5.': -137289004885.4980
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 6.': -238176172857.5993
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 7.': -111202301596.5099
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 8.': -105201378358.5615
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 9.': -76587524679.9483
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 1.': -305434650810.1039
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 2.': -407025067051.4532
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 3.': -305434650810.0967
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 4.': -289386574487.6831
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 5.': -296631303297.0084
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 6.': -191644944367.2900
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 7.': -220309495988.4739
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 8.': -93128615036.2719
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 9.': -170863827903.5591
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 1.': -6949482019.4995
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 2.': -8978275072.4968
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 3.': -10201212672.2006
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 4.': -7587730338.3704
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 5.': -4268977166.3381
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 6.': -7717325225.8148
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 7.': -3583099686.8577
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 8.': -3766445846.7881
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 9.': -2467761294.1243
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 1.': -58704334608.8582
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 2.': -77984294715.6396
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 3.': -58370048287.0504
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 4.': -56320620684.0446
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 5.': -55266065883.7034
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 6.': -33440217520.4344
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 7.': -40916057346.1140
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 8.': -18983719699.5431
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 9.': -35739204420.8816
+txt_prompt_'Provide a Python list[int] of vertices representing the in-order traversal for the image of the binary search tree.': 71755722067.6045
+txt_prompt_'Provide a Python list[int] of vertices representing the in-order traversal for the image of the binary tree.': 475940462331.2089
+txt_prompt_'Provide a Python list[int] of vertices representing the post-order traversal for the image of the binary search tree.': -119763437602.1484
+txt_prompt_'Provide a Python list[int] of vertices representing the post-order traversal for the image of the binary tree.': 314123890528.0558
+txt_prompt_'Provide a Python list[int] of vertices representing the pre-order traversal for the image of the binary search tree.': -452292247844.2269
+txt_prompt_'Provide a Python list[int] of vertices representing the pre-order traversal for the image of the binary tree.': -79572972610.2148
+txt_prompt_svd_0: -224412399033.0072
+txt_prompt_svd_1: -119973590935.7820
+txt_prompt_svd_2: 394231059824.8787
+txt_prompt_svd_3: 180226823489.4328
+txt_prompt_svd_4: 487752732841.3684
+txt_prompt_svd_5: 304262545704.1610
+txt_prompt_svd_6: 21442686211.5543
+txt_prompt_svd_7: 230941060688.8584
+txt_prompt_svd_8: -178858382399.1631
+txt_prompt_svd_9: -78482315196.2887
+txt_prompt_svd_10: 504289778264.3658
+txt_prompt_svd_11: 681474272729.4102
+txt_prompt_svd_12: -150380033240.9204
+txt_prompt_svd_13: 301250296682.7012
+txt_prompt_svd_14: -369539174964.4304
+txt_prompt_svd_15: -359713490577.5435
+txt_prompt_svd_16: 650034516134.4739
+txt_prompt_svd_17: 729059723934.8372
+txt_prompt_svd_18: -237711794137.0883
+txt_prompt_svd_19: -128788492401.3694
+
+Feature importances for Logistic Regression:
+density_bin_6: 1.1389
+img_pca_cmp_4: 1.1274
+img_pca_cmp_5: 1.1150
+txt_prompt_'Provide a Python dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the directed graph.': 0.8723
+txt_prompt_'Provide a Python dict[int, list[int]] of vertices and their edges representing the adjacency list for the image of the undirected graph.': 0.7071
+num_nodes_5: 0.7071
+density_bin_2: 0.6943
+num_edges_22: 0.6362
+density_bin_1: 0.6281
+density_bin_3: 0.5854
+in_degree_hist_9: 0.5764
+density_bin_5: 0.5418
+in_degree_hist_5: 0.5356
+node_rgb_blue_channel: 0.5293
+img_pca_cmp_36: 0.5075
+in_degree_hist_3: 0.4987
+img_pca_cmp_0: 0.4746
+img_pca_cmp_13: 0.4729
+out_degree_hist_9: 0.4535
+txt_prompt_svd_4: 0.4513
+img_pca_cmp_24: 0.4493
+num_edges_6: 0.4391
+num_edges_3: 0.4267
+str_directed_graph: 0.4160
+str_undirected_graph: 0.4028
+gen_id_1-0: 0.3990
+gen_id_5-0: 0.3984
+img_pca_cmp_12: 0.3843
+gen_id_4-0: 0.3630
+gen_id_6-2: 0.3600
+txt_prompt_'Provide a Python list[int] of vertices representing the in-order traversal for the image of the binary tree.': 0.3588
+img_pca_cmp_8: 0.3583
+num_nodes_4: 0.3471
+img_pca_cmp_7: 0.3471
+img_pca_cmp_49: 0.3417
+gen_id_2-0: 0.3408
+img_pca_cmp_2: 0.3343
+img_pca_cmp_32: 0.3281
+img_pca_cmp_14: 0.3277
+num_edges_20: 0.3226
+gen_id_1-1: 0.3222
+num_edges_18: 0.3217
+img_pca_cmp_29: 0.3131
+gen_id_5-1: 0.2819
+img_pca_cmp_42: 0.2633
+img_pca_cmp_3: 0.2617
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 8.': 0.2574
+img_pca_cmp_40: 0.2548
+gen_id_6-1: 0.2539
+img_pca_cmp_11: 0.2404
+avg_degree_bin_2: 0.2383
+avg_degree_bin_1: 0.2383
+num_nodes_10: 0.2345
+gen_id_7-2: 0.2339
+img_pca_cmp_20: 0.2321
+txt_prompt_svd_15: 0.2312
+img_pca_cmp_31: 0.2291
+txt_prompt_svd_13: 0.2249
+gen_id_6-0: 0.2170
+gen_id_7-1: 0.2117
+out_degree_hist_7: 0.2084
+in_degree_hist_7: 0.2084
+img_pca_cmp_22: 0.2076
+gen_id_5-2: 0.2040
+img_pca_cmp_37: 0.2017
+edge_width_5: 0.1995
+edge_width_1: 0.1995
+in_degree_hist_6: 0.1986
+num_nodes_edge_width_interaction: 0.1969
+gen_id_4-1: 0.1938
+img_pca_cmp_46: 0.1930
+gen_id_3-1: 0.1887
+img_pca_cmp_23: 0.1852
+img_pca_cmp_6: 0.1807
+txt_prompt_svd_6: 0.1775
+num_edges_7: 0.1773
+gen_id_7-0: 0.1773
+out_degree_hist_0: 0.1754
+num_nodes_7: 0.1754
+num_nodes_8: 0.1707
+img_pca_cmp_17: 0.1707
+in_degree_hist_0: 0.1678
+in_degree_hist_4: 0.1653
+out_degree_hist_4: 0.1653
+img_pca_cmp_73: 0.1613
+img_pca_cmp_68: 0.1607
+txt_prompt_'Provide a Python list[int] of vertices representing the in-order traversal for the image of the binary search tree.': 0.1571
+img_pca_cmp_28: 0.1516
+img_pca_cmp_61: 0.1513
+txt_prompt_'Provide a Python list[int] of vertices representing the pre-order traversal for the image of the binary tree.': 0.1488
+task_in_order: 0.1476
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 1.': 0.1475
+txt_prompt_svd_12: 0.1466
+num_edges_8: 0.1453
+img_pca_cmp_54: 0.1447
+txt_prompt_svd_17: 0.1445
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 1.': 0.1439
+txt_prompt_svd_2: 0.1401
+img_pca_cmp_47: 0.1399
+img_pca_cmp_53: 0.1399
+img_pca_cmp_26: 0.1396
+img_pca_cmp_16: 0.1391
+txt_prompt_svd_18: 0.1374
+img_pca_cmp_82: 0.1359
+num_edges_10: 0.1355
+img_pca_cmp_91: 0.1226
+task_adjacency_list: 0.1213
+txt_prompt_'Provide a Python list[int] of vertices representing the post-order traversal for the image of the binary tree.': 0.1208
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 3.': 0.1199
+img_pca_cmp_65: 0.1189
+img_pca_cmp_15: 0.1180
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 3.': 0.1155
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 1.': 0.1149
+img_pca_cmp_19: 0.1131
+img_pca_cmp_69: 0.1124
+img_pca_cmp_41: 0.1112
+task_post_order: 0.1108
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 8.': 0.1099
+img_pca_cmp_59: 0.1083
+img_pca_cmp_25: 0.1046
+txt_prompt_svd_7: 0.1032
+num_nodes_9: 0.1018
+txt_prompt_svd_14: 0.0995
+num_edges_4: 0.0966
+gen_id_2-1: 0.0958
+task_breadth_first_search: 0.0952
+gen_id_2-2: 0.0951
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 9.': 0.0946
+img_pca_cmp_98: 0.0925
+img_pca_cmp_1: 0.0920
+out_degree_hist_2: 0.0917
+in_degree_hist_2: 0.0917
+img_pca_cmp_63: 0.0915
+img_pca_cmp_35: 0.0906
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 4.': 0.0882
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 6.': 0.0879
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 7.': 0.0875
+img_pca_cmp_48: 0.0875
+out_degree_hist_5: 0.0864
+img_pca_cmp_21: 0.0851
+img_pca_cmp_10: 0.0849
+img_pca_cmp_92: 0.0814
+txt_prompt_svd_8: 0.0801
+img_pca_cmp_81: 0.0792
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 1.': 0.0791
+txt_prompt_'Provide a Python list[int] of vertices representing the pre-order traversal for the image of the binary search tree.': 0.0788
+img_pca_cmp_89: 0.0780
+gen_id_3-0: 0.0761
+img_pca_cmp_58: 0.0755
+img_pca_cmp_97: 0.0750
+txt_prompt_svd_16: 0.0750
+img_pca_cmp_45: 0.0732
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 5.': 0.0720
+img_pca_cmp_38: 0.0703
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 2.': 0.0701
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 5.': 0.0699
+str_binary_search_tree: 0.0692
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 7.': 0.0680
+img_pca_cmp_85: 0.0680
+img_pca_cmp_75: 0.0662
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 4.': 0.0661
+img_pca_cmp_51: 0.0657
+num_nodes_6: 0.0645
+gen_id_4-2: 0.0632
+img_pca_cmp_96: 0.0628
+img_pca_cmp_39: 0.0620
+img_pca_cmp_86: 0.0609
+txt_prompt_svd_10: 0.0598
+txt_prompt_svd_19: 0.0586
+img_pca_cmp_79: 0.0583
+txt_prompt_svd_9: 0.0571
+img_pca_cmp_52: 0.0565
+str_binary_tree: 0.0563
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 9.': 0.0550
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 8.': 0.0547
+img_pca_cmp_76: 0.0545
+txt_prompt_svd_5: 0.0540
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 3.': 0.0538
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 7.': 0.0537
+img_pca_cmp_64: 0.0535
+task_pre_order: 0.0526
+num_edges_16: 0.0507
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 4.': 0.0507
+num_edges_14: 0.0465
+img_pca_cmp_57: 0.0464
+img_pca_cmp_44: 0.0453
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 8.': 0.0452
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 3.': 0.0444
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 9.': 0.0434
+img_pca_cmp_30: 0.0422
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 2.': 0.0420
+img_pca_cmp_18: 0.0405
+img_pca_cmp_70: 0.0399
+img_pca_cmp_77: 0.0390
+out_degree_hist_6: 0.0379
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 2.': 0.0374
+img_pca_cmp_50: 0.0371
+txt_prompt_svd_3: 0.0357
+img_pca_cmp_95: 0.0354
+img_pca_cmp_60: 0.0351
+img_pca_cmp_9: 0.0349
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 5.': 0.0333
+img_pca_cmp_94: 0.0325
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 6.': 0.0323
+img_pca_cmp_88: 0.0316
+img_pca_cmp_84: 0.0312
+img_pca_cmp_66: 0.0306
+img_pca_cmp_33: 0.0304
+txt_prompt_'Provide a Python list[int] of vertices representing the post-order traversal for the image of the binary search tree.': 0.0292
+img_pca_cmp_55: 0.0291
+txt_prompt_svd_0: 0.0281
+img_pca_cmp_62: 0.0255
+txt_prompt_svd_11: 0.0247
+img_pca_cmp_93: 0.0241
+img_pca_cmp_71: 0.0229
+var_id_2: 0.0224
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the directed graph starting from vertex 6.': 0.0223
+img_pca_cmp_80: 0.0223
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 7.': 0.0222
+img_pca_cmp_67: 0.0213
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the directed graph starting from vertex 6.': 0.0197
+var_id_1: 0.0192
+img_pca_cmp_56: 0.0181
+img_pca_cmp_90: 0.0174
+img_pca_cmp_43: 0.0173
+img_pca_cmp_99: 0.0162
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 5.': 0.0157
+out_degree_hist_3: 0.0143
+img_pca_cmp_87: 0.0130
+num_edges_12: 0.0124
+task_depth_first_search: 0.0117
+img_pca_cmp_74: 0.0108
+density_bin_4: 0.0100
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 2.': 0.0092
+gen_id_1-2: 0.0087
+txt_prompt_'Provide a Python list[int] of vertices representing the breadth-first search traversal for the image of the undirected graph starting from vertex 4.': 0.0084
+txt_prompt_svd_1: 0.0082
+img_pca_cmp_72: 0.0038
+img_pca_cmp_27: 0.0037
+var_id_3: 0.0032
+img_pca_cmp_34: 0.0030
+txt_prompt_'Provide a Python list[int] of vertices representing the depth-first search traversal for the image of the undirected graph starting from vertex 9.': 0.0014
+gen_id_3-2: 0.0010
+img_pca_cmp_83: 0.0009
+img_pca_cmp_78: 0.0004
+node_rgb_green_channel: 0.0000
+node_rgb_red_channel: 0.0000
+Regression Metrics: {'mse': 0.037455014996006654, 'r2': 0.49293018799281674, 'y_test': 447     1.000000
+7195    0.166667
+6473    1.000000
+1400    1.000000
+5281    0.200000
+          ...   
+4313    0.000000
+6660    0.555556
+6930    1.000000
+7930    1.000000
+1244    1.000000
+Name: similarity, Length: 1815, dtype: float64, 'y_pred': array([0.96280038, 0.54580819, 0.99698007, ..., 0.72714364, 0.72274911,
+       1.02652108])}
+Classification Metrics: {'accuracy': 0.8275482093663912, 'precision': 0.8378109452736319, 'recall': 0.8487903225806451, 'f1': 0.8432648973460191, 'y_test': 447      True
+7195    False
+6473     True
+1400     True
+5281    False
+        ...  
+4313    False
+6660    False
+6930     True
+7930     True
+1244     True
+Name: match, Length: 1815, dtype: bool, 'y_pred': array([ True, False,  True, ...,  True,  True,  True]), 'y_pred_prob': array([0.94365606, 0.0090658 , 0.75788567, ..., 0.52356767, 0.6136141 ,
+       0.98007584])}
