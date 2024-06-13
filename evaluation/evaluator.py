@@ -43,7 +43,7 @@ class RateLimiter:
             current_time = time.monotonic()
             elapsed_time = current_time - self.last_call_time
 
-            if elapsed_time < 1 / self.calls_per_second:
+            if (elapsed_time < 1 / self.calls_per_second):
                 await asyncio.sleep(1 / self.calls_per_second - elapsed_time)
 
             self.last_call_time = time.monotonic()
@@ -160,9 +160,9 @@ class Evaluator:
       logger.info(f'[T{self.completed_calls}/{self.total_calls}] Complete')
       
       if prompt.get('task') == 'adjacency_list':
-        pattern = r'(\{.*?\})'
+        pattern = r'(\{.*?\})|(\[.*?\])|(\[.*?])|(\{.*?})'
       else:
-        pattern = r'(\[.*?\])'
+        pattern = r'(\[.*?\])|(\[.*?])|(\{.*?\})|(\{.*?})'
 
       content = re.sub(' +', ' ', result.replace('\n', ''))
       matches = re.findall(pattern, content)
@@ -178,7 +178,7 @@ class Evaluator:
           clean_matches = [match for match in matches if match]
         #logger.info(f'Clean Matches: {clean_matches}')
         
-        longest_match = max(clean_matches, key=len)
+        longest_match = clean_matches[-1]
         clean_pattern = "[^][{},:0-9]"
         cleaned_string = re.sub(clean_pattern, "", str(longest_match))
         if cleaned_string[-1] == '}':
@@ -191,7 +191,11 @@ class Evaluator:
         except SyntaxError as e:
           logger.error(f'Error parsing model response: {e}')
           logger.info(f'Content: {content}')
-          return
+          express_predicted = ""
+        except ValueError as e:
+          logger.error(f'ValueError parsing model response: {e}')
+          logger.info(f'Content: {content}')
+          express_predicted = ""
         
         logger.info(f'Ground Truth: {express_expected} | Predicted: {express_predicted}')
           
@@ -214,7 +218,7 @@ class Evaluator:
         'task': task.get('task'),
         'text_prompt': str([message.content for message in message_list if type(message) == UserMessage]).strip("]["),
         'image_prompt': image_path,
-        'response': content.replace('\n', '\\n'),
+        'response': content.replace('\n', '\\n').encode('ascii', 'replace').decode(),
         'predicted': express_predicted,
         'ground_truth': task.get('ground_truth'),
         'match': True if similarity >= 100.0 else False,
@@ -254,5 +258,3 @@ class Evaluator:
       tb = traceback.format_exc()
       logger.error(f'{type(e).__name__} @ {__name__}: {e}\n{tb}')
       raise Exception('Error writing to CSV')
-    
-    

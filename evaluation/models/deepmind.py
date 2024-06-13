@@ -14,7 +14,7 @@ from typing import List, TypeVar, Literal
 logger = Logger(__name__)
 
 Messages = TypeVar("Messages", UserMessage, ModelMessage)
-Model = Literal['gemini-pro-vision', 'gemini-1.5-pro-latest']
+Model = Literal['gemini-pro-vision', 'gemini-1.5-pro-latest', 'gemini-1.5-flash-latest']
 
 class DeepMind:
     """
@@ -142,7 +142,7 @@ class DeepMind:
                 start = perf_counter()
                 
                 async with httpx.AsyncClient(timeout=timeout) as client:
-                    response = await client.post(f'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key={self.api_key}', headers=headers, data=json.dumps(data))
+                    response = await client.post(f'https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}', headers=headers, data=json.dumps(data))
                     completion = response.json()
                     
                 end = perf_counter()

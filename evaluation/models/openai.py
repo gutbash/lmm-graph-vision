@@ -73,7 +73,7 @@ class OpenAI:
     top_p: float = 1.0 # 0.0 to 1.0
     calls_per_second: float = 5.0
     
-    def __init__(self, api_key: str, frequency_penalty: float = 0.0, presence_penalty: float = 0.0, logit_bias: Dict[str, int] = None, logprobs: bool = False, top_logprobs: int = None, max_tokens: int = 1000, n: int = None, seed: int = None, stop: List[str] = None, temperature: float = 1.0, top_p: float = 1.0, calls_per_second: float = 5.0) -> None:
+    def __init__(self, api_key: str, model: str = "gpt-4-vision-preview", frequency_penalty: float = 0.0, presence_penalty: float = 0.0, logit_bias: Dict[str, int] = None, logprobs: bool = False, top_logprobs: int = None, max_tokens: int = 1000, n: int = None, seed: int = None, stop: List[str] = None, temperature: float = 1.0, top_p: float = 1.0, calls_per_second: float = 5.0) -> None:
         """
         Initialize the OpenAI model.
         
@@ -104,6 +104,7 @@ class OpenAI:
         top_p : float
             the top p value
         """
+        self.model = model
         self.api_key = api_key
         self.client = openai.OpenAI(api_key=api_key)
         self.frequency_penalty = frequency_penalty
