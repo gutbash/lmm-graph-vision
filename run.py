@@ -126,7 +126,7 @@ async def evaluate_model(evaluator, eval_name, model, csv_name, prompts=PROMPTS,
     for prompt_name, prompts_group in prompts.items():
         for structure in structures:
             try:
-                await evaluator.evaluate(model=model, prompts=prompts_group, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=None)
+                await evaluator.evaluate(model=model,prompts=prompts_group, yaml_path=yaml_path, yaml_name=f'{structure}.yaml', csv_path=Path('results/'), csv_name=f'{csv_name}-{prompt_name}-{eval_name}.csv', repeats=3, limit=1)
             except Exception as e:
                 logger.error(f'{e}')
                 return
@@ -134,7 +134,7 @@ async def evaluate_model(evaluator, eval_name, model, csv_name, prompts=PROMPTS,
 async def run_evaluations():
     # Create a list of coroutines for the evaluations you want to run
     tasks = [
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=anthropic, csv_name='anthropic-haiku', structures=['directed_graph', 'undirected_graph', 'binary_search_tree', 'binary_tree']),
+        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=openai, csv_name='gpt4v', structures=['directed_graph', 'undirected_graph', 'binary_search_tree', 'binary_tree']),
         #evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=openai, csv_name='openai-dg', structures=['directed_graph']),
     ]
     
@@ -142,4 +142,4 @@ async def run_evaluations():
     await asyncio.gather(*tasks)
 
 # Run the run_evaluations coroutine
-asyncio.run(run_evaluations())
+#asyncio.run(run_evaluations())

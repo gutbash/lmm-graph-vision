@@ -1,0 +1,7 @@
+Model,Total Characters,Average Characters,Std Dev Characters,Min Characters,Max Characters,Total Words,Average Words,Std Dev Words,Min Words,Max Words,Total Tokens,Average Tokens,Standard Deviation,Minimum Tokens,Maximum Tokens
+GPT-4 Vision ,5068618,559,289,32,2054,907905,100,53,6,360,1376664,152,79,8,561
+Gemini 1.5 Pro,266685,29,25,10,145,73326,8,6,3,37,218625,24,17,9,110
+Gemini 1.0 Pro,266413,29,25,10,231,73249,8,6,3,46,218407,24,17,9,104
+Claude 3 Opus,3590616,396,214,9,1955,647348,71,40,3,369,1038594,114,64,9,547
+Claude 3 Sonnet,3957662,436,206,65,1984,700621,77,37,13,343,1078054,119,64,21,581
+Claude 3 Haiku,1311315,145,90,21,894,243972,27,16,7,164,421265,46,27,19,259

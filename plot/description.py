@@ -103,6 +103,80 @@ def accuracy_by_num_nodes(file_path_1: Path, file_path_2: Path, file_path_3: Pat
     # Save the figure
     plt.savefig('plot/accuracy_by_num_nodes.pdf', dpi=300, transparent=True, bbox_inches='tight', format='pdf')
     
+def accuracy_by_num_edges(file_path_1: Path, file_path_2: Path, file_path_3: Path, file_path_4: Path, file_path_5: Path, file_path_6: Path) -> None:
+    # Read each CSV file into a DataFrame
+    df1 = pd.read_csv(file_path_1)
+    df2 = pd.read_csv(file_path_2)
+    df3 = pd.read_csv(file_path_3)
+    df4 = pd.read_csv(file_path_4)
+    df5 = pd.read_csv(file_path_5)
+    df6 = pd.read_csv(file_path_6)
+
+    # Prepare a figure to contain subplots
+    fig, axes = plt.subplots(2, 3, figsize=(10, 5), sharey=True, sharex=True)  # Now sharing the y-axis
+    
+    axes[0, 0].set_ylabel('Accuracy')
+    axes[1, 0].set_ylabel('Accuracy')
+    axes[1, 0].set_xlabel('Number of Edges')
+    axes[1, 1].set_xlabel('Number of Edges')
+    axes[1, 2].set_xlabel('Number of Edges')
+
+    for subplot_index, (df, ax) in enumerate(zip([df1, df2, df3, df4, df5, df6], axes.flatten()), start=1):
+        # Group by 'structure' and 'num_nodes' to calculate match rate
+        grouped_data = df.groupby(['structure', 'num_edges']).agg(match_rate=('match', 'mean')).reset_index()
+        # normalize match to 0-100 scale
+        grouped_data['match_rate'] = grouped_data['match_rate'] * 100
+
+        # Get unique structures and num_nodes
+        structures = grouped_data['structure'].unique()
+        num_edges = grouped_data['num_edges'].unique()
+
+        # Set x-tick positions
+        x_ticks = np.arange(len(num_edges))
+
+        # Define a custom color palette
+        color_palette = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']
+
+        # Calculate the width of each bar
+        bar_width = 0.8 / len(structures)
+
+        # Plot bars for each structure
+        for i, structure in enumerate(structures):
+            structure_data = grouped_data[grouped_data['structure'] == structure]
+            
+            # Re-index structure_data with num_nodes
+            structure_data.set_index('num_edges', inplace=True)
+            structure_data = structure_data.reindex(num_edges).fillna(0)
+
+            # Calculate the positions for the bars of each structure
+            bar_positions = x_ticks + (i - len(structures) / 2 + 0.5) * bar_width
+
+            ax.bar(bar_positions, structure_data['match_rate'], width=bar_width, alpha=1,
+                   color=color_palette[i % len(color_palette)],
+                   label=structure.replace("_", " ") if subplot_index == 2 else "")
+
+        # Set x-tick labels and positions
+        ax.set_xticks(x_ticks)
+        # labels 2-11
+        ax.set_xticklabels(sorted(num_edges))
+
+        for spine in ax.spines.values():
+            spine.set_visible(True)
+            spine.set_color((0, 0, 0, 0.05))
+
+        ax.set_axisbelow(True)
+        ax.grid(True, which='both', axis='y', linestyle='-', linewidth=1, color='lightgrey', alpha=0.25)
+
+        ax.set_ylim(0, 100)
+
+    #axes[1, 1].legend(loc='upper right', bbox_to_anchor=(1, 1.25))
+
+    # Adjust layout for better readability
+    plt.tight_layout(rect=[0.00, 0.00, 1, 1])
+    plt.subplots_adjust(wspace=0.1, hspace=0.3)
+    # Save the figure
+    plt.savefig('plot/accuracy_by_num_edges.pdf', dpi=300, transparent=True, bbox_inches='tight', format='pdf')
+        
 def match_rate_per_structure_grouped_by_resolution(file_path: Path) -> None:
     """
     Plots the match rate per structure grouped by resolution.
@@ -846,14 +920,17 @@ path_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-la
 path_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
 path_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
 
+dg = Path('results/archive/large-macro/openai/gpt-dg-zero_shot-large_macro.csv')
+
 paths = [path_1, path_2, path_3, path_4, path_5, path_6]
 
-accuracy_by_num_nodes(path_1, path_2, path_3, path_4, path_5, path_6)
-accuracy_by_task(paths)
+#accuracy_by_num_nodes(path_1, path_2, path_3, path_4, path_5, path_6)
+#accuracy_by_task(paths)
 ##match_similarity_by_variation_num_nodes(path_1)
+accuracy_by_num_edges(path_1, path_2, path_3, path_4, path_5, path_6)
 
-#accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, path_2)
+accuracy_results_structure_model, accuracy_results_overall_model, accuracy_results_grouped_structure_model = calculate_accuracies(path_1, dg)
 
-#print(accuracy_results_structure_model)
-#print(accuracy_results_overall_model)
-#print(accuracy_results_grouped_structure_model)
+print(accuracy_results_structure_model)
+print(accuracy_results_overall_model)
+print(accuracy_results_grouped_structure_model)

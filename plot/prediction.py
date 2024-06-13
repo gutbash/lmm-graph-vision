@@ -11,6 +11,7 @@ from pathlib import Path
 from mpl_toolkits.mplot3d import Axes3D
 from PIL import Image
 from matplotlib.font_manager import FontProperties, fontManager
+from sklearn.inspection import PartialDependenceDisplay
 
 signifier_font_path = "plot/fonts/Test Signifier/TestSignifier-Medium.otf"
 sohne_font_path = "plot/fonts/Test Söhne Collection/Test Söhne/TestSöhne-Buch.otf"
@@ -130,6 +131,7 @@ def plot_tsne(X, y_class, perplexity=30):
     X_tsne = tsne.fit_transform(X)
 
     # Plot t-SNE visualization for the entire dataset
+    plt.rc('axes', unicode_minus=False)
     plt.figure(figsize=(6, 5))
     scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y_class, cmap='viridis', alpha=0.5)
     plt.colorbar(scatter)
@@ -137,7 +139,7 @@ def plot_tsne(X, y_class, perplexity=30):
     plt.xlabel("t-SNE Component 1")
     plt.ylabel("t-SNE Component 2")
     plt.tight_layout()
-    plt.savefig("plot/tsne_plot.png", dpi=300)
+    plt.savefig("plot/tsne_plot.pdf", transparent=True, format='pdf', dpi=300, bbox_inches='tight')
     
 def regression_confidence_intervals(y_test, y_pred, alpha=0.05):
     n = len(y_test)
@@ -290,6 +292,7 @@ def plot_3d_pca(pca_image_features, y_class):
     X_pca_3d = pca_image_features[:, :3]
 
     # Plotting
+    plt.rc('axes', unicode_minus=False)
     fig = plt.figure(figsize=(5, 5))
     ax = fig.add_subplot(111, projection='3d')
 
@@ -297,16 +300,16 @@ def plot_3d_pca(pca_image_features, y_class):
     scatter = ax.scatter(X_pca_3d[:, 0], X_pca_3d[:, 1], X_pca_3d[:, 2], c=y_class, cmap='viridis', alpha=0.5)
 
     # Adding color bar
-    cbar = fig.colorbar(scatter, ax=ax)
+    cbar = fig.colorbar(scatter, ax=ax, pad=0.15, shrink=0.75)
     cbar.set_label('Class')
 
     ax.set_title('PCA Image Feature Space', fontproperties=sohne_bold_font, fontsize=12, loc='left')
     ax.set_xlabel('PCA Component 1')
     ax.set_ylabel('PCA Component 2')
     ax.set_zlabel('PCA Component 3')
-
+    
     plt.tight_layout()
-    plt.savefig("plot/3d_pca.png", dpi=300)
+    plt.savefig("plot/3d_pca.pdf", dpi=300, transparent=True, format='pdf', bbox_inches='tight')
     
 def plot_pca_loadings_heatmap(pca, feature_names, n_components=3):
     loadings = pca.components_[:n_components, :]
@@ -323,6 +326,38 @@ def plot_pca_loadings_heatmap(pca, feature_names, n_components=3):
     plt.yticks(ticks=np.arange(len(feature_names)), labels=truncated_feature_names, fontsize=8)
     plt.tight_layout()
     plt.savefig("plot/pca_loadings_heatmap.png", dpi=300)
+
+def plot_partial_dependence_with_model(pipeline_reg, X, feature_names, feature_name):
+    # Define the index of the feature to analyze (e.g., 'feature_name')
+    feature_index = feature_names.index(feature_name)  # replace 'feature_name' with your actual feature
+
+    # Plot Partial Dependence Plot (PDP) for the given feature
+    fig, ax = plt.subplots(figsize=(8, 4))
+    display = PartialDependenceDisplay.from_estimator(
+        pipeline_reg.named_steps['regressor'],
+        X,
+        features=[feature_index],
+        feature_names=feature_names,
+        kind="average",
+        ax=ax
+    )
+    display.figure_.suptitle('Partial Dependence Plot')
+    plt.tight_layout()
+    plt.savefig("plot/partial_dependence_plot.png", dpi=300)
+
+    # Plot Individual Conditional Expectation (ICE) plot for the given feature
+    fig, ax = plt.subplots(figsize=(8, 4))
+    display = PartialDependenceDisplay.from_estimator(
+        pipeline_reg.named_steps['regressor'],
+        X,
+        features=[feature_index],
+        feature_names=feature_names,
+        kind="individual",
+        ax=ax
+    )
+    display.figure_.suptitle('Individual Conditional Expectation Plot')
+    plt.tight_layout()
+    plt.savefig("plot/individual_conditional_expectation_plot.png", dpi=300)
 
 def main(DATA_PATH, CSV_PATH):
     
@@ -363,16 +398,16 @@ def main(DATA_PATH, CSV_PATH):
         feature_names = [f"Feature_{i}" for i in range(X.shape[1])]
         print("Updated feature names:", feature_names)
         
-    mean_target = np.mean(metrics_reg['y_test'])
-    median_target = np.median(metrics_reg['y_test'])
+    #mean_target = np.mean(metrics_reg['y_test'])
+    #median_target = np.median(metrics_reg['y_test'])
 
     # Predictions by the mean and median predictor are just the mean and median values repeated for each test instance
-    mean_predictions = np.full_like(metrics_reg['y_test'], fill_value=mean_target)
-    median_predictions = np.full_like(metrics_reg['y_test'], fill_value=median_target)
+    #mean_predictions = np.full_like(metrics_reg['y_test'], fill_value=mean_target)
+    #median_predictions = np.full_like(metrics_reg['y_test'], fill_value=median_target)
 
     # Calculate MSE for the mean and median predictor
-    baseline_mse_mean = mean_squared_error(metrics_reg['y_test'], mean_predictions)
-    baseline_mse_median = mean_squared_error(metrics_reg['y_test'], median_predictions)
+    #baseline_mse_mean = mean_squared_error(metrics_reg['y_test'], mean_predictions)
+    #baseline_mse_median = mean_squared_error(metrics_reg['y_test'], median_predictions)
     
     #baseline_accuracy = accuracy_score(metrics_class['y_test'], metrics_class['y_test'].value_counts().idxmax())
     
@@ -386,11 +421,12 @@ def main(DATA_PATH, CSV_PATH):
     #plot_confusion_matrix(metrics_class['y_test'], metrics_class['y_pred'], ['No Match', 'Match'])
     #plot_precision_recall_curve(metrics_class['y_test'], metrics_class['y_pred_prob'])
     #plot_feature_correlation(X, feature_names)
-    #plot_tsne(X, y_class=y_class, perplexity=30)
+    plot_tsne(X, y_class=y_class, perplexity=30)
     #plot_feature_importances_with_model(feature_names, model_reg, "Feature Importances for Similarity Prediction")
-    plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
+    #plot_feature_importances_with_model(feature_names, model_class, "Feature Importances for Match Prediction")
+    #plot_partial_dependence_with_model(model_reg, X, feature_names, 'num_edges_20')
     
-    #plot_3d_pca(pca_image_features, y_class_aligned)
+    plot_3d_pca(pca_image_features, y_class_aligned)
     #plot_pca_loadings_heatmap(pca, feature_names, n_components=3)
     
     #print(regression_confidence_intervals(metrics_reg['y_test'], metrics_reg['y_pred']))
@@ -417,5 +453,5 @@ if __name__ == "__main__":
     CSV_PATH_4 = Path('results/archive/large-macro/anthropic/opus/anthropic-zero_shot-large_macro.csv')
     CSV_PATH_5 = Path('results/archive/large-macro/anthropic/sonnet/anthropic-sonnet-zero_shot-large_macro.csv')
     CSV_PATH_6 = Path('results/archive/large-macro/anthropic/haiku/anthropic-haiku-zero_shot-large_macro.csv')
-    main(DATA_PATH_5, CSV_PATH_5)
+    main(DATA_PATH_1, CSV_PATH_1)
     print("Script execution completed.")

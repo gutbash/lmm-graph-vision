@@ -16,3 +16,4 @@ torchvision
 timm
 dgl
 anthropic
+tiktoken
