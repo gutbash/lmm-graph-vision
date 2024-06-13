@@ -134,7 +134,9 @@ async def evaluate_model(evaluator, eval_name, model, csv_name, prompts=PROMPTS,
 async def run_evaluations():
     # Create a list of coroutines for the evaluations you want to run
     tasks = [
-        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_a, csv_name='deepmind-gemini-1.5-pro', structures=['binary_tree']),
+        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_a, csv_name='deepmind-gemini-1.5-pro-a', structures=['binary_search_tree']),
+        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_b, csv_name='deepmind-gemini-1.5-pro-b', structures=['undirected_graph']),
+        evaluate_model(evaluator=Evaluator(), eval_name='large_macro', model=deepmind_d, csv_name='deepmind-gemini-1.5-pro-d', structures=['directed_graph']),
     ]
     
     # Run the tasks concurrently
